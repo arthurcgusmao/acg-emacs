@@ -12,6 +12,9 @@
 ;; lets you undo and redo changes in the window configuration
 (winner-mode 1)
 
+;; disable truncation of line
+(set-default 'truncate-lines t)
+
 ;; delete the selection with a keypress
 (delete-selection-mode t)
 

@@ -22,9 +22,9 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
 
-;; testing transient function
-
-
+;; remove scroll bars
+;; (setq scroll-bar-mode nil)
+(scroll-bar-mode -1)
 
 
 
