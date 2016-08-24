@@ -18,6 +18,9 @@
 ;; delete the selection with a keypress
 (delete-selection-mode t)
 
+;; makes kill ring not mess with clipboard
+(setq x-select-enable-clipboard nil)
+
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))

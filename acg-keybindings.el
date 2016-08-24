@@ -20,8 +20,8 @@
 (global-set-key (kbd "<C-S-delete>") 'kill-line)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
-(global-set-key (kbd "C-S-X") 'clipboard-kill-region)
-(global-set-key (kbd "C-S-V") 'clipboard-yank)
+(global-set-key (kbd "C-S-V") 'x-clipboard-yank)
+
 
 ;; Rebinding Helm commands
 (require 'helm)
@@ -44,6 +44,9 @@
 (define-key undo-tree-map (kbd "C-/") nil)
 (global-set-key (kbd "C-/") (crux-with-region-or-line comment-or-uncomment-region))
 (global-set-key (kbd "C-S-C") (crux-with-region-or-line clipboard-kill-ring-save))
+(global-set-key (kbd "C-S-X") (crux-with-region-or-line clipboard-kill-region))
+(global-set-key (kbd "C-j") 'crux-top-join-line)
+(global-set-key (kbd "C-S-J") 'join-line)
 
 ;; Binding Custom Functions commands
 (global-set-key (kbd "<home>") 'prelude-move-beginning-of-line)

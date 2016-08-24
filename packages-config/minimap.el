@@ -1,4 +1,5 @@
 (require 'minimap)
+(diminish 'minimap-mode)
 
 ;; moving the minimap window to the right of the screen
 (setq minimap-window-location 'right)
