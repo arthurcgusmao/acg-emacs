@@ -12,6 +12,7 @@
 			  'scroll-restore
 			  'smooth-scrolling
 			  'minimap
+			  'multiple-cursors
 			  
 			  ;; 'language' modes
 			  'web-mode
