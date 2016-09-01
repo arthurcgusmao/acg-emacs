@@ -13,6 +13,7 @@
 			  'smooth-scrolling
 			  'minimap
 			  'multiple-cursors
+			  'expand-region
 			  
 			  ;; 'language' modes
 			  'web-mode
