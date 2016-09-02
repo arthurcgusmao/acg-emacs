@@ -21,6 +21,8 @@
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
 (global-set-key (kbd "C-S-V") 'x-clipboard-yank)
+(global-set-key (kbd "<M-up>") 'move-line-up)
+(global-set-key (kbd "<M-down>") 'move-line-down)
 
 
 ;; Rebinding Helm commands
