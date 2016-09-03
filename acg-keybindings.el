@@ -21,15 +21,13 @@
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
 (global-set-key (kbd "C-S-V") 'x-clipboard-yank)
-(global-set-key (kbd "<M-up>") 'move-line-up)
-(global-set-key (kbd "<M-down>") 'move-line-down)
 
 
 ;; Rebinding Helm commands
 (require 'helm)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-S-B") 'helm-mini)
-(global-set-key (kbd "C-S-F") 'helm-find-files)
+(global-set-key (kbd "C-o") 'helm-find-files)
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
 ;;(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; makes TAB work in terminal
 (define-key helm-map (kbd "M-a") 'helm-select-action) ; list actions using M-a
@@ -53,6 +51,10 @@
 
 ;; Binding Custom Functions commands
 (global-set-key (kbd "<home>") 'prelude-move-beginning-of-line)
+(global-set-key (kbd "<M-up>") 'move-line-up)
+(global-set-key (kbd "<M-down>") 'move-line-down)
+(global-set-key (kbd "C-c t") 'xah-open-in-terminal)
+(global-set-key (kbd "C-c o") 'xah-open-in-desktop)
 
 
 
