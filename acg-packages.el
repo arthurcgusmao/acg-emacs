@@ -5,6 +5,7 @@
 			  'undo-tree
 			  'anzu
 			  'projectile
+			  'helm-projectile
 			  'diminish
 
 			  ;; editor modes

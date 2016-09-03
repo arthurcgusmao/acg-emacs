@@ -32,6 +32,10 @@
 (setq vc-make-backup-files t)
 
 
+;; Make emacs identify camelCased words
+(subword-mode 1)
+
+
 ;; smart tab behavior - indent or complete
 (setq tab-always-indent 'complete)
 
@@ -76,18 +80,6 @@
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
 ;; makes the scroll speed always steady
 (setq mouse-wheel-progressive-speed nil)
-
-;; sublimity!!!
-;;(require 'sublimity)
-;;(require 'sublimity-scroll)
-;;(require 'sublimity-map)
-;;(require 'sublimity-attractive)
-;;(setq sublimity-mode 1)
-;;(setq sublimity-scroll-weight 15
-;;      sublimity-scroll-drift-length 0)
-;;(sublimity-map-set-delay nil)
-
-
 
 
 

@@ -1,3 +1,0 @@
-(require 'minimap)
-(setq minimap-mode 1)
-(minimap-window-location (quote right))

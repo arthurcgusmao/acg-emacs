@@ -9,7 +9,7 @@
 (define-key isearch-mode-map "\C-g" 'isearch-repeat-forward)
 ;;(define-key isearch-mode-map "\C-\S-G" 'isearch-repeat-backward) ;; @TODO: Not working!
 (global-set-key (kbd "C-w") 'kill-this-buffer)
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(global-set-key (kbd "<escape>") 'keyboard-quit)
 (global-set-key (kbd "M-q") 'other-window)
 (require 'csharp-mode)
 (define-key csharp-mode-map (kbd "C-d") nil)
@@ -23,14 +23,7 @@
 (global-set-key (kbd "C-S-V") 'x-clipboard-yank)
 
 
-;; Rebinding Helm commands
-(require 'helm)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-S-B") 'helm-mini)
-(global-set-key (kbd "C-o") 'helm-find-files)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
-;;(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; makes TAB work in terminal
-(define-key helm-map (kbd "M-a") 'helm-select-action) ; list actions using M-a
+
 
 ;; Binding Crux commands
 (require 'crux)
