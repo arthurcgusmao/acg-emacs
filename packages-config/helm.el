@@ -1,7 +1,5 @@
 (require 'helm)
 
-;; (helm-find-file-ignore-thing-at-point 1)
-
 ;; keybindings
 (defun my-helm-init ()
   (define-key helm-map (kbd "<escape>") 'helm-keyboard-quit)

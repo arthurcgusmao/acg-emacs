@@ -1,13 +1,12 @@
-;; -------------------------------------------------------------------------
-;; Rebinding Commands
-
 ;; Rebinding Emacs built-in commands
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-unset-key (kbd "C-f"))
 (global-set-key (kbd "C-f") 'isearch-forward)
 (define-key isearch-mode-map "\C-f" 'isearch-forward)
 (define-key isearch-mode-map "\C-g" 'isearch-repeat-forward)
-;;(define-key isearch-mode-map "\C-\S-G" 'isearch-repeat-backward) ;; @TODO: Not working!
+(define-key isearch-mode-map (kbd "C-S-G") 'isearch-repeat-backward) ;; @TODO: Not working!
+(global-set-key (kbd "C-S-F") 'isearch-forward-symbol-at-point)
+
 (global-set-key (kbd "C-w") 'kill-this-buffer)
 (global-set-key (kbd "<escape>") 'keyboard-quit)
 (global-set-key (kbd "M-q") 'other-window)
@@ -21,8 +20,6 @@
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
 (global-set-key (kbd "C-S-V") 'x-clipboard-yank)
-
-
 
 
 ;; Binding Crux commands
@@ -42,12 +39,25 @@
 (global-set-key (kbd "C-j") 'crux-top-join-line)
 (global-set-key (kbd "C-S-J") 'join-line)
 
+
 ;; Binding Custom Functions commands
 (global-set-key (kbd "<home>") 'prelude-move-beginning-of-line)
 (global-set-key (kbd "<M-up>") 'move-line-up)
 (global-set-key (kbd "<M-down>") 'move-line-down)
 (global-set-key (kbd "C-c t") 'xah-open-in-terminal)
 (global-set-key (kbd "C-c o") 'xah-open-in-desktop)
+(global-set-key (kbd "<S-return>") 'newline-above)
+
+
+
+;; Binding "Visual" C-v keys
+(global-unset-key (kbd "C-v"))
+(global-set-key (kbd "C-v h h") 'highlight-symbol-at-point)
+(global-set-key (kbd "C-v h r") 'highlight-regexp)
+(global-set-key (kbd "C-v h p") 'highlight-phrase)
+(global-set-key (kbd "C-v h u") 'unhighlight-regexp)
+
+
 
 
 

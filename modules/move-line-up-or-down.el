@@ -1,4 +1,5 @@
 (defun move-line-down ()
+  "Moves current line down."
   (interactive)
   (let ((col (current-column)))
     (forward-line)
@@ -7,6 +8,7 @@
     (move-to-column col)))
 
 (defun move-line-up ()
+  "Moves current line up."
   (interactive)
   (let ((col (current-column)))
     (transpose-lines 1)
