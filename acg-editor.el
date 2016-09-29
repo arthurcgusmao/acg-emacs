@@ -82,6 +82,9 @@
 (setq mouse-wheel-progressive-speed nil)
 
 
+;; enable disabled advanced features
+(put 'downcase-region 'disabled nil)
+
 
 
 
