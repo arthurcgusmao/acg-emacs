@@ -47,6 +47,8 @@
 (global-set-key (kbd "C-c t") 'xah-open-in-terminal)
 (global-set-key (kbd "C-c o") 'xah-open-in-desktop)
 (global-set-key (kbd "<S-return>") 'newline-above)
+(global-unset-key (kbd "C-n"))
+(global-set-key (kbd "C-n") 'new-empty-buffer)
 
 
 
