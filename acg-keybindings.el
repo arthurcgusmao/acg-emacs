@@ -33,7 +33,6 @@
 (local-unset-key (kbd "C-/"))
 (define-key undo-tree-map (kbd "C-/") nil)
 (global-set-key (kbd "C-/") (crux-with-region-or-line comment-or-uncomment-region))
-(global-set-key (kbd "C-;") 'append-string-to-eol)
 (global-set-key (kbd "C-S-C") (crux-with-region-or-line clipboard-kill-ring-save))
 (global-set-key (kbd "C-S-X") (crux-with-region-or-line clipboard-kill-region))
 (global-set-key (kbd "C-j") 'crux-top-join-line)
@@ -50,6 +49,8 @@
 (global-unset-key (kbd "C-n"))
 (global-set-key (kbd "C-n") 'new-empty-buffer)
 (global-set-key (kbd "C-S-V") 'clipboard-paste-replace-selection)
+(global-set-key (kbd "C-;") 'append-or-remove-semicolon-to-eol)
+(global-set-key (kbd "C-,") 'append-or-remove-comma-to-eol)
 
 
 
