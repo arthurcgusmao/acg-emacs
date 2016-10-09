@@ -4,7 +4,8 @@
 (global-set-key (kbd "C-f") 'isearch-forward)
 (define-key isearch-mode-map "\C-f" 'isearch-forward)
 (define-key isearch-mode-map "\C-g" 'isearch-repeat-forward)
-(define-key isearch-mode-map (kbd "C-S-G") 'isearch-repeat-backward) ;; @TODO: Not working!
+(define-key isearch-mode-map (kbd "C-S-G") 'isearch-repeat-backward)
+(define-key isearch-mode-map (kbd "C-S-V") 'isearch-yank-kill)
 (global-set-key (kbd "C-S-F") 'isearch-forward-symbol-at-point)
 
 (global-set-key (kbd "C-w") 'kill-this-buffer)
@@ -19,7 +20,6 @@
 (global-set-key (kbd "<C-S-delete>") 'kill-line)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
-(global-set-key (kbd "C-S-V") 'x-clipboard-yank)
 
 
 ;; Binding Crux commands
@@ -49,6 +49,7 @@
 (global-set-key (kbd "<S-return>") 'newline-above)
 (global-unset-key (kbd "C-n"))
 (global-set-key (kbd "C-n") 'new-empty-buffer)
+(global-set-key (kbd "C-S-V") 'clipboard-paste-replace-selection)
 
 
 
