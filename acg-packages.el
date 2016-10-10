@@ -21,6 +21,10 @@
 			  'scss-mode
 			  'less-css-mode
 			  'markdown-mode
+
+			  ;; company autocomplete modes
+			  'company
+			  'company-quickhelp
 			  )
 
 (my-load-all-in-directory "~/.emacs.d/acg/modules")
