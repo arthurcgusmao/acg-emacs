@@ -13,10 +13,10 @@
               web-mode-enable-engine-detection t)
 
 ;; using web-mode with autocomplete
-(require 'auto-complete-config)
-(add-to-list 'ac-modes 'web-mode)
-(setq web-mode-ac-sources-alist
-  '(("css" . (ac-source-css-property))
-    ("html" . (ac-source-words-in-buffer ac-source-abbrev))
-    ;;("php" . (ac-source-words-in-buffer ac-source-abbrev
-    ))
+;;(require 'auto-complete-config)
+;;(add-to-list 'ac-modes 'web-mode)
+;;(setq web-mode-ac-sources-alist
+;;  '(("css" . (ac-source-css-property))
+;;    ("html" . (ac-source-words-in-buffer ac-source-abbrev))
+;;    ;;("php" . (ac-source-words-in-buffer ac-source-abbrev
+;;    ))

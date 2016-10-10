@@ -25,6 +25,7 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
 
+(smooth-scrolling-mode +1)
 
 
 (provide 'acg-ui)

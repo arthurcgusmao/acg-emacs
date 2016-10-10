@@ -17,4 +17,5 @@
 
 
 ;; more company backends
-;; (to do)
+;;(my-load-all-in-directory "~/.emacs.d/acg/packages-config/company-backends/company-web")
+;;(require 'company-web-html)

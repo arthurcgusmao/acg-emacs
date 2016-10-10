@@ -15,6 +15,7 @@
 			  'minimap
 			  'multiple-cursors
 			  'expand-region
+			  'smartparens
 			  
 			  ;; 'language' modes
 			  'web-mode

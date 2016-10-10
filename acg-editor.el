@@ -6,9 +6,6 @@
 ;; saving the last session (for when you open emacs the next time)
 (desktop-save-mode 1)
 
-;; enabling auto-complete mode
-(auto-complete-mode t) ;; not working -- don't know why
-
 ;; lets you undo and redo changes in the window configuration
 (winner-mode 1)
 
