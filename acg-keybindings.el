@@ -21,6 +21,11 @@
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
 
+;; tab and indent
+(global-set-key (kbd "C-i") (crux-with-region-or-line indent-region))
+(global-set-key (kbd "C-S-I") 'indent-region-or-buffer)
+(global-set-key (kbd "C-<tab>") 'tab-to-tab-stop)
+
 
 ;; Binding Crux commands
 (require 'crux)

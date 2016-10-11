@@ -2,17 +2,17 @@
 			  'crux
 			  'beacon
 			  'which-key
+			  'minimap
 			  'undo-tree
-			  'anzu
 			  'projectile
+			  'smartparens
 			  'helm-projectile
 			  'diminish
 
 			  ;; editor modes
-			  'smartparens
+			  'anzu
 			  'scroll-restore
 			  'smooth-scrolling
-			  'minimap
 			  'multiple-cursors
 			  'expand-region
 			  'smartparens
