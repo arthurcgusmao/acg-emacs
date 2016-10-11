@@ -1,24 +1,54 @@
-;; -------------------------------------------------------------------------
-;; UI, Themes & Cursor
+;;;;;;;;;;;;;;;;;;;;;
+;; themes
+;;;;;;;;;;;;;;;;;;;;;
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t)
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; removing unnecessary things
+;;;;;;;;;;;;;;;;;;;;;
+
+;; hide toolbar, menubar and scrollbar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'zenburn t)
-(setq-default cursor-type 'bar) ;; makes cursor a bar instead of rectangle
-(blink-cursor-mode -1) ;; disable blinking cursor
+
 (setq inhibit-startup-screen t) ;; disable startup screen
+
+;; removes *scratch* from buffer after the mode has been set.
+(defun remove-scratch-buffer ()
+  (if (get-buffer "*scratch*")
+      (kill-buffer "*scratch*")))
+(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
 ;; diminish keeps the modeline tidy
 (require 'diminish)
 
-;; never lose the cursor again
-(beacon-mode +1) 
-(diminish 'beacon-mode)
+
+;;;;;;;;;;;;;;;;;;;;;
+;; help/info menus
+;;;;;;;;;;;;;;;;;;;;;
 
 ;; show available keybindings after you start typing
 (which-key-mode +1)
 (diminish 'which-key-mode)
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; cursor
+;;;;;;;;;;;;;;;;;;;;;
+
+;; makes cursor a bar instead of rectangle
+(setq-default cursor-type 'bar)
+
+;; disable blinking cursor
+(blink-cursor-mode -1)
+
+;; never lose the cursor again (beacon mode)
+(beacon-mode +1) 
+(diminish 'beacon-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;
