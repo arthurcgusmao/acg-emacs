@@ -10,6 +10,9 @@
 ;; consider camelCased as 2 words
 (global-subword-mode 1)
 
+;; enable disabled advanced features
+(put 'downcase-region 'disabled nil)
+
     
 ;;;;;;;;;;;;;;;;;;;;;
 ;; search/replace
@@ -57,28 +60,6 @@
 
 ;; saving the last session (for when you open emacs the next time)
 (desktop-save-mode 0)
-
-
-;;;;;;;;;;;;;;;;;;;;;
-;; scrolling
-;;;;;;;;;;;;;;;;;;;;;
-
-;; restore the cursor to position when scrolling through the page
-(require 'scroll-restore)
-(scroll-restore-mode 1)
-
-;; always keep some lines at bottom/top when scroll with keypad
-(require 'smooth-scrolling)
-(setq smooth-scrolling-mode 1)
-
-;; scroll wheel move one line per scroll
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
-;; scroll speed always steady
-(setq mouse-wheel-progressive-speed nil)
-
-
-;; enable disabled advanced features
-(put 'downcase-region 'disabled nil)
 
 
 ;;;;;;;;;;;;;;;;;;;;;

@@ -20,12 +20,37 @@
 (which-key-mode +1)
 (diminish 'which-key-mode)
 
+
+;;;;;;;;;;;;;;;;;;;;;
+;; scrolling
+;;;;;;;;;;;;;;;;;;;;;
+
+;; restore the cursor to position when scrolling through the page
+(require 'scroll-restore)
+(scroll-restore-mode 1)
+
+;; always keep some lines at bottom/top when scroll with keypad
+(require 'smooth-scrolling)
+(smooth-scrolling-mode 1)
+
+;; scroll wheel move one line per scroll
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
+;; scroll speed always steady
+(setq mouse-wheel-progressive-speed nil)
+
 ;; nice scrolling
 (setq scroll-margin 0
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
 
-(smooth-scrolling-mode +1)
+
+;;;;;;;;;;;;;;;;;;;;;
+;; window size
+;;;;;;;;;;;;;;;;;;;;;
+
+(add-to-list 'default-frame-alist '(height . 120))
+(add-to-list 'default-frame-alist '(width . 160))
+
 
 
 (provide 'acg-ui)
