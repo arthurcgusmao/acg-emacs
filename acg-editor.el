@@ -46,7 +46,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;
-;; backup and autosave
+;; files, buffers, backup, autosave
 ;;;;;;;;;;;;;;;;;;;;;
 
 ;; store all backup and autosave files in the tmp dir
