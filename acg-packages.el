@@ -1,34 +1,39 @@
-(ensure-package-installed 'helm
+(ensure-package-installed 'helm ;; configured in /packages-config/
 			  'crux
-			  'beacon
-			  'which-key
 			  'minimap
 			  'undo-tree
 			  'projectile
 			  'smartparens
 			  'helm-projectile
-			  'diminish
-
-			  ;; editor modes
-			  'anzu
-			  'scroll-restore
-			  'smooth-scrolling
-			  'multiple-cursors
 			  'expand-region
-			  'smartparens
-			  
-			  ;; 'language' modes
+			  'diminish
+                          
+			  ;; configured in /packages-config/company-mode.el
+			  'company
+			  'company-quickhelp
+                          'company-anaconda
+
+			  ;; configured in /languages-config/
 			  'web-mode
 			  'scss-mode
 			  'less-css-mode
 			  'markdown-mode
+                          'anaconda-mode
 
-			  ;; company autocomplete modes
-			  'company
-			  'company-quickhelp
+			  ;; configured in /acg-editor.el
+			  'anzu
+			  'multiple-cursors
+			  'smartparens
+
+                          ;; configured in /acg-ui.el
+			  'beacon
+			  'smooth-scrolling
+			  'scroll-restore
+			  'which-key
 			  )
 
 (my-load-all-in-directory "~/.emacs.d/acg/modules")
 (my-load-all-in-directory "~/.emacs.d/acg/packages-config")
+(my-load-all-in-directory "~/.emacs.d/acg/languages-config")
 
 (provide 'acg-packages)

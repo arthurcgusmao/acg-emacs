@@ -1,5 +1,7 @@
 ;; smartparens
 (require 'smartparens-config)
+(diminish 'smartparens-mode)
+
 (setq sp-base-key-bindings 'paredit)
 (setq sp-autoskip-closing-pair 'always)
 (setq sp-hybrid-kill-entire-symbol nil)

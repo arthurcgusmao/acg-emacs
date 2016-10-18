@@ -1,6 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/acg")
 (add-to-list 'load-path "~/.emacs.d/acg/modules")
 (add-to-list 'load-path "~/.emacs.d/acg/packages-config")
+(add-to-list 'load-path "~/.emacs.d/acg/languages-config")
 
 
 ;; -------------------------------------------------------------------------
