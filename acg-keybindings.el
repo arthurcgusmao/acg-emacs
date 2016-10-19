@@ -20,27 +20,6 @@
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
 
-;; (global-set-key (kbd "<escape>") 'keyboard-quit)
-;;; esc always quits
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-;; (global-set-key [escape] 'keyboard-quit)
-(global-set-key [escape] 'abort-recursive-edit)
-
-;; unused function, just an idea, may be useful later
-(defun set-quit-flag ()
-  "Sets `quit-flag` variable to true, just like C-g does."
-  (interactive)
-  (setq 'quit-flag t))
-
-;; rebind ESC functions to C-<escape>
-(define-key key-translation-map (kbd "C-<escape>") (kbd "ESC"))
-
-
-
 
 ;; tab and indent
 (global-set-key (kbd "C-i") (crux-with-region-or-line indent-region))
@@ -77,6 +56,16 @@
 (global-set-key (kbd "C-S-V") 'clipboard-paste-replace-selection)
 (global-set-key (kbd "C-;") 'append-or-remove-semicolon-to-eol)
 (global-set-key (kbd "C-,") 'append-or-remove-comma-to-eol)
+
+;;; esc always quits
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(global-set-key [escape] 'my-super-keyboard-quit)
+;; rebind ESC functions to C-<escape>
+(define-key key-translation-map (kbd "C-<escape>") (kbd "ESC"))
 
 
 

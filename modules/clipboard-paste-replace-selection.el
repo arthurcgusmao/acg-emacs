@@ -1,6 +1,10 @@
 (defun clipboard-paste-replace-selection ()
   "Paste text from clipboard overwriting the current selection"
   (interactive)
-  (when (use-region-p)
-    (delete-region (region-beginning) (region-end)))
-  (x-clipboard-yank))
+  (let ((clipboard-paste-region-beginning (region-beginning)))
+    (when (use-region-p)
+      (delete-region (region-beginning) (region-end)))
+    (x-clipboard-yank)
+    (indent-region clipboard-paste-region-beginning (region-end))
+    (message "Text pasted and indented.")
+    ))
