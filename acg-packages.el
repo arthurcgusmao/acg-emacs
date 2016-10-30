@@ -30,6 +30,7 @@
 			  'smooth-scrolling
 			  'scroll-restore
 			  'which-key
+                          'rainbow-mode
 			  )
 
 (my-load-all-in-directory "~/.emacs.d/acg/modules")

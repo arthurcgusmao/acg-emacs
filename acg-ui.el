@@ -35,6 +35,8 @@
 (which-key-mode +1)
 (diminish 'which-key-mode)
 
+;; showing colors in HEX representations
+(rainbow-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; cursor
