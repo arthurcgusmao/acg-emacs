@@ -16,6 +16,12 @@
 (scroll-bar-mode -1)
 
 (setq inhibit-startup-screen t) ;; disable startup screen
+;; (setq initial-buffer-choice 'custom-initial-buffer)
+
+(defun custom-initial-buffer ()
+  ;; (helm-find-files-1 "~/")
+  (kill-buffer "*scratch*")
+  "*Messages*")
 
 ;; removes *scratch* from buffer after the mode has been set.
 (defun remove-scratch-buffer ()
@@ -96,8 +102,8 @@
 
 (setq frame-title-format "Emacs")
 
-(add-to-list 'default-frame-alist '(height . 120))
-(add-to-list 'default-frame-alist '(width . 160))
+(add-to-list 'default-frame-alist '(height . 60))
+(add-to-list 'default-frame-alist '(width . 120))
 
 
 

@@ -60,6 +60,10 @@ Return a list of installed packages or nil for every skipped package."
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
 
+;; starting server
+(server-start)
+
+
 ;; -------------------------------------------------------------------------
 ;; Requiring Files
 (require 'acg-packages)
