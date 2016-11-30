@@ -10,6 +10,14 @@
 (add-to-list 'minimap-major-modes 'scss-mode)
 (add-to-list 'minimap-major-modes 'web-mode)
 
+;; (add-to-list 'minimap-major-modes 'TeX)
+;; (add-to-list 'minimap-major-modes 'LaTeX)
+;; (add-to-list 'minimap-major-modes 'TeX-mode)
+(add-to-list 'minimap-major-modes 'tex-mode)
+;; (add-to-list 'minimap-major-modes 'LaTeX-mode)
+(add-to-list 'minimap-major-modes 'latex-mode)
+
+
 ;; changing colors
 (custom-set-faces
   '(minimap-active-region-background

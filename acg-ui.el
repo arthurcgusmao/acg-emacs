@@ -63,24 +63,24 @@
 ;; scrolling
 ;;;;;;;;;;;;;;;;;;;;;
 
-;; restore the cursor to position when scrolling through the page
-(require 'scroll-restore)
-;; Allow scroll-restore to modify the cursor face
-(setq scroll-restore-handle-cursor t)
-;; Make the cursor invisible while POINT is off-screen
-(setq scroll-restore-cursor-type nil)
-;; Jump back to the original cursor position after scrolling
-(setq scroll-restore-jump-back t)
-;; Restores the highlighted line by hl-line mode
-;; (setq scroll-restore-handle-global-hl-line-mode t)
-;; (scroll-restore-mode 1)
+;; ;; restore the cursor to position when scrolling through the page
+;; (require 'scroll-restore)
+;; ;; Allow scroll-restore to modify the cursor face
+;; (setq scroll-restore-handle-cursor t)
+;; ;; Make the cursor invisible while POINT is off-screen
+;; (setq scroll-restore-cursor-type nil)
+;; ;; Jump back to the original cursor position after scrolling
+;; (setq scroll-restore-jump-back t)
+;; ;; Restores the highlighted line by hl-line mode
+;; ;; (setq scroll-restore-handle-global-hl-line-mode t)
+;; (scroll-restore-mode 0)
 
 ;; always keep some lines at bottom/top when scroll with keypad
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
 
 ;; scroll wheel move one line per scroll
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
 ;; scroll speed always steady
 (setq mouse-wheel-progressive-speed nil)
 

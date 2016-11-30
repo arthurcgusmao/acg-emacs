@@ -28,7 +28,7 @@
                           ;; configured in /acg-ui.el
 			  'beacon
 			  'smooth-scrolling
-			  'scroll-restore
+			  ;; 'scroll-restore
 			  'which-key
                           'rainbow-mode
 			  )
