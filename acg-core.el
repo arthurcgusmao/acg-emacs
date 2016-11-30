@@ -3,6 +3,8 @@
 (add-to-list 'load-path "~/.emacs.d/acg/packages-config")
 (add-to-list 'load-path "~/.emacs.d/acg/languages-config")
 
+(setq acg-backup-dir "~/.backups/emacs/")
+
 
 ;; -------------------------------------------------------------------------
 ;; Adding Repositories

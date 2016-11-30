@@ -51,9 +51,9 @@
 
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
+      `((".*" . ,(concat acg-backup-dir "files-autosave-and-backup/"))))
 (setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+      `((".*" ,(concat acg-backup-dir "files-autosave-and-backup/") t)))
 
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
