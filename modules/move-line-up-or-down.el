@@ -14,3 +14,7 @@
     (transpose-lines 1)
     (previous-line 2)
     (move-to-column col)))
+
+;; binding
+(global-set-key (kbd "<M-up>") 'move-line-up)
+(global-set-key (kbd "<M-down>") 'move-line-down)

@@ -9,6 +9,8 @@
 (add-to-list 'minimap-major-modes 'css-mode)
 (add-to-list 'minimap-major-modes 'scss-mode)
 (add-to-list 'minimap-major-modes 'web-mode)
+(add-to-list 'minimap-major-modes 'text-mode)
+
 
 ;; (add-to-list 'minimap-major-modes 'TeX)
 ;; (add-to-list 'minimap-major-modes 'LaTeX)

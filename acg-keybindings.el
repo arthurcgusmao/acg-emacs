@@ -22,10 +22,12 @@
 (global-set-key (kbd "C-S-Z") 'redo)
 
 
+
 ;; tab and indent
 (global-set-key (kbd "C-i") (crux-with-region-or-line indent-region))
 (global-set-key (kbd "C-S-I") 'indent-region-or-buffer)
 (global-set-key (kbd "C-<tab>") 'tab-to-tab-stop)
+
 
 
 ;; Binding Crux commands
@@ -47,8 +49,6 @@
 
 ;; Binding Custom Functions commands
 (global-set-key (kbd "<home>") 'prelude-move-beginning-of-line)
-(global-set-key (kbd "<M-up>") 'move-line-up)
-(global-set-key (kbd "<M-down>") 'move-line-down)
 (global-set-key (kbd "C-c t") 'xah-open-in-terminal)
 (global-set-key (kbd "C-c o") 'xah-open-in-desktop)
 (global-set-key (kbd "<S-return>") 'newline-above)
