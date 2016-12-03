@@ -8,6 +8,8 @@
 			  'expand-region
 			  'diminish
                           'yasnippet
+                          'highlight-indent-guides
+                          'tabbar
                           
 			  ;; configured in /packages-config/company-mode.el
 			  'company
