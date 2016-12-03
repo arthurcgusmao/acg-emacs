@@ -1,3 +1,5 @@
+(require 'crux)
+
 ;; Rebinding Emacs built-in commands
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-unset-key (kbd "C-f"))
@@ -8,35 +10,33 @@
 (define-key isearch-mode-map (kbd "C-S-V") 'isearch-yank-kill)
 (global-set-key (kbd "C-S-F") 'isearch-forward-symbol-at-point)
 
-(global-set-key (kbd "C-w") 'kill-this-buffer)
-(global-set-key (kbd "M-q") 'other-window)
-(require 'csharp-mode)
-(define-key csharp-mode-map (kbd "C-d") nil)
-(global-set-key (kbd "M-k") 'crux-kill-whole-line)
-(global-set-key (kbd "C-k") 'kill-line-content-or-line)
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
 (global-set-key (kbd "<M-return>") 'open-line)
-(global-set-key (kbd "<C-backspace>") 'backward-kill-word)
-(global-set-key (kbd "<C-S-delete>") 'kill-line)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
-
 
 
 ;; tab and indent
 (global-set-key (kbd "C-i") (crux-with-region-or-line indent-region))
 (global-set-key (kbd "C-S-I") 'indent-region-or-buffer)
-(global-set-key (kbd "C-<tab>") 'tab-to-tab-stop)
+
+;; changing windows
+(global-set-key (kbd "M-1") 'other-window)
+(global-set-key (kbd "C-1") 'delete-other-windows)
+(global-set-key (kbd "C-!") 'delete-window)
+(global-set-key (kbd "C-2") 'split-window-right)
+(global-set-key (kbd "C-@") 'split-window-below)
+
+;; changing buffers
+(global-set-key (kbd "M-q") 'crux-switch-to-previous-buffer)
+(global-set-key (kbd "C-w") 'kill-this-buffer)
 
 
 
 ;; Binding Crux commands
-(require 'crux)
 (crux-reopen-as-root-mode 1)
-(global-set-key (kbd "<C-S-backspace>") 'crux-kill-line-backwards)
 (global-set-key (kbd "<C-return>") 'crux-smart-open-line)
 (global-set-key (kbd "<C-S-return>") 'crux-smart-open-line-above)
-(global-set-key (kbd "C-b") 'crux-switch-to-previous-buffer)
 (global-unset-key (kbd "C-/"))
 (local-unset-key (kbd "C-/"))
 (define-key undo-tree-map (kbd "C-/") nil)
@@ -51,6 +51,7 @@
 (global-set-key (kbd "<home>") 'prelude-move-beginning-of-line)
 (global-set-key (kbd "C-c t") 'xah-open-in-terminal)
 (global-set-key (kbd "C-c o") 'xah-open-in-desktop)
+(global-set-key (kbd "C-c SPC") 'just-one-space)
 (global-set-key (kbd "<S-return>") 'newline-above)
 (global-unset-key (kbd "C-n"))
 (global-set-key (kbd "C-n") 'custom-scratch-buffer-create)

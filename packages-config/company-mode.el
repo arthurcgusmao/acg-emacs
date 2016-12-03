@@ -14,7 +14,7 @@
 ;; setting keybindings
 (define-key company-active-map (kbd "M-h") #'company-quickhelp-mode)
 (define-key company-active-map (kbd "<escape>") #'company-abort)
-(define-key company-mode-map (kbd "<tab>") 'company-complete)
+(define-key company-mode-map (kbd "<tab>") 'company-indent-or-complete-common)
 
 
 ;; more company backends

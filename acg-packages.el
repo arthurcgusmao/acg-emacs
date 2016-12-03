@@ -7,6 +7,7 @@
 			  'helm-projectile
 			  'expand-region
 			  'diminish
+                          'yasnippet
                           
 			  ;; configured in /packages-config/company-mode.el
 			  'company
