@@ -78,6 +78,7 @@
            ("M-<left>" . sp-backward-sexp)
            ("M-t" . sp-transpose-sexp)
            ("M-S-T" . sp-transpose-hybrid-sexp)
+           ("<M-delete>")
            ))))
 
 (sp--update-override-key-bindings)

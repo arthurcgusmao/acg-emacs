@@ -46,10 +46,12 @@ if there are only white spaces in it."
 ;;     (looking-at "[[:space:]]*$")))
 
 ;; bindings
-(global-set-key (kbd "<C-S-delete>") 'kill-line-or-region)
+(global-set-key (kbd "<C-backspace>") 'backward-kill-word)
 (global-set-key (kbd "<C-S-backspace>") 'kill-line-or-region-backwards)
+(global-set-key (kbd "<M-backspace>") 'backward-kill-sexp)
+(global-set-key (kbd "<C-S-delete>") 'kill-line-or-region)
+(global-set-key (kbd "<M-delete>") 'kill-sexp)
 (global-set-key (kbd "C-d") 'kill-whole-line-or-region-lines)
 (global-set-key (kbd "C-S-d") 'kill-whole-line-or-region-lines-and-move-up)
 (global-set-key (kbd "M-d") 'kill-whole-line-or-region-content)
-(global-set-key (kbd "<C-backspace>") 'backward-kill-word)
-(global-set-key (kbd "<M-delete>") 'backward-kill-word)
+
