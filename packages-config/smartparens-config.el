@@ -7,15 +7,6 @@
 (setq sp-hybrid-kill-entire-symbol nil)
 (sp-use-paredit-bindings)
 
-(show-smartparens-global-mode +1)
-
-
-
-
-
-
-
-(require 'smartparens-config)
 
 ;; smartparens for all modes
 (smartparens-global-mode t)
