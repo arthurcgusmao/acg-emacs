@@ -10,6 +10,7 @@
                           'yasnippet
                           'highlight-indent-guides
                           'tabbar
+                          ;; 'tabbar-ruler
                           
 			  ;; configured in /packages-config/company-mode.el
 			  'company
