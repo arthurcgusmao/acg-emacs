@@ -1,4 +1,7 @@
-(defun xah-open-in-external-app ()
+;; some functions here were renamed to maintain consistency,
+;; but they originally come from http://ergoemacs.org/emacs/
+
+(defun acg-open-in-external-app ()
   "Open the current file or dired marked files in external app.
 The app is chosen from your OS's preference.
 
@@ -28,7 +31,7 @@ Version 2015-01-26"
          (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath))) -file-list))))))
 
 
-(defun xah-open-in-desktop ()
+(defun acg-open-in-desktop ()
   "Show current file in desktop (OS's file manager).
 URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
 Version 2015-11-30"
@@ -48,7 +51,7 @@ Version 2015-11-30"
     )))
 
 
-(defun xah-open-in-terminal ()
+(defun acg-open-in-terminal ()
   "Open the current dir in a new terminal window.
 URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
 Version 2015-12-10"
@@ -62,3 +65,10 @@ Version 2015-12-10"
     (let ((process-connection-type nil))
       (start-process "" nil "x-terminal-emulator"
                      (concat "--working-directory=" default-directory) )))))
+
+
+
+
+;; keybindings
+(global-set-key (kbd "C-c t") 'acg-open-in-terminal)
+(global-set-key (kbd "C-c o") 'acg-open-in-desktop)

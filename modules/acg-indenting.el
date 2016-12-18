@@ -1,9 +1,9 @@
-(defun indent-buffer ()
+(defun acg-indent-buffer ()
   "Indent the currently visited buffer."
   (interactive)
   (indent-region (point-min) (point-max)))
 
-(defun indent-region-or-buffer ()
+(defun acg-indent-region-or-buffer ()
   "Indent a region if selected, otherwise the whole buffer."
   (interactive)
   (save-excursion
@@ -14,3 +14,7 @@
       (progn
         (indent-buffer)
         (message "Indented buffer.")))))
+
+;; keybindings
+(global-set-key (kbd "C-i") (crux-with-region-or-line indent-region))
+(global-set-key (kbd "C-S-I") 'acg-indent-region-or-buffer)

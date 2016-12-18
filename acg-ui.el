@@ -97,13 +97,22 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;
-;; window title / size
+;; windows - title / size / splitting / highlighting
 ;;;;;;;;;;;;;;;;;;;;;
 
 (setq frame-title-format "Emacs")
 
 (add-to-list 'default-frame-alist '(height . 60))
 (add-to-list 'default-frame-alist '(width . 120))
+
+;; makes new buffers always default to vertical splitting (instead of horizontal)
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
+
+;; hiwin changes the inactive windows background
+(require 'hiwin)
+(set-face-background 'hiwin-face "gray80")
+(hiwin-mode 1)
 
 
 

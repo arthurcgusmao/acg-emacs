@@ -1,6 +1,6 @@
 (require 'crux)
 
-(defun newline-above ()
+(defun acg-newline-above ()
   "Insert a newline above with the rest of current line."
   (interactive)
   (kill-line)
@@ -8,3 +8,5 @@
   (yank)
   (back-to-indentation))
 
+;; keybindings
+(global-set-key (kbd "<S-return>") 'acg-newline-above)

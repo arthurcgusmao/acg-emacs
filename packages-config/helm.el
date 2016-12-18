@@ -11,3 +11,6 @@
   (define-key helm-map (kbd "M-a") 'helm-select-action)) ; list actions using M-a
 
 (add-hook 'after-init-hook 'my-helm-init)
+
+;; helm buffer splits the window in the right side (instead of below)
+;; (setq helm-split-window-default-side 'right)
