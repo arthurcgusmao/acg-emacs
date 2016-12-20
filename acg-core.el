@@ -1,7 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/acg")
-(add-to-list 'load-path "~/.emacs.d/acg/modules")
-(add-to-list 'load-path "~/.emacs.d/acg/packages-config")
-(add-to-list 'load-path "~/.emacs.d/acg/languages-config")
+(add-to-list 'load-path "~/.emacs.d/acg/minor-modes-config")
+(add-to-list 'load-path "~/.emacs.d/acg/major-modes-config")
+(add-to-list 'load-path "~/.emacs.d/acg/custom-functions")
 
 (setq acg-backup-dir "~/.backups/emacs/")
 

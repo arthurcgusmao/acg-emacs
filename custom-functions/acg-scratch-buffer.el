@@ -56,4 +56,4 @@ Version 2016-08-11"
 
 ;; keybindings
 (global-unset-key (kbd "C-n"))
-(global-set-key (kbd "C-n") 'custom-scratch-buffer-create)
+(global-set-key (kbd "C-n") 'acg-scratch-buffer-create)

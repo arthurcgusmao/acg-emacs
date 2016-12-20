@@ -12,7 +12,7 @@
           (indent-region (region-beginning) (region-end))
           (message "Indented selected region."))
       (progn
-        (indent-buffer)
+        (acg-indent-buffer)
         (message "Indented buffer.")))))
 
 ;; keybindings
