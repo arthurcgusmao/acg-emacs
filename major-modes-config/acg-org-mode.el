@@ -32,8 +32,8 @@
             
             ;; (define-key org-mode-map (kbd "<M-S-right>") nil)
             ;; (define-key org-mode-map (kbd "<M-S-left>") nil)
-            (local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-left>") 'org-cycle-backwards)
-            (local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-right>") 'org-cycle)
+            (acg-local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-left>") 'org-cycle-backwards)
+            (acg-local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-right>") 'org-cycle)
             (define-key org-mode-map (kbd "<M-left>") 'org-cycle-backwards)
             (define-key org-mode-map (kbd "<M-right>") 'org-cycle)
             ))
@@ -49,18 +49,6 @@
   (interactive)
   (org-cycle ARG)
   (org-cycle ARG))
-
-(defun local-set-minor-mode-key (mode key def)
-  "Overrides a minor mode keybinding for the local
-   buffer, by creating or altering keymaps stored in buffer-local
-   `minor-mode-overriding-map-alist'."
-  (let* ((oldmap (cdr (assoc mode minor-mode-map-alist)))
-         (newmap (or (cdr (assoc mode minor-mode-overriding-map-alist))
-                     (let ((map (make-sparse-keymap)))
-                       (set-keymap-parent map oldmap)
-                       (push `(,mode . ,map) minor-mode-overriding-map-alist) 
-                       map))))
-    (define-key newmap key def)))
 
 (defun org-insert-subheading-newline ()
   "Same as `org-insert-subheading' but creates a new line with blank subheading."

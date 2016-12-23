@@ -62,6 +62,8 @@
 
 ;; highlight current line
 (global-hl-line-mode 1)
+(set-face-background 'hl-line "#FAF5FB")
+(set-cursor-color "#A0B")
 ;; prevent highlighted line from appearing in all windows
 (setq hl-line-sticky-flag nil)
 
@@ -109,11 +111,17 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
-;; hiwin changes the inactive windows background
-(require 'hiwin)
-(set-face-background 'hiwin-face "gray80")
-(hiwin-mode 1)
+;; always opens help buffer in the same window
+(add-to-list 'display-buffer-alist
+            '("Help" display-buffer-same-window))
 
+;; unhighlight inactive windows
+(add-hook 'after-init-hook
+          (lambda ()
+            (when (fboundp 'auto-dim-other-buffers-mode)
+              (auto-dim-other-buffers-mode t)
+              ;; (set-face-background 'auto-dim-other-buffers-face (face-background 'fringe)))))
+              (set-face-background 'auto-dim-other-buffers-face "#CCCCCC"))))
 
 
 (provide 'acg-ui)

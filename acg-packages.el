@@ -37,8 +37,8 @@
                           'rainbow-mode
 			  )
 
+(my-load-all-in-directory "~/.emacs.d/acg-emacs/custom-functions")
 (my-load-all-in-directory "~/.emacs.d/acg-emacs/minor-modes-config")
 (my-load-all-in-directory "~/.emacs.d/acg-emacs/major-modes-config")
-(my-load-all-in-directory "~/.emacs.d/acg-emacs/custom-functions")
 
 (provide 'acg-packages)

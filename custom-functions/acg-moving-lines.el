@@ -30,12 +30,12 @@
 (defun acg-move-lines-up (n)
   "move the line(s) spanned by the active region up by N lines."
   (interactive "*p")
-  (move-lines (- (or n 1))))
+  (acg-move-lines (- (or n 1))))
 
 (defun acg-move-lines-down (n)
   "move the line(s) spanned by the active region down by N lines."
   (interactive "*p")
-  (move-lines (or n 1)))
+  (acg-move-lines (or n 1)))
 
 ;; binding
 (global-set-key (kbd "<M-up>") 'acg-move-lines-up)

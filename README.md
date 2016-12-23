@@ -8,6 +8,7 @@ to seek how to properly handle those yet), so it won't be plug and play. Also
 may require some knowledge on how emacs works.
 
 Feel free to get in touch if you want to,
+
 Arthur
 
 ## Setup

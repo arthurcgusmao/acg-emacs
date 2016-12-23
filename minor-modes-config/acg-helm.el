@@ -12,5 +12,6 @@
 
 (add-hook 'after-init-hook 'my-helm-init)
 
-;; helm buffer splits the window in the right side (instead of below)
-;; (setq helm-split-window-default-side 'right)
+;; helm buffer always splits window and appears below
+(setq helm-split-window-default-side 'below)
+(setq helm-split-window-in-side-p t)
