@@ -1,4 +1,6 @@
-(defun clipboard-paste-replace-selection ()
+(require 'crux)
+
+(defun acg-clipboard-paste-replace-selection ()
   "Paste text from clipboard overwriting the current selection"
   (interactive)
   (if (use-region-p)
@@ -12,3 +14,10 @@
       (indent-region clipboard-paste-point-start (point))
       ))
   (message "Text pasted and indented."))
+
+
+;;keybindings
+(global-set-key (kbd "C-S-C") (crux-with-region-or-line clipboard-kill-ring-save))
+(global-set-key (kbd "C-S-X") (crux-with-region-or-line clipboard-kill-region))
+(global-set-key (kbd "C-S-V") 'acg-clipboard-paste-replace-selection)
+

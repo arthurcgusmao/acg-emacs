@@ -1,5 +1,5 @@
 ;; move the line(s) spanned by the active region up/down (line transposing)
-;; {{{
+
 (defun acg-move-lines (n)
   (let ((beg) (end) (keep))
     (if mark-active 

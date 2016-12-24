@@ -119,7 +119,7 @@
  '(tabbar-selected ((t (:inherit tabbar-default :background "#BBBBBF" :foreground "#333"))))
  '(tabbar-selected-modified ((t (:inherit tabbar-selected))))
  '(tabbar-modified ((t (:inherit tabbar-default))))
- '(tabbar-separator ((t (:inherit tabbar-default :background "#000"))))
+ '(tabbar-separator ((t (:inherit tabbar-default :background "#333"))))
  '(tabbar-unselected ((t (:inherit tabbar-default)))))
 
 
@@ -132,7 +132,7 @@
    (cons (cons "" tabbar-scroll-left-button-enabled-image)
          (cons "" nil)))
  '(tabbar-scroll-right-button
-   (cons (cons "" tabbar-scroll-left-button-enabled-image)
+   (cons (cons "" tabbar-scroll-right-button-enabled-image)
          (cons "" nil)))
  '(tabbar-home-button
    (cons (cons " " tabbar-home-button-enabled-image)

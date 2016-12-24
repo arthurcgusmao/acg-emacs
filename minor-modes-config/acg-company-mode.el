@@ -8,6 +8,9 @@
 ;; decrease delay before autocompletion popup shows
 (setq company-idle-delay nil) ;; before: .3
 
+;; do not require that the typed char when completing be a match
+(setq company-require-match nil)
+
 ;; decrease delay before showing quickhelp
 (setq company-quickhelp-delay 0.3)
 
