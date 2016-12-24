@@ -13,7 +13,7 @@
 
 ;; enables smartparens' paren highlighting mode and disables emacs default
 (show-smartparens-global-mode t) 
-(show-paren-mode nil)
+(show-paren-mode -1)
 
 
 ;; removing smartparens' default key-bindings (and setting new ones)
