@@ -14,7 +14,7 @@
 (global-set-key (kbd "<M-return>") 'open-line)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
-
+(global-set-key (kbd "C-r") 'repeat)
 (global-set-key (kbd "C-c SPC") 'just-one-space)
 
 
