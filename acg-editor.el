@@ -1,5 +1,4 @@
-;; Editor Configurations
-
+;; editor configurations
 
 ;; disable truncation of line
 (set-default 'truncate-lines t)
@@ -16,9 +15,8 @@
 ;; lets you undo and redo changes in the window configuration
 (winner-mode 1)
     
-;;;;;;;;;;;;;;;;;;;;;
+
 ;; search/replace
-;;;;;;;;;;;;;;;;;;;;;
 
 ;; anzu-mode enhances isearch & query-replace by showing
 ;; total matches and current match position
@@ -29,9 +27,8 @@
 ;; delete the selection with a keypress
 (delete-selection-mode t)
 
-;;;;;;;;;;;;;;;;;;;;;
+
 ;; files, buffers, backup, autosave
-;;;;;;;;;;;;;;;;;;;;;
 
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
@@ -45,10 +42,8 @@
 ;; saving the last session (for when you open emacs the next time)
 (desktop-save-mode 0)
 
-
-;;;;;;;;;;;;;;;;;;;;;
+
 ;; tabs, indent, spacing
-;;;;;;;;;;;;;;;;;;;;;
 
 (setq tab-width 4)
 (setq tab-stop-list (number-sequence 4 200 4))
@@ -62,5 +57,5 @@
 ;; max-width for lines when using fill commands
 (setq-default fill-column 80)
 
-
+
 (provide 'acg-editor)

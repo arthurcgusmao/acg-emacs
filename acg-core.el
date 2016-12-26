@@ -5,8 +5,7 @@
 
 (setq acg-backup-dir "~/.backups/emacs/")
 
-
-;; -------------------------------------------------------------------------
+
 ;; Adding Repositories
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
@@ -15,8 +14,7 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-
-;; -------------------------------------------------------------------------
+
 ;; Checking and installing defined packages
 
 (defun ensure-package-installed (&rest packages)
@@ -38,8 +36,7 @@ Return a list of installed packages or nil for every skipped package."
 ;; Activate installed packages
 (package-initialize)
 
-
-;; -------------------------------------------------------------------------
+
 ;; Autoloading all files within directory
 
 (defun my-load-all-in-directory (dir)
@@ -53,8 +50,7 @@ Return a list of installed packages or nil for every skipped package."
           (load library nil t)
           (push library libraries-loaded))))))
 
-
-;; -------------------------------------------------------------------------
+
 ;; Other configurations
 
 ;; warn when opening files bigger than 100MB
@@ -63,15 +59,12 @@ Return a list of installed packages or nil for every skipped package."
 ;; starting server
 (server-start)
 
-
-;; -------------------------------------------------------------------------
+
 ;; Requiring Files
 (require 'acg-packages)
 (require 'acg-editor)
 (require 'acg-ui)
 (require 'acg-keybindings)
 
-
-
-
+
 (provide 'acg-core)
