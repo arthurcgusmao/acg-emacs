@@ -82,7 +82,6 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position t)
 
-
 
 ;; windows - title / size / splitting / highlighting
 
