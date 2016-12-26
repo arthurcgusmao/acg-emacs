@@ -1,4 +1,4 @@
-(ensure-package-installed 'helm ;; configured in /packages-config/
+(ensure-package-installed 'helm ;; configured in /minor-modes-config/
 			  'crux
 			  'minimap
 			  'undo-tree
@@ -10,14 +10,14 @@
                           'yasnippet
                           'highlight-indent-guides
                           'tabbar
-                          ;; 'tabbar-ruler
+                          'form-feed
                           
-			  ;; configured in /packages-config/company-mode.el
+			  ;; configured in /minor-modes-config/acg-company-mode.el
 			  'company
 			  'company-quickhelp
                           'company-anaconda
 
-			  ;; configured in /languages-config/
+			  ;; configured in /major-modes-config/
 			  'web-mode
 			  'scss-mode
 			  'less-css-mode
@@ -30,11 +30,10 @@
 			  'smartparens
 
                           ;; configured in /acg-ui.el
-			  'beacon
 			  'smooth-scrolling
-			  ;; 'scroll-restore
 			  'which-key
                           'rainbow-mode
+                          'auto-dim-other-buffers
 			  )
 
 (my-load-all-in-directory "~/.emacs.d/acg-emacs/custom-functions")

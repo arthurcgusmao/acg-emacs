@@ -16,8 +16,7 @@
 (global-set-key (kbd "C-S-Z") 'redo)
 (global-set-key (kbd "C-r") 'repeat)
 (global-set-key (kbd "C-c SPC") 'just-one-space)
-
-
+(global-set-key (kbd "C-d") 'bookmark-set)
 
 
 ;; Binding Crux commands
@@ -25,8 +24,6 @@
 (global-set-key (kbd "<C-return>") 'crux-smart-open-line)
 (global-set-key (kbd "<C-S-return>") 'crux-smart-open-line-above)
 (global-set-key (kbd "<M-return>") 'indent-new-comment-line)
-(global-unset-key (kbd "C-/"))
-(local-unset-key (kbd "C-/"))
 (define-key undo-tree-map (kbd "C-/") nil)
 (global-set-key (kbd "C-/") (crux-with-region-or-line comment-or-uncomment-region))
 (global-set-key (kbd "C-j") 'crux-top-join-line)

@@ -1,14 +1,10 @@
-;;;;;;;;;;;;;;;;;;;;;
 ;; themes
-;;;;;;;;;;;;;;;;;;;;;
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 ;;(load-theme 'acg-light t)
 
-
-;;;;;;;;;;;;;;;;;;;;;
+
 ;; removing unnecessary things
-;;;;;;;;;;;;;;;;;;;;;
 
 ;; hide toolbar, menubar and scrollbar
 (tool-bar-mode -1)
@@ -32,21 +28,15 @@
 ;; diminish keeps the modeline tidy
 (require 'diminish)
 
-
-;;;;;;;;;;;;;;;;;;;;;
+
 ;; help/info menus
-;;;;;;;;;;;;;;;;;;;;;
 
 ;; show available keybindings after you start typing
 (which-key-mode +1)
 (diminish 'which-key-mode)
 
-;; showing colors in HEX representations
-(rainbow-mode t)
-
-;;;;;;;;;;;;;;;;;;;;;
+
 ;; cursor
-;;;;;;;;;;;;;;;;;;;;;
 
 ;; makes cursor a bar instead of rectangle
 (setq-default cursor-type 'bar)
@@ -56,20 +46,15 @@
 ;; disable blinking cursor
 (blink-cursor-mode -1)
 
-;; never lose the cursor again (beacon mode)
-;; (beacon-mode +1) 
-;; (diminish 'beacon-mode)
-
 ;; highlight current line
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#FAF5FB")
+(set-face-background 'hl-line "#FBF3FC")
 (set-cursor-color "#A0B")
 ;; prevent highlighted line from appearing in all windows
 (setq hl-line-sticky-flag nil)
 
-;;;;;;;;;;;;;;;;;;;;;
+
 ;; scrolling
-;;;;;;;;;;;;;;;;;;;;;
 
 ;; ;; restore the cursor to position when scrolling through the page
 ;; (require 'scroll-restore)
@@ -98,9 +83,8 @@
       scroll-preserve-screen-position t)
 
 
-;;;;;;;;;;;;;;;;;;;;;
+
 ;; windows - title / size / splitting / highlighting
-;;;;;;;;;;;;;;;;;;;;;
 
 (setq frame-title-format "Emacs")
 
@@ -116,6 +100,7 @@
             '("Help" display-buffer-same-window))
 
 ;; unhighlight inactive windows
+(diminish 'auto-dim-other-buffers-mode)
 (add-hook 'after-init-hook
           (lambda ()
             (when (fboundp 'auto-dim-other-buffers-mode)
@@ -123,5 +108,5 @@
               ;; (set-face-background 'auto-dim-other-buffers-face (face-background 'fringe)))))
               (set-face-background 'auto-dim-other-buffers-face "#CCCCCC"))))
 
-
+
 (provide 'acg-ui)

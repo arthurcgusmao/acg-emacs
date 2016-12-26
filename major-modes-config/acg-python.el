@@ -34,8 +34,9 @@ tab-stop if necessary."
 
 
 ;; keybindings
+(add-hook 'python-mode-hook '(lambda ()
 (define-key python-mode-map (kbd "<S-iso-lefttab>") 'python-indent-shift-left)
 (define-key python-mode-map (kbd "C-<") 'python-indent-shift-left)
-(define-key python-mode-map (kbd "C->") 'python-indent-shift-right)
+(define-key python-mode-map (kbd "C->") 'python-indent-shift-right)))
 
 

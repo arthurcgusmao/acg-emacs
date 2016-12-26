@@ -51,7 +51,7 @@ if there are only white spaces in it."
 (global-set-key (kbd "<M-backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "<C-S-delete>") 'acg-kill-line-or-region)
 (global-set-key (kbd "<M-delete>") 'kill-sexp)
-(global-set-key (kbd "C-d") 'acg-kill-whole-line-or-region-lines)
-(global-set-key (kbd "C-S-d") 'acg-kill-whole-line-or-region-lines-and-move-up)
-(global-set-key (kbd "M-d") 'acg-kill-whole-line-or-region-content)
+(global-set-key (kbd "C-e") 'acg-kill-whole-line-or-region-lines)
+(global-set-key (kbd "C-S-e") 'acg-kill-whole-line-or-region-lines-and-move-up)
+(global-set-key (kbd "M-e") 'acg-kill-whole-line-or-region-content)
 

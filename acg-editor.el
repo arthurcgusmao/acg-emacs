@@ -13,6 +13,8 @@
 ;; enable disabled advanced features
 (put 'downcase-region 'disabled nil)
 
+;; lets you undo and redo changes in the window configuration
+(winner-mode 1)
     
 ;;;;;;;;;;;;;;;;;;;;;
 ;; search/replace
@@ -26,24 +28,6 @@
 
 ;; delete the selection with a keypress
 (delete-selection-mode t)
-
-
-;;;;;;;;;;;;;;;;;;;;;
-;; undo
-;;;;;;;;;;;;;;;;;;;;;
-
-;; sensible undo
-(global-undo-tree-mode)
-(diminish 'undo-tree-mode)
-
-;; autosave the undo-tree history
-(setq undo-tree-history-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq undo-tree-auto-save-history t)
-
-;; lets you undo and redo changes in the window configuration
-(winner-mode 1)
-
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; files, buffers, backup, autosave

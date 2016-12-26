@@ -86,7 +86,7 @@
   (setq ad-return-value
         (if (and (buffer-modified-p (tabbar-tab-value tab))
                  (buffer-file-name (tabbar-tab-value tab)))
-            (concat " * " (concat ad-return-value " "))
+            (concat " ✎ " (concat ad-return-value " "))
           (concat " " (concat ad-return-value " ")))))
 
 ;; Called each time the modification state of the buffer changed.
