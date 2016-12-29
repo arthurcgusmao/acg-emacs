@@ -3,7 +3,6 @@
 (eval-after-load "company" 
   '(add-to-list 'company-backends 'company-anaconda))
 
-;; (setenv "PYTHONPATH" "/home/arthurcgusmao/.anaconda2/bin/python")
 
 
 ;; customized indentation 
@@ -34,9 +33,12 @@ tab-stop if necessary."
 
 
 ;; keybindings
-(add-hook 'python-mode-hook '(lambda ()
-(define-key python-mode-map (kbd "<S-iso-lefttab>") 'python-indent-shift-left)
-(define-key python-mode-map (kbd "C-<") 'python-indent-shift-left)
-(define-key python-mode-map (kbd "C->") 'python-indent-shift-right)))
+(add-hook 'python-mode-hook
+          '(lambda ()
+             (define-key python-mode-map (kbd "<S-iso-lefttab>") 'python-indent-shift-left)
+             (define-key python-mode-map (kbd "C-<") 'python-indent-shift-left)
+             (define-key python-mode-map (kbd "C->") 'python-indent-shift-right)
+             (define-key python-mode-map (kbd "<f7>") 'python-shell-switch-to-shell)
+             (define-key python-mode-map (kbd "<f8>") 'python-shell-send-buffer)))
 
 

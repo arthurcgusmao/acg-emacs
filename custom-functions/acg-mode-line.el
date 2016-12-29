@@ -37,7 +37,7 @@
                '(vc-mode vc-mode)
                
                ;; projectile indicator
-               '(:eval (format "   Proj:%s" (projectile-project-name)))
+               '(:eval (format "   Proj:%s   " (projectile-project-name)))
                
                
                minor-mode-alist  ;; list of minor modes

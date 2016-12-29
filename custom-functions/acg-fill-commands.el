@@ -29,3 +29,11 @@ Version 2016-07-13"
 (global-set-key (kbd "C-S-P") 'acg-unfill-paragraph)
 (global-set-key (kbd "M-p") (crux-with-region-or-line fill-region))
 (global-set-key (kbd "M-S-P") (crux-with-region-or-line acg-unfill-region))
+
+
+;; settings -- max-width for lines when using fill commands
+(setq-default fill-column 80)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (set-fill-column 96)))

@@ -54,8 +54,5 @@
 ;; smart tab behavior - indent or complete
 (setq tab-always-indent 'complete)
 
-;; max-width for lines when using fill commands
-(setq-default fill-column 80)
-
 
 (provide 'acg-editor)

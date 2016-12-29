@@ -51,6 +51,13 @@ Return a list of installed packages or nil for every skipped package."
           (push library libraries-loaded))))))
 
 
+;; Requiring Files
+(require 'acg-packages)
+(require 'acg-editor)
+(require 'acg-ui)
+(require 'acg-keybindings)
+
+
 ;; Other configurations
 
 ;; warn when opening files bigger than 100MB
@@ -59,12 +66,10 @@ Return a list of installed packages or nil for every skipped package."
 ;; starting server
 (server-start)
 
-
-;; Requiring Files
-(require 'acg-packages)
-(require 'acg-editor)
-(require 'acg-ui)
-(require 'acg-keybindings)
+;; make EMACS use the PATHs specified in .bashrc
+(require 'exec-path-from-shell)
+(when (memq window-system '(x))
+   (exec-path-from-shell-initialize))
 
 
 (provide 'acg-core)
