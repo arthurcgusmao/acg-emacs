@@ -3,6 +3,11 @@
 
 ;; configurations
 (setq org-startup-with-inline-images t)
+(setq org-startup-indented t)
+
+;; where to put latex preview images
+(setq org-latex-preview-ltxpng-directory "~/.emacs.d/latex-png-previews/")
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 
 (add-hook 'org-mode-hook 
           (lambda ()

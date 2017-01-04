@@ -1,7 +1,7 @@
 ;; editor configurations
 
 ;; disable truncation of line
-(set-default 'truncate-lines t)
+(set-default 'truncate-lines nil)
 
 ;; makes kill ring not mess with clipboard
 (setq x-select-enable-clipboard nil)
