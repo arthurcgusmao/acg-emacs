@@ -4,6 +4,7 @@
 ;; configurations
 (setq org-startup-with-inline-images t)
 (setq org-startup-indented t)
+(setq org-startup-truncated nil)
 
 ;; where to put latex preview images
 (setq org-latex-preview-ltxpng-directory "~/.emacs.d/latex-png-previews/")
