@@ -8,12 +8,12 @@
 (define-key isearch-mode-map (kbd "C-S-V") 'isearch-yank-kill)
 
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
-(global-set-key (kbd "<M-return>") 'open-line)
+(global-set-key (kbd "C-d") 'bookmark-set)
+(global-set-key (kbd "C-r") 'repeat)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
-(global-set-key (kbd "C-r") 'repeat)
-(global-set-key (kbd "C-c SPC") 'just-one-space)
-(global-set-key (kbd "C-d") 'bookmark-set)
+(global-set-key (kbd "<M-return>") 'open-line)
+(global-set-key (kbd "C-S-SPC") 'cycle-spacing)
 
 ;; Binding Crux commands
 (crux-reopen-as-root-mode 1)

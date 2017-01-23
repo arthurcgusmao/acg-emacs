@@ -1,0 +1,5 @@
+(require 'fix-word)
+(global-unset-key (kbd "M-f"))
+(global-set-key (kbd "M-f u") #'fix-word-upcase)
+(global-set-key (kbd "M-f l") #'fix-word-downcase)
+(global-set-key (kbd "M-f c") #'fix-word-capitalize)

@@ -25,9 +25,7 @@
            ("M-<up>")
            ("M-<down>")
            ("M-r")
-           ("C-)")
            ("C-}")
-           ("C-(")
            ("C-{")
            ("M-S")
            
@@ -63,6 +61,8 @@
            ;;    resources: https://ebzzry.github.io/emacs-pairs.html
            ("C-0" . sp-forward-slurp-sexp)
            ("C-9" . sp-backward-slurp-sexp)
+           ("C-)" . sp-forward-barf-sexp)
+           ("C-(" . sp-backward-barf-sexp)
            ("M-0" . sp-forward-barf-sexp)
            ("M-9" . sp-backward-barf-sexp)
            ("M-<right>" . sp-forward-sexp)

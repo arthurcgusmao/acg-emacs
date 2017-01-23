@@ -11,6 +11,7 @@
                           'highlight-indent-guides
                           'tabbar
                           'form-feed
+                          'fix-word
                           
 			  ;; configured in /minor-modes-config/acg-company-mode.el
 			  'company
@@ -27,7 +28,6 @@
 			  ;; configured in /acg-editor.el
 			  'anzu
 			  'multiple-cursors
-			  'smartparens
 
                           ;; configured in /acg-ui.el
 			  'smooth-scrolling

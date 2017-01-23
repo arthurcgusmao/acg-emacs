@@ -14,7 +14,7 @@
 
 ;; lets you undo and redo changes in the window configuration
 (winner-mode 1)
-    
+
 
 ;; search/replace
 
