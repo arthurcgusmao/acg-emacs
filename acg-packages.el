@@ -24,6 +24,7 @@
 			  'less-css-mode
 			  'markdown-mode
                           'anaconda-mode
+                          'yaml-mode
 
 			  ;; configured in /acg-editor.el
 			  'anzu
