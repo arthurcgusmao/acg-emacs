@@ -3,7 +3,9 @@
   (interactive)
   (if (use-region-p)
       (kill-region (region-beginning) (region-end)))
-  (kill-line))
+  (progn
+    (if (not (looking-at "[[:space:]]*$"))
+        (kill-line))))     
 
 (defun acg-kill-line-or-region-backwards ()
   "Kill line backwards (or lines defined by the region) and adjust the
