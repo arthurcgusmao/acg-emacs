@@ -12,6 +12,7 @@
                           'tabbar
                           'form-feed
                           'fix-word
+                          'magit
                           
 			  ;; configured in /minor-modes-config/acg-company-mode.el
 			  'company
