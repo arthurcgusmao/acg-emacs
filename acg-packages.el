@@ -1,5 +1,6 @@
 (ensure-package-installed 'helm ;; configured in /minor-modes-config/
 			  'crux
+                          'use-package
 			  'minimap
 			  'undo-tree
 			  'projectile
@@ -13,6 +14,7 @@
                           'form-feed
                           'fix-word
                           'magit
+                          'ein
                           
 			  ;; configured in /minor-modes-config/acg-company-mode.el
 			  'company
