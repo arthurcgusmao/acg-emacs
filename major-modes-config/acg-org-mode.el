@@ -20,6 +20,7 @@
             (define-key org-mode-map (kbd "<S-iso-lefttab>") 'org-cycle)
             (define-key org-mode-map (kbd "C-a") nil)
             (define-key org-mode-map (kbd "C-e") nil)
+            (define-key org-mode-map (kbd "M-e") nil)
             (define-key org-mode-map (kbd "C-j") nil)
             (define-key org-mode-map (kbd "C-k") nil)
             (define-key org-mode-map (kbd "C-y") nil)

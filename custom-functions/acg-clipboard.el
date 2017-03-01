@@ -10,8 +10,7 @@
     (let ((clipboard-paste-point-start (point)))
       (x-clipboard-yank)
       (indent-region clipboard-paste-point-start (point))
-      ))
-  (message "Text pasted and indented."))
+      )))
 
 
 (defun acg-clipboard-kill-ring-save ()
