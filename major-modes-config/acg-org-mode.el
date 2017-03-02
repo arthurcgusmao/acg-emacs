@@ -14,6 +14,22 @@
 (setq org-latex-preview-ltxpng-directory "~/.emacs.d/latex-png-previews/")
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 
+;; configuring the latex-pdf generator
+(setq org-latex-pdf-process
+      '("pdflatex %f" "bibtex %b" "pdflatex %f" "pdflatex %f"))
+
+
+;; org-ref package configurations
+(setq reftex-default-bibliography '("~/.emacs.d/bibliography/references.bib"))
+
+;; see org-ref for use of these variables
+(setq org-ref-bibliography-notes "~/.emacs.d/bibliography/notes.org"
+      org-ref-default-bibliography '("~/.emacs.d/bibliography/references.bib")
+      org-ref-pdf-directory "~/.emacs.d/bibliography/bibtex-pdfs/")
+(require 'org-ref)
+
+
+;; setting up keybindings
 (add-hook 'org-mode-hook 
           (lambda ()
             (define-key org-mode-map (kbd "<C-tab>") nil)
@@ -73,3 +89,4 @@
   (interactive)
   (end-of-line)
   (org-meta-return))
+

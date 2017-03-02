@@ -29,6 +29,9 @@
                           'anaconda-mode
                           'yaml-mode
 
+                          ;; configured in /major-modes-config/acg-org-mode.el
+                          'org-ref
+
 			  ;; configured in /acg-editor.el
 			  'anzu
 			  'multiple-cursors
