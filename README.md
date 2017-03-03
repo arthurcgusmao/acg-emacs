@@ -3,9 +3,9 @@
 Hey! This is my emacs configuration folder.
 
 All the configs I use are here. You can totally clone this repo if you want to.
-However, there are still some paths hardcoded (since I haven't taken to the time
-to seek how to properly handle those yet), so it won't be plug and play. Also
-may require some knowledge on how emacs works.
+However, all configurations were only tested on linux, so for using in other
+operating systems you may have to make changes which may require some knowledge
+on elisp and how emacs works.
 
 Feel free to get in touch if you want to,
 

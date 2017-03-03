@@ -11,7 +11,7 @@
 (setq org-src-fontify-natively t)
 
 ;; where to put latex preview images
-(setq org-latex-preview-ltxpng-directory "~/.emacs.d/latex-png-previews/")
+(setq org-latex-preview-ltxpng-directory (concat default-emacs-dir "latex-png-previews/"))
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 
 ;; configuring the latex-pdf generator
@@ -20,12 +20,12 @@
 
 
 ;; org-ref package configurations
-(setq reftex-default-bibliography '("~/.emacs.d/bibliography/references.bib"))
+(setq reftex-default-bibliography '((concat default-emacs-dir "bibliography/references.bib")))
 
 ;; see org-ref for use of these variables
-(setq org-ref-bibliography-notes "~/.emacs.d/bibliography/notes.org"
-      org-ref-default-bibliography '("~/.emacs.d/bibliography/references.bib")
-      org-ref-pdf-directory "~/.emacs.d/bibliography/bibtex-pdfs/")
+(setq org-ref-bibliography-notes (concat default-emacs-dir "bibliography/notes.org")
+      org-ref-default-bibliography '((concat default-emacs-dir "bibliography/references.bib"))
+      org-ref-pdf-directory (concat default-emacs-dir "bibliography/bibtex-pdfs/"))
 (require 'org-ref)
 
 

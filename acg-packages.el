@@ -43,8 +43,8 @@
                           'auto-dim-other-buffers
 			  )
 
-(my-load-all-in-directory "~/.emacs.d/acg-emacs/custom-functions")
-(my-load-all-in-directory "~/.emacs.d/acg-emacs/minor-modes-config")
-(my-load-all-in-directory "~/.emacs.d/acg-emacs/major-modes-config")
+(my-load-all-in-directory (concat acg-emacs-dir "custom-functions"))
+(my-load-all-in-directory (concat acg-emacs-dir "minor-modes-config"))
+(my-load-all-in-directory (concat acg-emacs-dir "major-modes-config"))
 
 (provide 'acg-packages)

@@ -1,7 +1,9 @@
-(add-to-list 'load-path "~/.emacs.d/acg")
-(add-to-list 'load-path "~/.emacs.d/acg/minor-modes-config")
-(add-to-list 'load-path "~/.emacs.d/acg/major-modes-config")
-(add-to-list 'load-path "~/.emacs.d/acg/custom-functions")
+;; Defining directories variables
+(defconst default-emacs-dir "~/.emacs.d/"
+  "Directory where init.el is located (usually ~/.emacs.d/)")
+
+(defconst acg-emacs-dir (file-name-directory (or load-file-name (buffer-file-name)))
+  "Directory where acg-emacs is installed.")
 
 (setq acg-backup-dir "~/.backups/emacs/")
 
