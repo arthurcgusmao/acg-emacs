@@ -65,9 +65,6 @@ Return a list of installed packages or nil for every skipped package."
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
 
-;; starting server
-(server-start)
-
 ;; make EMACS use the PATHs specified in .bashrc
 (require 'exec-path-from-shell)
 (when (memq window-system '(x))
