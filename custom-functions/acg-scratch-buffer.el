@@ -1,6 +1,11 @@
 (defvar acg-scratch-buffer-directory (concat acg-backup-dir "scratch-buffer-backups/")
   "Prefix path for scratch buffers")
 
+;; flag should be always buffer-local
+(make-variable-buffer-local 'acg-scratch-buffer)
+;; variable should not be deleted when major mode changes
+(put 'acg-scratch-buffer 'permanent-local t)
+
 (defun acg-scratch-buffer-create ()
   "Open a new empty buffer.
 URL `http://ergoemacs.org/emacs/emacs_new_empty_buffer.html'
@@ -10,7 +15,7 @@ Version 2016-08-11"
     (switch-to-buffer -buf)
     (funcall initial-major-mode)
     (setq buffer-offer-save t)
-    (set (make-local-variable 'acg-scratch-buffer) t)))
+    (set 'acg-scratch-buffer t)))
 
 (defun acg-scratch-buffer-kill-query-function ()
   (if (and (not buffer-file-name)   ;; buffer is not visiting a file
@@ -21,9 +26,8 @@ Version 2016-08-11"
     t))
 
 
-;;;;;;;;;;;;;;;
+
 ;; making backup of unsaved acg-scratch buffers
-;;;;;;;;;;;;;;;
 
 (defun acg-scratch-buffer-save-backup ()
   "Write the contents of *scratch* to the file name
@@ -35,7 +39,7 @@ Version 2016-08-11"
         (if (and (not buffer-file-name)   ;; buffer is not visiting a file
                  (buffer-modified-p)      ;; buffer has been modified
                  (boundp 'acg-scratch-buffer))
-            (if 'acg-scratch-buffer ;; buffer is a acg-scratch created buffer
+            (if 'acg-scratch-buffer ;; buffer is acg-scratch created buffer
                 (write-file (concat
                              acg-scratch-buffer-directory
                              (format-time-string "%Y-%m-%d--%Hh%Mm%Ss--")
@@ -44,9 +48,8 @@ Version 2016-08-11"
       (setq buffers (cdr buffers)))))
 
 
-;;;;;;;;;;;;;;;
+
 ;; configuring and initializing
-;;;;;;;;;;;;;;;
 
 ;; run query before killing if buffer is acg-scratch-buffer
 (add-to-list 'kill-buffer-query-functions 'acg-scratch-buffer-kill-query-function)
