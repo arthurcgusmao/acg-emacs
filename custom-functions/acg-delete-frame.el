@@ -3,8 +3,7 @@
 frame."
   (interactive "e")
   (acg-kill-normal-buffers)
-  (delete-frame)
-  )
+  (delete-frame))
 
 (defun acg-kill-normal-buffers ()
   "Kill all normal buffers (non-emacs buffers)."

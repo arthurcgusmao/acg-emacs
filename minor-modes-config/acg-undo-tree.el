@@ -7,3 +7,5 @@
       `((".*" . ,temporary-file-directory)))
 (setq undo-tree-auto-save-history t)
 
+;; keybindings
+(global-set-key (kbd "s-z") 'undo-tree-visualize)
