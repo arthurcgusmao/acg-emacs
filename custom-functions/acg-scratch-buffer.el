@@ -66,9 +66,9 @@ Version 2016-08-11"
 
 ;; removing the default scratch buffer
 
-(defun acg-kill-scratch-buffer ()
+(defun acg-initial-buffer-choice ()
   (if (get-buffer "*scratch*")
-      (kill-buffer "*scratch*")))
+      (kill-buffer "*scratch*"))
+  (get-buffer "*Messages*"))
 
-(add-hook 'emacs-startup-hook 'acg-kill-scratch-buffer)
-(add-hook 'after-make-frame-functions 'acg-kill-scratch-buffer t)
+(setq initial-buffer-choice 'acg-initial-buffer-choice)
