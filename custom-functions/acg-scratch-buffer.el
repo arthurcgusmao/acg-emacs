@@ -2,9 +2,9 @@
   "Prefix path for scratch buffers")
 
 ;; flag should be always buffer-local
-(make-variable-buffer-local 'acg-scratch-buffer)
+;;(make-variable-buffer-local 'acg-scratch-buffer)
 ;; variable should not be deleted when major mode changes
-(put 'acg-scratch-buffer 'permanent-local t)
+;;(put 'acg-scratch-buffer 'permanent-local t)
 
 (defun acg-scratch-buffer-create ()
   "Open a new empty buffer.
@@ -15,7 +15,8 @@ Version 2016-08-11"
     (switch-to-buffer -buf)
     (funcall initial-major-mode)
     (setq buffer-offer-save t)
-    (set 'acg-scratch-buffer t)))
+    (set (make-local-variable 'acg-scratch-buffer) t))
+  (put 'acg-scratch-buffer 'permanent-local t))
 
 (defun acg-scratch-buffer-kill-query-function ()
   (if (and (not buffer-file-name)   ;; buffer is not visiting a file
@@ -60,3 +61,13 @@ Version 2016-08-11"
 ;; keybindings
 (global-unset-key (kbd "C-n"))
 (global-set-key (kbd "C-n") 'acg-scratch-buffer-create)
+
+
+
+;; removing the default scratch buffer
+
+(defun acg-kill-scratch-buffer ()
+  (kill-buffer "*scratch*")
+  (switch-to-buffer "*Messages*"))
+
+(add-hook 'after-make-frame-functions 'acg-kill-scratch-buffer t)

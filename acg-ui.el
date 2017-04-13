@@ -11,19 +11,8 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
-(setq inhibit-startup-screen t) ;; disable startup screen
-;; (setq initial-buffer-choice 'custom-initial-buffer)
-
-(defun custom-initial-buffer ()
-  ;; (helm-find-files-1 "~/")
-  (kill-buffer "*scratch*")
-  "*Messages*")
-
-;; removes *scratch* from buffer after the mode has been set.
-(defun remove-scratch-buffer ()
-  (if (get-buffer "*scratch*")
-      (kill-buffer "*scratch*")))
-(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+;; disable startup screen
+(setq inhibit-startup-screen t) 
 
 ;; diminish keeps the modeline tidy
 (require 'diminish)
