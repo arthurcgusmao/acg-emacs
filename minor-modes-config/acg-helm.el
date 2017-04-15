@@ -13,7 +13,8 @@
   (define-key helm-map (kbd "M-a") 'helm-select-action) ; list actions using M-a
   (global-set-key (kbd "C-f") 'helm-swoop-without-pre-input)
   (global-set-key (kbd "C-S-F") 'helm-swoop)
-  (global-set-key (kbd "C-M-f") 'helm-multi-swoop-all))
+  (global-set-key (kbd "C-M-f") 'helm-multi-swoop-all)
+  (global-set-key (kbd "M-v") 'helm-show-kill-ring))
 
 
 (add-hook 'after-init-hook 'acg-helm-init)

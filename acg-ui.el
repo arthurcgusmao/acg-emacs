@@ -28,8 +28,8 @@
 ;; cursor
 
 ;; makes cursor a bar instead of rectangle
-(setq-default cursor-type 'bar)
-(setq cursor-type 'bar)
+(setq-default cursor-type '(bar . 2))
+(setq cursor-type '(bar . 2))
 (setq cursor-in-non-selected-windows 'hollow)
 
 ;; disable blinking cursor
@@ -37,8 +37,9 @@
 
 ;; highlight current line
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#FBF3FC")
-(set-cursor-color "#A0B")
+(set-face-background 'hl-line "#F0F0F0")
+(set-cursor-color "#000000")
+
 ;; prevent highlighted line from appearing in all windows
 (setq hl-line-sticky-flag nil)
 
