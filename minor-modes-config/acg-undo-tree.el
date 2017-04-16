@@ -8,4 +8,6 @@
 (setq undo-tree-auto-save-history t)
 
 ;; keybindings
-(global-set-key (kbd "s-z") 'undo-tree-visualize)
+(acg-force-global-set-key "M-z" 'undo-tree-visualize)
+(define-key undo-tree-visualizer-mode-map (kbd "RET") 'undo-tree-visualizer-quit)
+(define-key undo-tree-visualizer-mode-map [escape] 'undo-tree-visualizer-quit)
