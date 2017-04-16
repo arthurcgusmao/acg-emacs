@@ -34,6 +34,8 @@
 (global-set-key (kbd "C-2") 'acg-split-window-right)
 (global-set-key (kbd "C-@") 'acg-split-window-below)
 
-(global-set-key (kbd "C-w") 'acg-kill-buffer-and-window)
 (global-set-key (kbd "C-q") 'delete-window)
+
+(add-hook 'calc-load-hook (lambda () (define-key calc-mode-map (kbd "C-w") nil)))
+(global-set-key (kbd "C-w") 'acg-kill-buffer-and-window)
 

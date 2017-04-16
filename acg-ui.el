@@ -1,6 +1,7 @@
 ;; themes
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;; (my-load-all-in-directory (concat acg-emacs-dir "themes"))
 ;;(load-theme 'acg-light t)
 
 
@@ -37,7 +38,7 @@
 
 ;; highlight current line
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#F0F0F0")
+(set-face-background 'hl-line "#F6F6F6")
 (set-cursor-color "#000000")
 
 ;; prevent highlighted line from appearing in all windows
