@@ -53,11 +53,10 @@ Return a list of installed packages or nil for every skipped package."
           (push library libraries-loaded))))))
 
 
-;; Defining mode maps list variable
+;; Removing unwanted keybindings from local modes
 
-(defvar acg-modes-alist
-  '(emacs-lisp-mode
-    help-mode)
+(defvar acg-activated-major-modes-list
+  '()
   "List that contains all modes and their respective mode-map.")
 
 (defvar acg-global-keybindings-list
@@ -66,17 +65,13 @@ Return a list of installed packages or nil for every skipped package."
 
 (defun acg-remove-all-local-keybindings ()
   "Removes keybindings in list `acg-glogal-keybindings-list' from
-current local mode-map."
-  (dolist (el acg-global-keybindings-list)
-    (local-set-key (kbd el) nil)))
+current local mode-map if mode is activated for the first time."
+  (unless (member major-mode 'acg-activated-major-modes-list)
+    (dolist (el acg-global-keybindings-list)
+      (local-set-key (kbd el) nil))
+    (add-to-list 'acg-activated-major-modes-list major-mode)))
 
-(defun acg-remove-all-mode-maps-global-keybindings ()
-  "Removes all acg-global-keybindings from all modes and
-mode-maps defined in `acg-modes-maps-alist'."
-  (dolist (el acg-modes-alist)
-    (eval-after-load el '(acg-remove-all-local-keybindings))))
-
-(add-hook 'after-change-major-mode-hook 'acg-remove-all-mode-maps-global-keybindings)
+(add-hook 'after-change-major-mode-hook 'acg-remove-all-local-keybindings)
 
 (defun acg-force-global-set-key (keystring keyfunc)
   "Globally assigns to the keybinding (1st argument) the
