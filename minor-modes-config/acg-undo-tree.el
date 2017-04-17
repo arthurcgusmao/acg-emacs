@@ -9,5 +9,6 @@
 
 ;; keybindings
 (acg-force-global-set-key "M-z" 'undo-tree-visualize)
+(define-key undo-tree-map (kbd "C-/") nil)
 (define-key undo-tree-visualizer-mode-map (kbd "RET") 'undo-tree-visualizer-quit)
 (define-key undo-tree-visualizer-mode-map [escape] 'undo-tree-visualizer-quit)

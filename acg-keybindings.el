@@ -7,7 +7,7 @@
 (define-key isearch-mode-map (kbd "C-S-G") 'isearch-repeat-backward)
 (define-key isearch-mode-map (kbd "C-S-V") 'isearch-yank-kill)
 
-(global-set-key (kbd "C-a") 'mark-whole-buffer)
+(acg-force-global-set-key "C-a" 'mark-whole-buffer)
 (global-set-key (kbd "C-d") 'bookmark-set)
 (global-set-key (kbd "C-r") 'repeat)
 (global-set-key (kbd "C-z") 'undo)
@@ -20,7 +20,6 @@
 (global-set-key (kbd "<C-return>") 'crux-smart-open-line)
 (global-set-key (kbd "<C-S-return>") 'crux-smart-open-line-above)
 (global-set-key (kbd "<M-return>") 'indent-new-comment-line)
-(define-key undo-tree-map (kbd "C-/") nil)
 (global-set-key (kbd "C-/") (crux-with-region-or-line comment-or-uncomment-region))
 (global-set-key (kbd "C-j") 'crux-top-join-line)
 (global-set-key (kbd "C-S-J") 'join-line)
