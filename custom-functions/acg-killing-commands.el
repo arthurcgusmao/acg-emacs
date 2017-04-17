@@ -72,12 +72,12 @@ active."
 ;;     (looking-at "[[:space:]]*$")))
 
 ;; bindings
-(global-set-key (kbd "<C-backspace>") 'acg-backward-kill-word)
-(global-set-key (kbd "<C-S-backspace>") 'acg-kill-line-or-region-backwards)
-(global-set-key (kbd "<M-backspace>") 'acg-backward-kill-sexp)
-(global-set-key (kbd "<C-S-delete>") 'acg-kill-line-or-region)
-(global-set-key (kbd "<M-delete>") 'acg-kill-sexp)
+(acg-force-global-set-key "<C-backspace>" 'acg-backward-kill-word)
+(acg-force-global-set-key "<C-S-backspace>" 'acg-kill-line-or-region-backwards)
+(acg-force-global-set-key "<M-backspace>" 'acg-backward-kill-sexp)
+(acg-force-global-set-key "<C-S-delete>" 'acg-kill-line-or-region)
+(acg-force-global-set-key "<M-delete>" 'acg-kill-sexp)
 (global-set-key (kbd "C-e") 'acg-kill-whole-line-or-region-lines)
 (global-set-key (kbd "C-S-e") 'acg-kill-whole-line-or-region-lines-and-move-up)
-(global-set-key (kbd "M-e") 'acg-kill-whole-line-or-region-content)
+(acg-force-global-set-key "M-e" 'acg-kill-whole-line-or-region-content)
 
