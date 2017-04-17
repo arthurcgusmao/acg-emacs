@@ -41,6 +41,29 @@ if there are only white spaces in it."
   (previous-line)
   (back-to-indentation))
 
+(defun acg-backward-kill-sexp ()
+  "Same as `backward-kill-sexp' but kills region first if
+active."
+  (interactive)
+  (if (use-region-p)
+      (kill-region (region-beginning) (region-end)))
+  (backward-kill-sexp))
+
+(defun acg-backward-kill-word ()
+  "Same as `backward-kill-word' but kills region first if
+active."
+  (interactive)
+  (if (use-region-p)
+      (kill-region (region-beginning) (region-end)))
+  (backward-kill-word 1))
+
+(defun acg-kill-sexp ()
+  "Same as `kill-sexp' but kills region first if active."
+  (interactive)
+  (if (use-region-p)
+      (kill-region (region-beginning) (region-end)))
+  (kill-sexp))
+
 ;; helper function
 ;; (defun current-line-empty-p ()
 ;;   "Checks if line is empty (has only whitespace characters)"
@@ -49,11 +72,11 @@ if there are only white spaces in it."
 ;;     (looking-at "[[:space:]]*$")))
 
 ;; bindings
-(global-set-key (kbd "<C-backspace>") 'backward-kill-word)
+(global-set-key (kbd "<C-backspace>") 'acg-backward-kill-word)
 (global-set-key (kbd "<C-S-backspace>") 'acg-kill-line-or-region-backwards)
-(global-set-key (kbd "<M-backspace>") 'backward-kill-sexp)
+(global-set-key (kbd "<M-backspace>") 'acg-backward-kill-sexp)
 (global-set-key (kbd "<C-S-delete>") 'acg-kill-line-or-region)
-(global-set-key (kbd "<M-delete>") 'kill-sexp)
+(global-set-key (kbd "<M-delete>") 'acg-kill-sexp)
 (global-set-key (kbd "C-e") 'acg-kill-whole-line-or-region-lines)
 (global-set-key (kbd "C-S-e") 'acg-kill-whole-line-or-region-lines-and-move-up)
 (global-set-key (kbd "M-e") 'acg-kill-whole-line-or-region-content)
