@@ -16,7 +16,7 @@
   (define-key helm-read-file-map (kbd "<right>") nil)
   (define-key helm-find-files-map (kbd "<right>") nil)
   
-  (define-key helm-find-files-map (kbd "<backtab>") 'helm-find-files-up-one-level)
+  ;; (define-key helm-find-files-map (kbd "<backtab>") 'helm-find-files-up-one-level)
   
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "<menu>") 'helm-M-x)
@@ -30,12 +30,6 @@
   (global-set-key (kbd "C-S-F") 'helm-swoop)
   (global-set-key (kbd "C-M-f") 'helm-multi-swoop-all)
   (global-set-key (kbd "M-v") 'helm-show-kill-ring)
-
-  (advice-add 'helm-ff-delete-char-backward :around #'acg-helm-find-files-navigate-back)
-  (advice-add 'helm-ff-delete-char-backward :around #'acg-helm-find-files-navigate-back)
-  ;; removing . and .. from helm-find-files list
-  (add-to-list 'helm-boring-file-regexp-list "^\.$")
-  (add-to-list 'helm-boring-file-regexp-list "^\.\.$")
 
   ;; see HELM FIND FILES configs section below
   (define-key helm-find-files-map (kbd "<return>") 'helm-execute-persistent-action)
