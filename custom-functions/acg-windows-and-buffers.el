@@ -36,6 +36,6 @@
 
 (global-set-key (kbd "C-q") 'delete-window)
 
-(add-hook 'calc-load-hook (lambda () (define-key calc-mode-map (kbd "C-w") nil)))
+(eval-after-load "calc" '(define-key calc-mode-map (kbd "C-w") nil))
 (global-set-key (kbd "C-w") 'acg-kill-buffer-and-window)
 
