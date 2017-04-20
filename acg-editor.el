@@ -42,6 +42,12 @@
 ;; saving the last session (for when you open emacs the next time)
 (desktop-save-mode 0)
 
+;; keep a list of recently opened files                                                                      
+(require 'recentf)
+(recentf-mode 1)
+(setq-default recent-save-file "~/.emacs.d/recentf")
+(setq recentf-max-menu-items 100)
+
 
 ;; tabs, indent, spacing
 

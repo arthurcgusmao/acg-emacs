@@ -1,5 +1,13 @@
 (require 'helm)
 
+;; use recentf-list instead of file-name-history
+(setq helm-ff-file-name-history-use-recentf t)
+
+;; helm buffer always splits window and appears below
+(setq helm-split-window-default-side 'below)
+(setq helm-split-window-in-side-p t)
+
+
 ;; keybindings
 (defun acg-helm-init ()
   (define-key helm-map (kbd "<escape>") 'helm-keyboard-quit)
@@ -15,6 +23,8 @@
   (define-key helm-map (kbd "<right>") nil)
   (define-key helm-read-file-map (kbd "<right>") nil)
   (define-key helm-find-files-map (kbd "<right>") nil)
+
+  (define-key helm-find-files-map (kbd "<C-backspace>") nil)
   
   ;; (define-key helm-find-files-map (kbd "<backtab>") 'helm-find-files-up-one-level)
   
@@ -22,6 +32,7 @@
   (global-set-key (kbd "<menu>") 'helm-M-x)
   (global-set-key (kbd "C-b") 'helm-mini)
   (global-set-key (kbd "C-o") 'helm-find-files)
+  (global-set-key (kbd "C-S-O") 'helm-recentf)
   (global-set-key (kbd "C-S-B") 'helm-bookmarks)
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
   ;;(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; makes TAB work in terminal
@@ -35,12 +46,7 @@
   (define-key helm-find-files-map (kbd "<return>") 'helm-execute-persistent-action)
   )
 
-
 (add-hook 'after-init-hook 'acg-helm-init)
-
-;; helm buffer always splits window and appears below
-(setq helm-split-window-default-side 'below)
-(setq helm-split-window-in-side-p t)
 
 
 ;; HELM FIND FILES configs
