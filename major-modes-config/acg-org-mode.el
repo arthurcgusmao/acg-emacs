@@ -64,7 +64,7 @@
             (define-key org-mode-map (kbd "<return>") 'org-return-indent)
             (define-key org-mode-map (kbd "<C-return>") nil)
             (define-key org-mode-map (kbd "<C-S-return>") nil)
-            (define-key org-mode-map (kbd "<M-return>") 'org-meta-return-newline)
+            (define-key org-mode-map (kbd "<M-return>") 'acg-org-meta-return-newline)
             (define-key org-mode-map (kbd "C-8") 'org-insert-heading-after-current)
             (define-key org-mode-map (kbd "M-8") 'org-insert-subheading-newline)
             
@@ -104,9 +104,11 @@
   (org-insert-heading-after-current)
   (org-shiftmetaright))
 
-(defun org-meta-return-newline ()
+(defun acg-org-meta-return-newline ()
   "Same as `org-meta-return' but creates a new line."
   (interactive)
+  (org-forward-paragraph)
+  (previous-line)
   (end-of-line)
   (org-meta-return))
 
@@ -116,37 +118,37 @@
 ;; - https://www.reddit.com/r/emacs/comments/3pw2qq/orgmode_headings_and_blank_lines/
 ;; - https://emacs.stackexchange.com/questions/13311/make-org-blank-before-new-entry-distinguish-between-a-todo-list-and-a-text-outli
 
-(setq org-blank-before-new-entry
-      '((heading . always)
-        (plain-list-item . nil)))
+;; (setq org-blank-before-new-entry
+;;       '((heading . always)
+;;         (plain-list-item . nil)))
 
-(defun call-rebinding-org-blank-behaviour (fn)
-  (let ((org-blank-before-new-entry
-         (copy-tree org-blank-before-new-entry)))
-    (when (org-at-heading-p)
-      (rplacd (assoc 'heading org-blank-before-new-entry) nil))
-    (call-interactively fn)))
+;; (defun call-rebinding-org-blank-behaviour (fn)
+;;   (let ((org-blank-before-new-entry
+;;          (copy-tree org-blank-before-new-entry)))
+;;     (when (org-at-heading-p)
+;;       (rplacd (assoc 'heading org-blank-before-new-entry) nil))
+;;     (call-interactively fn)))
 
-(defun smart-org-meta-return-dwim ()
-  (interactive)
-  (call-rebinding-org-blank-behaviour 'org-meta-return))
+;; (defun smart-org-meta-return-dwim ()
+;;   (interactive)
+;;   (call-rebinding-org-blank-behaviour 'org-meta-return))
 
-(defun smart-org-insert-todo-heading-dwim ()
-  (interactive)
-  (call-rebinding-org-blank-behaviour 'org-insert-todo-heading))
+;; (defun smart-org-insert-todo-heading-dwim ()
+;;   (interactive)
+;;   (call-rebinding-org-blank-behaviour 'org-insert-todo-heading))
 
-(defun smart-org-insert-heading-respent-content-dwim ()
-  (interactive)
-  (call-rebinding-org-blank-behaviour 'org-insert-heading-respect-content))
+;; (defun smart-org-insert-heading-respent-content-dwim ()
+;;   (interactive)
+;;   (call-rebinding-org-blank-behaviour 'org-insert-heading-respect-content))
 
-(defun smart-org-insert-todo-heading-respect-content-dwim ()
-  (interactive)
-  (call-rebinding-org-blank-behaviour 'org-insert-todo-heading-respect-content))
+;; (defun smart-org-insert-todo-heading-respect-content-dwim ()
+;;   (interactive)
+;;   (call-rebinding-org-blank-behaviour 'org-insert-todo-heading-respect-content))
 
-(define-key org-mode-map (kbd "M-<return>") 'smart-org-meta-return-dwim) 
-(define-key org-mode-map (kbd "M-S-<return>") 'smart-org-insert-todo-heading-dwim) 
-(define-key org-mode-map (kbd "C-<return>") 'smart-org-insert-heading-respent-content-dwim)
-(define-key org-mode-map (kbd "C-S-<return>") 'smart-org-insert-todo-heading-respect-content-dwim)
+;; (define-key org-mode-map (kbd "M-<return>") 'smart-org-meta-return-dwim) 
+;; (define-key org-mode-map (kbd "M-S-<return>") 'smart-org-insert-todo-heading-dwim) 
+;; (define-key org-mode-map (kbd "C-<return>") 'smart-org-insert-heading-respent-content-dwim)
+;; (define-key org-mode-map (kbd "C-S-<return>") 'smart-org-insert-todo-heading-respect-content-dwim)
 
 
 ;; crazyly trying to fix the subtree moving behavior
