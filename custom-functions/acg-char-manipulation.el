@@ -19,4 +19,4 @@
 
 (global-set-key (kbd "C-;") 'append-or-remove-semicolon-to-eol)
 (global-set-key (kbd "C-,") 'append-or-remove-comma-to-eol)
-(global-set-key (kbd "C-S-T") 'transpose-words)
+(global-set-key (kbd "M-w t") 'transpose-words)

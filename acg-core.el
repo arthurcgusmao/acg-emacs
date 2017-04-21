@@ -82,8 +82,8 @@ bindings to the same command."
 
 
 ;; Requiring Files
-(require 'acg-packages)
 (require 'acg-keybindings)
+(require 'acg-packages)
 (require 'acg-editor)
 (require 'acg-ui)
 

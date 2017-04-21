@@ -46,7 +46,8 @@
 (require 'recentf)
 (recentf-mode 1)
 (setq-default recent-save-file "~/.emacs.d/recentf")
-(setq recentf-max-menu-items 100)
+(setq recentf-max-saved-items 300)
+(setq recentf-max-menu-items 300)
 
 
 ;; tabs, indent, spacing
