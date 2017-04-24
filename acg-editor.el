@@ -15,6 +15,8 @@
 ;; lets you undo and redo changes in the window configuration
 (winner-mode 1)
 
+;; automatically run fill-paragraph
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;; fill-paragraph function only leave one space after period instead of two
 (setq sentence-end-double-space nil)
 
