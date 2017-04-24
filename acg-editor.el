@@ -15,6 +15,9 @@
 ;; lets you undo and redo changes in the window configuration
 (winner-mode 1)
 
+;; fill-paragraph function only leave one space after period instead of two
+(setq sentence-end-double-space nil)
+
 
 ;; search/replace
 
