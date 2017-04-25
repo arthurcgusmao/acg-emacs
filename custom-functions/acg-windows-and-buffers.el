@@ -57,7 +57,6 @@
 
 (global-set-key (kbd "C-q") 'delete-window)
 
-(eval-after-load "calc" '(define-key calc-mode-map (kbd "C-w") nil))
-(global-set-key (kbd "C-w") 'acg-kill-buffer-and-window)
+(acg-force-global-set-key (kbd "C-w") 'acg-kill-buffer-and-window)
 
 (global-set-key (kbd "C-S-T") 'acg-reopen-killed-file)
