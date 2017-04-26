@@ -13,5 +13,6 @@
   (interactive)
   (insert (calc-eval (car kill-ring))))
 
+(global-set-key (kbd "C-c c c") 'calc)
 (global-set-key (kbd "C-c c e") 'acg-calc-eval)
 (global-set-key (kbd "C-c c p") 'acg-calc-paste-and-eval)

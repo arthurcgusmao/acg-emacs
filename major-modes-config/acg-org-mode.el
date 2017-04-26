@@ -7,6 +7,7 @@
 (setq org-startup-indented nil)
 (setq org-adapt-indentation nil)
 (setq org-startup-truncated nil)
+(setq org-startup-folded nil)
 
 ;; make code blocks pretty
 (setq org-src-fontify-natively t)
