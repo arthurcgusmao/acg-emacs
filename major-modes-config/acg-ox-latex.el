@@ -9,4 +9,16 @@
                  ("\\subsection{%s}" . "\\subsection*a{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("times-12-small-margin"                          ;class-name
+                 "\\documentclass[12pt]{article}
+\\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+ [PACKAGES]
+ [EXTRA]" ;;header-string
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*a{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+

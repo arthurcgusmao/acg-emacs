@@ -109,6 +109,7 @@
   "Same as `org-meta-return' but creates a new line."
   (interactive)
   (org-forward-paragraph)
+  (org-back-over-empty-lines)
   (previous-line)
   (end-of-line)
   (org-meta-return))
