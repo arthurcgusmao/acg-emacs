@@ -3,12 +3,10 @@
 Hey! This is my emacs configuration folder.
 
 All the configs I use are here. You can totally clone this repo if you want to.
-However, all configurations were only tested on linux, so for using in other
-operating systems you may have to make changes which may require some knowledge
-on elisp and how emacs works.
+However, all configurations were only tested on linux, so be aware that it may
+not work on Windows/MacOS.
 
 Feel free to get in touch if you want to,
-
 Arthur
 
 ## Setup

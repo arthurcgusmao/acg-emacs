@@ -78,16 +78,20 @@
 
 (setq frame-title-format "Emacs")
 
-(add-to-list 'default-frame-alist '(height . 60))
+(add-to-list 'default-frame-alist '(height . 100))
 (add-to-list 'default-frame-alist '(width . 160))
 
 ;; makes new buffers always default to vertical splitting (instead of horizontal)
 (setq split-height-threshold nil)
-(setq split-width-threshold 0)
+(setq split-width-threshold nil)
 
 ;; always opens help buffer in the same window
 (add-to-list 'display-buffer-alist
-            '("Help" display-buffer-same-window))
+             '("Help" display-buffer-same-window))
+(add-to-list 'display-buffer-alist
+             '("Magit" display-buffer-same-window))
+(add-to-list 'display-buffer-alist
+             '("Anaconda" display-buffer-same-window))
 
 ;; unhighlight inactive windows
 (diminish 'auto-dim-other-buffers-mode)
