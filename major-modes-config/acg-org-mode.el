@@ -76,6 +76,9 @@
             ;; (acg-local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-right>") 'org-cycle)
             (define-key org-mode-map (kbd "<M-left>") nil)
             (define-key org-mode-map (kbd "<M-right>") nil)
+
+            (define-key org-mode-map (kbd "<f5>") (lambda () (interactive) (org-preview-latex-fragment 16)))
+            (define-key org-mode-map (kbd "<f6>") 'org-preview-latex-fragment)
             ))
 
 

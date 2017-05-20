@@ -13,7 +13,7 @@
   (add-to-list 'org-latex-classes
                '("times-12-small-margin"                          ;class-name
                  "\\documentclass[12pt]{article}
-\\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\\usepackage[top=1.5in, bottom=1.5in, left=1.5in, right=1.5in]{geometry}
  [PACKAGES]
  [EXTRA]" ;;header-string
                  ("\\section{%s}" . "\\section*{%s}")
