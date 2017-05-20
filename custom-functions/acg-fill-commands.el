@@ -37,3 +37,9 @@ Version 2016-07-13"
 (add-hook 'org-mode-hook
           (lambda ()
             (set-fill-column 96)))
+(add-hook 'tex-mode-hook
+          (lambda ()
+            (set-fill-column 96)))
+(add-hook 'text-mode-hook
+          (lambda ()
+            (set-fill-column 96)))

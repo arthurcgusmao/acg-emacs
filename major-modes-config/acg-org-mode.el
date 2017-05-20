@@ -22,12 +22,13 @@
 
 
 ;; org-ref package configurations
-(setq reftex-default-bibliography '((concat default-emacs-dir "bibliography/references.bib")))
+(setq reftex-default-bibliography acg-default-bib-file
+      org-ref-default-bibliography acg-default-bib-file)
 
 ;; see org-ref for use of these variables
-(setq org-ref-bibliography-notes (concat default-emacs-dir "bibliography/notes.org")
-      org-ref-default-bibliography '((concat default-emacs-dir "bibliography/references.bib"))
-      org-ref-pdf-directory (concat default-emacs-dir "bibliography/bibtex-pdfs/"))
+;; (setq org-ref-bibliography-notes (concat default-emacs-dir "bibliography/notes.org")
+;; org-ref-pdf-directory (concat default-emacs-dir "bibliography/bibtex-pdfs/"))
+
 (require 'org-ref)
 
 

@@ -5,6 +5,10 @@
 (defconst acg-emacs-dir (file-name-directory (or load-file-name (buffer-file-name)))
   "Directory where acg-emacs is installed.")
 
+(defconst acg-default-bib-file "~/Documents/Mendeley/library.bib"
+  "Default bibliography file for references.")
+
+
 (setq acg-backup-dir "~/.backups/emacs/")
 
 
