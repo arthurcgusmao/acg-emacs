@@ -11,7 +11,11 @@
 
 ;; make code blocks pretty
 (setq org-src-fontify-natively t)
+;; highlight latex related syntax
+(eval-after-load 'org
+  '(setf org-highlight-latex-and-related '(latex)))
 
+
 ;; where to put latex preview images
 (setq org-latex-preview-ltxpng-directory (concat default-emacs-dir "latex-png-previews/"))
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
@@ -80,6 +84,7 @@
 
             (define-key org-mode-map (kbd "<f5>") (lambda () (interactive) (org-preview-latex-fragment 16)))
             (define-key org-mode-map (kbd "<f6>") 'org-preview-latex-fragment)
+            (define-key org-mode-map (kbd "<f9>") 'org-latex-export-to-pdf)
             ))
 
 

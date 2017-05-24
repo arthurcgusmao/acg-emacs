@@ -1,10 +1,10 @@
-# My EMACS configuration.
+# My Emacs configuration.
 
-Hey! This is my emacs configuration folder.
+My Emacs configurations.
 
-All the configs I use are here. You can totally clone this repo if you want to.
-However, all configurations were only tested on linux, so be aware that it may
-not work on Windows/MacOS.
+You can totally clone this repo if you want to. However, it was only tested on linux, so be
+aware that it may not work on Windows/MacOS. You may also find some hardcoded filepaths at the
+`acg-core.el` file, please change them to what works for you.
 
 Feel free to get in touch if you want to,
 Arthur
