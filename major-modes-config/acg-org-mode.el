@@ -13,7 +13,7 @@
 (setq org-src-fontify-natively t)
 ;; highlight latex related syntax
 (eval-after-load 'org
-  '(setf org-highlight-latex-and-related '(latex)))
+  '(setf org-highlight-latex-and-related '(latex script entities)))
 
 
 ;; where to put latex preview images
