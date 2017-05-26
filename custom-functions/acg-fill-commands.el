@@ -32,7 +32,7 @@ Version 2016-07-13"
 
 
 ;; settings -- max-width for lines when using fill commands
-(setq-default fill-column 80)
+(setq-default fill-column 79)
 
 (add-hook 'org-mode-hook
           (lambda ()
