@@ -13,6 +13,8 @@
 
 (global-set-key (kbd "<C-tab>") 'acg-tabbar-forward)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'acg-tabbar-backward)
+(global-set-key (kbd "<C-next>") 'acg-tabbar-forward)
+(global-set-key (kbd "<C-prior>") 'acg-tabbar-backward)
 
 ;; removing tabbar display in some buffers
 ;; not necessary anymore because these modes are not even belonging to a group anymore
