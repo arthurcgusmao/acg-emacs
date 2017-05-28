@@ -1,11 +1,11 @@
-(defun prelude-move-beginning-of-line (arg)
+(defun acg-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
-Move point to the first non-whitespace character on this line.
-If point is already there, move to the beginning of the line.
+Move point to the first non-whitespace character on this line. If
+point is already there, move to the beginning of the line.
 Effectively toggle between the first non-whitespace character and
-the beginning of the line.
-If ARG is not nil or 1, move forward ARG - 1 lines first. If
-point reaches the beginning or end of the buffer, stop there."
+the beginning of the line. If ARG is not nil or 1, move forward
+ARG - 1 lines first. If point reaches the beginning or end of the
+buffer, stop there. (function taken from prelude)"
   (interactive "^p")
   (setq arg (or arg 1))
 
@@ -20,4 +20,6 @@ point reaches the beginning or end of the buffer, stop there."
       (move-beginning-of-line 1))))
 
 ;; keybindings
-(global-set-key (kbd "<home>") 'prelude-move-beginning-of-line)
+(global-set-key (kbd "<home>") 'acg-move-beginning-of-line)
+(global-set-key (kbd "<C-M-left>") 'acg-move-beginning-of-line)
+(global-set-key (kbd "<C-M-right>") 'move-end-of-line)
