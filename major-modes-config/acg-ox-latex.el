@@ -1,4 +1,6 @@
 (with-eval-after-load 'ox-latex
+  
+  
   (add-to-list 'org-latex-classes
                '("article-1"                          ;class-name
                  "\\documentclass{article}
@@ -10,10 +12,14 @@
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  
+  
+  
   (add-to-list 'org-latex-classes
-               '("times-12-small-margin"                          ;class-name
+               '("times-12"                          ;class-name
                  "\\documentclass[12pt]{article}
-\\usepackage[top=1.5in, bottom=1.5in, left=1.5in, right=1.5in]{geometry}
+\\usepackage{times}
+\\usepackage[top=1.5in, bottom=1.8in, left=1.5in, right=1.5in]{geometry}
  [PACKAGES]
  [EXTRA]" ;;header-string
                  ("\\section{%s}" . "\\section*{%s}")
