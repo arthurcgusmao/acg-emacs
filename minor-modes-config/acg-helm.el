@@ -28,6 +28,8 @@
 
   (define-key helm-find-files-map (kbd "<C-backspace>") nil)
   (define-key helm-map (kbd "M-h") 'helm-execute-persistent-action) ;; shows description of commands on M-x helm mode
+
+  (define-key helm-map (kbd "M-k") 'helm-buffer-run-kill-persistent)
   
   ;; (define-key helm-find-files-map (kbd "<backtab>") 'helm-find-files-up-one-level)
   
