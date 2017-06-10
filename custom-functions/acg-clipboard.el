@@ -1,4 +1,4 @@
-(defun acg-clipboard-paste-replace-selection ()
+(defun acg-clipboard-paste-replace-selection-indent ()
   "Paste text from clipboard overwriting the current selection"
   (interactive)
   (if (use-region-p)
@@ -10,6 +10,21 @@
     (let ((clipboard-paste-point-start (point)))
       (x-clipboard-yank)
       (indent-region clipboard-paste-point-start (point))
+      )))
+
+
+(defun acg-clipboard-paste-replace-selection ()
+  "Paste text from clipboard overwriting the current selection"
+  (interactive)
+  (if (use-region-p)
+      (let ((clipboard-paste-region-beginning (region-beginning)))
+        (delete-region (region-beginning) (region-end))
+        (x-clipboard-yank)
+        (indent-region clipboard-paste-region-beginning (region-end))
+        )
+    (let ((clipboard-paste-point-start (point)))
+      (x-clipboard-yank)
+      ;; (indent-region clipboard-paste-point-start (point))
       )))
 
 
@@ -43,4 +58,5 @@ whitespace)"
 (global-set-key (kbd "C-S-C") 'acg-clipboard-kill-ring-save)
 (global-set-key (kbd "C-S-X") 'acg-clipboard-kill-region-or-line)
 (global-set-key (kbd "C-S-V") 'acg-clipboard-paste-replace-selection)
+(global-set-key (kbd "C-v") 'acg-clipboard-paste-replace-selection-indent)
 
