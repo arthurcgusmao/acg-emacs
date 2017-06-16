@@ -10,3 +10,5 @@ fi
 
 # bring application to front
 emacsclient -e '(select-frame-set-input-focus (selected-frame))'
+
+# "right-maximize" window

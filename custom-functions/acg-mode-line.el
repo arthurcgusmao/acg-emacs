@@ -20,12 +20,11 @@
                " "
                ;; was this buffer modified since the last save?
                '(:eval (if buffer-read-only
-                           ("")
+                           ""
                          (if (buffer-modified-p) "[m]" "[s]")))
                
                ;; the buffer name; the file name as a tool tip
-               '(:eval (propertize " %b" 'face 'acg-mode-line-common-bold
-                                   'help-echo (buffer-file-name)))
+               '(:eval (propertize " %b" 'face 'acg-mode-line-common-bold))
                
 
                ;; line
@@ -38,8 +37,7 @@
                
 
                ;; the current major mode for the buffer.
-               '(:eval ("   %m"
-                        'help-echo buffer-file-coding-system))
+               "   %m"
                ;; version control indicator
 	       "   "
                '(vc-mode vc-mode)
