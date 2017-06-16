@@ -1,8 +1,8 @@
 ;; themes
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (my-load-all-in-directory (concat acg-emacs-dir "themes"))
-;;(load-theme 'acg-light t)
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(my-load-all-in-directory (concat acg-emacs-dir "themes"))
+;; (acg-dark-theme)
 
 
 ;; removing unnecessary things
@@ -38,8 +38,6 @@
 
 ;; highlight current line
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#F6F6F6")
-(set-cursor-color "#000000")
 
 ;; prevent highlighted line from appearing in all windows
 (setq hl-line-sticky-flag nil)
@@ -98,9 +96,10 @@
 (add-hook 'after-init-hook
           (lambda ()
             (when (fboundp 'auto-dim-other-buffers-mode)
-              (auto-dim-other-buffers-mode t)
-              ;; (set-face-background 'auto-dim-other-buffers-face (face-background 'fringe)))))
-              (set-face-background 'auto-dim-other-buffers-face "#CCCCCC"))))
+              (auto-dim-other-buffers-mode 0)
+              (set-face-background 'auto-dim-other-buffers-face (face-background 'fringe))
+              ;; (set-face-background 'auto-dim-other-buffers-face "#445")
+              )))
 
 
 (provide 'acg-ui)
