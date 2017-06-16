@@ -2,7 +2,7 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'custom-theme-load-path (concat acg-emacs-dir "themes"))
-(load-theme 'acg-dark)
+(load-theme 'acg-dark t)
 
 
 ;; removing unnecessary things

@@ -1,6 +1,6 @@
 (deftheme acg-dark "A dark theme.")
 
-(load-theme 'acg-common-faces)
+(load-theme 'acg-common-faces t)
 
 (set-face-background 'hl-line "#000000")
 (set-cursor-color "#FFFFFF")
