@@ -15,6 +15,7 @@
                           'fix-word
                           'magit
                           'ein
+                          'highlight
                           
 			  ;; configured in /minor-modes-config/acg-company-mode.el
 			  'company

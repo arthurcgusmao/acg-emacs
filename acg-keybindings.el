@@ -17,13 +17,6 @@
 (global-set-key (kbd "C-S-J") 'join-line)
 (global-set-key (kbd "M-j") 'open-line)
 
-;; Binding "Visual" C-v keys
-(global-unset-key (kbd "M-h"))
-(global-set-key (kbd "M-h h") 'highlight-symbol-at-point)
-(global-set-key (kbd "M-h r") 'highlight-regexp)
-(global-set-key (kbd "M-h p") 'highlight-phrase)
-(global-set-key (kbd "M-h u") 'unhighlight-regexp)
-
 
 ;; Todo List
 
