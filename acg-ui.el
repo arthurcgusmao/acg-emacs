@@ -10,7 +10,7 @@
 ;; hide toolbar, menubar and scrollbar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(scroll-bar-mode -1)
+(scroll-bar-mode 1)
 
 ;; disable startup screen
 (setq inhibit-startup-screen t) 
@@ -63,13 +63,13 @@
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
 
-;; scroll wheel move one line per scroll
+;; scroll wheel move 3 lines per scroll
 (setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
 ;; scroll speed always steady
 (setq mouse-wheel-progressive-speed nil)
 
 ;; nice scrolling
-(setq scroll-margin 0
+(setq scroll-margin 0 ; never recenters window
       scroll-conservatively 100000
       scroll-preserve-screen-position t)
 
