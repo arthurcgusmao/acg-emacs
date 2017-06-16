@@ -14,18 +14,39 @@
                   :overline nil :underline nil :slant normal :weight normal
                   :height 113 :width normal :foundry "MS  "
                   :family "Consolas"))))
- '(font-lock-builtin-face ((t (:foreground "#ffa0a0"))))
- '(font-lock-comment-face ((t (:foreground "#666"))))
- '(font-lock-constant-face ((t (:foreground "Aquamarine"))))
- '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#8866aa"))))
+ '(font-lock-builtin-face ((t (:foreground "#7ce"))))
+ ;; '(font-lock-comment-face ((t (:foreground "#666" :slant italic))))
+ '(font-lock-comment-face ((t (:foreground "#648" :slant italic))))
+ '(font-lock-constant-face ((t (:foreground "#7ec"))))
+ '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#88d"))))
  '(font-lock-function-name-face ((t (:foreground "#bb55ff" :weight bold))))
- '(font-lock-keyword-face ((t (:foreground "deep sky blue" :weight bold))))
- '(font-lock-string-face ((t (:foreground "#88d"))))
+ '(font-lock-keyword-face ((t (:foreground "#50bfff" :weight bold))))
+ '(font-lock-string-face ((t (:foreground "#d88"))))
  '(font-lock-type-face ((t (:foreground "PaleGreen" :weight bold))))
  '(font-lock-variable-name-face ((t (:foreground "#ddcc82"))))
+ '(region ((t (:background "#66a"))))
+
+ ;; helm
+ '(helm-buffer-directory ((t (:inherit helm-ff-directory))))
+ '(helm-buffer-file ((t (:foreground "#ddd"))))
+ '(helm-buffer-process ((t (:foreground "dark slate gray"))))
+ '(helm-ff-directory ((t (:background "#000" :foreground "#B1DBFF"))))
+ '(helm-ff-dotted-directory
+   ((t (:inherit helm-ff-directory :foreground "#555"))))
+ '(helm-ff-file
+   ((t (:inherit font-lock-builtin-face :foreground "#ddd"))))
+ '(helm-source-header
+   ((t (:background "dark gray" :foreground "gray10"
+                    :box (:line-width 5 :color "grey75") :weight bold
+                    :height 1.3 :family "Sans Serif"))))
+
+ ;; multiple cursors
+ '(mc/cursor-bar-face ((t (:height 1 :background "white"))))
  
- '(fringe ((t (:background "black"))))
- ;; '(region ((t (:background "gold" :distant-foreground "white"))))
+ ;; border (buffer separator)
+ '(fringe ((t (:inherit 'font-lock-comment-face))))
+ '(vertical-border ((t (:foreground "#1B1B2A"))))
+ 
  )
 
 

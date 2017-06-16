@@ -16,13 +16,13 @@
                   :width normal :foundry "MS  " :family "Consolas"))))
  '(font-lock-builtin-face ((t (:foreground "#88d"))))
  '(font-lock-comment-face ((t (:foreground "#969896"))))
- ;; '(font-lock-constant-face ((t (:foreground "Aquamarine"))))
- ;; '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#8866aa"))))
- '(font-lock-function-name-face ((t (:foreground "#7F33A9"))))
- '(font-lock-keyword-face ((t (:foreground "#9D1353"))))
- '(font-lock-string-face ((t (:foreground "#15309F"))))
+ '(font-lock-constant-face ((t (:foreground "#055"))))
+ '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "indian red"))))
+ '(font-lock-function-name-face ((t (:foreground "#F23"))))
+ '(font-lock-keyword-face ((t (:foreground "blue"))))
+ '(font-lock-string-face ((t (:foreground "#639"))))
  '(font-lock-type-face ((t (:foreground "#0086b3"))))
- '(font-lock-variable-name-face ((t (:foreground "gold4"))))
+ '(font-lock-variable-name-face ((t (:foreground "#760"))))
  
  '(helm-buffer-directory ((t (:inherit helm-ff-directory))))
  '(helm-buffer-file ((t (:foreground "black"))))
@@ -38,6 +38,12 @@
                     :height 1.3 :family "Sans Serif"))))
 
  '(fringe ((t (:background "white"))))
+
+ ;; backups
+ ;; '(font-lock-keyword-face ((t (:foreground "#9D1353"))))
+ ;; '(font-lock-string-face ((t (:foreground "#15309F"))))
+ ;; '(font-lock-variable-name-face ((t (:foreground "gold4"))))
+ '(mc/cursor-bar-face ((t (:height 1 :background "black"))))
  )
 
 
