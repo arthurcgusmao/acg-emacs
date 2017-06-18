@@ -6,8 +6,8 @@
  
  ;; mode line
  '(mode-line
-   ((t (:background "#405" :foreground "#ddd" :box
-                    (:line-width 2 :color "#405" :style released-button)))))
+   ((t (:background "#203" :foreground "#ddd" :box
+                    (:line-width 2 :color "#203" :style released-button)))))
  '(mode-line-inactive
    ((t (:inherit mode-line :background "#555"
                  :foreground "#bbb" :box (:line-width 1 :color "#777")
@@ -60,8 +60,12 @@
  '(tabbar-separator ((t (:inherit tabbar-default :background "#333"))))
  '(tabbar-unselected ((t (:inherit tabbar-default))))
 
+ ;; fringe
+ '(fringe ((t (:foreground "orange" :background "#3d3c3a"))))
+ ;; border (buffer separator)
+ '(vertical-border ((t (:foreground "#3d3c3a"))))
  ;; linum
- '(linum ((t (:inherit font-lock-comment-face))))
+ '(linum ((t (:inherit fringe :weight normal :foreground "#6d6c6a"))))
  )
 
 

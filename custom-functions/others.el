@@ -6,7 +6,9 @@
     (forward-char -1)))
 
 
-;; concentration mode:
-;; create a function that changes the fringes width to make the file centralize when in full screen
-;; then when the user press the key it goes fullscreen and automatically the fringes go thick
-;; (set-window-fringes nil 500 500 t)
+;; concentration mode
+(defun acg-concentration-mode ()
+  "Changes the window fringes to center text and limit distractions."
+  (interactive)
+  (set-window-fringes nil 500 0 t))
+(global-set-key (kbd "<f12>") 'acg-concentration-mode)

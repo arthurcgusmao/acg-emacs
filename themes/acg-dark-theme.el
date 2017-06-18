@@ -36,17 +36,12 @@
  '(helm-ff-file
    ((t (:inherit font-lock-builtin-face :foreground "#ddd"))))
  '(helm-source-header
-   ((t (:background "dark gray" :foreground "gray10"
-                    :box (:line-width 5 :color "grey75") :weight bold
-                    :height 1.3 :family "Sans Serif"))))
+   ((t (:inherit 'fringe :weight bold :height 1.4 :family "Sans Serif"
+                 :box (:line-width 10 :color "#3d3c3a")))))
+
 
  ;; multiple cursors
  '(mc/cursor-bar-face ((t (:height 1 :background "white"))))
- 
- ;; border (buffer separator)
- '(fringe ((t (:inherit 'font-lock-comment-face))))
- '(vertical-border ((t (:foreground "#1B1B2A"))))
- 
  )
 
 
