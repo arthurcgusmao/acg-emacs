@@ -1,7 +1,7 @@
 ;; editor configurations
 
 ;; disable truncation of line
-(set-default 'truncate-lines nil)
+(set-default 'truncate-lines t)
 
 ;; makes kill ring not mess with clipboard
 (setq x-select-enable-clipboard nil)
@@ -46,11 +46,13 @@
 
 ;; saving the last session (for when you open emacs the next time)
 (desktop-save-mode 0)
+(setq desktop-dirname (concat default-emacs-dir "desktop/")
+      desktop-path (list desktop-dirname))
 
-;; keep a list of recently opened files                                                                      
+;; keep a list of recently opened files
+(setq-default recent-save-file (concat default-emacs-dir "recentf"))
 (require 'recentf)
 (recentf-mode 1)
-(setq-default recent-save-file "~/.emacs.d/recentf")
 (setq recentf-max-saved-items 300)
 (setq recentf-max-menu-items 300)
 
