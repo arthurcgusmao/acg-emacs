@@ -77,7 +77,7 @@
 (setq frame-title-format "Emacs")
 
 (add-to-list 'default-frame-alist '(height . 100))
-(add-to-list 'default-frame-alist '(width . 160))
+(add-to-list 'default-frame-alist '(width . 80))
 
 ;; makes new buffers always default to vertical splitting (instead of horizontal)
 (setq split-height-threshold nil)
