@@ -16,7 +16,13 @@
 (winner-mode 1)
 
 ;; automatically run fill-paragraph
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; visual-fill-column-mode makes the visual line be pruned at fill-column length
+(require 'visual-fill-column)
+(global-visual-fill-column-mode)
+(add-hook 'text-mode-hook 'visual-line-mode)
+
 ;; fill-paragraph function only leave one space after period instead of two
 (setq sentence-end-double-space nil)
 

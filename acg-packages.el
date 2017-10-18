@@ -36,6 +36,7 @@
 			  ;; configured in /acg-editor.el
 			  'anzu
 			  'multiple-cursors
+                          'visual-fill-column
 
                           ;; configured in /acg-ui.el
 			  'smooth-scrolling
