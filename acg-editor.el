@@ -26,6 +26,9 @@
 ;; fill-paragraph function only leave one space after period instead of two
 (setq sentence-end-double-space nil)
 
+;; make scratch buffer always start as text-mode and not lisp-mode
+(setq initial-major-mode 'text-mode)
+
 
 ;; search/replace
 
