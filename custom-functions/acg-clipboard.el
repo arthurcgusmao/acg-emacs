@@ -20,7 +20,7 @@
       (let ((clipboard-paste-region-beginning (region-beginning)))
         (delete-region (region-beginning) (region-end))
         (x-clipboard-yank)
-        (indent-region clipboard-paste-region-beginning (region-end))
+        ;; (indent-region clipboard-paste-region-beginning (region-end))
         )
     (let ((clipboard-paste-point-start (point)))
       (x-clipboard-yank)
@@ -59,4 +59,3 @@ whitespace)"
 (global-set-key (kbd "C-S-X") 'acg-clipboard-kill-region-or-line)
 (global-set-key (kbd "C-S-V") 'acg-clipboard-paste-replace-selection)
 (global-set-key (kbd "C-v") 'acg-clipboard-paste-replace-selection-indent)
-
