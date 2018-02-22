@@ -16,6 +16,7 @@
                           'magit
                           'ein
                           'highlight
+                          'exec-path-from-shell
                           
 			  ;; configured in /minor-modes-config/acg-company-mode.el
 			  'company
