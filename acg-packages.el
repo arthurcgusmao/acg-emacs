@@ -6,6 +6,7 @@
 			  'projectile
 			  'smartparens
 			  'helm-projectile
+                          'helm-swoop
 			  'expand-region
 			  'diminish
                           'yasnippet
