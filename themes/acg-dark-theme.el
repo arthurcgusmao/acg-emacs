@@ -11,9 +11,7 @@
  '(default
     ((t (:inherit nil :stipple nil :background "#1B1B2A" :foreground "#ddd"
                   :inverse-video nil :box nil :strike-through nil
-                  :overline nil :underline nil :slant normal :weight normal
-                  :height 113 :width normal :foundry "MS  "
-                  :family "Consolas"))))
+                  :overline nil :underline nil :slant normal :weight normal))))
  '(font-lock-builtin-face ((t (:foreground "#7ce"))))
  ;; '(font-lock-comment-face ((t (:foreground "#666" :slant italic))))
  '(font-lock-comment-face ((t (:foreground "#648" :slant italic))))

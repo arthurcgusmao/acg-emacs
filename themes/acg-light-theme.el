@@ -12,8 +12,7 @@
     ((t (:inherit nil :stipple nil :background "#eee"
                   :foreground "#222" :inverse-video nil :box nil
                   :strike-through nil :overline nil :underline nil
-                  :slant normal :weight normal :height 113
-                  :width normal :foundry "MS  " :family "Consolas"))))
+                  :slant normal :weight normal))))
  '(font-lock-builtin-face ((t (:foreground "#88d"))))
  '(font-lock-builtin-face ((t (:foreground "indian red"))))
  '(font-lock-comment-face ((t (:foreground "#969896" :slant italic))))
