@@ -68,7 +68,7 @@ Return a list of installed packages or nil for every skipped package."
 (defun acg-remove-all-local-keybindings ()
   "Removes keybindings in list `acg-glogal-keybindings-list' from
 current local mode-map if mode is activated for the first time."
-  (unless (member major-mode 'acg-activated-major-modes-list)
+  (unless (member major-mode acg-activated-major-modes-list)
     (dolist (el acg-global-keybindings-list)
       (local-set-key (kbd el) nil))
     (add-to-list 'acg-activated-major-modes-list major-mode)))

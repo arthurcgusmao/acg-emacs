@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: begal*
-# key: begal*
-# --
-\begin{align*}
-$0
-\end{align*}

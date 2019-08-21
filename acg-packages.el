@@ -14,7 +14,6 @@
                           'tabbar
                           'form-feed
                           'fix-word
-                          'magit
                           'ein
                           'highlight
                           'exec-path-from-shell
