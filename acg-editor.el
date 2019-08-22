@@ -24,6 +24,10 @@
 ;; make scratch buffer always start as text-mode and not lisp-mode
 (setq initial-major-mode 'text-mode)
 
+;; visual line mode
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+;; (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+
 
 ;; search/replace
 

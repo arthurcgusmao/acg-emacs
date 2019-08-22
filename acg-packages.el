@@ -14,6 +14,7 @@
                           'tabbar
                           'form-feed
                           'fix-word
+                          'neotree
                           'ein
                           'highlight
                           'exec-path-from-shell
