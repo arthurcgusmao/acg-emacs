@@ -58,7 +58,7 @@ Version 2015-12-10"
   (interactive)
   (cond
    ((string-equal system-type "windows-nt")
-    (message "Microsoft Windows not supported. File a bug report or pull request."))
+    (w32-shell-execute "cmd" (replace-regexp-in-string "/" "\\" default-directory t t)))
    ((string-equal system-type "darwin")
     (message "Mac not supported. File a bug report or pull request."))
    ((string-equal system-type "gnu/linux")
