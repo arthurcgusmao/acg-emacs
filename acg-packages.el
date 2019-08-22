@@ -15,6 +15,7 @@
                           'form-feed
                           'fix-word
                           'magit
+                          'neotree
                           'ein
                           'highlight
                           'exec-path-from-shell
