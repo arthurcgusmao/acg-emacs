@@ -27,6 +27,20 @@
       ;; (indent-region clipboard-paste-point-start (point))
       )))
 
+(defun acg-windows-clipboard-paste-replace-selection ()
+  "Paste text from clipboard overwriting the current selection"
+  (interactive)
+  (if (use-region-p)
+      (let ((clipboard-paste-region-beginning (region-beginning)))
+        (delete-region (region-beginning) (region-end))
+        (clipboard-yank)
+        ;; (indent-region clipboard-paste-region-beginning (region-end))
+        )
+    (let ((clipboard-paste-point-start (point)))
+      (clipboard-yank)
+      ;; (indent-region clipboard-paste-point-start (point))
+      )))
+
 
 (defun acg-clipboard-kill-ring-save ()
   "Copies to the clipboard the current active region. If no region is selected,
@@ -59,3 +73,8 @@ whitespace)"
 (global-set-key (kbd "C-S-X") 'acg-clipboard-kill-region-or-line)
 (global-set-key (kbd "C-S-V") 'acg-clipboard-paste-replace-selection)
 (global-set-key (kbd "C-v") 'acg-clipboard-paste-replace-selection-indent)
+
+;; Windows keybindings
+(if (string-equal system-type "windows-nt")
+    (and (global-set-key (kbd "C-S-V") 'acg-windows-clipboard-paste-replace-selection)
+         (global-set-key (kbd "C-v") 'acg-windows-clipboard-paste-replace-selection)))

@@ -17,6 +17,11 @@
 (global-set-key (kbd "C-S-J") 'join-line)
 (global-set-key (kbd "M-j") 'open-line)
 
+;; for Windows only
+(if (string-equal system-type "windows-nt")
+    (and (global-set-key (kbd "<M-f4>") 'delete-frame)))
+ 
+
 
 ;; Todo List
 
