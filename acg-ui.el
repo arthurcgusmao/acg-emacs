@@ -102,4 +102,9 @@
               )))
 
 
+;; configure font in Windows
+(if (string-equal system-type "windows-nt")
+    (and (set-default-font "Consolas 10" nil t)))
+
+
 (provide 'acg-ui)
