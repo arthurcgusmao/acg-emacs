@@ -72,9 +72,11 @@ whitespace)"
 (global-set-key (kbd "C-S-C") 'acg-clipboard-kill-ring-save)
 (global-set-key (kbd "C-S-X") 'acg-clipboard-kill-region-or-line)
 (global-set-key (kbd "C-S-V") 'acg-clipboard-paste-replace-selection)
-(global-set-key (kbd "C-v") 'acg-clipboard-paste-replace-selection-indent)
+(global-set-key (kbd "C-v") 'acg-clipboard-paste-replace-selection)
+(global-set-key (kbd "<S-insert>") 'acg-clipboard-paste-replace-selection) ;; compatibility with CopyQ (OS clipboard history software)
 
 ;; Windows keybindings
 (if (string-equal system-type "windows-nt")
     (and (global-set-key (kbd "C-S-V") 'acg-windows-clipboard-paste-replace-selection)
-         (global-set-key (kbd "C-v") 'acg-windows-clipboard-paste-replace-selection)))
+         (global-set-key (kbd "C-v") 'acg-windows-clipboard-paste-replace-selection)
+         (global-set-key (kbd "<S-insert>") 'acg-windows-clipboard-paste-replace-selection)))
