@@ -7,7 +7,6 @@
 (global-set-key (kbd "M-w") nil)
 
 (acg-force-global-set-key "C-a" 'mark-whole-buffer)
-(global-set-key (kbd "C-d") 'bookmark-set)
 (global-set-key (kbd "C-r") 'repeat)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)
