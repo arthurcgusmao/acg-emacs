@@ -103,8 +103,12 @@
 
 
 ;; configure font in Windows
+(defun fontify-frame-windows (frame)
+  (set-frame-parameter frame 'font "Consolas-10"))
+
 (if (string-equal system-type "windows-nt")
-    (and (set-face-attribute 'default nil :family "Consolas" :height 110)))
+    (progn (fontify-frame-windows nil) ;; Fontify current frame
+           (push 'fontify-frame-windows after-make-frame-functions))) ;; Fontify any future frames
 
 
 (provide 'acg-ui)

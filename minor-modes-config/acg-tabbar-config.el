@@ -12,7 +12,8 @@
 (setq tabbar-use-images nil)
 
 (global-set-key (kbd "<C-tab>") 'acg-tabbar-forward)
-(global-set-key (kbd "<C-S-iso-lefttab>") 'acg-tabbar-backward)
+(global-set-key (kbd "<C-S-iso-lefttab>") 'acg-tabbar-backward) ;; for Linux
+(global-set-key (kbd "<C-S-tab>") 'acg-tabbar-backward) ;; for Windows
 (global-set-key (kbd "<C-next>") 'acg-tabbar-forward)
 (global-set-key (kbd "<C-prior>") 'acg-tabbar-backward)
 
