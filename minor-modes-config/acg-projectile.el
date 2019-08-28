@@ -13,3 +13,8 @@
 
 ;; set keybindings
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(global-unset-key (kbd "M-o"))
+(define-key projectile-mode-map (kbd "M-O") 'helm-projectile-switch-project)
+(define-key projectile-mode-map (kbd "M-o") 'helm-projectile-find-file)
+(global-unset-key (kbd "M-f"))
+(define-key projectile-mode-map (kbd "M-f") 'helm-projectile-grep)
