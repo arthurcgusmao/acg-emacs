@@ -104,7 +104,7 @@
 
 ;; configure font in Windows
 (if (string-equal system-type "windows-nt")
-    (and (set-default-font "Consolas 10" nil t)))
+    (and (set-face-attribute 'default nil :family "Consolas" :height 110)))
 
 
 (provide 'acg-ui)
