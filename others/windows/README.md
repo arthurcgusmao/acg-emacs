@@ -1,6 +1,6 @@
 
 
-# Configuration on Windows
+# My configuration for Windows
 
 This is a temporary workaround to be able to launch Emacs using `Windows key + emacs + RET`:
 
