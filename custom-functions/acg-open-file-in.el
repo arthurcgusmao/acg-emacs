@@ -58,7 +58,9 @@ Version 2015-12-10"
   (interactive)
   (cond
    ((string-equal system-type "windows-nt")
-    (w32-shell-execute "cmd" (replace-regexp-in-string "/" "\\" default-directory t t)))
+    ;; Custom AutoHotKey script file must be in path, see https://github.com/arthurcgusmao/acg-windows/blob/master/bin/cmder-in-dir.ahk
+    (shell-command (concat "cmder-in-dir.ahk " default-directory)))
+    ;; (w32-shell-execute "cmd" (replace-regexp-in-string "/" "\\" default-directory t t)))
    ((string-equal system-type "darwin")
     (message "Mac not supported. File a bug report or pull request."))
    ((string-equal system-type "gnu/linux")

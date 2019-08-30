@@ -37,6 +37,8 @@
         org-self-insert-command
         prelude-move-beginning-of-line
         sp-kill-hybrid-sexp
+        sp-backward-sexp
+        sp-forward-sexp
         subword-left
         subword-right
         web-mode-attribute-insert
