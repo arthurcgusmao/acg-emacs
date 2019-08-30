@@ -8,8 +8,21 @@
 (defconst acg-default-bib-file "~/Documents/Mendeley/library.bib"
   "Default bibliography file for references.")
 
+(defun acg-parent-directory (dir)
+  "Get parent directory of given path. Works for both files and dirs."
+  (unless (equal "/" dir)
+    (file-name-directory (directory-file-name dir))))
 
+(defun acg-recursively-make-directory (dir)
+  "Create directories recursively, i.e., also create all parent
+directories necessary."
+  (unless (file-exists-p dir)
+    (acg-recursively-make-directory (acg-parent-directory dir))
+    (make-directory dir)))
+
+;; Set backup directory and ensure it exists.
 (setq acg-backup-dir "~/.backups/emacs/")
+(acg-recursively-make-directory acg-backup-dir)
 
 
 ;; Adding Repositories
