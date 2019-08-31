@@ -96,17 +96,13 @@
 (defun ztl-modification-state-change ()
   (tabbar-set-template tabbar-current-tabset nil)
   (tabbar-display-update))
+(add-hook 'after-save-hook 'ztl-modification-state-change)
 
 ;; First-change-hook is called BEFORE the change is made.
 (defun ztl-on-buffer-modification ()
   (set-buffer-modified-p t)
   (ztl-modification-state-change))
-(add-hook 'after-save-hook 'ztl-modification-state-change)
-
-;; This doesn't work for revert, I don't know.
-;;(add-hook 'after-revert-hook 'ztl-modification-state-change)
 (add-hook 'first-change-hook 'ztl-on-buffer-modification)
-
 
 ;; ---------------------------------------------------------
 ;; face customization
