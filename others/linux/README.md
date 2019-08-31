@@ -37,4 +37,34 @@ sudo sed -i 's/gedit\.desktop/acg-emacs\.desktop/g' /usr/share/applications/defa
 
 ## Start emacs server on startup
 
-Follow [this tutorial](http://wikemacs.org/wiki/Emacs_server).
+According to [this tutorial](http://wikemacs.org/wiki/Emacs_server), the best way is to configure it through the init daemon `systemd`. Create a file `~/.config/systemd/user/emacsd.service` with the contents below:
+
+```
+[Unit]
+Description=Emacs: the extensible, self-documenting text editor
+Documentation=man:emacs(1) info:Emacs
+
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon
+ExecStop=/usr/bin/emacsclient --eval "(progn (setq kill-emacs-hook nil) (kill-emacs))"
+Restart=on-failure
+Environment=DISPLAY=:%i
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target
+```
+
+Then enable the new module with
+
+```console
+systemctl --user enable emacsd
+```
+
+You can check that the configurations have been applied by checking the output of
+
+```console
+systemctl --user list-units --type service --all
+```
