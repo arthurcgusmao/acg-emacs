@@ -1,6 +1,15 @@
 # My configurations for Linux (Ubuntu)
 
 
+## Emacs installation
+
+On Ubuntu:
+```console
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt update
+sudo apt install emacs26
+```
+
 ## Add `acg-emacs.sh` to your path
 
 `acg-emacs.sh` is a bash script to:
