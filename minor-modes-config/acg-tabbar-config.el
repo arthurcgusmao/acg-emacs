@@ -104,6 +104,9 @@
   (ztl-modification-state-change))
 (add-hook 'first-change-hook 'ztl-on-buffer-modification)
 
+;; Update when buffer unmodified -- requires `update-unmodified-buffer' to be loaded first
+(add-to-list 'acg-unmodified-buffer-hook 'ztl-modification-state-change t)
+
 ;; ---------------------------------------------------------
 ;; face customization
 ;; ---------------------------------------------------------
