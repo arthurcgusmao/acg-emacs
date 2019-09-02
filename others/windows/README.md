@@ -25,3 +25,8 @@ It is possible to create a bash script to be able to launch Emacs on a desired l
 ## Start daemon on startup
 
 Follow [this tutorial](https://wikemacs.org/wiki/Emacs_server#MS_Windows).
+
+
+## Minor requirements
+
+- Projectile is set to use git's grep on Windows. Have git installed for the string search in project to work out of the box.

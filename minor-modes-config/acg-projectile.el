@@ -11,13 +11,18 @@
 (require 'helm-projectile)
 (helm-projectile-on)
 
-;; find string in projectile root dir in MS-Windows
-(defun acg-grep-projectile-windows(&optional search-string)
-  (interactive)
-  (let ((search-string (or search-string (read-string "[search in project] string pattern: "))))
-    (shell-command-to-string (concat "findstr /s /i /p"
-                           (concat "/c:\"" search-string "\" ")
-                           (concat "\"" (replace-regexp-in-string "/" "\\" (projectile-project-root) t t) "*.*\"")))))
+;; ;; find string in projectile root dir in MS-Windows
+;; ;; code below is working, but I decided to go for the solution of using git's grep
+;; (defun acg-grep-projectile-windows(&optional search-string)
+;;   (interactive)
+;;   (let ((search-string (or search-string (read-string "[search in project] string pattern: "))))
+;;     (shell-command-to-string (concat "findstr /s /i /p"
+;;                            (concat "/c:\"" search-string "\" ")
+;;                            (concat "\"" (replace-regexp-in-string "/" "\\" (projectile-project-root) t t) "*.*\"")))))
+
+;; for ms-windows: projectile's default grep was not working; setting this and
+;; having git installed on windows fixed.
+(if (string-equal system-type "windows-nt") (setq projectile-use-git-grep t))
 
 ;; set keybindings
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
