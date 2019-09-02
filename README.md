@@ -1,10 +1,8 @@
 # My Emacs configurations
 
-This repository contains all the configurations I use in Emacs.
-
-You can totally clone it if you want to. However, it was only tested on linux, so be aware that
-it may not work on Windows/MacOS. You may also find some hardcoded filepaths at the
-`acg-core.el` file, please change them to what works for you.
+This repository contains my Emacs configurations. It has been tested on Ubuntu and Windows.
+There are a few hardcoded filepaths in `acg-core.el` (top section), please change them to what
+works for you.
 
 Feel free to get in touch if you want to,
 
@@ -14,8 +12,7 @@ Arthur
 
 ### 1) Clone the repository
 
-Clone this repo into your `~/.emacs.d` folder (default folder name will be
-`acg-emacs`).
+Clone this repo into your `~/.emacs.d` folder (default folder name will be `acg-emacs`).
 
 ### 2) Add path to list and require core
 
@@ -26,3 +23,10 @@ Add to the (or create a) `~/.emacs.d/init.el` file the following:
 (add-to-list 'load-path "~/.emacs.d/acg-emacs")
 (require 'acg-core)
 ```
+
+### 3) Make OS configurations
+
+See additional configurations for the OS type:
+
+- [Linux (Ubuntu)](./others/linux/)
+- [Windows](./others/windows/)

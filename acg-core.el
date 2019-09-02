@@ -8,8 +8,15 @@
 (defconst acg-default-bib-file "~/Documents/Mendeley/library.bib"
   "Default bibliography file for references.")
 
+(defvar acg-backup-dir (concat user-emacs-directory "backups/")
+  "Emacs's default directory for backing up files.")
+(defvar acg-scratch-backup-dir (concat user-emacs-directory "scratch-backups/")
+  "Backup directory for scratch buffers.")
 
-(setq acg-backup-dir "~/.backups/emacs/")
+(if (not (file-exists-p acg-backup-dir))
+        (make-directory acg-backup-dir t))
+(if (not (file-exists-p acg-scratch-backup-dir))
+        (make-directory acg-scratch-backup-dir t))
 
 
 ;; Adding Repositories

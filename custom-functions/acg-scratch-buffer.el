@@ -1,6 +1,3 @@
-(defvar acg-scratch-buffer-directory (concat acg-backup-dir "scratch-buffer-backups/")
-  "Prefix path for scratch buffers")
-
 ;; flag should be always buffer-local
 ;;(make-variable-buffer-local 'acg-scratch-buffer)
 ;; variable should not be deleted when major mode changes
@@ -42,7 +39,7 @@ Version 2016-08-11"
                  (boundp 'acg-scratch-buffer))
             (if 'acg-scratch-buffer ;; buffer is acg-scratch created buffer
                 (write-file (concat
-                             acg-scratch-buffer-directory
+                             acg-scratch-backup-dir
                              (format-time-string "%Y-%m-%d--%Hh%Mm%Ss--")
                              (buffer-name))))
           t))
