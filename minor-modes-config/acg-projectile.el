@@ -11,6 +11,14 @@
 (require 'helm-projectile)
 (helm-projectile-on)
 
+;; find string in projectile root dir in MS-Windows
+(defun acg-grep-projectile-windows(&optional search-string)
+  (interactive)
+  (let ((search-string (or search-string (read-string "[search in project] string pattern: "))))
+    (shell-command-to-string (concat "findstr /s /i /p"
+                           (concat "/c:\"" search-string "\" ")
+                           (concat "\"" (replace-regexp-in-string "/" "\\" (projectile-project-root) t t) "*.*\"")))))
+
 ;; set keybindings
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (global-unset-key (kbd "M-o"))
@@ -18,3 +26,4 @@
 (define-key projectile-mode-map (kbd "M-o") 'helm-projectile-find-file)
 (global-unset-key (kbd "M-f"))
 (define-key projectile-mode-map (kbd "M-f") 'helm-projectile-grep)
+
