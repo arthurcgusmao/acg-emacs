@@ -39,7 +39,16 @@ https://stackoverflow.com/a/11452885/5103881"
                 (widen)
                 (write-region (point-min) (point-max) tempfile nil 'silent))
               ;; unless buffer diffs from file
-              (unless (/= (call-process "diff" nil nil nil "-q" basefile tempfile) 0) ;; returns 0 if files are equal, 1 if different, and 2 if invalid file paths
+              (unless
+                  (cond
+                   ((string-equal system-type "windows-nt")
+                    (/= (call-process "FC" nil nil nil "/B"
+                                      (replace-regexp-in-string "/" "\\" basefile t t)
+                                      (replace-regexp-in-string "/" "\\" tempfile t t)) 0))
+                   ((string-equal system-type "darwin")
+                    (message "Mac not supported. File a bug report or pull request."))
+                   ((string-equal system-type "gnu/linux")
+                    (/= (call-process "diff" nil nil nil "-q" basefile tempfile) 0))) ;; returns 0 if files are equal, 1 if different, and 2 if invalid file paths
                 (progn
                   (set-buffer-modified-p nil) ;; set unmodified state (important emacs native flag)
                   (--each acg-unmodified-buffer-hook (funcall it)))))
