@@ -25,34 +25,35 @@ from respective file in disk. Requires diff to be installed on
 your system. Adapted from
 https://stackoverflow.com/a/11452885/5103881"
   (interactive)
-  (let ((basefile (buffer-file-name buffer)))
-    (unless (not basefile) ;; buffer must be associated to a file
-      (let ((b-size (buffer-size buffer))
-            (f-size (acg-get-file-size basefile)))
-        ;; (setq count-run-times (+ count-run-times 1)) ;; debugging purposes - delete later
-        (unless (or (/= b-size f-size) ;; buffer size should be equal to file size (much faster comparison than diffing)
-                    (> b-size acg-check-buffer-modified-size-limit) ;; buffer size must be smaller than limit
-                    (> f-size acg-check-buffer-modified-size-limit)) ;; file size must be smaller than limit
-          (let ((tempfile (make-temp-file "buffer-content-")))
-            (with-current-buffer buffer
-              (save-restriction
-                (widen)
-                (write-region (point-min) (point-max) tempfile nil 'silent))
-              ;; unless buffer diffs from file
-              (unless
-                  (cond
-                   ((string-equal system-type "windows-nt")
-                    (/= (call-process "FC" nil nil nil "/B"
-                                      (replace-regexp-in-string "/" "\\" basefile t t)
-                                      (replace-regexp-in-string "/" "\\" tempfile t t)) 0))
-                   ((string-equal system-type "darwin")
-                    (message "Mac not supported. File a bug report or pull request."))
-                   ((string-equal system-type "gnu/linux")
-                    (/= (call-process "diff" nil nil nil "-q" basefile tempfile) 0))) ;; returns 0 if files are equal, 1 if different, and 2 if invalid file paths
-                (progn
-                  (set-buffer-modified-p nil) ;; set unmodified state (important emacs native flag)
-                  (--each acg-unmodified-buffer-hook (funcall it)))))
-            (delete-file tempfile)))))))
+  (if (buffer-live-p buffer) ;; check that buffer has not been killed
+      (let ((basefile (buffer-file-name buffer)))
+        (unless (not basefile) ;; buffer must be associated to a file
+          (let ((b-size (buffer-size buffer))
+                (f-size (acg-get-file-size basefile)))
+            ;; (setq count-run-times (+ count-run-times 1)) ;; debugging purposes - delete later
+            (unless (or (/= b-size f-size) ;; buffer size should be equal to file size (much faster comparison than diffing)
+                        (> b-size acg-check-buffer-modified-size-limit) ;; buffer size must be smaller than limit
+                        (> f-size acg-check-buffer-modified-size-limit)) ;; file size must be smaller than limit
+              (let ((tempfile (make-temp-file "buffer-content-")))
+                (with-current-buffer buffer
+                  (save-restriction
+                    (widen)
+                    (write-region (point-min) (point-max) tempfile nil 'silent))
+                  ;; unless buffer diffs from file
+                  (unless
+                      (cond
+                       ((string-equal system-type "windows-nt")
+                        (/= (call-process "FC" nil nil nil "/B"
+                                          (replace-regexp-in-string "/" "\\" basefile t t)
+                                          (replace-regexp-in-string "/" "\\" tempfile t t)) 0))
+                       ((string-equal system-type "darwin")
+                        (message "Mac not supported. File a bug report or pull request."))
+                       ((string-equal system-type "gnu/linux")
+                        (/= (call-process "diff" nil nil nil "-q" basefile tempfile) 0))) ;; returns 0 if files are equal, 1 if different, and 2 if invalid file paths
+                    (progn
+                      (set-buffer-modified-p nil) ;; set unmodified state (important emacs native flag)
+                      (--each acg-unmodified-buffer-hook (funcall it)))))
+                (delete-file tempfile))))))))
 
 (defun acg-schedule-modified-buffer-update (beg end len)
   "Schedules a check of the actual buffer state (if it is really
