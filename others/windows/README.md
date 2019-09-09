@@ -12,14 +12,18 @@ Although there is WSL, what worked best for me (in Aug/2019) was to install the 
 
 ## Launch Emacs with ease
 
-@TODO
+1. Use the default binary `emacsclient` to open desired files from both Windows Explorer (the file manager) and from the command prompt (Cmd.exe).
+2. Link the execution of `acg-emacs.bat` to a keyboard shorcut using AutHotKey, cf. [here](https://github.com/arthurcgusmao/acg-windows/blob/master/startup/hotkeys.ahk).
+3. Copy `acg-emacs-startup.bat` to Windows startup folder (usually `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp`).
 
-This is a temporary workaround to be able to launch Emacs using `Windows key + emacs + RET`:
 
-1. Place `acg-emacs.bat` under your Emacs binary path (e.g., `C:\Program Files (x86)\Emacs\emacs-26.1-x86_64\bin\acg-emacs.bat`)
-2. Create a shortcut of the file in your desktop and rename it to "Emacs".
+@TODO: It is possible to create a bash script to be able to launch Emacs on a desired location from WSL (Windows Subsystem for Linux) by converting between paths in WSL and paths in Windows using `wslpath`. This is something I intend to do in the future.
 
-It is possible to create a bash script to be able to launch Emacs on a desired location from WSL (Windows Subsystem for Linux) by converting between paths in WSL and paths in Windows using `wslpath`. This is something I intend to do in the future.
+
+If you want to be able to launch Emacs from the Windows startup panel (`Windows key + emacs + RET`), you can also:
+
+1. Place `acg-emacs.bat` under any directory that is on your Windows binary path;
+2. Create a shortcut of `acg-emacs.bat` in your desktop and rename it to "Emacs".
 
 
 ## Start daemon on startup
