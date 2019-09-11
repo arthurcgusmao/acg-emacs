@@ -3,8 +3,7 @@
 (diminish 'undo-tree-mode)
 
 ;; autosave the undo-tree history
-(setq undo-tree-history-directory-alist
-      `((".*" . ,temporary-file-directory)))
+(setq undo-tree-history-directory-alist `((".*" . ,(expand-file-name (concat user-emacs-directory "undo-tree-history/")))))
 (setq undo-tree-auto-save-history t)
 
 ;; keybindings

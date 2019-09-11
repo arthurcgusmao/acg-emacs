@@ -31,6 +31,7 @@
 			  'markdown-mode
                           'anaconda-mode
                           'yaml-mode
+                          'scala-mode
 
                           ;; configured in /major-modes-config/acg-org-mode.el
                           'org-ref
