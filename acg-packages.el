@@ -32,6 +32,10 @@
                           'anaconda-mode
                           'yaml-mode
 
+                          ;; configure in /marjor-modes-config/acg-term.el
+                          'multi-term
+                          'eterm-256color
+
                           ;; configured in /major-modes-config/acg-org-mode.el
                           'org-ref
 
