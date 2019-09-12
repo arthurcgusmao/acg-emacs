@@ -20,10 +20,6 @@
 ;;                            (concat "/c:\"" search-string "\" ")
 ;;                            (concat "\"" (replace-regexp-in-string "/" "\\" (projectile-project-root) t t) "*.*\"")))))
 
-;; for ms-windows: projectile's default grep was not working; setting this and
-;; having git installed on windows fixed.
-(if (string-equal system-type "windows-nt") (setq projectile-use-git-grep t))
-
 ;; set keybindings
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (global-unset-key (kbd "M-o"))
@@ -32,3 +28,15 @@
 (global-unset-key (kbd "M-f"))
 (define-key projectile-mode-map (kbd "M-f") 'helm-projectile-grep)
 
+;; MS-Windows configs
+(if (string-equal system-type "windows-nt")
+    (progn
+      ;; projectile's default grep was not working; setting it to use git grep
+      ;; and having git installed on windows fixed.
+      (setq projectile-use-git-grep t)
+      ;; disable helm in grep because it wrecks on Windows
+      (defun acg-projectile-grep-no-helm ()
+        (interactive)
+        (projectile-grep))
+      ;; override keybindings
+      (define-key projectile-mode-map (kbd "M-f") 'acg-projectile-grep-no-helm)))
