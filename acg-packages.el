@@ -31,6 +31,7 @@
 			  'markdown-mode
                           'anaconda-mode
                           'yaml-mode
+                          'scala-mode
 
                           ;; configure in /marjor-modes-config/acg-term.el
                           'multi-term
