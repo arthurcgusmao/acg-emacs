@@ -16,7 +16,7 @@ Clone this repo into your `~/.emacs.d` folder (default folder name will be `acg-
 
 ### 2) Add path to list and require core
 
-Add to the (or create a) `~/.emacs.d/init.el` file the following:
+Add to the `~/.emacs.d/init.el` file the following content (create the file if necessary):
 
 ```lisp
 ;; loads acg-emacs
