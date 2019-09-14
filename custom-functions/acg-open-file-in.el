@@ -69,6 +69,9 @@ Version 2015-12-10"
                      (concat "--working-directory=" default-directory) )))))
 
 
+;; do not ask for passphrase on SSH or GPG keys when opening terminal
+(require 'keychain-environment)
+(keychain-refresh-environment)
 
 
 ;; keybindings

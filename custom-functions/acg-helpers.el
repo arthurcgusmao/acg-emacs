@@ -28,3 +28,16 @@ directories necessary."
   (unless (file-exists-p dir)
     (acg-recursively-make-directory (acg-parent-directory dir))
     (make-directory dir)))
+
+(require 'multiple-cursors)
+(defun kmacro-insert-letter (DELTA)
+  "Similar to `kmacro-insert-counter', but inserts a letter
+instead. DELTA argument can be passed to modify the increment
+between each call to the function. If you want to start from a
+letter different than 'a', call `kmacro-set-counter' before
+starting to record the macro and change its value to the number
+that corresponds to the respective letter offset (e.g., 0 -> a, 1
+-> b, etc.)"
+  (interactive "P")
+  (mc/insert-letters kmacro-counter)
+  (kmacro-add-counter (or DELTA 1)))

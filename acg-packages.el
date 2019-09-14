@@ -36,6 +36,7 @@
                           ;; configure in /marjor-modes-config/acg-term.el
                           'multi-term
                           'eterm-256color
+                          'keychain-environment
 
                           ;; configured in /major-modes-config/acg-org-mode.el
                           'org-ref
