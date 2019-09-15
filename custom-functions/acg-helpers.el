@@ -29,6 +29,7 @@ directories necessary."
     (acg-recursively-make-directory (acg-parent-directory dir))
     (make-directory dir)))
 
+
 (require 'multiple-cursors)
 (defun kmacro-insert-letter (DELTA)
   "Similar to `kmacro-insert-counter', but inserts a letter
@@ -41,3 +42,7 @@ that corresponds to the respective letter offset (e.g., 0 -> a, 1
   (interactive "P")
   (mc/insert-letters kmacro-counter)
   (kmacro-add-counter (or DELTA 1)))
+;; Set keybinding
+(global-set-key (kbd "<S-f3>") 'kmacro-insert-letter)
+
+

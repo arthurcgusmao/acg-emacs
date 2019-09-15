@@ -74,3 +74,7 @@
 
 (sp--update-override-key-bindings)
 
+;; related keybinding
+;; @TODO: rebind function below
+;; (global-set-key (kbd "M-w t") 'transpose-words)
+

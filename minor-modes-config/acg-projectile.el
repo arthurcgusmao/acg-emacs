@@ -27,6 +27,7 @@
 (define-key projectile-mode-map (kbd "M-o") 'helm-projectile-find-file)
 (global-unset-key (kbd "M-f"))
 (define-key projectile-mode-map (kbd "M-f") 'helm-projectile-grep)
+(define-key helm-projectile-find-file-map (kbd "<C-backspace>") nil)
 
 ;; MS-Windows configs
 (if (string-equal system-type "windows-nt")

@@ -13,7 +13,6 @@
                           'highlight-indent-guides
                           'tabbar
                           'form-feed
-                          'fix-word
                           'neotree
                           'ein
                           'highlight
