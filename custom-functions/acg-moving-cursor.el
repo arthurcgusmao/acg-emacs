@@ -20,43 +20,9 @@ buffer, stop there. (function taken from prelude)"
       (move-beginning-of-line 1))))
 
 
-(defun acg-get-word-mode ()
-  (cond
-   (superword-mode 'superword-mode)
-   (subword-mode 'subword-mode)))
-
-(defun acg-reset-word-mode (original-word-mode altered-word-mode)
-  (unless (eq original-word-mode altered-word-mode)
-    (if original-word-mode
-        (set original-word-mode 1)
-      (set altered-word-mode 0))))
-
-(defun acg-forward-subword (&optional arg)
-  "Similar to `forward-word' when in subword-mode, but does not
-  depend on subword-mode activation."
-  (interactive "^p")
-  (setq arg (or arg 1))
-  (with-current-buffer (current-buffer)
-    (let ((word-mode (acg-get-word-mode)))
-      (subword-mode 1)
-      (forward-word arg)
-      (acg-reset-word-mode word-mode 'subword-mode))))
-
-(defun acg-backward-subword (&optional arg)
-  "Similar to `forward-word' when in subword-mode, but does not
-  depend on subword-mode activation."
-  (interactive "^p")
-  (setq arg (or arg 1))
-  (with-current-buffer (current-buffer)
-    (let ((word-mode (acg-get-word-mode)))
-      (subword-mode 1)
-      (backward-word arg)
-      (acg-reset-word-mode word-mode 'subword-mode))))
-
-
 ;; keybindings
 (global-set-key (kbd "<home>") 'acg-move-beginning-of-line)
 (global-set-key (kbd "<C-M-left>") 'acg-move-beginning-of-line)
 (global-set-key (kbd "<C-M-right>") 'move-end-of-line)
-(global-set-key (kbd "<s-right>") 'acg-forward-subword)
-(global-set-key (kbd "<s-left>") 'acg-backward-subword)
+(global-set-key (kbd "<s-right>") (acg-with-subword-mode #'forward-word))
+(global-set-key (kbd "<s-left>") (acg-with-subword-mode #'backward-word))

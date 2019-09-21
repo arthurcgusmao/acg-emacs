@@ -49,13 +49,14 @@ active."
       (kill-region (region-beginning) (region-end)))
   (backward-kill-sexp))
 
-(defun acg-backward-kill-word ()
+(defun acg-backward-kill-word (&optional arg)
   "Same as `backward-kill-word' but kills region first if
 active."
-  (interactive)
+  (interactive "^p")
+  (setq arg (or arg 1))
   (if (use-region-p)
       (kill-region (region-beginning) (region-end)))
-  (backward-kill-word 1))
+  (backward-kill-word arg))
 
 (defun acg-kill-sexp ()
   "Same as `kill-sexp' but kills region first if active."
@@ -73,11 +74,15 @@ active."
 
 ;; bindings
 (acg-force-global-set-key "<C-backspace>" 'acg-backward-kill-word)
-(acg-force-global-set-key "<C-S-backspace>" 'acg-kill-line-or-region-backwards)
+(global-set-key (kbd "<s-backspace>") (acg-with-subword-mode #'acg-backward-kill-word))
 (acg-force-global-set-key "<M-backspace>" 'acg-backward-kill-sexp)
-(acg-force-global-set-key "<C-S-delete>" 'acg-kill-line-or-region)
-(acg-force-global-set-key "<M-delete>" 'acg-kill-sexp)
-(global-set-key (kbd "<S-delete>") 'acg-kill-whole-line-or-region-lines)
-(global-set-key (kbd "<M-S-delete>") 'acg-kill-whole-line-or-region-lines-and-move-up)
-(acg-force-global-set-key "<S-backspace>" 'acg-kill-whole-line-or-region-content)
 
+(acg-force-global-set-key "<M-delete>" 'acg-kill-sexp)
+(acg-force-global-set-key "<s-delete>" (acg-with-subword-mode #'kill-word))
+(global-set-key (kbd "<M-S-delete>") 'acg-kill-whole-line-or-region-lines-and-move-up)
+
+(acg-force-global-set-key "<C-S-backspace>" 'acg-kill-line-or-region-backwards)
+(acg-force-global-set-key "<C-S-delete>" 'acg-kill-line-or-region)
+
+(global-set-key (kbd "<S-delete>") 'acg-kill-whole-line-or-region-lines)
+(acg-force-global-set-key "<S-backspace>" 'acg-kill-whole-line-or-region-content)
