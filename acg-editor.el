@@ -6,8 +6,8 @@
 ;; makes kill ring not mess with clipboard
 (setq x-select-enable-clipboard nil)
 
-;; consider camelCased as 2 words
-(global-subword-mode 1)
+;; consider hifened words as a single word
+(global-superword-mode 1)
 
 ;; enable disabled advanced features
 (put 'downcase-region 'disabled nil)
