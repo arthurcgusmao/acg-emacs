@@ -68,14 +68,15 @@ The `./configure` step accepts arguments. `--with-modules` builds Emacs with dyn
 make -j4
 ```
 
-#### Done!
+#### Install
 
-After `make` run successfully, the Emacs binaries will be in `./src/`. You can then add this path to your bash $PATH.
+```console
+sudo su -
+cd .../Projects/emacs
+make install
+```
 
-<!-- #### Install (optional) -->
-<!-- ```console -->
-<!-- sudo make install -->
-<!-- ``` -->
+The binaries will be installed in `/usr/bin/`.
 
 ## Add `acg-emacs.sh` to your path
 
