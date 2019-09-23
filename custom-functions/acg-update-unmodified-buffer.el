@@ -24,14 +24,14 @@
 from respective file in disk. Requires diff to be installed on
 your system. Adapted from
 https://stackoverflow.com/a/11452885/5103881"
-  (interactive)
   (if (buffer-live-p buffer) ;; check that buffer has not been killed
       (let ((basefile (buffer-file-name buffer)))
         (unless (not basefile) ;; buffer must be associated to a file
           (let ((b-size (buffer-size buffer))
                 (f-size (acg-get-file-size basefile)))
             ;; (setq count-run-times (+ count-run-times 1)) ;; debugging purposes - delete later
-            (unless (or (/= b-size f-size) ;; buffer size should be equal to file size (much faster comparison than diffing)
+            (unless (or (not f-size) ; sometimes the buffer can be associated to a file but the file does not exist on disk. This line covers this case.
+                        (/= b-size f-size) ;; buffer size should be equal to file size (much faster comparison than diffing)
                         (> b-size acg-check-buffer-modified-size-limit) ;; buffer size must be smaller than limit
                         (> f-size acg-check-buffer-modified-size-limit)) ;; file size must be smaller than limit
               (let ((tempfile (make-temp-file "buffer-content-")))
