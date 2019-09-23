@@ -76,7 +76,7 @@ cd .../Projects/emacs
 make install
 ```
 
-The binaries will be installed in `/usr/bin/`.
+The binaries will be installed in `/usr/local/bin/`, which is the default location for programs not managed by the distribution package manager.
 
 ## Add `acg-emacs.sh` to your path
 
@@ -114,7 +114,7 @@ sudo sed -i 's/gedit\.desktop/acg-emacs\.desktop/g' /usr/share/applications/defa
 
 ## Start emacs server on startup
 
-According to [this tutorial](http://wikemacs.org/wiki/Emacs_server), the best way is to configure it through the init daemon `systemd`. Create a file `~/.config/systemd/user/emacsd.service` with the contents below:
+According to [this tutorial](http://wikemacs.org/wiki/Emacs_server), the best way is to configure it through the init daemon `systemd`. Create a file `~/.config/systemd/user/emacsd.service` with the contents below (note: check whether your Emacs is installed in `/usr/bin` or in `/usr/local/bin` and modify the file accordingly):
 
 ```
 [Unit]
@@ -124,8 +124,8 @@ Documentation=man:emacs(1) info:Emacs
 
 [Service]
 Type=forking
-ExecStart=/usr/bin/emacs --daemon
-ExecStop=/usr/bin/emacsclient --eval "(progn (setq kill-emacs-hook nil) (kill-emacs))"
+ExecStart=/usr/local/bin/emacs --daemon
+ExecStop=/usr/local/bin/emacsclient --eval "(progn (setq kill-emacs-hook nil) (kill-emacs))"
 Restart=on-failure
 Environment=DISPLAY=:%i
 TimeoutStartSec=0
