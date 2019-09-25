@@ -28,6 +28,10 @@
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 ;; (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
+;; MS Windows configs
+(if (string-equal system-type "windows-nt")
+    (setq-default visible-bell t)) ; disables the annoying ring bell when something goes wrong
+
 
 ;; search/replace
 
