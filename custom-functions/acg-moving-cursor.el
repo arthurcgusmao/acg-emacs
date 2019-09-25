@@ -19,7 +19,10 @@ buffer, stop there. (function taken from prelude)"
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
+
 ;; keybindings
 (global-set-key (kbd "<home>") 'acg-move-beginning-of-line)
 (global-set-key (kbd "<C-M-left>") 'acg-move-beginning-of-line)
 (global-set-key (kbd "<C-M-right>") 'move-end-of-line)
+(global-set-key (kbd "<s-right>") (acg-with-subword-mode #'forward-word))
+(global-set-key (kbd "<s-left>") (acg-with-subword-mode #'backward-word))

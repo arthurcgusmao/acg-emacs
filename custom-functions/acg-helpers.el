@@ -46,3 +46,32 @@ that corresponds to the respective letter offset (e.g., 0 -> a, 1
 (global-set-key (kbd "<S-f3>") 'kmacro-insert-letter)
 
 
+;; Word mode helpers (subword and superword modes)
+
+(defun acg-get-word-mode ()
+  "Returns the current active word mode (superword or subword) or
+nil if no word mode active."
+  (cond
+   (superword-mode 'superword-mode)
+   (subword-mode 'subword-mode)))
+
+(defun acg-reset-word-mode (original-word-mode altered-word-mode)
+  "Restores the word mode to an original state, given that it has
+been temporarily modified to an altered word mode."
+  (unless (eq original-word-mode altered-word-mode)
+    (if original-word-mode
+        (set original-word-mode 1)
+      (set altered-word-mode 0))))
+
+(defun acg-with-subword-mode (fun)
+  "Returns a function that executes the same command as `fun',
+but on subword-mode. Does not depend on previous subword-mode
+activation; original word-mode is restored automatically."
+  `(lambda (&optional arg)
+     (interactive "^p")
+     (setq arg (or arg 1))
+     (with-current-buffer (current-buffer)
+       (let ((word-mode (acg-get-word-mode)))
+         (subword-mode 1)
+         (,fun arg)
+         (acg-reset-word-mode word-mode 'subword-mode)))))
