@@ -5,9 +5,9 @@
  'acg-common-faces
  
  ;; mode line
- '(mode-line
-   ((t (:background "#203" :foreground "#ddd" :box
-                    (:line-width 2 :color "#203" :style released-button)))))
+ ;; '(mode-line
+ ;;   ((t (:background "#203" :foreground "#ddd" :box
+ ;;                    (:line-width 2 :color "#203" :style released-button)))))
  '(mode-line-inactive
    ((t (:inherit mode-line :background "#555"
                  :foreground "#bbb" :box (:line-width 1 :color "#777")

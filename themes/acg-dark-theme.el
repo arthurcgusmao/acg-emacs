@@ -40,6 +40,11 @@
 
  ;; multiple cursors
  '(mc/cursor-bar-face ((t (:height 1 :background "white"))))
+
+ ;; mode line
+ '(mode-line
+   ((t (:background "#203" :foreground "#ddd" :box
+                    (:line-width 2 :color "#203" :style released-button)))))
  )
 
 
