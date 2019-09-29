@@ -6,4 +6,8 @@ https://emacs.stackexchange.com/a/52865/13589)"
     (kill-line)(delete-blank-lines)
     (read-only-mode +1))
 
-(define-key occur-mode-map (kbd "k") 'occur-kill-line)
+;; switch to occur buffer automatically after running occur
+(add-hook 'occur-hook (lambda () (switch-to-buffer-other-window "*Occur*")))
+
+;; keybindings
+(define-key occur-mode-map (kbd "d") 'occur-kill-line)

@@ -20,8 +20,9 @@
 (setq mc/cmds-to-run-for-all
       '(
         acg-clipboard-paste-replace-selection
-        acg-windows-clipboard-paste-replace-selection
         acg-kill-line-or-region-backwards
+        acg-move-beginning-of-line
+        acg-windows-clipboard-paste-replace-selection
         clipboard-kill-region
         clipboard-kill-ring-save
         clipboard-paste-replace-selection

@@ -76,6 +76,13 @@
 (setq recentf-max-saved-items 300)
 (setq recentf-max-menu-items 300)
 
+;; kill minibuffer when it loses focus
+(defun stop-using-minibuffer ()
+  "kill the minibuffer"
+  (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
+    (abort-recursive-edit)))
+(add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
+
 
 ;; tabs, indent, spacing
 
