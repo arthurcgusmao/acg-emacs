@@ -6,6 +6,9 @@
 (ivy-mode 1)
 ;; (setq ivy-use-virtual-buffers t)
 
+;; max size the minibuffer can grow up to
+(setq ivy-height 25)
+
 ;; keybindings
 (global-set-key (kbd "C-f") 'swiper-isearch)
 ;; @todo: set C-f to restart search when in swiper
