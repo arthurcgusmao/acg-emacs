@@ -59,12 +59,11 @@ https://stackoverflow.com/a/11452885/5103881"
   "Schedules a check of the actual buffer state (if it is really
 different than its corresponding file in disk). Arguments are not
 used but must comply with `after-chenge-functions' call."
-  (combine-after-change-calls
-    (with-current-buffer (current-buffer)
-      (save-restriction
-        (acg-cancel-schedule-modified-buffer-update) ;; delete previously scheduled timer
-        (setq acg-scheduled-buffer-timer ;; schedule new timer and save requested action to variable
-              (run-at-time "0.5 sec" nil #'acg-update-modified-buffer-flag (current-buffer))))))) ;; use 0.5 sec 'buffer' time
+  (with-current-buffer (current-buffer)
+    (save-restriction
+      (acg-cancel-schedule-modified-buffer-update) ;; delete previously scheduled timer
+      (setq acg-scheduled-buffer-timer ;; schedule new timer and save requested action to variable
+            (run-at-time "0.5 sec" nil #'acg-update-modified-buffer-flag (current-buffer)))))) ;; use 0.5 sec 'buffer' time
 
 (defun acg-cancel-schedule-modified-buffer-update ()
   "Cancels the last scheduling of a check of the actual buffer

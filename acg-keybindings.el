@@ -1,9 +1,5 @@
 ;; Rebinding Emacs built-in commands
 (global-set-key (kbd "C-s") 'save-buffer)
-(define-key isearch-mode-map "\C-f" 'isearch-forward)
-(define-key isearch-mode-map "\C-g" 'isearch-repeat-forward)
-(define-key isearch-mode-map (kbd "C-S-G") 'isearch-repeat-backward)
-(define-key isearch-mode-map (kbd "C-S-V") 'isearch-yank-kill)
 
 (acg-force-global-set-key "C-a" 'mark-whole-buffer)
 (global-set-key (kbd "C-r") 'repeat)

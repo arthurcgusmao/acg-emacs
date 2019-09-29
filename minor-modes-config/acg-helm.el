@@ -33,19 +33,19 @@
   
   ;; (define-key helm-find-files-map (kbd "<backtab>") 'helm-find-files-up-one-level)
   
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "<menu>") 'helm-M-x)
-  (global-set-key (kbd "C-b") 'helm-mini)
-  (global-set-key (kbd "C-o") 'helm-find-files)
-  (global-set-key (kbd "C-S-O") 'helm-recentf)
+  ;; (global-set-key (kbd "M-x") 'helm-M-x)
+  ;; (global-set-key (kbd "<menu>") 'helm-M-x)
+  ;; (global-set-key (kbd "C-b") 'helm-mini)
+  ;; (global-set-key (kbd "C-o") 'helm-find-files)
+  ;; (global-set-key (kbd "C-S-O") 'helm-recentf)
   (global-set-key (kbd "C-S-B") 'helm-bookmarks)
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
   ;;(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; makes TAB work in terminal
   (define-key helm-map (kbd "M-a") 'helm-select-action) ; list actions using M-a
-  (global-set-key (kbd "C-f") 'helm-swoop-without-pre-input)
-  (global-set-key (kbd "C-S-F") 'helm-swoop)
-  (global-set-key (kbd "C-M-f") 'helm-multi-swoop-all)
-  (global-set-key (kbd "M-v") 'helm-show-kill-ring)
+  ;; (global-set-key (kbd "C-f") 'helm-swoop-without-pre-input)
+  ;; (global-set-key (kbd "C-S-F") 'helm-swoop)
+  ;; (global-set-key (kbd "C-M-f") 'helm-multi-swoop-all)
+  ;; (global-set-key (kbd "M-v") 'helm-show-kill-ring)
 
   ;; see HELM FIND FILES configs section below
   (define-key helm-find-files-map (kbd "<return>") 'helm-execute-persistent-action)

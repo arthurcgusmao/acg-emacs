@@ -17,6 +17,10 @@
                           'ein
                           'highlight
                           'exec-path-from-shell
+                          'ivy
+                          'swiper
+                          'counsel
+                          'smex
                           
 			  ;; configured in /minor-modes-config/acg-company-mode.el
 			  'company
