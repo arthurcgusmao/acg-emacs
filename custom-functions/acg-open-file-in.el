@@ -72,6 +72,7 @@ Version 2015-12-10"
 ;; do not ask for passphrase on SSH or GPG keys when opening terminal
 (require 'keychain-environment)
 (keychain-refresh-environment)
+;; @todo: run keychain before starting emacs daemon
 
 
 ;; keybindings

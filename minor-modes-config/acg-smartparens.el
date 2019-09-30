@@ -65,6 +65,7 @@
            ("C-(" . sp-backward-barf-sexp)
            ("M-0" . sp-forward-barf-sexp)
            ("M-9" . sp-backward-barf-sexp)
+           ("M-)" . sp-unwrap-sexp)
            ("M-<right>" . sp-forward-sexp)
            ("M-<left>" . sp-backward-sexp)
            ("M-t" . sp-transpose-sexp)
