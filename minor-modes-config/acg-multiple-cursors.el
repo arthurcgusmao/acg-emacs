@@ -19,8 +19,11 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        acg-backward-kill-sexp
         acg-clipboard-paste-replace-selection
+        acg-forward-kill-sexp
         acg-windows-clipboard-paste-replace-selection
+        acg-kill-line-or-region
         acg-kill-line-or-region-backwards
         clipboard-kill-region
         clipboard-kill-ring-save
