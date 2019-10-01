@@ -17,7 +17,7 @@ Although there is WSL, what worked best for me (in Aug/2019) was to install the 
 3. Copy `acg-emacs-startup.bat` to Windows startup folder (usually `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp`).
 
 
-@TODO: It is possible to create a bash script to be able to launch Emacs on a desired location from WSL (Windows Subsystem for Linux) by converting between paths in WSL and paths in Windows using `wslpath`. This is something I intend to do in the future.
+It is possible to create a bash script to be able to launch Emacs on a desired location from WSL (Windows Subsystem for Linux) by converting between paths in WSL and paths in Windows using `wslpath`. This is something I intend to do in the future.
 
 
 If you want to be able to launch Emacs from the Windows startup panel (`Windows key + emacs + RET`), you can also:

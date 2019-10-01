@@ -37,7 +37,7 @@
                           'yaml-mode
                           'scala-mode
 
-                          ;; configure in /marjor-modes-config/acg-term.el
+                          ;; configure in /major-modes-config/acg-term.el
                           'multi-term
                           'eterm-256color
                           'keychain-environment

@@ -19,7 +19,10 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        acg-backward-kill-sexp
         acg-clipboard-paste-replace-selection
+        acg-forward-kill-sexp
+        acg-kill-line-or-region
         acg-kill-line-or-region-backwards
         acg-move-beginning-of-line
         acg-windows-clipboard-paste-replace-selection
@@ -39,9 +42,9 @@
         my-super-keyboard-quit
         org-self-insert-command
         prelude-move-beginning-of-line
-        sp-kill-hybrid-sexp
         sp-backward-sexp
         sp-forward-sexp
+        sp-kill-hybrid-sexp
         subword-left
         subword-right
         web-mode-attribute-insert
