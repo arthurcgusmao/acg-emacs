@@ -3,7 +3,8 @@
 https://emacs.stackexchange.com/a/52865/13589)"
     (interactive)
     (read-only-mode -1)
-    (kill-line)(delete-blank-lines)
+    (kill-whole-line)
+    (delete-blank-lines)
     (read-only-mode +1))
 
 ;; switch to occur buffer automatically after running occur

@@ -21,6 +21,7 @@
                           'swiper
                           'counsel
                           'smex
+                          'dired-subtree
                           
 			  ;; configured in /minor-modes-config/acg-company-mode.el
 			  'company
