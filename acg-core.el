@@ -5,6 +5,10 @@
 (defconst acg-emacs-dir (file-name-directory (or load-file-name (buffer-file-name)))
   "Directory where acg-emacs is installed.")
 
+;; Add miniconda binaries to executables path
+(if (string-equal system-type "gnu/linux")
+    (add-to-list 'exec-path "~/.miniconda3/bin"))
+
 (defconst acg-default-bib-file "~/Documents/Mendeley/library.bib"
   "Default bibliography file for references.")
 

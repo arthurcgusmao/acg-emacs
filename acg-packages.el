@@ -21,7 +21,6 @@
                           'swiper
                           'counsel
                           'smex
-                          'dired-subtree
                           
 			  ;; configured in /minor-modes-config/acg-company-mode.el
 			  'company
@@ -36,6 +35,8 @@
                           'anaconda-mode
                           'yaml-mode
                           'scala-mode
+                          'jupyter
+                          'dired-subtree
 
                           ;; configure in /major-modes-config/acg-term.el
                           'multi-term

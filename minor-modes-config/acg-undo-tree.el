@@ -1,10 +1,10 @@
 ;; sensible undo
 (global-undo-tree-mode)
-(diminish 'undo-tree-mode)
+;; (diminish 'undo-tree-mode)
 
 ;; autosave the undo-tree history
-(setq undo-tree-history-directory-alist `((".*" . ,(expand-file-name (concat user-emacs-directory "undo-tree-history/")))))
-(setq undo-tree-auto-save-history t)
+(setq undo-tree-auto-save-history nil)
+;; (setq undo-tree-history-directory-alist `((".*" . ,(expand-file-name (concat user-emacs-directory "undo-tree-history/")))))
 
 ;; keybindings
 (acg-force-global-set-key "M-z" 'undo-tree-visualize)
