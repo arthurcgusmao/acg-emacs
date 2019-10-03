@@ -8,7 +8,6 @@
 			  'helm-projectile
                           'helm-swoop
 			  'expand-region
-			  'diminish
                           'yasnippet
                           'highlight-indent-guides
                           'tabbar

@@ -1,6 +1,5 @@
 (require 'company)
 (require 'crux)
-(diminish 'company-mode)
 
 ;; enable company in all modes
 (add-hook 'after-init-hook 'global-company-mode)

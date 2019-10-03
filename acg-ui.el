@@ -15,15 +15,11 @@
 ;; disable startup screen
 (setq inhibit-startup-screen t) 
 
-;; diminish keeps the modeline tidy
-(require 'diminish)
-
 
 ;; help/info menus
 
 ;; show available keybindings after you start typing
 (which-key-mode +1)
-(diminish 'which-key-mode)
 
 
 ;; cursor
@@ -92,7 +88,6 @@
              '("Anaconda" display-buffer-same-window))
 
 ;; unhighlight inactive windows
-(diminish 'auto-dim-other-buffers-mode)
 (add-hook 'after-init-hook
           (lambda ()
             (when (fboundp 'auto-dim-other-buffers-mode)

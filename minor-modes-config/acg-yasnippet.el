@@ -4,4 +4,3 @@
              (concat acg-emacs-dir "snippets"))
 
 (yas-global-mode t)
-(diminish 'yas-minor-mode)

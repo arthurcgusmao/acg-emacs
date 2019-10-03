@@ -38,7 +38,6 @@
 ;; anzu-mode enhances isearch & query-replace by showing
 ;; total matches and current match position
 (require 'anzu)
-(diminish 'anzu-mode)
 (global-anzu-mode)
 
 ;; delete the selection with a keypress
