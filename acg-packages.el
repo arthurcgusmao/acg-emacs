@@ -13,13 +13,13 @@
                           'tabbar
                           'form-feed
                           'neotree
-                          'ein
                           'highlight
                           'exec-path-from-shell
                           'ivy
                           'swiper
                           'counsel
                           'smex
+			  'multiple-cursors
                           
 			  ;; configured in /minor-modes-config/acg-company-mode.el
 			  'company
@@ -44,10 +44,6 @@
 
                           ;; configured in /major-modes-config/acg-org-mode.el
                           'org-ref
-
-			  ;; configured in /acg-editor.el
-			  'anzu
-			  'multiple-cursors
 
                           ;; configured in /acg-ui.el
 			  'smooth-scrolling
