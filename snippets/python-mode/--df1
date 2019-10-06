@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: --df1
+# key: --df1
+# group : debug
+# --
+df1 = pd.DataFrame({'a': [1, 2, 3], 'b': [10, 20, 30]})
+$0

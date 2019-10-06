@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: --s
+# key: --s
+# group : debug
+# --
+s = "Just another test string."
+$0

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: --a1
+# key: --a1
+# group : debug
+# --
+a1 = np.array([[1, 2, 3], [10, 20, 30]])
+$0

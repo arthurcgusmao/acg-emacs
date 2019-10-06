@@ -13,7 +13,9 @@
   (define-key magit-mode-map [escape] 'keyboard-quit)
   (define-key magit-log-mode-map [escape] 'magit-kill-this-buffer)
   (define-key magit-mode-map (kbd "C-w") 'magit-kill-this-buffer)
+  (define-key magit-log-mode-map (kbd "C-w") 'magit-kill-this-buffer)
   (define-key magit-mode-map (kbd "q") 'magit-kill-this-buffer)
+  (define-key magit-log-mode-map (kbd "q") 'magit-kill-this-buffer)
 
   (define-key with-editor-mode-map (kbd "C-w") 'with-editor-cancel)
   (define-key with-editor-mode-map (kbd "C-s") 'with-editor-finish)

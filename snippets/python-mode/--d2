@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: --d2
+# key: --d2
+# group : debug
+# --
+d2 = {'a': [4, 5, 6], 'b': [40, 50, 60]}
+$0

@@ -9,6 +9,7 @@
                           'helm-swoop
 			  'expand-region
                           'yasnippet
+                          'yasnippet-snippets
                           'highlight-indent-guides
                           'tabbar
                           'form-feed

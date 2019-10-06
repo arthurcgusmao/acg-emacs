@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: --l
+# key: --l
+# group : debug
+# --
+l = [1, 2, 3]
+$0
