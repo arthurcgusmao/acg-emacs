@@ -1,7 +1,14 @@
 (require 'company)
 (require 'crux)
+(require 'counsel)
 
-;; enable company in all modes
+;; disable on some modes
+(setq company-global-modes '(not magit-mode
+                                 magit-file-section
+                                 magit-status-mode
+                                 magit-log-mode
+                                 ))
+;; enable company in all modes except the ones above
 (add-hook 'after-init-hook 'global-company-mode)
 
 
@@ -39,7 +46,9 @@ complete the common part."
                           (eq (char-before) 41)                         ; )
                           (eq (char-before) 93)                         ; ]
                           (eq (char-before) 125))))                     ; }
-        (company-complete-common))))))
+        (company-complete-common)
+        ;; (counsel-company)
+        )))))
 
 ;; keybindings
 (define-key company-active-map (kbd "M-h") #'company-quickhelp-mode)

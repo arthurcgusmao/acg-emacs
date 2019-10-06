@@ -17,6 +17,9 @@
 ;; remove initial ^ from search
 (setq ivy-initial-inputs-alist nil)
 
+;; do not quit the minibuffer when deletion error happens
+(setq ivy-on-del-error-function #'ignore)
+
 ;; keybindings
 (global-set-key (kbd "C-f") 'swiper-isearch)
 ;; @todo: set C-f to restart search when in swiper

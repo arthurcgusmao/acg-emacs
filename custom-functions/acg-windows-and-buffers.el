@@ -57,6 +57,7 @@
 
 (global-set-key (kbd "C-q") 'delete-window)
 
+(global-set-key (kbd "C-s") 'save-buffer)
 (acg-force-global-set-key (kbd "C-w") 'acg-kill-buffer-and-window)
 
 (global-set-key (kbd "C-S-T") 'acg-reopen-killed-file)

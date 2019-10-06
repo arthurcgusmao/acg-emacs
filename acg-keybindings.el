@@ -1,6 +1,4 @@
 ;; Rebinding Emacs built-in commands
-(global-set-key (kbd "C-s") 'save-buffer)
-
 (acg-force-global-set-key "C-a" 'mark-whole-buffer)
 (global-set-key (kbd "C-r") 'repeat)
 (global-set-key (kbd "C-z") 'undo)

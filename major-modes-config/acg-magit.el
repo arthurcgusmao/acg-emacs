@@ -7,12 +7,16 @@
 (with-eval-after-load 'magit
   (global-set-key (kbd "C-x g") 'magit-status)
   ;; (define-key magit-popup-mode-map [escape] 'magit-popup-quit)
-  (define-key magit-mode-map [escape] 'magit-mode-bury-buffer)
-  (define-key magit-log-mode-map [escape] 'magit-log-bury-buffer)
   (define-key magit-mode-map ["C-h"] nil)
   (define-key magit-log-mode-map ["C-h"] nil)
 
+  (define-key magit-mode-map [escape] 'keyboard-quit)
+  (define-key magit-log-mode-map [escape] 'magit-kill-this-buffer)
   (define-key magit-mode-map (kbd "C-w") 'magit-kill-this-buffer)
+  (define-key magit-mode-map (kbd "q") 'magit-kill-this-buffer)
+
+  (define-key with-editor-mode-map (kbd "C-w") 'with-editor-cancel)
+  (define-key with-editor-mode-map (kbd "C-s") 'with-editor-finish)
   )
 
 
