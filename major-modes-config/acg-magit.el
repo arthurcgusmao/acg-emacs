@@ -17,6 +17,9 @@
 
   (define-key with-editor-mode-map (kbd "C-w") 'with-editor-cancel)
   (define-key with-editor-mode-map (kbd "C-s") 'with-editor-finish)
+
+  (define-key magit-mode-map (kbd "<C-up>") 'magit-section-backward-sibling)
+  (define-key magit-mode-map (kbd "<C-down>") 'magit-section-forward-sibling)
   )
 
 

@@ -7,6 +7,7 @@
                                  magit-file-section
                                  magit-status-mode
                                  magit-log-mode
+                                 dired-mode
                                  ))
 ;; enable company in all modes except the ones above
 (add-hook 'after-init-hook 'global-company-mode)
