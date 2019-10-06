@@ -9,6 +9,14 @@
 ;; max size the minibuffer can grow up to
 (setq ivy-height 25)
 
+;; configure regular expression of the search
+(setq ivy-re-builders-alist
+      '((swiper-isearch . regexp-quote)
+        (t . ivy--regex-ignore-order)))
+
+;; remove initial ^ from search
+(setq ivy-initial-inputs-alist nil)
+
 ;; keybindings
 (global-set-key (kbd "C-f") 'swiper-isearch)
 ;; @todo: set C-f to restart search when in swiper

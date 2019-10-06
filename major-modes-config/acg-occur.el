@@ -1,11 +1,10 @@
 (defun occur-kill-line()
-    "Quick and dirty discard line from occur resultset. (from
+  "Quick and dirty discard line from occur resultset. (from
 https://emacs.stackexchange.com/a/52865/13589)"
-    (interactive)
-    (read-only-mode -1)
+  (interactive)
+  (let ((buffer-read-only nil))
     (kill-whole-line)
-    (delete-blank-lines)
-    (read-only-mode +1))
+    (delete-blank-lines)))
 
 ;; switch to occur buffer automatically after running occur
 (add-hook 'occur-hook (lambda () (switch-to-buffer-other-window "*Occur*")))

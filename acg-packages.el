@@ -36,6 +36,7 @@
                           'scala-mode
                           'jupyter
                           'dired-subtree
+                          'magit
 
                           ;; configure in /major-modes-config/acg-term.el
                           'multi-term

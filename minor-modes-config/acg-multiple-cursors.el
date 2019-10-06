@@ -24,6 +24,7 @@
         acg-forward-kill-sexp
         acg-kill-line-or-region
         acg-kill-line-or-region-backwards
+        acg-kill-sexp
         acg-move-beginning-of-line
         acg-windows-clipboard-paste-replace-selection
         clipboard-kill-region
