@@ -1,8 +1,8 @@
 (defun occur-kill-line()
-  "Quick and dirty discard line from occur resultset. (from
-https://emacs.stackexchange.com/a/52865/13589)"
+  "Quick and dirty discard line from occur resultset.
+from https://emacs.stackexchange.com/a/52865/13589"
   (interactive)
-  (let ((buffer-read-only nil))
+  (let ((inhibit-read-only t))
     (kill-whole-line)
     (delete-blank-lines)))
 
