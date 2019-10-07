@@ -48,9 +48,6 @@ Return a list of installed packages or nil for every skipped package."
 (or (file-exists-p package-user-dir)
     (package-refresh-contents))
 
-;; Activate installed packages
-(package-initialize)
-
 
 ;; Autoloading all files within directory
 
