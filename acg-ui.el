@@ -53,19 +53,31 @@
 ;; ;; (setq scroll-restore-handle-global-hl-line-mode t)
 ;; (scroll-restore-mode 0)
 
+
 ;; always keep some lines at bottom/top when scroll with keypad
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
-
-;; scroll wheel move 3 lines per scroll
-(setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
-;; scroll speed always steady
-(setq mouse-wheel-progressive-speed nil)
 
 ;; nice scrolling
 (setq scroll-margin 0 ; never recenters window
       scroll-conservatively 100000
       scroll-preserve-screen-position t)
+
+
+(when (display-graphic-p)
+  ;; scroll wheel move 3 lines per scroll
+  (setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
+  ;; scroll speed always steady
+  (setq mouse-wheel-progressive-speed nil))
+
+;; disable middle-mouse button pasting
+(global-set-key [mouse-2] nil)
+;; let middle-mouse button drag scroll (mouse throwing)
+(require 'mouse-drag)
+(global-set-key [down-mouse-2] 'mouse-drag-throw)
+;; (global-set-key [down-mouse-2] 'mouse-drag-drag)
+(setq mouse-throw-with-scroll-bar t)
+(setq mouse-drag-electric-col-scrolling t)
 
 
 ;; windows - title / size / splitting / highlighting
