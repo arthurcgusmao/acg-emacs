@@ -33,7 +33,14 @@
 
 ;; MS Windows configs
 (if (string-equal system-type "windows-nt")
-    (setq-default visible-bell t)) ; disables the annoying ring bell when something goes wrong
+    (progn
+      ;; disables the annoying ring bell when something goes wrong
+      (setq-default visible-bell t)
+      ;; enable the windows key to be processed by Emacs (instead of passed to Windows directly)
+      (setq w32-pass-lwindow-to-system nil
+            w32-lwindow-modifier 'super)
+      ;; default to unix coding system
+      (setq-default buffer-file-coding-system 'utf-8-unix)))
 
 
 ;; files, buffers, backup, autosave
