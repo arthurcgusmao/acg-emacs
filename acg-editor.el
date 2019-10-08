@@ -14,6 +14,10 @@
 
 ;; enable disabled advanced features
 (put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-defun 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 ;; lets you undo and redo changes in the window configuration
 (winner-mode 1)

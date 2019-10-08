@@ -59,8 +59,8 @@ https://stackoverflow.com/a/11452885/5103881"
   "Schedules a check of the actual buffer state (if it is really
 different than its corresponding file in disk). Arguments are not
 used but must comply with `after-chenge-functions' call."
-  (with-current-buffer (current-buffer)
-    (save-restriction
+  (save-match-data ; necessary; otherwise running `replace-string' was giving error "Match data clobbered by buffer modification hooks."
+    (with-current-buffer (current-buffer)
       (acg-cancel-schedule-modified-buffer-update) ;; delete previously scheduled timer
       (setq acg-scheduled-buffer-timer ;; schedule new timer and save requested action to variable
             (run-at-time "0.5 sec" nil #'acg-update-modified-buffer-flag (current-buffer)))))) ;; use 0.5 sec 'buffer' time
@@ -75,6 +75,6 @@ disk)."
 ;; Add after-change-hook locally for buffers who visit a file
 (add-hook 'find-file-hook
           (lambda () (with-current-buffer (current-buffer)
-                       (add-hook 'after-change-functions 'acg-schedule-modified-buffer-update nil t))))
+                       (add-hook 'after-change-functions 'acg-schedule-modified-buffer-update t t))))
 ;; No need to check status when file has been saved
 (add-hook 'after-save-hook 'acg-cancel-schedule-modified-buffer-update)
