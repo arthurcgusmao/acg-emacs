@@ -1,5 +1,8 @@
 ;; editor configurations
 
+;; warn when opening files bigger than 100MB
+(setq large-file-warning-threshold 100000000)
+
 ;; disable truncation of line
 (set-default 'truncate-lines t)
 

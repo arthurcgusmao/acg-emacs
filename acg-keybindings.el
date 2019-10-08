@@ -6,16 +6,9 @@
 (global-set-key (kbd "C-S-SPC") 'cycle-spacing)
 (global-set-key (kbd "C-S-J") 'join-line)
 
-;; for Windows only
+;; for MS Windows only
 (if (string-equal system-type "windows-nt")
     (and (global-set-key (kbd "<M-f4>") 'delete-frame)))
- 
-
-
-;; Todo List
-
-;; - Ver questão cursor não mudar com scroll (prelude ui)
-;; - Ver smart-mode-line
 
 
 (provide 'acg-keybindings)

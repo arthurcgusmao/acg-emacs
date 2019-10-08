@@ -2,6 +2,9 @@
 (defconst default-emacs-dir "~/.emacs.d/"
   "Directory where init.el is located (usually ~/.emacs.d/)")
 
+;; Change location of the automatically generated custom configurations
+(setq custom-file (concat default-emacs-dir "custom.el"))
+
 (defconst acg-emacs-dir (file-name-directory (or load-file-name (buffer-file-name)))
   "Directory where acg-emacs is installed.")
 
@@ -23,34 +26,6 @@
         (make-directory acg-scratch-backup-dir t))
 
 
-;; Adding Repositories
-(require 'package)
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(setq package-enable-at-startup nil)
-(package-initialize)
-
-
-;; Checking and installing defined packages
-
-(defun ensure-package-installed (&rest packages)
-  "Assure every package is installed, ask for installation if it’s not.
-Return a list of installed packages or nil for every skipped package."
-  (mapcar
-   (lambda (package)
-     (if (package-installed-p package)
-         nil
-       (package-install package)))
-   packages))
-
-;; Make sure to have downloaded archive description.
-(or (file-exists-p package-user-dir)
-    (package-refresh-contents))
-
-
-;; Autoloading all files within directory
-
 (defun my-load-all-in-directory (dir)
   "`load' all elisp libraries in directory DIR which are not already loaded."
   (interactive "D")
@@ -99,9 +74,6 @@ bindings to the same command."
 
 
 ;; Other configurations
-
-;; warn when opening files bigger than 100MB
-(setq large-file-warning-threshold 100000000)
 
 ;; make EMACS use the PATHs specified in .bashrc
 (require 'exec-path-from-shell)
