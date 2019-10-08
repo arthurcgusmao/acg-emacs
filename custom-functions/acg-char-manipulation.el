@@ -54,3 +54,20 @@ Version 2017-04-19"
       (put this-command 'state 0)))))
 
 (global-set-key (kbd "M-c") 'acg-toggle-letter-case)
+
+
+
+(defun acg-split-string-with-region-or-line ()
+  "Split and replace string in the current line or region."
+  (interactive)
+  (when (not (use-region-p))
+    (acg-select-current-line))
+  (let ((REGION-STRING (buffer-substring-no-properties
+                        (region-beginning) (region-end)))
+        (SEPARATORS (read-string "Enter separators (leave blank for default): "
+                                nil nil split-string-default-separators)))
+    (delete-region (region-beginning) (region-end))
+    (insert
+     (string-join
+      (split-string REGION-STRING SEPARATORS)
+      "\n"))))

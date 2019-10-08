@@ -10,6 +10,12 @@
     (back-to-indentation)
     (current-column)))
 
+(defun acg-select-current-line ()
+  "Select the current line."
+  (interactive)
+  (end-of-line)
+  (set-mark (line-beginning-position)))
+
 
 (defun acg-get-file-size (filename)
   "Returns the size of the file in bytes. See
