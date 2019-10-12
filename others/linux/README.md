@@ -59,12 +59,14 @@ At this stage, manually install any missing dependencies using apt-get. Some tha
 
 - Missing lib: `autoconf`; Solution: `$ sudo apt install autoconf`
 - Missing lib: `gnutls`; Solution: `$ sudo apt install libgnutls-dev`
+- Missing lib: `libxml2`; Solution: `# sudo apt install libxml2-dev`
+- Missing lib: `librsvg2`; Solution: `# sudo apt install librsvg2-dev`
 
 The `./configure` step accepts arguments. `--with-modules` builds Emacs with dynamics modules support (allowing packages like Jupyter and ZeroMQ); `CC=clang` builds it using the Clang compiler; it was required because building with gcc was not working to use Jupyter, as mentioned before.
 
 ```console
 ./autogen.sh
-./configure --with-modules CC=clang
+./configure --with-xml2 --with-rsvg --with-modules CC=clang
 make -j4
 ```
 

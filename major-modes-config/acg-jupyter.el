@@ -3,11 +3,12 @@
 
 ;; Copy evaluation input to a REPL cell
 (setq jupyter-repl-echo-eval-p t)
+(setq jupyter-eval-use-overlays nil)
 
 ;; Custom faces
 (set-face-attribute 'jupyter-repl-traceback nil :background "#660000")
 
-
+
 ;; Custom functions
 ;;
 (defun acg/jupyter-eval-region-lines ()
@@ -73,9 +74,54 @@ lines before evaluating."
 ;; @todo: eval up to point if universal argument is supplied
 ;; @todo: send text to buffer if universal argument is supplied
 
+
+
+;; Python specifics
+
+;; Open variable content in external app
+(defun acg/jupyter-open-python-variable-external-app ()
+  "Saves the content of a Python variable to a temporary file and opens
+it with the default external app."
+  (interactive)
+  (let* ((var (read-string "Enter variable: "
+                           (thing-at-point 'symbol)))
+         (type (jupyter-eval (format "type(%s)" var))))
+    (pcase type
+      ("pandas.core.frame.DataFrame"
+       (let ((tempfpath
+              (concat temporary-file-directory "emacs-jupyter--" var ".csv")))
+         (jupyter-eval (format "%s.to_csv('%s')" var tempfpath))
+         ;; (message (format "%s.to_csv('%s')" var tempfpath))
+         (acg/open-in-external-app (list tempfpath))
+         ))
+      ("numpy.ndarray"
+       (let ((tempfpath
+              (concat temporary-file-directory "emacs-jupyter--" var ".csv")))
+         (jupyter-eval (format "import numpy as np; np.savetxt('%s', %s, delimiter=',')" tempfpath var))
+         (acg/open-in-external-app (list tempfpath))))
+      ("str"
+       (let ((tempfpath
+              (concat temporary-file-directory "emacs-jupyter--" var ".txt")))
+         (jupyter-eval (format "with open('%s','w') as f: f.write(%s)" tempfpath var))
+         (acg/open-in-external-app (list tempfpath))))
+      ("dict"
+       (let ((tempfpath
+              (concat temporary-file-directory "emacs-jupyter--" var ".json")))
+         (jupyter-eval (format "with open('%s','w') as f: f.write(json.dumps(%s, indent=4))" tempfpath var))
+         (acg/open-in-external-app (list tempfpath))))
+      )))
+
+
 ;; Keybindings
-(define-key python-mode-map (kbd "C-c r") 'jupyter-run-repl)
+(add-hook 'python-mode-hook
+      (lambda ()
+        ;; (setq indent-tabs-mode t)
+        (setq tab-width 4)
+        (setq python-indent 4)))
+(with-eval-after-load 'python
+  (define-key python-mode-map (kbd "C-c r") 'jupyter-run-repl))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-c") 'acg/jupyter-eval-dwim)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-p") 'acg/jupyter-eval-page)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-l") 'acg/jupyter-eval-region-lines)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-d") 'acg/jupyter-send-defun-body)
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o") 'acg/jupyter-open-python-variable-external-app)
