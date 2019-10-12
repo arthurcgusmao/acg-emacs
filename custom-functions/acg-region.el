@@ -7,7 +7,6 @@ Adapted from https://spwhitton.name/blog/entry/expandregionlines/"
       (let ((beg (point)))
         (goto-char (mark))
         (end-of-line)
-        (forward-char 1)
         (push-mark)
         (goto-char beg)
         (beginning-of-line))
@@ -52,3 +51,13 @@ From https://emacs.stackexchange.com/a/34981/13589"
           (setq indent (- indent (prefix-numeric-value pad))))
         (indent-rigidly (point-min) (point-max) (- indent))
         (buffer-substring-no-properties (point-min) (point-max))))))
+
+(defun acg/region-inside-defun-p ()
+  "Returns t if region is inside a defun; nil otherwise."
+  (let ((beg (region-beginning))
+        (end (region-end)))
+    (save-mark-and-excursion
+      (er/mark-defun)
+      (if (and (>= beg (region-beginning))
+               (<= end (region-end)))
+          t nil))))
