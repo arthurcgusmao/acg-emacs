@@ -23,14 +23,17 @@ region only up to the cursor position."
                                           (symbol-name func)))))
     (eval `(defun ,func-symbol (&optional arg)
              "Evaluates the lines of the region marked by the
-respective function. If universal argument is passed,
-evaluates the region only up to the cursor position."
+respective function. If universal argument is passed, evaluates
+the region only up to the line where the cursor is."
              (interactive "P")
              (save-mark-and-excursion
                (if arg
-                   (save-excursion
-                     (,func)
-                     (exchange-point-and-mark))
+                   (progn
+                     (save-excursion
+                       (,func)
+                       (if (< (point) (mark))
+                           (exchange-point-and-mark)))
+                     (end-of-line))
                  (,func))
                (jupyter-eval-region
                 (region-beginning) (region-end)))))))
