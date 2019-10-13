@@ -72,7 +72,7 @@ been temporarily modified to an altered word mode."
 (defun acg-with-subword-mode (fun)
   "Returns a function that executes the same command as `fun',
 but on subword-mode. Does not depend on previous subword-mode
-activation; original word-mode is restored automatically."
+activation; original word mode is restored automatically."
   `(lambda (&optional arg)
      (interactive "^p")
      (setq arg (or arg 1))

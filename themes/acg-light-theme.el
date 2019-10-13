@@ -53,6 +53,10 @@
  '(mode-line
    ((t (:background "#ab89c2" :foreground "#203" :box
                     (:line-width 2 :color "#ab89c2" :style released-button)))))
+
+ ;; emacs-jupyter
+ '(jupyter-eval-overlay ((t (:background "#F87440" :foreground "#621e04"
+                                         :height 0.8))))
  )
 
 

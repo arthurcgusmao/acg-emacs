@@ -1,16 +1,8 @@
 (require 'jupyter)
 (require 'expand-region)
 
-;; Copy evaluation input to a REPL cell
-(setq jupyter-repl-echo-eval-p t)
-(setq jupyter-eval-use-overlays nil)
+;; Custom eval functions
 
-;; Custom faces
-(set-face-attribute 'jupyter-repl-traceback nil :background "#660000")
-
-
-;; Custom functions
-;;
 (defun acg/jupyter-eval-region-lines ()
   "Same as `jupyter-eval-region' but operates on the whole lines
 that the region spans. It also compensates for indentation by
@@ -21,64 +13,32 @@ lines before evaluating."
     (acg/expand-region-to-whole-lines)
     (jupyter-eval-string
      (acg/get-region-unindented nil (region-beginning) (region-end))
-     (region-beginning)
-     (region-end))))
+     (region-beginning) (region-end))))
 
-(defun acg/jupyter-send (args)
-  "Send text to Jupyter REPL."
-  (interactive "P")
-  )
-
-(defun acg/jupyter-eval-paragraph-or-region (arg)
-  "Calls `acg/jupyter-eval-region-lines' on current paragraph."
-  (interactive "P")
-  (save-mark-and-excursion
-    (unless (use-region-p)
-      (er/mark-paragraph))
-    (acg/jupyter-eval-region-lines)))
-
-(defun acg/jupyter-eval-defun (arg)
-  "Calls `jupyter-eval-region' on current paragraph."
-  (interactive "P")
-  (save-mark-and-excursion
-    (er/mark-defun)
-    (acg/jupyter-eval-region-lines)))
-
-(defun acg/jupyter-eval-page (arg)
-  "Calls `jupyter-eval-region' on current page."
-  (interactive "P")
-  (save-mark-and-excursion
-    (mark-page)
-    (acg/jupyter-eval-region-lines)))
-
-(defun acg/jupyter-send-defun-body (arg)
-  "aojaoiajoa"
-  (interactive "P")
-  (save-mark-and-excursion
-    (er/mark-defun)
-    (if (> (point) (mark))
-        (exchange-point-and-mark))
-    (forward-line)
-    (acg/jupyter-eval-region-lines)))
-
-(defun acg/jupyter-eval-dwim (arg)
-  "My custom jupyter eval."
-  (interactive "P")
-  (save-mark-and-excursion
-    (unless (use-region-p)
-      (er/mark-paragraph)
-      (if (acg/region-inside-defun-p)
-          (er/mark-defun)))
-    (acg/jupyter-eval-region-lines)))
-
-;; @todo: eval up to point if universal argument is supplied
-;; @todo: send text to buffer if universal argument is supplied
-
+(defun acg/jupyter-eval-with (func)
+  "Creates and returns a function that evaluates the region
+marked by FUNC. If universal argment is passed, evaluates the
+region only up to the cursor position."
+  (let ((func-symbol (make-symbol (concat "acg/jupyter-eval-with--"
+                                          (symbol-name func)))))
+    (eval `(defun ,func-symbol (&optional arg)
+             "Evaluates the lines of the region marked by the
+respective function. If universal argument is passed,
+evaluates the region only up to the cursor position."
+             (interactive "P")
+             (save-mark-and-excursion
+               (if arg
+                   (save-excursion
+                     (,func)
+                     (exchange-point-and-mark))
+                 (,func))
+               (jupyter-eval-region
+                (region-beginning) (region-end)))))))
 
 
-;; Python specifics
+;; Custom Python functions
 
-;; Open variable content in external app
+;; Open Python variable content in external app
 (defun acg/jupyter-open-python-variable-external-app ()
   "Saves the content of a Python variable to a temporary file and opens
 it with the default external app."
@@ -91,7 +51,6 @@ it with the default external app."
        (let ((tempfpath
               (concat temporary-file-directory "emacs-jupyter--" var ".csv")))
          (jupyter-eval (format "%s.to_csv('%s')" var tempfpath))
-         ;; (message (format "%s.to_csv('%s')" var tempfpath))
          (acg/open-in-external-app (list tempfpath))
          ))
       ("numpy.ndarray"
@@ -112,16 +71,60 @@ it with the default external app."
       )))
 
 
+;; Configurations
+
+(defun acg/jupyter-toggle-use-overlays-repl (&optional arg)
+  "Toggles automatically between using overlays in the buffer
+where code is and sending code to be evaluated in the REPL."
+  (interactive)
+  (if jupyter-eval-use-overlays
+      (progn
+        (setq jupyter-eval-use-overlays nil
+              jupyter-repl-echo-eval-p t)
+        (message "Jupyter overlays disabled; sending output to REPL."))
+    (progn
+      (setq jupyter-eval-use-overlays t
+            jupyter-repl-echo-eval-p nil)
+      (message "Jupyter overlays enabled."))))
+
+(setq jupyter-eval-use-overlays t
+      jupyter-repl-echo-eval-p nil)
+
+;; Custom faces/visuals
+(set-face-attribute 'jupyter-repl-traceback nil :background "#660000")
+
+;; Remove prefix from overlay
+(setq jupyter-eval-overlay-prefix nil)
+;; Override default function to remove space between prefix and overlay
+(defun jupyter-eval-ov--propertize (text &optional newline)
+  ;; Display properties can't be nested so use the one on TEXT if available
+  (if (get-text-property 0 'display text) text
+    (let ((display (concat
+                    ;; Add a space before a newline so that `point' stays on
+                    ;; the same line when moving to the beginning of the
+                    ;; overlay.
+                    (if newline " \n" " ")
+                    (propertize
+                     (concat jupyter-eval-overlay-prefix text)
+                     'face 'jupyter-eval-overlay))))
+      ;; Ensure `point' doesn't move past the beginning or end of the overlay
+      ;; on motion commands.
+      (put-text-property 0 1 'cursor t display)
+      (put-text-property (1- (length display)) (length display) 'cursor t display)
+      (propertize " " 'display display))))
+
+
 ;; Keybindings
-(add-hook 'python-mode-hook
-      (lambda ()
-        ;; (setq indent-tabs-mode t)
-        (setq tab-width 4)
-        (setq python-indent 4)))
 (with-eval-after-load 'python
-  (define-key python-mode-map (kbd "C-c r") 'jupyter-run-repl))
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-c") 'acg/jupyter-eval-dwim)
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-p") 'acg/jupyter-eval-page)
+  (define-key python-mode-map (kbd "C-c j") 'jupyter-run-repl))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c r") 'jupyter-repl-restart-kernel)
+
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-c") (acg/jupyter-eval-with 'acg/mark-dwim))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-p") (acg/jupyter-eval-with 'mark-page))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-l") 'acg/jupyter-eval-region-lines)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-d") 'acg/jupyter-send-defun-body)
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o") 'acg/jupyter-open-python-variable-external-app)
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-e") 'acg/jupyter-open-python-variable-external-app)
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o") nil)
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o t") 'acg/jupyter-toggle-use-overlays-repl)
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o r") 'jupyter-eval-remove-overlays)
+

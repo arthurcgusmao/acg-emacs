@@ -61,3 +61,21 @@ From https://emacs.stackexchange.com/a/34981/13589"
       (if (and (>= beg (region-beginning))
                (<= end (region-end)))
           t nil))))
+
+(defun acg/mark-dwim ()
+  "Mark, do what I mean."
+  (interactive)
+  (if (use-region-p)
+      (acg/expand-region-to-whole-lines)
+    (er/mark-paragraph)
+    (if (acg/region-inside-defun-p)
+        (er/mark-defun))))
+
+(defun acg/mark-defun-body ()
+  "Marks the body of a function definition by skipping the first
+line."
+  (interactive)
+    (er/mark-defun)
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (forward-line))
