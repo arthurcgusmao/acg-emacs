@@ -19,6 +19,7 @@
               expand-region
               yasnippet
               yasnippet-snippets
+              ivy-yasnippet
               highlight-indent-guides
               tabbar
               form-feed
