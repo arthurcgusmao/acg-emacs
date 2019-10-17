@@ -4,6 +4,7 @@
 (setq mc/cmds-to-run-for-all
       '(
         acg-backward-kill-sexp
+        acg-calc-eval
         acg-clipboard-paste-replace-selection
         acg-forward-kill-sexp
         acg-kill-line-or-region
@@ -44,9 +45,9 @@
         helm-find-files
         kmacro-end-or-call-macro
         kmacro-start-macro-or-insert-counter
+        mc/mark-next-lines
+        mc/mark-previous-lines
         mouse-set-region
         repeat
         web-mode-mark-and-expand
-        mc/mark-next-lines
-        mc/mark-previous-lines
         ))

@@ -26,7 +26,7 @@
         (make-directory acg-scratch-backup-dir t))
 
 
-(defun my-load-all-in-directory (dir)
+(defun acg/load-all-in-directory (dir)
   "`load' all elisp libraries in directory DIR which are not already loaded."
   (interactive "D")
   (let ((libraries-loaded (mapcar #'file-name-sans-extension

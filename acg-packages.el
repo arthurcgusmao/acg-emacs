@@ -70,8 +70,8 @@
   (package-refresh-contents))
 (package-install-selected-packages)
 
-(my-load-all-in-directory (concat acg-emacs-dir "custom-functions"))
-(my-load-all-in-directory (concat acg-emacs-dir "minor-modes-config"))
-(my-load-all-in-directory (concat acg-emacs-dir "major-modes-config"))
+(acg/load-all-in-directory (concat acg-emacs-dir "custom-functions"))
+(acg/load-all-in-directory (concat acg-emacs-dir "minor-modes-config"))
+(acg/load-all-in-directory (concat acg-emacs-dir "major-modes-config"))
 
 (provide 'acg-packages)
