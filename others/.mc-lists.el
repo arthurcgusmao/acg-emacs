@@ -39,14 +39,15 @@
 
 (setq mc/cmds-to-run-once
       '(
+        counsel-M-x
         crux-switch-to-previous-buffer
         helm-M-x
         helm-find-files
         kmacro-end-or-call-macro
         kmacro-start-macro-or-insert-counter
+        mc/mark-next-lines
+        mc/mark-previous-lines
         mouse-set-region
         repeat
         web-mode-mark-and-expand
-        mc/mark-next-lines
-        mc/mark-previous-lines
         ))

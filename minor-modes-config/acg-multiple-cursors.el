@@ -11,6 +11,7 @@
 
 (define-key mc/keymap (kbd "<escape>") 'mc/keyboard-quit)
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-S-d") 'mc/mark-all-like-this)
 (global-set-key (kbd "<M-S-up>") 'mc/mark-previous-lines)
 (global-set-key (kbd "<M-S-down>") 'mc/mark-next-lines)
 
