@@ -1,3 +1,5 @@
+(require 'projectile)
+
 ;; http://emacs-fu.blogspot.com.br/2011/08/customizing-mode-line.html
 ;; http://amitp.blogspot.com.br/2011/08/emacs-custom-mode-line.html
 ;; http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html

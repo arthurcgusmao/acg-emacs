@@ -7,7 +7,7 @@
 ;; (setq ivy-use-virtual-buffers t)
 
 ;; max size the minibuffer can grow up to
-(setq ivy-height 25)
+(setq ivy-height 16)
 
 ;; configure regular expression of the search
 (setq ivy-re-builders-alist
@@ -46,6 +46,8 @@ thing/symbol at point."
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 (define-key ivy-minibuffer-map (kbd "S-SPC") nil)
 (define-key ivy-minibuffer-map (kbd "<S-return>") 'ivy-restrict-to-matches)
+(define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
+(define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
 
 ;; makes ESC quit minibuffer
 (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)

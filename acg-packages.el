@@ -7,9 +7,9 @@
 
 (setq package-selected-packages
       (quote (;; configured in /minor-modes-config/
-              helm
-              crux
               use-package
+              crux
+              helm
               minimap
               undo-tree
               projectile
