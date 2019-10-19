@@ -30,3 +30,4 @@ See additional configurations for the OS type:
 
 - [Linux (Ubuntu)](./others/linux/)
 - [Windows](./others/windows/)
+- [WSL (Windows Subsystem for Linux)](./others/wsl/)

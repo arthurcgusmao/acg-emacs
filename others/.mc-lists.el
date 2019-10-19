@@ -4,6 +4,7 @@
 (setq mc/cmds-to-run-for-all
       '(
         acg-backward-kill-sexp
+        acg-calc-eval
         acg-clipboard-paste-replace-selection
         acg-forward-kill-sexp
         acg-kill-line-or-region
