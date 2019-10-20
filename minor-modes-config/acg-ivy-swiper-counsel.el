@@ -21,17 +21,21 @@
 (setq ivy-on-del-error-function #'ignore)
 
 
-(defun acg/swiper-or-isearch-thing-at-point (arg)
+(defun acg/swiper-thing-at-point-or-isearch (arg)
   "Calls swiper or isearch-forward (if ARG is non-nil) with
 thing/symbol at point."
   (interactive "P")
   (if arg
-      (progn (isearch-forward-symbol-at-point))
+      (progn (isearch-forward))
     (swiper-thing-at-point)))
 
+;; preselect input
+(advice-add 'swiper-thing-at-point :before #'acg/with-marked-input)
+(advice-add 'swiper-all-thing-at-point :before #'acg/with-marked-input)
 
+
 ;; keybindings
-(global-set-key (kbd "C-f") 'acg/swiper-or-isearch-thing-at-point)
+(global-set-key (kbd "C-f") 'acg/swiper-thing-at-point-or-isearch)
 ;; @todo: set C-f to restart search when in swiper
 (global-set-key (kbd "C-S-F") 'swiper-all-thing-at-point)
 (global-set-key (kbd "C-o") 'counsel-find-file)
@@ -50,7 +54,8 @@ thing/symbol at point."
 (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
 
 ;; makes ESC quit minibuffer
-(define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit) ; quit or deselect text
+(define-key ivy-minibuffer-map [escape] 'abort-recursive-edit) ; quit right away
 
 ;; isearch keybindings
 ;; (define-key overriding-terminal-local-map (kbd "S-SPC") nil) ; unbind S-SPC in isearch
