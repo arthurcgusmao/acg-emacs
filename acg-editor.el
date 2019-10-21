@@ -106,4 +106,10 @@
 (setq tab-always-indent 'complete)
 
 
+;; remote access (TRAMP)
+(require 'tramp)
+
+(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
+
 (provide 'acg-editor)
