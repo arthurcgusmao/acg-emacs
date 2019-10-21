@@ -79,3 +79,29 @@ line."
     (if (> (point) (mark))
         (exchange-point-and-mark))
     (forward-line))
+
+
+(defun acg/eval-with (eval-func mark-func)
+  "Creates and returns a function that evaluates the region
+marked by MARK-FUNC using EVAL-FUNC. If universal argment is
+passed, evaluates the region only up to the cursor position."
+  (let ((out-func-symbol
+         (make-symbol
+          (concat "acg/" (symbol-name eval-func)
+                  "--" (symbol-name mark-func)))))
+    (eval `(defun ,out-func-symbol (&optional arg)
+             "Evaluates the lines of the region marked by the
+respective function. If universal argument is passed, evaluates
+the region only up to the line where the cursor is."
+             (interactive "P")
+             (save-mark-and-excursion
+               (if arg
+                   (progn
+                     (save-excursion
+                       (,mark-func)
+                       (if (< (point) (mark))
+                           (exchange-point-and-mark)))
+                     (end-of-line))
+                 (,mark-func))
+               (,eval-func
+                (region-beginning) (region-end)))))))
