@@ -34,12 +34,12 @@ Version 2016-07-13"
 ;; settings -- max-width for lines when using fill commands
 (setq-default fill-column 79)
 
-(add-hook 'org-mode-hook
-          (lambda ()
-            (set-fill-column 96)))
-(add-hook 'tex-mode-hook
-          (lambda ()
-            (set-fill-column 96)))
-(add-hook 'text-mode-hook
-          (lambda ()
-            (set-fill-column 96)))
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             (set-fill-column 96)))
+;; (add-hook 'tex-mode-hook
+;;           (lambda ()
+;;             (set-fill-column 96)))
+;; (add-hook 'text-mode-hook
+;;           (lambda ()
+;;             (set-fill-column 96)))

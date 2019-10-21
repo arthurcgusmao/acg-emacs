@@ -74,6 +74,7 @@ been temporarily modified to an altered word mode."
 but on subword-mode. Does not depend on previous subword-mode
 activation; original word mode is restored automatically."
   `(lambda (&optional arg)
+     "Calls FUN on subword-mode. See `acg-with-subword-mode'"
      (interactive "^p")
      (setq arg (or arg 1))
      (with-current-buffer (current-buffer)
@@ -81,3 +82,24 @@ activation; original word mode is restored automatically."
          (subword-mode 1)
          (,fun arg)
          (acg-reset-word-mode word-mode 'subword-mode)))))
+
+
+;; Keychord helpers
+
+(defun acg/set-transient-key (key command)
+  "Set a transient keybinding that can be captured only in the
+next keypress."
+  (let ((kmap (make-sparse-keymap)))
+    (define-key kmap (kbd key) command)
+    (set-transient-map kmap)))
+
+
+;; Select minibuffer input
+
+(defun acg/with-marked-input (&rest args)
+  "Mark input of minibuffer. To be used as advice before any
+function that starts with an initial input in the minibuffer."
+  (run-with-idle-timer
+   0 nil (lambda ()
+           (push 'C-S-right unread-command-events)
+           (push 'C-left unread-command-events))))

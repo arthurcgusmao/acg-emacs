@@ -40,3 +40,26 @@
 ;; (define-key magit-log-mode-map [escape] 'magit-log-bury-buffer)
 
 ;; (define-key magit-mode-map (kbd "C-w") 'magit-kill-this-buffer)
+
+
+
+;; Follow guidelines when committing;
+;; taken from https://protesilaos.com/dotemacs
+
+(use-package git-commit
+  :after magit
+  :custom
+  (git-commit-fill-column 72)
+  (git-commit-summary-max-length 50)
+  (git-commit-known-pseudo-headers
+   '("Signed-off-by"
+     "Acked-by"
+     "Modified-by"
+     "Cc"
+     "Suggested-by"
+     "Reported-by"
+     "Tested-by"
+     "Reviewed-by"))
+  (git-commit-style-convention-checks
+   '(non-empty-second-line
+     overlong-summary-line)))

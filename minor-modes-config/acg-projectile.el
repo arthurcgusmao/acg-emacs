@@ -1,14 +1,18 @@
-(require 'projectile)
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode t)
+  :bind
+  (:map projectile-mode-map
+        ("C-c p" . projectile-command-map)
+        ("M-o" . projectile-find-file)
+        ("M-f" . projectile-grep)))
 
 ;;(setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
-(projectile-global-mode t)
 
 ;; trying to fix projectile issue with tramp
-(defadvice projectile-project-root (around ignore-remote first activate)
-  (unless (file-remote-p default-directory) ad-do-it))
-
-(require 'helm-projectile)
-(helm-projectile-on)
+;; (defadvice projectile-project-root (around ignore-remote first activate)
+;;   (unless (file-remote-p default-directory) ad-do-it))
 
 ;; ;; find string in projectile root dir in MS-Windows
 ;; ;; code below is working, but I decided to go for the solution of using git's grep
@@ -19,15 +23,24 @@
 ;;                            (concat "/c:\"" search-string "\" ")
 ;;                            (concat "\"" (replace-regexp-in-string "/" "\\" (projectile-project-root) t t) "*.*\"")))))
 
-;; set keybindings
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(global-unset-key (kbd "M-o"))
-(define-key projectile-mode-map (kbd "M-O") 'helm-projectile-switch-project)
-(define-key projectile-mode-map (kbd "M-o") 'helm-projectile-find-file)
-(global-unset-key (kbd "M-f"))
-(define-key projectile-mode-map (kbd "M-f") 'helm-projectile-grep)
-(define-key helm-projectile-find-file-map (kbd "<C-backspace>") nil)
+
+;; Integrations with completion packages
 
+(use-package counsel-projectile
+  :ensure t
+  :after projectile
+  :config
+  (counsel-projectile-mode))
+
+;; (require 'helm-projectile)
+;; (helm-projectile-on)
+
+;; (define-key projectile-mode-map (kbd "M-O") 'helm-projectile-switch-project)
+;; (define-key projectile-mode-map (kbd "M-o") 'helm-projectile-find-file)
+;; (define-key projectile-mode-map (kbd "M-f") 'helm-projectile-grep)
+;; (define-key helm-projectile-find-file-map (kbd "<C-backspace>") nil)
+
+
 ;; MS-Windows configs
 (if (string-equal system-type "windows-nt")
     (progn

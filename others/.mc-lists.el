@@ -40,6 +40,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+        counsel-M-x
         crux-switch-to-previous-buffer
         helm-M-x
         helm-find-files
