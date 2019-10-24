@@ -23,6 +23,14 @@
       (next-buffer)
     (kill-buffer-and-window)))
 
+(defun acg-kill-buffer ()
+  "Same as `kill-buffer-and-window' but acts differently when in
+*Messages* buffer."
+  (interactive)
+  (if (equal (buffer-name (current-buffer)) "*Messages*")
+      (next-buffer)
+    (kill-buffer)))
+
 
 ;; from https://emacs.stackexchange.com/questions/3330/how-to-reopen-just-killed-buffer-like-c-s-t-in-firefox-browser
 ;; making C-S-T reopen last closed buffer as in chrome
@@ -58,6 +66,6 @@
 (global-set-key (kbd "C-q") 'delete-window)
 
 (global-set-key (kbd "C-s") 'save-buffer)
-(acg-force-global-set-key (kbd "C-w") 'acg-kill-buffer-and-window)
+(acg-force-global-set-key (kbd "C-w") 'acg-kill-buffer)
 
 (global-set-key (kbd "C-S-T") 'acg-reopen-killed-file)

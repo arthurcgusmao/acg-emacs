@@ -49,6 +49,7 @@ thing/symbol at point."
 (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 (define-key ivy-minibuffer-map (kbd "S-SPC") nil)
+(define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-immediate-done)
 (define-key ivy-minibuffer-map (kbd "<S-return>") 'ivy-restrict-to-matches)
 (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
 (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
