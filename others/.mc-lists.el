@@ -30,6 +30,7 @@
         prelude-move-beginning-of-line
         sp-backward-sexp
         sp-forward-sexp
+        sp-forward-slurp-sexp
         sp-kill-hybrid-sexp
         subword-left
         subword-right

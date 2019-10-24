@@ -1,44 +1,6 @@
 (require 'jupyter)
 (require 'expand-region)
 
-;; Custom eval functions
-
-(defun acg/jupyter-eval-region-lines ()
-  "Same as `jupyter-eval-region' but operates on the whole lines
-that the region spans. It also compensates for indentation by
-removing the lowest indentation in the region lines from all
-lines before evaluating."
-  (interactive)
-  (save-mark-and-excursion
-    (acg/expand-region-to-whole-lines)
-    (jupyter-eval-string
-     (acg/get-region-unindented nil (region-beginning) (region-end))
-     (region-beginning) (region-end))))
-
-
-(defun acg/jupyter-eval-with (func)
-  "Creates and returns a function that evaluates the region
-marked by FUNC. If universal argment is passed, evaluates the
-region only up to the cursor position."
-  (let ((func-symbol (make-symbol (concat "acg/jupyter-eval-with--"
-                                          (symbol-name func)))))
-    (eval `(defun ,func-symbol (&optional arg)
-             "Evaluates the lines of the region marked by the
-respective function. If universal argument is passed, evaluates
-the region only up to the line where the cursor is."
-             (interactive "P")
-             (save-mark-and-excursion
-               (if arg
-                   (progn
-                     (save-excursion
-                       (,func)
-                       (if (< (point) (mark))
-                           (exchange-point-and-mark)))
-                     (end-of-line))
-                 (,func))
-               (jupyter-eval-region
-                (region-beginning) (region-end)))))))
-
 
 ;; @todo: create pull request to jupyter package with changes in this page
 
@@ -170,9 +132,10 @@ where code is and sending code to be evaluated in the REPL."
   (define-key python-mode-map (kbd "C-c j") 'jupyter-run-repl))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c r") 'jupyter-repl-restart-kernel)
 
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-c") (acg/jupyter-eval-with 'acg/mark-dwim))
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-p") (acg/jupyter-eval-with 'mark-page))
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-l") 'acg/jupyter-eval-region-lines)
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-b") (acg/eval-with 'jupyter-eval-region 'mark-whole-buffer))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-p") (acg/eval-with 'jupyter-eval-region 'mark-page))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-c") (acg/eval-with 'jupyter-eval-region 'acg/mark-dwim))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-l") (acg/eval-with 'jupyter-eval-region 'acg/expand-region-to-whole-lines))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-d") 'acg/jupyter-send-defun-body)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-e") 'acg/jupyter-open-python-variable-external-app)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o") nil)

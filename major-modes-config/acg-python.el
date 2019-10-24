@@ -54,7 +54,7 @@ any, similar to what a Jupyter REPL would do."
              (define-key python-mode-map (kbd "<f7>") 'python-shell-switch-to-shell)
              (define-key python-mode-map (kbd "<f8>") 'python-shell-send-buffer)
              (define-key python-mode-map (kbd "C-c C-y") 'run-python)
-             (define-key python-mode-map (kbd "C-c C-c") (acg/eval-with 'acg/python-shell-send-region 'acg/mark-dwim))
              (define-key python-mode-map (kbd "C-c C-b") (acg/eval-with 'acg/python-shell-send-region 'mark-whole-buffer))
              (define-key python-mode-map (kbd "C-c C-p") (acg/eval-with 'acg/python-shell-send-region 'mark-page))
+             (define-key python-mode-map (kbd "C-c C-c") (acg/eval-with 'acg/python-shell-send-region 'acg/mark-dwim))
              (define-key python-mode-map (kbd "C-c C-l") (acg/eval-with 'acg/python-shell-send-region 'acg/expand-region-to-whole-lines))))
