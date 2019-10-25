@@ -88,8 +88,8 @@
 (add-to-list 'default-frame-alist '(width . 100))
 
 ;; makes new buffers always default to vertical splitting (instead of horizontal)
-(setq split-height-threshold nil)
-(setq split-width-threshold nil)
+;; (setq split-height-threshold nil)
+;; (setq split-width-threshold nil)
 
 ;; always opens help buffer in the same window
 (add-to-list 'display-buffer-alist
