@@ -11,6 +11,7 @@
         acg-kill-line-or-region-backwards
         acg-kill-sexp
         acg-move-beginning-of-line
+        acg-toggle-letter-case
         acg-windows-clipboard-paste-replace-selection
         clipboard-kill-region
         clipboard-kill-ring-save
