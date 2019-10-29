@@ -24,6 +24,15 @@
 
   (define-key magit-mode-map (kbd "<C-up>") 'magit-section-backward-sibling)
   (define-key magit-mode-map (kbd "<C-down>") 'magit-section-forward-sibling)
+
+  (define-key magit-status-mode-map (kbd "M-1") nil)
+  (define-key magit-status-mode-map (kbd "M-2") nil)
+  (define-key magit-status-mode-map (kbd "M-3") nil)
+  (define-key magit-status-mode-map (kbd "M-4") nil)
+  (define-key magit-status-mode-map (kbd "C-c 1") 'magit-section-show-level-1-all)
+  (define-key magit-status-mode-map (kbd "C-c 2") 'magit-section-show-level-2-all)
+  (define-key magit-status-mode-map (kbd "C-c 3") 'magit-section-show-level-3-all)
+  (define-key magit-status-mode-map (kbd "C-c 4") 'magit-section-show-level-4-all)
   )
 
 

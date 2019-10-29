@@ -135,7 +135,7 @@ where code is and sending code to be evaluated in the REPL."
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-b") (acg/eval-with 'jupyter-eval-region 'mark-whole-buffer))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-p") (acg/eval-with 'jupyter-eval-region 'mark-page))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-c") (acg/eval-with 'jupyter-eval-region 'acg/mark-dwim))
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-l") (acg/eval-with 'jupyter-eval-region 'acg/expand-region-to-whole-lines))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-l") (acg/eval-with 'jupyter-eval-string 'acg/expand-region-to-whole-lines t))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-d") 'acg/jupyter-send-defun-body)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-e") 'acg/jupyter-open-python-variable-external-app)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o") nil)

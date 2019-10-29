@@ -86,27 +86,44 @@ line."
     (forward-line))
 
 
-(defun acg/eval-with (eval-func mark-func)
+(defun acg/eval-with (eval-func mark-func &optional string-unindent)
   "Creates and returns a function that evaluates the region
-marked by MARK-FUNC using EVAL-FUNC. If universal argment is
-passed, evaluates the region only up to the cursor position."
+marked by MARK-FUNC using EVAL-FUNC.
+
+If optional argument STRING-UNINDENT is nil, the marked region is
+evaluated as-is, and EVAL-FUNC is expected to receive two
+arguments: the values of `(region-beginning)' and `(region-end)'.
+If STRING-UNINDENT is non-nil, the region is copied to a string
+and its indentation is compensated using
+`acg/get-region-unindented'. In this special case, EVAL-FUNC is
+expected to receive a string (containing the code to be
+evaluated) as argument, instead of the region positions.
+
+See docstring of the returned function for its details.
+"
   (let ((out-func-symbol
          (make-symbol
           (concat "acg/" (symbol-name eval-func)
-                  "--" (symbol-name mark-func)))))
+                  "--" (symbol-name mark-func)
+                  (unless string-unindent "--unindented")))))
     (eval `(defun ,out-func-symbol (&optional arg)
-             "Evaluates the lines of the region marked by the
-respective function. If universal argument is passed, evaluates
-the region only up to the line where the cursor is."
+             "Evaluates the region marked by the respective
+function. If universal argument is passed, evaluates the region
+only up to the line where the cursor is. This function was
+created by `acg/eval-with'."
              (interactive "P")
-             (save-mark-and-excursion
-               (if arg
-                   (progn
-                     (save-excursion
-                       (,mark-func)
-                       (if (< (point) (mark))
-                           (exchange-point-and-mark)))
-                     (end-of-line))
-                 (,mark-func))
-               (,eval-func
-                (region-beginning) (region-end)))))))
+             (let (BEG END)
+               (save-mark-and-excursion
+                 (if arg
+                     (progn
+                       (save-excursion
+                         (,mark-func)
+                         (if (< (point) (mark))
+                             (exchange-point-and-mark)))
+                       (end-of-line))
+                   (,mark-func))
+                 (setq BEG (region-beginning)
+                       END (region-end)))
+               (if ,string-unindent
+                   (,eval-func (acg/get-region-unindented nil BEG END))
+                 (,eval-func BEG END)))))))
