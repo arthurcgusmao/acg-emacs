@@ -41,6 +41,8 @@
 
 (setq mc/cmds-to-run-once
       '(
+        acg-scratch-buffer-create
+        acg-tabbar-backward
         counsel-M-x
         crux-switch-to-previous-buffer
         helm-M-x
