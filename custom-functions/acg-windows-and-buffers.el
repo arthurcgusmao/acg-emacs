@@ -31,6 +31,13 @@
       (next-buffer)
     (kill-buffer)))
 
+(defun acg/save-buffer-as (filename)
+  "Save buffer content as another file and open the file in a new
+buffer."
+  (interactive "F")
+  (write-region (point-min) (point-max) filename)
+  (find-file filename))
+
 
 ;; from https://emacs.stackexchange.com/questions/3330/how-to-reopen-just-killed-buffer-like-c-s-t-in-firefox-browser
 ;; making C-S-T reopen last closed buffer as in chrome
@@ -66,6 +73,7 @@
 (global-set-key (kbd "C-q") 'delete-window)
 
 (global-set-key (kbd "C-s") 'save-buffer)
+(global-set-key (kbd "C-S-s") 'acg/save-buffer-as)
 (acg-force-global-set-key (kbd "C-w") 'acg-kill-buffer)
 
 (global-set-key (kbd "C-S-T") 'acg-reopen-killed-file)

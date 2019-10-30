@@ -25,6 +25,11 @@ Taken from https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer"
      (let ((orig (current-buffer)))
        (dired-mouse-find-file event #'find-alternate-file find-dir-func)
        (kill-buffer orig)))
+
+  :custom
+  ;; Group directories together
+  (dired-listing-switches "--group-directories-first -al")
+
   :bind
   (("C-x d" . dired-jump)
    :map dired-mode-map
