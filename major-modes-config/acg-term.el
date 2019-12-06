@@ -2,7 +2,7 @@
 
 (setq multi-term-program "/bin/bash")
 
-(defun acg-new-term ()
+(defun acg/new-term ()
   (interactive)
   (multi-term))
 
@@ -28,7 +28,7 @@
 ;; The idea is to segregate terminal processes from file buffers and prevent
 ;; occasional crashes.)
 
-(defun acg-update-term-frame (frame)
+(defun acg/update-term-frame (frame)
   (interactive)
   (with-selected-frame frame
     (if (string= server-name "term")
@@ -36,4 +36,4 @@
           (set-background-color "#300A24")
           (set-frame-name "Terminal")))))
 
-(add-to-list 'after-make-frame-functions #'acg-update-term-frame)
+(add-to-list 'after-make-frame-functions #'acg/update-term-frame)
