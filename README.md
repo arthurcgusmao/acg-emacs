@@ -1,12 +1,11 @@
 # My Emacs configurations
 
-This repository contains my Emacs configurations. It has been tested on Ubuntu and Windows.
-There are a few hardcoded filepaths in `acg-core.el` (top section), please change them to what
-works for you.
+This repository contains my Emacs configurations. It has been tested on Ubuntu and Windows (on Windows, I have been using these configs mainly running Emacs on WSL).
 
-Feel free to get in touch if you want to,
+If you have contributions, questions, etc., feel free to get in touch.
 
 Arthur
+
 
 ## Setup
 
@@ -14,7 +13,12 @@ Arthur
 
 Clone this repo into your `~/.emacs.d` folder (default folder name will be `acg-emacs`).
 
-### 2) Add path to list and require core
+### 2) Change hardcoded paths
+
+There are a few hardcoded filepaths in `acg-core.el` (top section), please change them to what
+works for you.
+
+### 3) Add path to list and require core
 
 Add to the `~/.emacs.d/init.el` file the following content (create the file if necessary):
 
@@ -24,9 +28,9 @@ Add to the `~/.emacs.d/init.el` file the following content (create the file if n
 (require 'acg-core)
 ```
 
-### 3) Make OS configurations
+### 4) Make OS-specific configurations
 
-See additional configurations for the OS type:
+See additional configurations for the Operating system you are using:
 
 - [Linux (Ubuntu)](./others/linux/)
 - [Windows](./others/windows/)
