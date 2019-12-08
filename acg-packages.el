@@ -62,6 +62,11 @@
               which-key
               rainbow-mode
               auto-dim-other-buffers
+              ;; themes
+              zenburn-theme
+              anti-zenburn-theme
+              modus-operandi-theme ; by Prot
+              modus-vivendi-theme ; by Prot
               )))
 
 ;; initialize and install selected packages (cf. https://stackoverflow.com/a/39891192/5103881)
