@@ -38,6 +38,9 @@
 ;; delete the selection with a keypress
 (delete-selection-mode t)
 
+;; Remove annoying ring bell
+(setq ring-bell-function 'ignore)
+
 ;; MS Windows configs
 (if (string-equal system-type "windows-nt")
     (progn
