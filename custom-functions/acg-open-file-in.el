@@ -31,7 +31,7 @@ Version 2015-01-26"
          (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath))) -file-list))))))
 
 
-(defun acg-open-in-desktop ()
+(defun acg/open-in-desktop ()
   "Show current file in desktop (OS's file manager).
 URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
 Version 2015-11-30"
@@ -51,7 +51,7 @@ Version 2015-11-30"
     )))
 
 
-(defun acg-open-in-terminal ()
+(defun acg/open-in-terminal ()
   "Open the current dir in a new terminal window.
 URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
 Version 2015-12-10"
@@ -76,5 +76,5 @@ Version 2015-12-10"
 
 
 ;; keybindings
-(global-set-key (kbd "C-c t") 'acg-open-in-terminal)
-(global-set-key (kbd "C-c o") 'acg-open-in-desktop)
+(global-set-key (kbd "C-c t") 'acg/open-in-terminal)
+(global-set-key (kbd "C-c o") 'acg/open-in-desktop)
