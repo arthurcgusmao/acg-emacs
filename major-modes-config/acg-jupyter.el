@@ -83,6 +83,12 @@ it with the default external app."
          (jupyter-eval (format "%s.to_csv('%s')" var tempfpath))
          (acg/open-in-external-app (list tempfpath))
          ))
+      ("pandas.core.series.Series"
+       (let ((tempfpath
+              (concat temporary-file-directory "emacs-jupyter--" var ".csv")))
+         (jupyter-eval (format "%s.to_csv('%s')" var tempfpath))
+         (acg/open-in-external-app (list tempfpath))
+         ))
       ("numpy.ndarray"
        (let ((tempfpath
               (concat temporary-file-directory "emacs-jupyter--" var ".csv")))
@@ -99,6 +105,24 @@ it with the default external app."
          (jupyter-eval (format "with open('%s','w') as f: f.write(json.dumps(%s, indent=4))" tempfpath var))
          (acg/open-in-external-app (list tempfpath))))
       )))
+
+;; Show value of the last variable that was assigned in Jupyter
+(defun acg/add-last-var (code-str)
+  "Returns a modified string by appending to CODE-STR a newline
+with the last line's assigned variable (if any variable
+assignment occurred). Useful for code inspection in REPLs (such
+as Jupyter)."
+  (let ((last-line (car (last (split-string code-str "\n")))))
+    (if (string-match
+         "^\\`\\([A-Za-z]+[A-Za-z0-9_\.]*\\) *[\+\*\/-]*=[^=].+\\'"
+         last-line)
+        (let* ((var-name (match-string 1 last-line)))
+          (concat code-str "\n" var-name))
+      code-str)))
+
+(defun acg/unindent-add-last-var (code-str)
+  "Calls the functions `acg/add-last-var' and `acg/unindent-string'."
+  (acg/add-last-var (acg/unindent-string code-str)))
 
 
 ;; Configurations
@@ -132,10 +156,10 @@ where code is and sending code to be evaluated in the REPL."
   (define-key python-mode-map (kbd "C-c j") 'jupyter-run-repl))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c r") 'jupyter-repl-restart-kernel)
 
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-b") (acg/eval-with 'jupyter-eval-region 'mark-whole-buffer))
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-p") (acg/eval-with 'jupyter-eval-region 'mark-page))
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-c") (acg/eval-with 'jupyter-eval-region 'acg/mark-dwim))
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-l") (acg/eval-with 'jupyter-eval-string 'acg/expand-region-to-whole-lines t))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-b") (acg/eval-with 'jupyter-eval-string 'mark-whole-buffer 'acg/add-last-var))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-p") (acg/eval-with 'jupyter-eval-string 'mark-page 'acg/add-last-var))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-c") (acg/eval-with 'jupyter-eval-string 'acg/mark-dwim 'acg/add-last-var))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-l") (acg/eval-with 'jupyter-eval-string 'acg/expand-region-to-whole-lines 'acg/unindent-add-last-var))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-d") 'acg/jupyter-send-defun-body)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-e") 'acg/jupyter-open-python-variable-external-app)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o") nil)
