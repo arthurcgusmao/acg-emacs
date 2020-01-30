@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: --se
+# key: --se
+# group : debug
+# --
+se = pd.Series([1, 2, 3], index=[10, 20, 30])
+$0

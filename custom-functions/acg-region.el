@@ -23,16 +23,16 @@ Adapted from https://spwhitton.name/blog/entry/expandregionlines/"
     (end-of-line)
     (activate-mark)))
 
-(defun acg/get-region-unindented (pad beginning end)
-  "Copy the region, un-indented by the length of its minimum indent.
+(defun acg/unindent-string (str &optional pad)
+  "Returns a modified version of STRING by unindenting it by the
+length of its minimum indent.
 
-If numeric prefix argument PAD is supplied, indent the resulting
-text by that amount.
+If optional numeric argument PAD is supplied, indent the
+resulting text by that amount.
 
-From https://emacs.stackexchange.com/a/34981/13589"
+Adapted from https://emacs.stackexchange.com/a/34981/13589"
   (interactive "P\nr")
-  (let ((buf (current-buffer))
-        (itm indent-tabs-mode)
+  (let ((itm indent-tabs-mode)
         (tw tab-width)
         (st (syntax-table))
         (indent nil))
@@ -40,7 +40,7 @@ From https://emacs.stackexchange.com/a/34981/13589"
       (setq indent-tabs-mode itm
             tab-width tw)
       (set-syntax-table st)
-      (insert-buffer-substring buf beginning end)
+      (insert str)
       ;; Establish the minimum level of indentation.
       (goto-char (point-min))
       (while (and (re-search-forward "^[[:space:]\n]*" nil :noerror)
@@ -86,16 +86,17 @@ line."
     (forward-line))
 
 
-(defun acg/eval-with (eval-func mark-func &optional string-unindent)
+(defun acg/eval-with (eval-func mark-func &optional str-modif-func)
   "Creates and returns a function that evaluates the region
 marked by MARK-FUNC using EVAL-FUNC.
 
-If optional argument STRING-UNINDENT is nil, the marked region is
+If optional argument STR-MODIF-FUNC is nil, the marked region is
 evaluated as-is, and EVAL-FUNC is expected to receive two
 arguments: the values of `(region-beginning)' and `(region-end)'.
-If STRING-UNINDENT is non-nil, the region is copied to a string
-and its indentation is compensated using
-`acg/get-region-unindented'. In this special case, EVAL-FUNC is
+If STR-MODIF-FUNC is a function, it is applied to the buffer
+substring of the region marked by MARK-FUNC before calling
+EVAL-FUNC (i.e., STR-MODIF-FUNC takes a string as argument, and
+returns another string). In this special case, EVAL-FUNC is
 expected to receive a string (containing the code to be
 evaluated) as argument, instead of the region positions.
 
@@ -105,7 +106,9 @@ See docstring of the returned function for its details.
          (make-symbol
           (concat "acg/" (symbol-name eval-func)
                   "--" (symbol-name mark-func)
-                  (unless string-unindent "--unindented")))))
+                  (if str-modif-func
+                      (concat "--"
+                              (symbol-name str-modif-func)))))))
     (eval `(defun ,out-func-symbol (&optional arg)
              "Evaluates the region marked by the respective
 function. If universal argument is passed, evaluates the region
@@ -124,6 +127,7 @@ created by `acg/eval-with'."
                    (,mark-func))
                  (setq BEG (region-beginning)
                        END (region-end)))
-               (if ,string-unindent
-                   (,eval-func (acg/get-region-unindented nil BEG END))
+               (if (quote ,str-modif-func)
+                   (,eval-func
+                    (,str-modif-func (buffer-substring BEG END)))
                  (,eval-func BEG END)))))))

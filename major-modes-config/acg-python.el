@@ -54,7 +54,11 @@ any, similar to what a Jupyter REPL would do."
              (define-key python-mode-map (kbd "<f7>") 'python-shell-switch-to-shell)
              (define-key python-mode-map (kbd "<f8>") 'python-shell-send-buffer)
              (define-key python-mode-map (kbd "C-c C-y") 'run-python)
+             ; The functions below are just sending the code to the shell
+             ; ("invisibly"), but not printing it. @TODO: create a new function
+             ; that prints the results of the last variable, so that it works
+             ; like the Jupyter REPL.
              (define-key python-mode-map (kbd "C-c C-b") (acg/eval-with 'acg/python-shell-send-region 'mark-whole-buffer))
              (define-key python-mode-map (kbd "C-c C-p") (acg/eval-with 'acg/python-shell-send-region 'mark-page))
              (define-key python-mode-map (kbd "C-c C-c") (acg/eval-with 'acg/python-shell-send-region 'acg/mark-dwim))
-             (define-key python-mode-map (kbd "C-c C-l") (acg/eval-with 'python-shell-send-string 'acg/expand-region-to-whole-lines t))))
+             (define-key python-mode-map (kbd "C-c C-l") (acg/eval-with 'python-shell-send-string 'acg/expand-region-to-whole-lines 'acg/unindent-add-last-var))))
