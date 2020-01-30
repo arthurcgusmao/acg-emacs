@@ -112,7 +112,10 @@ it with the default external app."
 with the last line's assigned variable (if any variable
 assignment occurred). Useful for code inspection in REPLs (such
 as Jupyter)."
-  (let ((last-line (car (last (split-string code-str "\n")))))
+  (let (lines last-line)
+    (setq lines (split-string code-str "\n"))
+    (delete "" lines)
+    (setq last-line (car (last lines)))
     (if (string-match
          "^\\`\\([A-Za-z]+[A-Za-z0-9_\.]*\\) *[\+\*\/-]*=[^=].+\\'"
          last-line)
