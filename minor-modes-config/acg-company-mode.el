@@ -28,7 +28,7 @@
 
 ;; my custom function for custom indentation
 
-(defun acg-company-indent-or-complete-common ()
+(defun acg/company-indent-or-complete-common ()
   "Indent the current line or region (using function supplied as argument), or
 complete the common part."
   (interactive)
@@ -54,4 +54,4 @@ complete the common part."
 ;; keybindings
 (define-key company-active-map (kbd "M-h") #'company-quickhelp-mode)
 (define-key company-active-map (kbd "<escape>") #'company-abort)
-(define-key company-mode-map (kbd "<tab>") #'acg-company-indent-or-complete-common)
+(define-key company-mode-map (kbd "<tab>") #'acg/company-indent-or-complete-common)

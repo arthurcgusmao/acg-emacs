@@ -1,6 +1,6 @@
 ;; move the line(s) spanned by the active region up/down (line transposing)
 
-(defun acg-move-lines (n)
+(defun acg/move-lines (n)
   (let ((beg) (end) (keep))
     (if mark-active 
         (save-excursion
@@ -27,16 +27,16 @@
         (setq mark-active t
               deactivate-mark nil))))
 
-(defun acg-move-lines-up (n)
+(defun acg/move-lines-up (n)
   "move the line(s) spanned by the active region up by N lines."
   (interactive "*p")
-  (acg-move-lines (- (or n 1))))
+  (acg/move-lines (- (or n 1))))
 
-(defun acg-move-lines-down (n)
+(defun acg/move-lines-down (n)
   "move the line(s) spanned by the active region down by N lines."
   (interactive "*p")
-  (acg-move-lines (or n 1)))
+  (acg/move-lines (or n 1)))
 
 ;; binding
-(global-set-key (kbd "<M-up>") 'acg-move-lines-up)
-(global-set-key (kbd "<M-down>") 'acg-move-lines-down)
+(global-set-key (kbd "<M-up>") 'acg/move-lines-up)
+(global-set-key (kbd "<M-down>") 'acg/move-lines-down)

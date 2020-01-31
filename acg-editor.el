@@ -56,7 +56,7 @@
 ;; files, buffers, backup, autosave
 
 ;; from https://stackoverflow.com/a/18330742/5103881
-(setq backup-directory-alist `(("." . ,acg-backup-dir)))
+(setq backup-directory-alist `(("." . ,acg/backup-dir)))
 (setq make-backup-files t               ; backup of a file the first time it is saved.
       backup-by-copying t               ; don't clobber symlinks
       version-control t                 ; version numbers for backup files

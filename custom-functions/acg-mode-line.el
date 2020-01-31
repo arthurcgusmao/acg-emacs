@@ -4,15 +4,15 @@
 ;; http://amitp.blogspot.com.br/2011/08/emacs-custom-mode-line.html
 ;; http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html
 
-(make-face 'acg-mode-line-common)
-(set-face-attribute 'acg-mode-line-common nil
+(make-face 'acg/mode-line-common)
+(set-face-attribute 'acg/mode-line-common nil
                     ;; :foreground "#777"
                     :foreground (face-attribute 'mode-line :foreground)
                     :weight 'ultralight
                     )
-(make-face 'acg-mode-line-common-bold)
-(set-face-attribute 'acg-mode-line-common-bold nil
-                    :foreground (face-attribute 'acg-mode-line-common :foreground)
+(make-face 'acg/mode-line-common-bold)
+(set-face-attribute 'acg/mode-line-common-bold nil
+                    :foreground (face-attribute 'acg/mode-line-common :foreground)
                     :weight 'bold
                     )
 
@@ -26,7 +26,7 @@
                          (if (buffer-modified-p) "[m]" "[s]")))
                
                ;; the buffer name; the file name as a tool tip
-               '(:eval (propertize " %b" 'face 'acg-mode-line-common-bold))
+               '(:eval (propertize " %b" 'face 'acg/mode-line-common-bold))
                
 
                ;; line

@@ -16,4 +16,4 @@
 (global-set-key (kbd "<M-S-down>") 'mc/mark-next-lines)
 
 ;; define custom location for file that saves which commands to run once/for-all
-(setq mc/list-file (concat acg-emacs-dir "others/.mc-lists.el"))
+(setq mc/list-file (concat acg/acg-emacs-dir "others/.mc-lists.el"))

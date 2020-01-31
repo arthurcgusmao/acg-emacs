@@ -14,7 +14,7 @@
 ;; keybindings
 (add-hook 'comint-mode-hook
   	  (function (lambda ()
-                      (acg-local-set-minor-mode-key 'company-mode-map (kbd "<tab>") 'completion-at-point)
+                      (acg/local-set-minor-mode-key 'company-mode-map (kbd "<tab>") 'completion-at-point)
                       (local-set-key (kbd "<tab>") 'completion-at-point)
 
                       (local-set-key (kbd "<up>") 'comint-previous-input)
@@ -23,7 +23,7 @@
 
 (add-hook 'inferior-python-mode-hook
   	  (function (lambda ()
-                      (acg-local-set-minor-mode-key 'company-mode-map (kbd "<tab>") 'python-shell-completion-complete-or-indent)
+                      (acg/local-set-minor-mode-key 'company-mode-map (kbd "<tab>") 'python-shell-completion-complete-or-indent)
                       (local-set-key (kbd "<tab>") 'python-shell-completion-complete-or-indent))))
 
 

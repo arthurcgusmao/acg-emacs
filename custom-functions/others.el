@@ -7,8 +7,8 @@
 
 
 ;; concentration mode
-(defun acg-concentration-mode ()
+(defun acg/concentration-mode ()
   "Changes the window fringes to center text and limit distractions."
   (interactive)
   (set-window-fringes nil 500 0 t))
-(global-set-key (kbd "<f12>") 'acg-concentration-mode)
+(global-set-key (kbd "<f12>") 'acg/concentration-mode)

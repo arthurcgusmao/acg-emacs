@@ -26,8 +26,8 @@
 
 
 ;; org-ref package configurations
-(setq reftex-default-bibliography acg-default-bib-file
-      org-ref-default-bibliography acg-default-bib-file)
+(setq reftex-default-bibliography acg/default-bib-file
+      org-ref-default-bibliography acg/default-bib-file)
 
 ;; see org-ref for use of these variables
 ;; (setq org-ref-bibliography-notes (concat default-emacs-dir "bibliography/notes.org")
@@ -64,7 +64,7 @@
             (define-key org-mode-map (kbd "<M-end>") 'org-cycle)
             (define-key org-mode-map (kbd "<M-home>") 'org-cycle-backwards)
             (define-key org-mode-map (kbd "<C-M-end>") 'org-global-cycle)
-            (define-key org-mode-map (kbd "<C-M-home>") 'acg-org-global-cycle-backwards)
+            (define-key org-mode-map (kbd "<C-M-home>") 'acg/org-global-cycle-backwards)
             (define-key org-mode-map (kbd "C-<") 'org-shiftmetaleft)
             (define-key org-mode-map (kbd "C->") 'org-shiftmetaright)
 
@@ -74,15 +74,15 @@
             (define-key org-mode-map (kbd "<return>") 'org-return-indent)
             (define-key org-mode-map (kbd "<C-return>") nil)
             (define-key org-mode-map (kbd "<C-S-return>") nil)
-            (define-key org-mode-map (kbd "<M-return>") 'acg-org-meta-return-newline)
+            (define-key org-mode-map (kbd "<M-return>") 'acg/org-meta-return-newline)
             (define-key org-mode-map (kbd "C-8") 'org-insert-heading-after-current)
             (define-key org-mode-map (kbd "M-8") 'org-insert-subheading-newline)
             
             (define-key org-mode-map (kbd "<M-S-right>") nil)
             (define-key org-mode-map (kbd "<M-S-left>") nil)
             
-            ;; (acg-local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-left>") 'org-cycle-backwards)
-            ;; (acg-local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-right>") 'org-cycle)
+            ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-left>") 'org-cycle-backwards)
+            ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-right>") 'org-cycle)
             (define-key org-mode-map (kbd "<M-left>") nil)
             (define-key org-mode-map (kbd "<M-right>") nil)
 
@@ -106,7 +106,7 @@
   (org-cycle ARG)
   (org-cycle ARG))
 
-(defun acg-org-global-cycle-backwards (&optional ARG)
+(defun acg/org-global-cycle-backwards (&optional ARG)
   "Same as `org-global-cycle' but backwards."
   (interactive)
   (org-global-cycle ARG)
@@ -118,7 +118,7 @@
   (org-insert-heading-after-current)
   (org-shiftmetaright))
 
-(defun acg-org-meta-return-newline ()
+(defun acg/org-meta-return-newline ()
   "Same as `org-meta-return' but creates a new line."
   (interactive)
   (org-forward-paragraph)
@@ -168,7 +168,7 @@
 
 ;; crazyly trying to fix the subtree moving behavior
 
-(defun acg-org-move-subtree-down (&optional arg)
+(defun acg/org-move-subtree-down (&optional arg)
   "Move the current subtree down past ARG headlines of the same level."
   (interactive "p")
   (setq arg (prefix-numeric-value arg))

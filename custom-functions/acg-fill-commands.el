@@ -1,7 +1,7 @@
 (require 'crux)
 
 
-(defun acg-unfill-paragraph ()
+(defun acg/unfill-paragraph ()
   "Replace newline chars in current paragraph by single spaces.
 This command does the inverse of `fill-paragraph'.
 
@@ -12,7 +12,7 @@ Version 2016-07-13"
     (fill-paragraph)))
 
 
-(defun acg-unfill-region (start end)
+(defun acg/unfill-region (start end)
   "Replace newline chars in region by single spaces.
 This command does the inverse of `fill-region'.
 
@@ -26,9 +26,9 @@ Version 2016-07-13"
 
 ;; keybindings
 (global-set-key (kbd "C-p") 'fill-paragraph)
-(global-set-key (kbd "C-S-P") 'acg-unfill-paragraph)
+(global-set-key (kbd "C-S-P") 'acg/unfill-paragraph)
 (global-set-key (kbd "M-p") (crux-with-region-or-line fill-region))
-(global-set-key (kbd "M-S-P") (crux-with-region-or-line acg-unfill-region))
+(global-set-key (kbd "M-S-P") (crux-with-region-or-line acg/unfill-region))
 
 
 ;; settings -- max-width for lines when using fill commands

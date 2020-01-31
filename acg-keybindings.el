@@ -1,5 +1,5 @@
 ;; Rebinding Emacs built-in commands
-(acg-force-global-set-key "C-a" 'mark-whole-buffer)
+(acg/force-global-set-key "C-a" 'mark-whole-buffer)
 (global-set-key (kbd "C-r") 'repeat)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-Z") 'redo)

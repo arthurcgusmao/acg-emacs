@@ -11,11 +11,11 @@
 (setq tabbar-cycle-scope 'tabs)
 (setq tabbar-use-images nil)
 
-(global-set-key (kbd "<C-tab>") 'acg-tabbar-forward)
-(global-set-key (kbd "<C-S-iso-lefttab>") 'acg-tabbar-backward) ;; for Linux
-(global-set-key (kbd "<C-S-tab>") 'acg-tabbar-backward) ;; for Windows
-(global-set-key (kbd "<C-next>") 'acg-tabbar-forward)
-(global-set-key (kbd "<C-prior>") 'acg-tabbar-backward)
+(global-set-key (kbd "<C-tab>") 'acg/tabbar-forward)
+(global-set-key (kbd "<C-S-iso-lefttab>") 'acg/tabbar-backward) ;; for Linux
+(global-set-key (kbd "<C-S-tab>") 'acg/tabbar-backward) ;; for Windows
+(global-set-key (kbd "<C-next>") 'acg/tabbar-forward)
+(global-set-key (kbd "<C-prior>") 'acg/tabbar-backward)
 ;; Key sequences "C-S-PgUp" and "C-S-PgDn" move the current tab to the left and to the right.
 (global-set-key (kbd "C-S-<prior>") 'tabbar-move-current-tab-one-place-left)
 (global-set-key (kbd "C-S-<next>") 'tabbar-move-current-tab-one-place-right)
@@ -70,13 +70,13 @@
        tab-buffer-list) )))
 
 
-(defun acg-tabbar-forward ()
+(defun acg/tabbar-forward ()
   (interactive)
   (if (string-equal (tabbar-buffer-tabs) "user")
       (tabbar-forward)
     (switch-tab-group "user")))
 
-(defun acg-tabbar-backward ()
+(defun acg/tabbar-backward ()
   (interactive)
   (if (string-equal (tabbar-buffer-tabs) "user")
       (tabbar-backward)
@@ -108,7 +108,7 @@
 (add-hook 'first-change-hook 'ztl-on-buffer-modification)
 
 ;; Update when buffer unmodified -- requires `update-unmodified-buffer' to be loaded first
-(add-to-list 'acg-unmodified-buffer-hook 'ztl-modification-state-change t)
+(add-to-list 'acg/unmodified-buffer-hook 'ztl-modification-state-change t)
 
 ;; ---------------------------------------------------------
 ;; face customization
