@@ -4,7 +4,9 @@
 (setq mc/cmds-to-run-for-all
       '(
         acg-backward-kill-sexp
+        acg-backward-kill-word
         acg-calc-eval
+        acg-clipboard-kill-ring-save
         acg-clipboard-paste-replace-selection
         acg-forward-kill-sexp
         acg-kill-line-or-region
@@ -33,6 +35,7 @@
         sp-forward-sexp
         sp-forward-slurp-sexp
         sp-kill-hybrid-sexp
+        sp-unwrap-sexp
         subword-left
         subword-right
         web-mode-attribute-insert
