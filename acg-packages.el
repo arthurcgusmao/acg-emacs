@@ -69,7 +69,7 @@
               modus-vivendi-theme ; by Prot
               )))
 
-;; initialize and install selected packages (cf. https://stackoverflow.com/a/39891192/5103881)
+;; Initialize and install selected packages (cf. https://stackoverflow.com/a/39891192/5103881)
 (setq package-enable-at-startup nil)
 (package-initialize)
 (unless package-archive-contents

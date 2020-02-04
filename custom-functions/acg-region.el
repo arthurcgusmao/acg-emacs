@@ -129,5 +129,6 @@ created by `acg/eval-with'."
                        END (region-end)))
                (if (quote ,str-modif-func)
                    (,eval-func
-                    (,str-modif-func (buffer-substring BEG END)))
+                    (,str-modif-func (buffer-substring BEG END))
+                    BEG END)
                  (,eval-func BEG END)))))))
