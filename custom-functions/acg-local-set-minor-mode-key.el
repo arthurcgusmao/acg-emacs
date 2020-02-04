@@ -1,4 +1,4 @@
-(defun acg-local-set-minor-mode-key (mode key def)
+(defun acg/local-set-minor-mode-key (mode key def)
   "Overrides a minor mode keybinding for the local
    buffer, by creating or altering keymaps stored in buffer-local
    `minor-mode-overriding-map-alist'."

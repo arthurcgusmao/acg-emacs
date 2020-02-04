@@ -69,15 +69,15 @@
               modus-vivendi-theme ; by Prot
               )))
 
-;; initialize and install selected packages (cf. https://stackoverflow.com/a/39891192/5103881)
+;; Initialize and install selected packages (cf. https://stackoverflow.com/a/39891192/5103881)
 (setq package-enable-at-startup nil)
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 (package-install-selected-packages)
 
-(acg/load-all-in-directory (concat acg-emacs-dir "custom-functions"))
-(acg/load-all-in-directory (concat acg-emacs-dir "minor-modes-config"))
-(acg/load-all-in-directory (concat acg-emacs-dir "major-modes-config"))
+(acg/load-all-in-directory (concat acg/acg-emacs-dir "custom-functions"))
+(acg/load-all-in-directory (concat acg/acg-emacs-dir "minor-modes-config"))
+(acg/load-all-in-directory (concat acg/acg-emacs-dir "major-modes-config"))
 
 (provide 'acg-packages)

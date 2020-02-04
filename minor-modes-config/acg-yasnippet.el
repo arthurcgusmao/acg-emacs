@@ -2,7 +2,7 @@
 (require 'ivy-yasnippet)
 
 (add-to-list 'yas-snippet-dirs
-             (concat acg-emacs-dir "snippets"))
+             (concat acg/acg-emacs-dir "snippets"))
 
 (yas-global-mode t)
 

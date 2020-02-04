@@ -22,7 +22,7 @@
 
 
 
-(defun acg-toggle-letter-case ()
+(defun acg/toggle-letter-case ()
   "Toggle the letter case of current word or text selection.
 Always cycle in this order: Init Caps, ALL CAPS, all lower.
 
@@ -53,15 +53,15 @@ Version 2017-04-19"
       (downcase-region -p1 -p2)
       (put this-command 'state 0)))))
 
-(global-set-key (kbd "M-c") 'acg-toggle-letter-case)
+(global-set-key (kbd "M-c") 'acg/toggle-letter-case)
 
 
 
-(defun acg-split-string-with-region-or-line ()
+(defun acg/split-string-with-region-or-line ()
   "Split and replace string in the current line or region."
   (interactive)
   (when (not (use-region-p))
-    (acg-select-current-line))
+    (acg/select-current-line))
   (let ((REGION-STRING (buffer-substring-no-properties
                         (region-beginning) (region-end)))
         (SEPARATORS (read-string "Enter separators (leave blank for default): "

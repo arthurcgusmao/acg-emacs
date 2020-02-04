@@ -1,38 +1,38 @@
 ;; only helper functions in this buffer.
 
-(defun acg-current-line-empty-p ()
+(defun acg/current-line-empty-p ()
   (save-excursion
     (beginning-of-line)
     (looking-at "[[:space:]]*$")))
 
-(defun acg-current-indentation-column-p ()
+(defun acg/current-indentation-column-p ()
   (save-excursion
     (back-to-indentation)
     (current-column)))
 
-(defun acg-select-current-line ()
+(defun acg/select-current-line ()
   "Select the current line."
   (interactive)
   (end-of-line)
   (set-mark (line-beginning-position)))
 
 
-(defun acg-get-file-size (filename)
+(defun acg/get-file-size (filename)
   "Returns the size of the file in bytes. See
 https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Attributes.html"
   (nth 7 (file-attributes filename)))
 
 
-(defun acg-parent-directory (dir)
+(defun acg/parent-directory (dir)
   "Get parent directory of given path. Works for both files and dirs."
   (unless (equal "/" dir)
     (file-name-directory (directory-file-name dir))))
 
-(defun acg-recursively-make-directory (dir)
+(defun acg/recursively-make-directory (dir)
   "Create directories recursively, i.e., also create all parent
 directories necessary."
   (unless (file-exists-p dir)
-    (acg-recursively-make-directory (acg-parent-directory dir))
+    (acg/recursively-make-directory (acg/parent-directory dir))
     (make-directory dir)))
 
 
@@ -54,14 +54,14 @@ that corresponds to the respective letter offset (e.g., 0 -> a, 1
 
 ;; Word mode helpers (subword and superword modes)
 
-(defun acg-get-word-mode ()
+(defun acg/get-word-mode ()
   "Returns the current active word mode (superword or subword) or
 nil if no word mode active."
   (cond
    (superword-mode 'superword-mode)
    (subword-mode 'subword-mode)))
 
-(defun acg-reset-word-mode (original-word-mode altered-word-mode)
+(defun acg/reset-word-mode (original-word-mode altered-word-mode)
   "Restores the word mode to an original state, given that it has
 been temporarily modified to an altered word mode."
   (unless (eq original-word-mode altered-word-mode)
@@ -69,19 +69,19 @@ been temporarily modified to an altered word mode."
         (set original-word-mode 1)
       (set altered-word-mode 0))))
 
-(defun acg-with-subword-mode (fun)
+(defun acg/with-subword-mode (fun)
   "Returns a function that executes the same command as `fun',
 but on subword-mode. Does not depend on previous subword-mode
 activation; original word mode is restored automatically."
   `(lambda (&optional arg)
-     "Calls FUN on subword-mode. See `acg-with-subword-mode'"
+     "Calls FUN on subword-mode. See `acg/with-subword-mode'"
      (interactive "^p")
      (setq arg (or arg 1))
      (with-current-buffer (current-buffer)
-       (let ((word-mode (acg-get-word-mode)))
+       (let ((word-mode (acg/get-word-mode)))
          (subword-mode 1)
          (,fun arg)
-         (acg-reset-word-mode word-mode 'subword-mode)))))
+         (acg/reset-word-mode word-mode 'subword-mode)))))
 
 
 ;; Keychord helpers

@@ -16,7 +16,7 @@
 
 ;; ;; find string in projectile root dir in MS-Windows
 ;; ;; code below is working, but I decided to go for the solution of using git's grep
-;; (defun acg-grep-projectile-windows(&optional search-string)
+;; (defun acg/grep-projectile-windows(&optional search-string)
 ;;   (interactive)
 ;;   (let ((search-string (or search-string (read-string "[search in project] string pattern: "))))
 ;;     (shell-command-to-string (concat "findstr /s /i /p"
@@ -48,8 +48,8 @@
       ;; and having git installed on windows fixed.
       (setq projectile-use-git-grep t)
       ;; disable helm in grep because it wrecks on Windows
-      (defun acg-projectile-grep-no-helm ()
+      (defun acg/projectile-grep-no-helm ()
         (interactive)
         (projectile-grep))
       ;; override keybindings
-      (define-key projectile-mode-map (kbd "M-f") 'acg-projectile-grep-no-helm)))
+      (define-key projectile-mode-map (kbd "M-f") 'acg/projectile-grep-no-helm)))

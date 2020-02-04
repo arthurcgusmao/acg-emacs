@@ -3,18 +3,18 @@
 
 (setq mc/cmds-to-run-for-all
       '(
-        acg-backward-kill-sexp
-        acg-backward-kill-word
-        acg-calc-eval
-        acg-clipboard-kill-ring-save
-        acg-clipboard-paste-replace-selection
-        acg-forward-kill-sexp
-        acg-kill-line-or-region
-        acg-kill-line-or-region-backwards
-        acg-kill-sexp
-        acg-move-beginning-of-line
-        acg-toggle-letter-case
-        acg-windows-clipboard-paste-replace-selection
+        acg/backward-kill-sexp
+        acg/backward-kill-word
+        acg/calc-eval
+        acg/clipboard-kill-ring-save
+        acg/clipboard-paste-replace-selection
+        acg/forward-kill-sexp
+        acg/kill-line-or-region
+        acg/kill-line-or-region-backwards
+        acg/kill-sexp
+        acg/move-beginning-of-line
+        acg/toggle-letter-case
+        acg/windows-clipboard-paste-replace-selection
         clipboard-kill-region
         clipboard-kill-ring-save
         clipboard-paste-replace-selection
@@ -45,8 +45,8 @@
 
 (setq mc/cmds-to-run-once
       '(
-        acg-scratch-buffer-create
-        acg-tabbar-backward
+        acg/scratch-buffer-create
+        acg/tabbar-backward
         counsel-M-x
         crux-switch-to-previous-buffer
         helm-M-x

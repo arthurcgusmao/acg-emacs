@@ -1,4 +1,4 @@
-(defun acg-move-beginning-of-line (arg)
+(defun acg/move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
 Move point to the first non-whitespace character on this line. If
 point is already there, move to the beginning of the line.
@@ -21,8 +21,8 @@ buffer, stop there. (function taken from prelude)"
 
 
 ;; keybindings
-(global-set-key (kbd "<home>") 'acg-move-beginning-of-line)
-(global-set-key (kbd "<C-M-left>") 'acg-move-beginning-of-line)
+(global-set-key (kbd "<home>") 'acg/move-beginning-of-line)
+(global-set-key (kbd "<C-M-left>") 'acg/move-beginning-of-line)
 (global-set-key (kbd "<C-M-right>") 'move-end-of-line)
-(global-set-key (kbd "<s-right>") (acg-with-subword-mode #'forward-word))
-(global-set-key (kbd "<s-left>") (acg-with-subword-mode #'backward-word))
+(global-set-key (kbd "<s-right>") (acg/with-subword-mode #'forward-word))
+(global-set-key (kbd "<s-left>") (acg/with-subword-mode #'backward-word))
