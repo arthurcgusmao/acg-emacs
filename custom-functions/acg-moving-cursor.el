@@ -19,10 +19,24 @@ buffer, stop there. (function taken from prelude)"
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
+(defun acg/move-beginning-of-visual-line (arg)
+  "Same as `acg/move-beginning-of-line' but for the visual line."
+  (interactive "^p")
+  (setq arg (or arg 1))
+
+  ;; Move lines first
+  (when (/= arg 1)
+    (let ((line-move-visual nil))
+      (forward-line (1- arg))))
+
+  (let ((orig-point (point)))
+    (back-to-indentation)
+    (when (= orig-point (point))
+      (beginning-of-visual-line 1))))
 
 ;; keybindings
-(global-set-key (kbd "<home>") 'acg/move-beginning-of-line)
-(global-set-key (kbd "<C-M-left>") 'acg/move-beginning-of-line)
+(global-set-key (kbd "<home>") 'acg/move-beginning-of-visual-line)
+(global-set-key (kbd "<C-M-left>") 'acg/move-beginning-of-visual-line)
 (global-set-key (kbd "<C-M-right>") 'move-end-of-line)
 (global-set-key (kbd "<s-right>") (acg/with-subword-mode #'forward-word))
 (global-set-key (kbd "<s-left>") (acg/with-subword-mode #'backward-word))
