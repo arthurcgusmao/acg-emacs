@@ -33,6 +33,17 @@ thing/symbol at point."
 (advice-add 'swiper-thing-at-point :before #'acg/with-marked-input)
 (advice-add 'swiper-all-thing-at-point :before #'acg/with-marked-input)
 
+;; Show rich descriptions after each ivy candidate option
+(use-package ivy-rich
+  :ensure t
+  :config
+  ; Show abbreviated filepaths
+  (setq ivy-rich-path-style 'abbreviate)
+  ;; Recommended setting (don't know why, it's said in the package description)
+  (setcdr (assq t ivy-format-functions-alist)
+          #'ivy-format-function-line)
+  :hook (after-init . ivy-rich-mode))
+
 
 ;; keybindings
 (global-set-key (kbd "C-f") 'acg/swiper-thing-at-point-or-isearch)
