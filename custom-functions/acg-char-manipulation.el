@@ -21,7 +21,6 @@
 (global-set-key (kbd "C-,") 'append-or-remove-comma-to-eol)
 
 
-
 (defun acg/toggle-letter-case ()
   "Toggle the letter case of current word or text selection.
 Always cycle in this order: Init Caps, ALL CAPS, all lower.
@@ -54,7 +53,6 @@ Version 2017-04-19"
       (put this-command 'state 0)))))
 
 (global-set-key (kbd "M-c") 'acg/toggle-letter-case)
-
 
 
 (defun acg/split-string-with-region-or-line ()
