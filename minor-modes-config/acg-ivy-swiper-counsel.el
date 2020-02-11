@@ -7,7 +7,7 @@
 ;; (setq ivy-use-virtual-buffers t)
 
 ;; max size the minibuffer can grow up to
-(setq ivy-height 22)
+(setq ivy-height 16)
 
 ;; configure regular expression of the search
 (setq ivy-re-builders-alist
@@ -43,26 +43,6 @@ thing/symbol at point."
   (setcdr (assq t ivy-format-functions-alist)
           #'ivy-format-function-line)
   :hook (after-init . ivy-rich-mode))
-
-(use-package ivy-posframe
-  :ensure t
-  :delight
-  :config
-  (setq ivy-posframe-parameters
-        '((left-fringe . 2)
-          (right-fringe . 2)
-          (internal-border-width . 2)
-          ))
-  ;; (setq ivy-posframe-height-alist
-  ;;       '((swiper . 15)
-  ;;         (swiper-isearch . 15)
-  ;;         (t . 15)))
-  (setq ivy-posframe-display-functions-alist
-        '((complete-symbol . ivy-posframe-display-at-point)
-          (swiper . nil)
-          (swiper-isearch . nil)
-          (t . ivy-posframe-display-at-frame-center)))
-  :hook (after-init . ivy-posframe-mode))
 
 
 ;; keybindings
