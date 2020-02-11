@@ -20,6 +20,7 @@
         clipboard-paste-replace-selection
         crux-kill-line-backwards
         crux-smart-open-line-above
+        end-of-visual-line
         helm-mini
         indent-for-tab-command
         keyboard-escape-quit
