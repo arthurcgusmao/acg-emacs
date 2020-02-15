@@ -132,3 +132,18 @@ created by `acg/eval-with'."
                     (,str-modif-func (buffer-substring BEG END))
                     BEG END)
                  (,eval-func BEG END)))))))
+
+;; --------------------------------------------------------------
+;; CONFIGS
+
+;; Make sort-lines operate on the whole lines of the region, instead of trying
+;; to operate on the region (which makes half-lines text from mid-selected
+;; lines get cluttered with other lines)
+(defadvice sort-lines (around advice-sort-lines activate)
+  (interactive "P\nr")
+  (acg/expand-region-to-whole-lines)
+  (if (interactive-p)
+      (progn
+        (call-interactively (ad-get-orig-definition 'sort-lines)))
+    ad-do-it))
+
