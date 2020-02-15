@@ -9,9 +9,27 @@ positions of the current buffer, most recent first.")
 (defvar acg/cursor-ring-max 128 "Maximum size of cursor ring.
 Start discarding off end if gets this big.")
 
-(defvar acg/cursor-ring-commands nil "List of commands for
-which the cursor position will be pushed to `acg/cursor-ring'
-before being called.")
+(defvar acg/cursor-ring-commands
+  '(beginning-of-buffer
+    end-of-buffer
+    mark-defun
+    mark-page
+    mark-paragraph
+    mark-sexp
+    mark-whole-buffer
+    mark-work
+    mwheel-scroll
+    scroll-bar-drag
+    scroll-bar-scroll-down
+    scroll-bar-scroll-up
+    scroll-bar-toolkit-scroll
+    scroll-down-command
+    scroll-other-window
+    scroll-other-window-down
+    scroll-up scroll-down
+    scroll-up-command)
+  "List of commands for which the cursor position will be pushed
+to `acg/cursor-ring' before being called.")
 
 (defun acg/push-cursor-ring ()
   "Pushes the current cursor position to the cursor ring if the
@@ -30,35 +48,13 @@ previous command was not in `acg/cursor-ring-commands'."
   (goto-char (nth 0 acg/cursor-ring))
   (recenter-top-bottom))
 
-(setq acg/cursor-ring-commands
-      '(
-        acg/mark-dwim
-        er/mark-defun
-        mark-defun
-        mark-page
-        mark-paragraph
-        mark-whole-buffer
-        scroll-down-command
-        scroll-up-command
-        ;; forward-paragraph
-        ;; backward-paragraph
-        end-of-buffer
-        beginning-of-buffer
-        ;; mwheel-scroll ; Not working @TODO
-        ))
-
-;; Add advice to all functions in list
-;; Note: couldn't use `advice-add' because it wasn't handling the "^p" and "^P"
-;; interactive cases (shift handling was not happening).
-(dolist (f acg/cursor-ring-commands)
-  (eval
-   `(defadvice ,f (around acg/push-cursor-ring-adv activate)
-      (interactive)
-      (unless (memq last-command acg/cursor-ring-commands)
-        (acg/push-cursor-ring))
-      (if (called-interactively-p 'interactive)
-          (call-interactively (ad-get-orig-definition ',f))
-        ad-do-it))))
+;; Pre-command function
+(defun acg/restore-cursor-pre-command ()
+  (when (and (not (eq this-command last-command))
+             (memq this-command acg/cursor-ring-commands)
+             (not (memq last-command acg/cursor-ring-commands)))
+    (acg/push-cursor-ring)))
+(add-hook 'pre-command-hook 'acg/restore-cursor-pre-command)
 
 
 ;; Advise functions that perform quit to restore cursor position
@@ -77,3 +73,9 @@ previous command was not in `acg/cursor-ring-commands'."
     (acg/restore-cursor-position)))
 
 
+;; ----------------------------------------
+;; CONFIGS
+
+(dolist (f '(acg/mark-dwim
+             er/mark-defun))
+  (add-to-list 'acg/cursor-ring-commands f))
