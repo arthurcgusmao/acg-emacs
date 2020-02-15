@@ -27,8 +27,8 @@ REPL buffer whenever this variable is non-nil. When the REPL
 buffer isn't visible, output will also be sent to pop-up buffers
 as is done when this variable is nil.
 
-If this variable is 'display, display the REPL buffer in another
-window."
+If this variable is 'display, display the REPL buffer in some
+window, without selecting it."
   :type 'boolean
   :group 'jupyter-repl)
 
