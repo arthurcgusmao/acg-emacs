@@ -80,26 +80,51 @@
 (setq mouse-drag-electric-col-scrolling t)
 
 
-;; windows - title / size / splitting / highlighting
+;; Windows - Title / Size / Splitting / Highlighting
 
 (setq frame-title-format "Emacs")
 
-(add-to-list 'default-frame-alist '(height . 100))
-(add-to-list 'default-frame-alist '(width . 100))
+(add-to-list 'default-frame-alist '(width . 160))
+(add-to-list 'default-frame-alist '(height . 80))
 
-;; makes new buffers always default to vertical splitting (instead of horizontal)
-;; (setq split-height-threshold nil)
-;; (setq split-width-threshold nil)
+;; Allow splitting current window if size above one of these thresholds
+(setq split-width-threshold 160) ; How many columns to split side-by-side
+(setq split-height-threshold 100) ; How many lines to split above/below
 
-;; always opens help buffer in the same window
-(add-to-list 'display-buffer-alist
-             '("Help" display-buffer-same-window))
-(add-to-list 'display-buffer-alist
-             '("Magit" display-buffer-same-window))
-(add-to-list 'display-buffer-alist
-             '("Anaconda" display-buffer-same-window))
+;; Custom split window logic
+(defun acg/split-window-sensibly (&optional window)
+  "Similar to `split-window-sensibly', but prefers
+horizontal (side by side) rather than vertical (below) splitting.
+Also, it doesn't force splitting when current window is the only
+one on its frame and its size is smaller than the split
+thresholds as the original would."
+  (let ((window (or window (selected-window))))
+    (or (and (window-splittable-p window t)
+	     ;; Split window horizontally.
+	     (with-selected-window window
+	       (split-window-right)))
+        (and (window-splittable-p window)
+	     ;; Split window vertically.
+	     (with-selected-window window
+	       (split-window-below))))))
 
-;; unhighlight inactive windows
+(setq split-window-preferred-function #'acg/split-window-sensibly)
+
+;; Select help buffer after displaying it
+(setq help-window-select t)
+
+;; Always opens help buffer in the same window
+;; (add-to-list 'display-buffer-alist
+;;              '("Help" display-buffer-same-window))
+;; (add-to-list 'display-buffer-alist
+;;              '("Magit" display-buffer-same-window))
+;; (add-to-list 'display-buffer-alist
+;;              '("Anaconda" display-buffer-same-window))
+
+
+;; Unhighlight inactive windows
+
+;; Not working properly
 (add-hook 'after-init-hook
           (lambda ()
             (when (fboundp 'auto-dim-other-buffers-mode)
@@ -108,14 +133,33 @@
               ;; (set-face-background 'auto-dim-other-buffers-face "#445")
               )))
 
+;; ;; Also didn't work properly
+;; (defun highlight-selected-window ()
+;;   "Highlight selected window with a different background color.
+;; Adapted from https://emacs.stackexchange.com/a/36240/13589"
+;;   (walk-windows (lambda (w)
+;;                   (if (eq w (selected-window))
+;;                       (with-current-buffer (window-buffer w)
+;;                         (buffer-face-set '(:background "green"))
+;;                         ;; (message "true `%s'" w)
+;;                         )
+;;                     (with-current-buffer (window-buffer w)
+;;                       (buffer-face-set '(:background "red"))
+;;                       ;; (message "true `%s'" w)
+;;                       ))))
+;;   (buffer-face-set 'default))
+;; (add-hook 'buffer-list-update-hook 'highlight-selected-window)
+;; ;; (remove-hook 'buffer-list-update-hook 'highlight-selected-window)
+
+
 
-;; configure font in Windows
-(defun fontify-frame-windows (frame)
+;; configure font in MS-Windows
+(defun acg/fontify-frame-mswindows (frame)
   (set-frame-parameter frame 'font "Consolas-10"))
 
 (if (string-equal system-type "windows-nt")
-    (progn (fontify-frame-windows nil) ;; Fontify current frame
-           (push 'fontify-frame-windows after-make-frame-functions))) ;; Fontify any future frames
+    (progn (acg/fontify-frame-mswindows nil) ;; Fontify current frame
+           (push 'acg/fontify-frame-mswindows after-make-frame-functions))) ;; Fontify any future frames
 
 
 (provide 'acg-ui)
