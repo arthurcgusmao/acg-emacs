@@ -6,6 +6,7 @@
         acg/backward-kill-sexp
         acg/backward-kill-word
         acg/calc-eval
+        acg/clipboard-kill-region-or-line
         acg/clipboard-kill-ring-save
         acg/clipboard-paste-replace-selection
         acg/forward-kill-sexp

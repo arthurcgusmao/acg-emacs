@@ -1,7 +1,7 @@
 (use-package dired
   :config
   (put 'dired-find-alternate-file 'disabled nil) ;; enable disabled command
-  
+
   (defun acg/dired-alternate-up-directory (&optional other-window)
     "Run Dired on parent directory of current directory.
 Taken from https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer"
@@ -26,6 +26,20 @@ Taken from https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer"
        (dired-mouse-find-file event #'find-alternate-file find-dir-func)
        (kill-buffer orig)))
 
+  (defun acg/dired-display-file-and-next ()
+    "Same as `dired-display-file' but moves point to next file
+afterwards."
+    (interactive)
+    (dired-display-file)
+    (dired-hacks-next-file))
+
+  (defun acg/dired-display-file-and-previous ()
+    "Same as `dired-display-file' but moves point to previous file
+afterwards."
+    (interactive)
+    (dired-display-file)
+    (dired-hacks-previous-file))
+
   :custom
   ;; Group directories together
   (dired-listing-switches "--group-directories-first -al")
@@ -36,7 +50,10 @@ Taken from https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer"
    ("C-o" . nil)
    ("q" . 'kill-current-buffer)
    ("<return>" . 'dired-find-alternate-file)
-   ("<C-return>" . 'dired-find-file)
+   ;; ("<C-return>" . 'dired-find-file)
+   ("<C-return>" . 'dired-display-file)
+   ("<S-return>" . 'acg/dired-display-file-and-next)
+   ("<C-S-return>" . 'acg/dired-display-file-and-previous)
    ("<backspace>" . 'acg/dired-alternate-up-directory)
    ("<C-backspace>" . 'dired-up-directory)
    ([C-mouse-2] . 'dired-mouse-find-file-other-window) ;; not working @todo
@@ -53,6 +70,3 @@ Taken from https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer"
 (use-package dired-sidebar
   :ensure t
   :commands (dired-sidebar-toggle-sidebar))
-
-
-

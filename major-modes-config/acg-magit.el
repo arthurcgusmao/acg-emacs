@@ -3,6 +3,35 @@
 ;; disable Emacs's built-in version control since not using it
 (setq vc-handled-backends nil)
 
+;; Custom functions for visiting files
+
+(defun acg/magit-diff-visit-file (file)
+  "Same as `magit-diff-visit-file', but uses the default
+`pop-to-buffer' (which in turn uses `display-buffer') to display
+the respective file."
+  (interactive (list (magit-file-at-point t t)))
+  (magit-diff-visit-file--internal file nil #'pop-to-buffer))
+
+(defun acg/magit-diff-display-file (file)
+  "Display Magit's file at point in some buffer (uses the default
+`display-buffer')"
+  (interactive (list (magit-file-at-point t t)))
+  (magit-diff-visit-file--internal file nil #'display-buffer))
+
+(defun acg/magit-diff-display-file-and-next (file)
+  "Same as `acg/magit-diff-display-file', but moves to the next
+file before displaying file at point."
+  (interactive (list (magit-file-at-point t t)))
+  (magit-next-line)
+  (magit-diff-visit-file--internal file nil #'display-buffer))
+
+(defun acg/magit-diff-display-file-and-previous (file)
+  "Same as `acg/magit-diff-display-file', but moves to the
+previous file before displaying file at point."
+  (interactive (list (magit-file-at-point t t)))
+  (magit-previous-line)
+  (magit-diff-visit-file--internal file nil #'display-buffer))
+
 
 (with-eval-after-load 'magit
   (global-set-key (kbd "C-x g") 'magit-status)
@@ -33,6 +62,11 @@
   (define-key magit-status-mode-map (kbd "C-c 2") 'magit-section-show-level-2-all)
   (define-key magit-status-mode-map (kbd "C-c 3") 'magit-section-show-level-3-all)
   (define-key magit-status-mode-map (kbd "C-c 4") 'magit-section-show-level-4-all)
+
+  (define-key magit-file-section-map (kbd "<return>") 'acg/magit-diff-visit-file)
+  (define-key magit-file-section-map (kbd "<C-return>") 'acg/magit-diff-display-file)
+  (define-key magit-file-section-map (kbd "<S-return>") 'acg/magit-diff-display-file-and-next)
+  (define-key magit-file-section-map (kbd "<C-S-return>") 'acg/magit-diff-display-file-and-previous)
   )
 
 
