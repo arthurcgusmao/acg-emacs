@@ -4,3 +4,5 @@
 (global-set-key (kbd "M-h") hlt-map)
 ;; add custom keymaps that I find easier to remember
 (global-set-key (kbd "M-h u a") 'hlt-unhighlight-all-prop)
+
+;; @todo: Switch workflow to use hi-lock

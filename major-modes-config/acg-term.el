@@ -22,6 +22,34 @@
 ;;  '(term-default-fg-color "#dddd00"))       ;; foreground color (yellow)
 
 
+;; commands / keybindings
+;; (setq term-unbind-key-list '("C-z" "C-x" "C-c" "C-h" "C-y" "<ESC>"))
+
+(setq term-bind-key-alist
+      '(("C-c C-c" . term-interrupt-subjob)
+        ("C-c C-e" . term-send-esc)
+        ("C-p" . previous-line)
+        ("C-n" . next-line)
+        ("C-s" . isearch-forward)
+        ("C-r" . isearch-backward)
+        ;; ("C-m" . term-send-return)
+        ;; ("C-y" . term-paste)
+        ("C-v" . term-paste)
+        ("M-f" . term-send-forward-word)
+        ("M-b" . term-send-backward-word)
+        ("M-o" . term-send-backspace)
+        ("M-p" . term-send-up)
+        ("M-n" . term-send-down)
+        ;; ("M-M" . term-send-forward-kill-word)
+        ("<C-delete>" . term-send-forward-kill-word)
+        ;; ("M-N" . term-send-backward-kill-word)
+        ("<C-backspace>" . term-send-backward-kill-word)
+        ("M-r" . term-send-reverse-search-history)
+        ("M-d" . term-send-delete-word)
+        ("M-," . term-send-raw)
+        ("M-." . comint-dynamic-complete)))
+
+
 ;; customize frame
 
 ;; (I intend to use a dedicated server (daemon) named "term" to run terminals.
