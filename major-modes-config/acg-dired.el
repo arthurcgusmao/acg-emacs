@@ -1,4 +1,5 @@
 (use-package dired
+  :straight nil
   :config
   (put 'dired-find-alternate-file 'disabled nil) ;; enable disabled command
 

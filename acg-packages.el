@@ -1,13 +1,20 @@
-(require 'package)
+;; Bootstrap for `straight.el' package manager
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-;; Adding Repositories
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-
-(setq package-selected-packages
+;; My list of selected packages
+(setq acg/selected-packages
       (quote (;; configured in /minor-modes-config/
-              use-package
               crux
               helm
               minimap
@@ -69,12 +76,13 @@
               modus-vivendi-theme ; by Prot
               )))
 
-;; Initialize and install selected packages (cf. https://stackoverflow.com/a/39891192/5103881)
-(setq package-enable-at-startup nil)
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-(package-install-selected-packages)
+;; Integrate `use-package' with `straight.el'
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+
+;; Install my list of packages
+(dolist (pak acg/selected-packages)
+  (straight-use-package pak))
 
 (acg/load-all-in-directory (concat acg/acg-emacs-dir "custom-functions"))
 (acg/load-all-in-directory (concat acg/acg-emacs-dir "minor-modes-config"))
