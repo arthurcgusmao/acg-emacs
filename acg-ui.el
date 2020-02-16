@@ -53,6 +53,13 @@
 ;; ;; (setq scroll-restore-handle-global-hl-line-mode t)
 ;; (scroll-restore-mode 0)
 
+;; Restore point (cursor) position when scrolling or marking w/ ESC or C-g
+(require 'restore-point)
+(dolist (f '(acg/mark-dwim
+             er/mark-defun))
+  (add-to-list 'rp/restore-point-commands f t))
+(restore-point-mode 1)
+
 
 ;; always keep some lines at bottom/top when scroll with keypad
 (require 'smooth-scrolling)
