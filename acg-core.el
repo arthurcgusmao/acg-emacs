@@ -37,6 +37,15 @@
           (load library nil t)
           (push library libraries-loaded))))))
 
+(defun append-to-list (list-var elements)
+  "Append ELEMENTS to the end of LIST-VAR."
+  (unless (consp elements)
+    (error "ELEMENTS must be a list"))
+  (let ((list (symbol-value list-var)))
+    (if list
+        (setcdr (last list) elements)
+      (set list-var elements)))
+  (symbol-value list-var))
 
 ;; Removing unwanted keybindings from local modes
 

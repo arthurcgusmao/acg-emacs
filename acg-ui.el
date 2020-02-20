@@ -1,30 +1,30 @@
-;; themes
+;; Themes
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'custom-theme-load-path (concat acg/acg-emacs-dir "themes"))
 (load-theme 'acg-dark t)
 
 
-;; removing unnecessary things
+;; Remove unnecessary things
 
-;; hide toolbar, menubar and scrollbar
+;; Hide toolbar, menubar and scrollbar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
-;; disable startup screen
+;; Disable startup screen
 (setq inhibit-startup-screen t) 
 
 
-;; help/info menus
+;; Help/Info Menus
 
 ;; show available keybindings after you start typing
 (which-key-mode +1)
 
 
-;; cursor
+;; Point (Cursor)
 
-;; makes cursor a bar instead of rectangle
+;; make cursor a bar instead of rectangle
 (setq-default cursor-type '(bar . 2))
 (setq cursor-type '(bar . 2))
 (setq cursor-in-non-selected-windows 'hollow)
@@ -39,21 +39,9 @@
 (setq hl-line-sticky-flag nil)
 
 
-;; scrolling
+;; Scrolling
 
-;; ;; restore the cursor to position when scrolling through the page
-;; (require 'scroll-restore)
-;; ;; Allow scroll-restore to modify the cursor face
-;; (setq scroll-restore-handle-cursor t)
-;; ;; Make the cursor invisible while POINT is off-screen
-;; (setq scroll-restore-cursor-type nil)
-;; ;; Jump back to the original cursor position after scrolling
-;; (setq scroll-restore-jump-back t)
-;; ;; Restores the highlighted line by hl-line mode
-;; ;; (setq scroll-restore-handle-global-hl-line-mode t)
-;; (scroll-restore-mode 0)
-
-;; Restore point (cursor) position when scrolling or marking w/ ESC or C-g
+;; restore point (cursor) position when scrolling or marking w/ ESC or C-g
 (use-package restore-point
   :straight (:host github :repo "arthurcgusmao/restore-point")
   :ensure t
@@ -104,9 +92,9 @@
 (defun acg/split-window-sensibly (&optional window)
   "Similar to `split-window-sensibly', but prefers
 horizontal (side by side) rather than vertical (below) splitting.
-Also, it doesn't force splitting when current window is the only
-one on its frame and its size is smaller than the split
-thresholds as the original would."
+In case it needs to force splitting when current window is the
+only one on its frame and its size is smaller than the split
+thresholds, then it goes for vertical (below) splitting."
   (let ((window (or window (selected-window))))
     (or (and (window-splittable-p window t)
 	     ;; Split window horizontally.
@@ -115,20 +103,51 @@ thresholds as the original would."
         (and (window-splittable-p window)
 	     ;; Split window vertically.
 	     (with-selected-window window
-	       (split-window-below))))))
+	       (split-window-below)))
+        (and
+         ;; If WINDOW is the only usable window on its frame (it is
+         ;; the only one or, not being the only one, all the other
+         ;; ones are dedicated) and is not the minibuffer window, try
+         ;; to split it disregarding the value of threshold.
+         (let ((frame (window-frame window)))
+           (or
+            (eq window (frame-root-window frame))
+            (catch 'done
+              (walk-window-tree (lambda (w)
+                                  (unless (or (eq w window)
+                                              (window-dedicated-p w))
+                                    (throw 'done nil)))
+                                frame)
+              t)))
+	 (not (window-minibuffer-p window))
+	 (let ((split-height-threshold 0))
+	   (when (window-splittable-p window)
+	     (with-selected-window window
+	       (split-window-below))))))))
 
 (setq split-window-preferred-function #'acg/split-window-sensibly)
 
+(defun acg/display-buffer-respect-thresholds (buffer alist)
+  "Similar to display-buffer but displays on the same
+window (instead of forcefully splitting) when splitting
+thresholds are not met."
+  (let ((window (selected-window)))
+    (unless (or (window-splittable-p window t)
+                (window-splittable-p window)
+                (not (one-window-p)))
+      (display-buffer-same-window buffer alist))))
+
+;; Set custom splitting behavior as default
+(setq display-buffer-base-action '(acg/display-buffer-respect-thresholds))
+;; Filter out buffers that should split regardless of thresholds
+(setq display-buffer-alist nil)
+(append-to-list
+ 'display-buffer-alist
+ `(("^\*jupyter-repl.*" . ,display-buffer-fallback-action)
+   ))
+
 ;; Select help buffer after displaying it
 (setq help-window-select t)
-
-;; Always opens help buffer in the same window
-;; (add-to-list 'display-buffer-alist
-;;              '("Help" display-buffer-same-window))
-;; (add-to-list 'display-buffer-alist
-;;              '("Magit" display-buffer-same-window))
-;; (add-to-list 'display-buffer-alist
-;;              '("Anaconda" display-buffer-same-window))
 
 
 ;; Unhighlight inactive windows
