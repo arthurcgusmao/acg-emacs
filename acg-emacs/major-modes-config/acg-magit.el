@@ -37,6 +37,10 @@ previous file before displaying file at point."
   (global-set-key (kbd "C-x g") 'magit-status)
   (define-key magit-status-mode-map (kbd "<C-tab>") nil)
   (define-key magit-status-mode-map (kbd "C-c <tab>") 'magit-section-cycle)
+  (define-key magit-process-mode-map (kbd "<C-tab>") nil)
+  (define-key magit-process-mode-map (kbd "C-c <tab>") 'magit-section-cycle)
+  (define-key magit-log-mode-map (kbd "<C-tab>") nil)
+  (define-key magit-log-mode-map (kbd "C-c <tab>") 'magit-section-cycle)
 
   (define-key magit-mode-map [escape] 'keyboard-quit)
   (define-key magit-log-mode-map [escape] 'magit-kill-this-buffer)
