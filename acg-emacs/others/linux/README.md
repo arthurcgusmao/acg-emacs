@@ -74,7 +74,7 @@ make -j4
 
 ```console
 sudo su -
-cd .../Projects/emacs
+cd /path/to/Projects/emacs/
 make install
 ```
 
@@ -152,4 +152,3 @@ systemctl --user list-units --type service --all
 # References
 
 1. http://ergoemacs.org/emacs/building_emacs_from_git_repository.html
-2. 
