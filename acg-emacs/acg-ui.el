@@ -31,9 +31,9 @@
 ;; Point (Cursor)
 
 ;; make cursor a bar instead of rectangle
-(setq-default cursor-type '(bar . 2))
-(setq cursor-type '(bar . 2))
-(setq cursor-in-non-selected-windows 'hollow)
+(setq-default cursor-type 'box)
+;; (setq-default cursor-type '(bar . 2))
+(setq-default cursor-in-non-selected-windows 'hollow)
 
 ;; disable blinking cursor
 (blink-cursor-mode -1)
