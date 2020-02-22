@@ -4,8 +4,7 @@
   :bind
   (:map projectile-mode-map
         ("C-c p" . projectile-command-map)
-        ("M-o" . projectile-find-file)
-        ("M-f" . projectile-grep)))
+        ("M-o" . projectile-find-file)))
 
 ;;(setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
 
@@ -28,7 +27,10 @@
 (use-package counsel-projectile
   :after projectile
   :config
-  (counsel-projectile-mode))
+  (counsel-projectile-mode)
+  :bind
+  (:map projectile-mode-map
+        ("M-f" . counsel-git-grep)))
 
 ;; (require 'helm-projectile)
 ;; (helm-projectile-on)
