@@ -61,7 +61,6 @@ afterwards."
    ([mouse-2] . 'acg/dired-mouse-find-alternate-file)))
 
 (use-package dired-subtree
-  :ensure t
   :after dired
   :bind
   (:map dired-mode-map
@@ -69,5 +68,4 @@ afterwards."
    ("<S-iso-lefttab>" . 'dired-subtree-remove)))
 
 (use-package dired-sidebar
-  :ensure t
   :commands (dired-sidebar-toggle-sidebar))

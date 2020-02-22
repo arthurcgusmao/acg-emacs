@@ -35,7 +35,6 @@ thing/symbol at point."
 
 ;; Show rich descriptions after each ivy candidate option
 (use-package ivy-rich
-  :ensure t
   :config
   ; Show abbreviated filepaths
   (setq ivy-rich-path-style 'abbreviate)
@@ -45,9 +44,7 @@ thing/symbol at point."
   :hook (after-init . ivy-rich-mode))
 
 ;; Writable Grep package (use after ivy-occur (C-c C-o)); Key `w' enables writing
-(use-package wgrep
-  :ensure t)
-
+(use-package wgrep)
 
 ;; keybindings
 (global-set-key (kbd "C-f") 'acg/swiper-thing-at-point-or-isearch)

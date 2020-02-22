@@ -44,7 +44,6 @@
 ;; restore point (cursor) position when scrolling or marking w/ ESC or C-g
 (use-package restore-point
   :straight (:host github :repo "arthurcgusmao/restore-point")
-  :ensure t
   :config
   (dolist (f '(acg/mark-dwim
                er/mark-defun))

@@ -1,5 +1,4 @@
 (use-package projectile
-  :ensure t
   :config
   (projectile-global-mode t)
   :bind
@@ -27,7 +26,6 @@
 ;; Integrations with completion packages
 
 (use-package counsel-projectile
-  :ensure t
   :after projectile
   :config
   (counsel-projectile-mode))

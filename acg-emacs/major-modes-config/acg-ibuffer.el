@@ -7,7 +7,6 @@
 
 ;; Group buffers per Projectile project
 (use-package ibuffer-projectile
-  :ensure t
   :after (ibuffer
           projectile)
   :config
@@ -24,7 +23,6 @@
 
 ;; Sidebar
 (use-package ibuffer-sidebar
-  :ensure t
   :commands (ibuffer-sidebar-toggle-sidebar)
   :config
   (setq ibuffer-sidebar-use-custom-font t)
