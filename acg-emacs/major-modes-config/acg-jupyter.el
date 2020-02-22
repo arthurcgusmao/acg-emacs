@@ -169,3 +169,6 @@ where code is and sending code to be evaluated in the REPL."
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o t") 'acg/jupyter-toggle-use-overlays-repl)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o r") 'jupyter-eval-remove-overlays)
 
+;; Hotfix
+(add-hook 'jupyter-repl-mode-hook
+          (lambda () (font-lock-mode 0)))
