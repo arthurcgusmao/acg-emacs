@@ -1,2 +1,9 @@
 *.elc
 *.el~
+anaconda-mode
+auto-save-list
+projectile-bookmarks.eld
+scratch-backups
+smex-items
+straight
+transient
