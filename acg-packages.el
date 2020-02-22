@@ -81,8 +81,8 @@
 (setq straight-use-package-by-default t)
 
 ;; Install my list of packages
-(dolist (pak acg/selected-packages)
-  (straight-use-package pak))
+(dolist (p acg/selected-packages)
+  (straight-use-package p))
 
 (acg/load-all-in-directory (concat acg/acg-emacs-dir "custom-functions"))
 (acg/load-all-in-directory (concat acg/acg-emacs-dir "minor-modes-config"))

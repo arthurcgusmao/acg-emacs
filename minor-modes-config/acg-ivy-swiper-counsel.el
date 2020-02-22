@@ -44,6 +44,10 @@ thing/symbol at point."
           #'ivy-format-function-line)
   :hook (after-init . ivy-rich-mode))
 
+;; Writable Grep package (use after ivy-occur (C-c C-o)); Key `w' enables writing
+(use-package wgrep
+  :ensure t)
+
 
 ;; keybindings
 (global-set-key (kbd "C-f") 'acg/swiper-thing-at-point-or-isearch)
