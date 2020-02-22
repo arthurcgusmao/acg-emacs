@@ -1,4 +1,4 @@
-(require 'crux)
+(use-package crux)
 
 (defun acg/split-window-right ()
   "Same as `split-window-right' but runs `other-window' afterwards."

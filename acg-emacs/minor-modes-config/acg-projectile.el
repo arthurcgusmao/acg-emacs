@@ -1,10 +1,12 @@
 (use-package projectile
   :config
-  (projectile-global-mode t)
+  (setq projectile-use-git-grep t)
   :bind
   (:map projectile-mode-map
         ("C-c p" . projectile-command-map)
-        ("M-o" . projectile-find-file)))
+        ("M-o" . projectile-find-file))
+  :hook
+  (after-init . projectile-mode))
 
 ;;(setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
 
@@ -21,35 +23,7 @@
 ;;                            (concat "/c:\"" search-string "\" ")
 ;;                            (concat "\"" (replace-regexp-in-string "/" "\\" (projectile-project-root) t t) "*.*\"")))))
 
-
 ;; Integrations with completion packages
-
 (use-package counsel-projectile
-  :after projectile
-  :config
-  (counsel-projectile-mode)
-  :bind
-  (:map projectile-mode-map
-        ("M-f" . counsel-git-grep)))
-
-;; (require 'helm-projectile)
-;; (helm-projectile-on)
-
-;; (define-key projectile-mode-map (kbd "M-O") 'helm-projectile-switch-project)
-;; (define-key projectile-mode-map (kbd "M-o") 'helm-projectile-find-file)
-;; (define-key projectile-mode-map (kbd "M-f") 'helm-projectile-grep)
-;; (define-key helm-projectile-find-file-map (kbd "<C-backspace>") nil)
-
-
-;; MS-Windows configs
-(if (string-equal system-type "windows-nt")
-    (progn
-      ;; projectile's default grep was not working; setting it to use git grep
-      ;; and having git installed on windows fixed.
-      (setq projectile-use-git-grep t)
-      ;; disable helm in grep because it wrecks on Windows
-      (defun acg/projectile-grep-no-helm ()
-        (interactive)
-        (projectile-grep))
-      ;; override keybindings
-      (define-key projectile-mode-map (kbd "M-f") 'acg/projectile-grep-no-helm)))
+  :after (projectile)
+  :hook (after-init . counsel-projectile-mode))

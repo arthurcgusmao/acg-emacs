@@ -1,4 +1,12 @@
+
+(use-package scss-mode)
+(use-package less-css-mode)
+(use-package rainbow-mode)
+(use-package markdown-mode)
+(use-package yaml-mode)
+(use-package scala-mode)
 (use-package dockerfile-mode)
+
 
 
 (use-package ttl-mode

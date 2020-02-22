@@ -1,4 +1,5 @@
 ;; smartparens
+(use-package smartparens)
 (require 'smartparens-config)
 
 (setq sp-base-key-bindings 'paredit)

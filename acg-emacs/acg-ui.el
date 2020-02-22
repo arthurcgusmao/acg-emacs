@@ -1,5 +1,10 @@
 ;; Themes
 
+(use-package zenburn-theme)
+(use-package anti-zenburn-theme)
+(use-package modus-operandi-theme)
+(use-package modus-vivendi-theme)
+
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'custom-theme-load-path (concat acg/acg-emacs-dir "themes"))
 (load-theme 'acg-dark t)
@@ -19,7 +24,8 @@
 ;; Help/Info Menus
 
 ;; show available keybindings after you start typing
-(which-key-mode +1)
+(use-package which-key
+  :hook (after-init . which-key-mode))
 
 
 ;; Point (Cursor)
@@ -51,8 +57,8 @@
   :hook (after-init . restore-point-mode))
 
 ;; always keep some lines at bottom/top when scroll with keypad
-(require 'smooth-scrolling)
-(smooth-scrolling-mode 1)
+(use-package smooth-scrolling
+  :hook (after-init . smooth-scrolling-mode))
 
 ;; nice scrolling
 (setq scroll-margin 0 ; never recenters window
@@ -69,11 +75,13 @@
 ;; disable middle-mouse button pasting
 (global-set-key [mouse-2] nil)
 ;; let middle-mouse button drag scroll (mouse throwing)
-(require 'mouse-drag)
-(global-set-key [down-mouse-2] 'mouse-drag-throw)
-;; (global-set-key [down-mouse-2] 'mouse-drag-drag)
-(setq mouse-throw-with-scroll-bar t)
-(setq mouse-drag-electric-col-scrolling t)
+(use-package mouse-drag
+  :config
+  (setq mouse-throw-with-scroll-bar t)
+  (setq mouse-drag-electric-col-scrolling t)
+  :bind
+  (([down-mouse-2] . mouse-drag-throw)))
+;; ([down-mouse-2] . mouse-drag-drag)
 
 
 ;; Windows - Title / Size / Splitting / Highlighting
@@ -85,7 +93,7 @@
 
 ;; Allow splitting current window if size above one of these thresholds
 (setq split-width-threshold 160) ; How many columns to split side-by-side
-(setq split-height-threshold 100) ; How many lines to split above/below
+(setq split-height-threshold 80) ; How many lines to split above/below
 
 ;; Custom split window logic
 (defun acg/split-window-sensibly (&optional window)
@@ -152,6 +160,7 @@ thresholds are not met."
 ;; Unhighlight inactive windows
 
 ;; Not working properly
+(use-package auto-dim-other-buffers)
 (add-hook 'after-init-hook
           (lambda ()
             (when (fboundp 'auto-dim-other-buffers-mode)

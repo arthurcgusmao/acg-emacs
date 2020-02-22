@@ -1,4 +1,4 @@
-(require 'crux)
+(use-package crux)
 
 (defun acg/newline-above ()
   "Insert a newline above with the rest of current line."

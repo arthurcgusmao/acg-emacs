@@ -1,4 +1,4 @@
-(require 'tabbar)
+(use-package tabbar)
 ;; (require 'tabbar-ruler)
 
 ;; (setq tabbar-ruler-global-tabbar t)    ; get tabbar

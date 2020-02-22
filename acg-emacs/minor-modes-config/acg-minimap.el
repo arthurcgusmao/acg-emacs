@@ -1,4 +1,4 @@
-(require 'minimap)
+(use-package minimap)
 
 ;; moving the minimap window to the right of the screen
 (custom-set-variables

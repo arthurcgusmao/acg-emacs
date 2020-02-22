@@ -82,11 +82,12 @@
       desktop-path (list desktop-dirname))
 
 ;; keep a list of recently opened files
-(setq-default recent-save-file (concat user-emacs-directory "recentf"))
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-saved-items 300)
-(setq recentf-max-menu-items 300)
+(use-package recentf
+  :config
+  (setq recent-save-file (concat user-emacs-directory "recentf"))
+  (setq recentf-max-saved-items 300)
+  (setq recentf-max-menu-items 10)
+  :hook ((after-init . recentf-mode)))
 
 ;; kill minibuffer when it loses focus
 (defun stop-using-minibuffer ()
@@ -110,9 +111,9 @@
 
 
 ;; remote access (TRAMP)
-(require 'tramp)
-
-(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+(use-package tramp
+  :config
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 
 (provide 'acg-editor)

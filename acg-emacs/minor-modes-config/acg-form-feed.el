@@ -1,5 +1,5 @@
-(require 'form-feed)
-(require 'undo-tree)
+(use-package form-feed)
+(use-package undo-tree)
 (add-hook 'prog-mode-hook 'form-feed-mode)
 (add-hook 'css-mode-hook 'form-feed-mode)
 

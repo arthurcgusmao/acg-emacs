@@ -83,9 +83,9 @@ bindings to the same command."
 ;; Other configurations
 
 ;; make EMACS use the PATHs specified in .bashrc
-(unless (string-equal system-type "windows-nt")
-  (require 'exec-path-from-shell)
-  (exec-path-from-shell-initialize))
+(use-package exec-path-from-shell
+  :if (not (string-equal system-type "windows-nt"))
+  :config (exec-path-from-shell-initialize))
 
 
 (provide 'acg-core)

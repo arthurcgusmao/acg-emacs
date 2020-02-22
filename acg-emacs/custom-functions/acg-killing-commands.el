@@ -16,7 +16,7 @@ indentation."
   (kill-line 0)
   (indent-according-to-mode))
 
-(require 'crux)
+(use-package crux)
 (defun acg/kill-whole-line-or-region-content ()
   "Kill all characters in line and indent, or kill line
 if there are only white spaces in it."

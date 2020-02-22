@@ -1,6 +1,7 @@
-(require 'company)
-(require 'crux)
-(require 'counsel)
+(use-package company)
+(use-package company-quickhelp)
+(use-package crux)
+(use-package counsel)
 
 ;; disable on some modes
 (setq company-global-modes '(not magit-mode

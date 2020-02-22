@@ -1,4 +1,4 @@
-(require 'magit)
+(use-package magit)
 
 ;; disable Emacs's built-in version control since not using it
 (setq vc-handled-backends nil)
@@ -67,7 +67,7 @@ previous file before displaying file at point."
   )
 
 
-(require 'transient)
+(use-package transient)
 
 (with-eval-after-load 'transient
   (define-key transient-map (kbd "<escape>") 'transient-quit-all)

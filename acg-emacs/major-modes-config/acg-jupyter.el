@@ -1,5 +1,5 @@
-(require 'jupyter)
-(require 'expand-region)
+(use-package jupyter)
+(use-package expand-region)
 
 
 ;; @todo: create pull request to jupyter package with changes in this page

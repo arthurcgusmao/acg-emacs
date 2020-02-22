@@ -1,4 +1,4 @@
-(require 'projectile)
+(use-package projectile)
 
 ;; http://emacs-fu.blogspot.com.br/2011/08/customizing-mode-line.html
 ;; http://amitp.blogspot.com.br/2011/08/emacs-custom-mode-line.html

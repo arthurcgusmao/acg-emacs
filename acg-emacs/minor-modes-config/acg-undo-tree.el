@@ -1,3 +1,4 @@
+(use-package undo-tree)
 ;; sensible undo
 (global-undo-tree-mode)
 

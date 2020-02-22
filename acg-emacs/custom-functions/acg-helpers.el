@@ -36,7 +36,7 @@ directories necessary."
     (make-directory dir)))
 
 
-(require 'multiple-cursors)
+(use-package multiple-cursors)
 (defun kmacro-insert-letter (DELTA)
   "Similar to `kmacro-insert-counter', but inserts a letter
 instead. DELTA argument can be passed to modify the increment

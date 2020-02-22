@@ -1,10 +1,14 @@
-(require 'yasnippet)
-(require 'ivy-yasnippet)
+(use-package yasnippet
+  :config
+  (add-to-list 'yas-snippet-dirs
+               (concat acg/acg-emacs-dir "snippets"))
+  :hook (after-init . yas-global-mode))
 
-(add-to-list 'yas-snippet-dirs
-             (concat acg/acg-emacs-dir "snippets"))
+(use-package yasnippet-snippets
+  :after yasnippet)
 
-(yas-global-mode t)
-
-;; keybindings
-(define-key yas-minor-mode-map (kbd "C-c <tab>") 'ivy-yasnippet)
+(use-package ivy-yasnippet
+  :after yasnippet
+  :bind
+  (:map yas-minor-mode-map
+        ("C-c <tab>" . ivy-yasnippet)))

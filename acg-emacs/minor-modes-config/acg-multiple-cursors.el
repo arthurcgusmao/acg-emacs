@@ -1,4 +1,4 @@
-(require 'multiple-cursors)
+(use-package multiple-cursors)
 
 (global-set-key (kbd "C-c m m") 'mc/edit-lines)
 (global-set-key (kbd "C-c m n") 'mc/mark-next-like-this)

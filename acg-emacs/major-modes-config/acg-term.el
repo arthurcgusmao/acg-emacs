@@ -1,4 +1,4 @@
-(require 'multi-term) ;; See description of the package in https://www.emacswiki.org/emacs/MultiTerm
+(use-package multi-term) ;; See description of the package in https://www.emacswiki.org/emacs/MultiTerm
 
 (setq multi-term-program "/bin/bash")
 
@@ -8,7 +8,7 @@
 
 
 ;; customizing colors
-(require 'eterm-256color)
+(use-package eterm-256color)
 
 ;; 256 color support
 (add-hook 'term-mode-hook #'eterm-256color-mode)

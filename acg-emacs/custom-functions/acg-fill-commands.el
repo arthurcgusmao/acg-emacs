@@ -1,4 +1,4 @@
-(require 'crux)
+(use-package crux)
 
 
 (defun acg/unfill-paragraph ()

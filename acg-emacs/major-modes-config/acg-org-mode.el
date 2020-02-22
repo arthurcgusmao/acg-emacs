@@ -1,5 +1,5 @@
-(require 'org)
-(require 'crux)
+(use-package org)
+(use-package crux)
 
 ;; configurations
 (setq org-startup-with-inline-images t)
@@ -26,6 +26,7 @@
 
 
 ;; org-ref package configurations
+(use-package org-ref)
 (setq reftex-default-bibliography acg/default-bib-file
       org-ref-default-bibliography acg/default-bib-file)
 
@@ -33,7 +34,7 @@
 ;; (setq org-ref-bibliography-notes (concat user-emacs-directory "bibliography/notes.org")
 ;; org-ref-pdf-directory (concat user-emacs-directory "bibliography/bibtex-pdfs/"))
 
-(require 'org-ref)
+(use-package org-ref)
 
 
 ;; setting up keybindings

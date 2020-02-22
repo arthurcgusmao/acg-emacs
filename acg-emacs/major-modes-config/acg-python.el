@@ -1,3 +1,6 @@
+(use-package anaconda-mode)
+(use-package company-anaconda)
+
 (add-hook 'python-mode-hook 'anaconda-mode)
 
 (eval-after-load "company" 
