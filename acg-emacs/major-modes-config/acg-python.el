@@ -65,3 +65,8 @@ any, similar to what a Jupyter REPL would do."
              (define-key python-mode-map (kbd "C-c C-p") (acg/eval-with 'acg/python-shell-send-region 'mark-page))
              (define-key python-mode-map (kbd "C-c C-c") (acg/eval-with 'acg/python-shell-send-region 'acg/mark-dwim))
              (define-key python-mode-map (kbd "C-c C-l") (acg/eval-with 'python-shell-send-string 'acg/expand-region-to-whole-lines 'acg/unindent-add-last-var))))
+
+(use-package python-docstring
+  :bind (:map python-docstring-mode-map
+         ("C-p" . python-docstring-fill)
+         ("M-q" . nil)))
