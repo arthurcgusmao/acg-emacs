@@ -78,11 +78,11 @@
 
 ;; saving the last session (for when you open emacs the next time)
 (desktop-save-mode 0)
-(setq desktop-dirname (concat default-emacs-dir "desktop/")
+(setq desktop-dirname (concat user-emacs-directory "desktop/")
       desktop-path (list desktop-dirname))
 
 ;; keep a list of recently opened files
-(setq-default recent-save-file (concat default-emacs-dir "recentf"))
+(setq-default recent-save-file (concat user-emacs-directory "recentf"))
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-saved-items 300)

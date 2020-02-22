@@ -1,9 +1,7 @@
 ;; Defining directories variables
-(defconst default-emacs-dir "~/.emacs.d/"
-  "Directory where init.el is located (usually ~/.emacs.d/)")
 
 ;; Change location of the automatically generated custom configurations
-(setq custom-file (concat default-emacs-dir "custom.el"))
+(setq custom-file (concat user-emacs-directory "custom.el"))
 
 (defconst acg/acg-emacs-dir (file-name-directory (or load-file-name (buffer-file-name)))
   "Directory where acg-emacs is installed.")

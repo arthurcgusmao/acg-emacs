@@ -17,7 +17,7 @@
 
 
 ;; where to put latex preview images
-(setq org-latex-preview-ltxpng-directory (concat default-emacs-dir "latex-png-previews/"))
+(setq org-latex-preview-ltxpng-directory (concat user-emacs-directory "latex-png-previews/"))
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 
 ;; configuring the latex-pdf generator
@@ -30,8 +30,8 @@
       org-ref-default-bibliography acg/default-bib-file)
 
 ;; see org-ref for use of these variables
-;; (setq org-ref-bibliography-notes (concat default-emacs-dir "bibliography/notes.org")
-;; org-ref-pdf-directory (concat default-emacs-dir "bibliography/bibtex-pdfs/"))
+;; (setq org-ref-bibliography-notes (concat user-emacs-directory "bibliography/notes.org")
+;; org-ref-pdf-directory (concat user-emacs-directory "bibliography/bibtex-pdfs/"))
 
 (require 'org-ref)
 
