@@ -21,6 +21,8 @@ indentation."
   "Kill all characters in line and indent, or kill line
 if there are only white spaces in it."
   (interactive)
+  (if (use-region-p)
+      (kill-region (region-beginning) (region-end)))
   (end-of-line)
   (crux-kill-line-backwards))
 
