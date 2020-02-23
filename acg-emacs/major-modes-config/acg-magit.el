@@ -1,7 +1,7 @@
 (use-package magit)
 
-;; disable Emacs's built-in version control since not using it
-(setq vc-handled-backends nil)
+;; ;; Disable Emacs's built-in version control since not using it
+;; (setq vc-handled-backends nil)
 
 ;; Custom functions for visiting files
 

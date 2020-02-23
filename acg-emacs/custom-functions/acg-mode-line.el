@@ -22,29 +22,27 @@
                " "
                ;; was this buffer modified since the last save?
                '(:eval (if buffer-read-only
-                           ""
-                         (if (buffer-modified-p) "[m]" "[s]")))
+                           " "
+                         (if (buffer-modified-p) " 🖉" " 💾")))
                
                ;; the buffer name; the file name as a tool tip
                '(:eval (propertize " %b" 'face 'acg/mode-line-common-bold))
                
 
-               ;; line
-               ;; '%02' to set to 2 chars at least; prevents flickering
-               "   L%1l "
-               ;; column
-               "C%1c"
-               ;; relative position, size of file
+               ;; Line number
+               ;; '%02l' to set to 2 chars at least; prevents flickering
+               "   %l️⇊"
+               ;; Column number
+               " %c⇉"
+               ;; Relative position, size of file
                " %p" ;; % above top
-               
-
-               ;; the current major mode for the buffer.
-               "   %m"
+               ;; Current major mode for the buffer.
+               "   📃 %m"
+               ;; Projectile indicator
+               '(:eval (format "   📁 %s" (projectile-project-name)))
                ;; version control indicator
-	       "   "
-               '(vc-mode vc-mode)
-               ;; projectile indicator
-               '(:eval (format "   Proj:%s   " (projectile-project-name)))
+               '(:eval (when (stringp vc-mode)
+	                 '(" 🔀" (vc-mode vc-mode))))
                ;; list of minor modes
                ;; minor-mode-alist  
                ))
