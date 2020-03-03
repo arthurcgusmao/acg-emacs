@@ -181,13 +181,32 @@ thresholds are not met."
 
 
 
-;; configure font in MS-Windows
+;; Configure font in MS-Windows
 (defun acg/fontify-frame-mswindows (frame)
   (set-frame-parameter frame 'font "Consolas-10"))
 
 (if (string-equal system-type "windows-nt")
     (progn (acg/fontify-frame-mswindows nil) ;; Fontify current frame
            (push 'acg/fontify-frame-mswindows after-make-frame-functions))) ;; Fontify any future frames
+
+
+;; Configure font in Remote Environments, usually using XLaunch. For whatever
+;; reason Emacs does not start with XFCE4's default monospace font
+(defun acg/set-custom-frame-font (frame)
+  "Set my custom font for the frame."
+  (interactive)
+  (with-selected-frame frame
+    (cond
+     ((>= (display-pixel-height) 2160) (set-frame-parameter frame 'font "Hack-15")) ; 4k resolution
+     ((>= (display-pixel-height) 1440) (set-frame-parameter frame 'font "Hack-10.5")) ; 2560x1440 resolution
+     (t (set-frame-parameter frame 'font "Hack-9")))))
+
+;; Use (getenv "DISPLAY") to conditionally apply font configuration. Usually
+;; the DISPLAY variable is only set when Forwarding X11, which is when we want
+;; to apply these configurations.
+(when (not (eq (getenv "DISPLAY") nil))
+  (acg/set-custom-frame-font (selected-frame)) ; Fontify current frame, if any
+  (add-to-list 'after-make-frame-functions #'acg/set-custom-frame-font)) ; Fontify any future frames
 
 
 (provide 'acg-ui)
