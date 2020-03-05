@@ -108,6 +108,6 @@ previous file before displaying file at point."
 
 
 ;; Make Emacs work with ssh-ident
-(add-to-list 'load-path "~/Projects/emacs-ssh-ident/")
-(require 'ssh-ident)
+(use-package ssh-ident
+  :straight (:host github :repo "arthurcgusmao/emacs-ssh-ident"))
 
