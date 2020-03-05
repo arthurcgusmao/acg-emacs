@@ -202,9 +202,10 @@ thresholds are not met."
      (t (set-frame-parameter frame 'font "Hack-9")))))
 
 ;; Use (getenv "DISPLAY") to conditionally apply font configuration. Usually
-;; the DISPLAY variable is only set when Forwarding X11, which is when we want
-;; to apply these configurations.
-(when (not (eq (getenv "DISPLAY") nil))
+;; the DISPLAY variable only contains "localhost" when Forwarding X11 through
+;; an SSH connection, which is when we want to apply these configurations
+;; (because in those cases Emacs starts with a strange font).
+(when (string-match-p (regexp-quote "localhost") (getenv "DISPLAY"))
   (acg/set-custom-frame-font (selected-frame)) ; Fontify current frame, if any
   (add-to-list 'after-make-frame-functions #'acg/set-custom-frame-font)) ; Fontify any future frames
 
