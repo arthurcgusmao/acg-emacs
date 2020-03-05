@@ -105,3 +105,9 @@ previous file before displaying file at point."
   (git-commit-style-convention-checks
    '(non-empty-second-line
      overlong-summary-line)))
+
+
+;; Make Emacs work with ssh-ident
+(add-to-list 'load-path "~/Projects/emacs-ssh-ident/")
+(require 'ssh-ident)
+

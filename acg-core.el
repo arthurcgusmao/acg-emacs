@@ -85,8 +85,8 @@ bindings to the same command."
 ;; Other configurations
 
 ;; make EMACS use the PATHs specified in .bashrc
-(require 'exec-path-from-shell)
-(when (memq window-system '(x))
+(unless (string-equal system-type "windows-nt")
+  (require 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 
 
