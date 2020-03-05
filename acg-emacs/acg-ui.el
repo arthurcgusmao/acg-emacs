@@ -86,7 +86,7 @@
 
 ;; Windows - Title / Size / Splitting / Highlighting
 
-(setq frame-title-format "☯ Emacs")
+(setq frame-title-format "Emacs")
 
 (add-to-list 'default-frame-alist '(width . 160))
 (add-to-list 'default-frame-alist '(height . 80))

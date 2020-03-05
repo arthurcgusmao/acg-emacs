@@ -19,7 +19,7 @@
 ;; use setq-default to set it for /all/ modes
 (setq-default mode-line-format
               (list
-               " "
+               "%n " ; Print "Narrow" if region is narrowed
                ;; was this buffer modified since the last save?
                '(:eval (if buffer-read-only
                            " "
@@ -29,11 +29,8 @@
                '(:eval (propertize " %b" 'face 'acg/mode-line-common-bold))
                
 
-               ;; Line number
-               ;; '%02l' to set to 2 chars at least; prevents flickering
-               "   %l️⇊"
-               ;; Column number
-               " %c⇉"
+               ;; Line & Column numbers -- Use '%02l' to set to 2 chars at least; may prevent flickering
+               "   (%l,%c)"
                ;; Relative position, size of file
                " %p" ;; % above top
                ;; Current major mode for the buffer.
