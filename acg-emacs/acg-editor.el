@@ -112,6 +112,7 @@
 
 ;; remote access (TRAMP)
 (use-package tramp
+  :straight nil
   :config
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
