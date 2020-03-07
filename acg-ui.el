@@ -192,22 +192,24 @@ thresholds are not met."
 
 ;; Configure font in Remote Environments, usually using XLaunch. For whatever
 ;; reason Emacs does not start with XFCE4's default monospace font
-(defun acg/set-custom-frame-font (frame)
-  "Set my custom font for the frame."
-  (interactive)
-  (with-selected-frame frame
-    (cond
-     ((>= (display-pixel-height) 2160) (set-frame-parameter frame 'font "Hack-15")) ; 4k resolution
-     ((>= (display-pixel-height) 1440) (set-frame-parameter frame 'font "Hack-10.5")) ; 2560x1440 resolution
-     (t (set-frame-parameter frame 'font "Hack-9")))))
+(defun acg/set-custom-frame-font (&optional frame)
+  "Set my custom font for the frame.
 
-;; Use (getenv "DISPLAY") to conditionally apply font configuration. Usually
-;; the DISPLAY variable only contains "localhost" when Forwarding X11 through
-;; an SSH connection, which is when we want to apply these configurations
-;; (because in those cases Emacs starts with a strange font).
-(when (string-match-p (regexp-quote "localhost") (getenv "DISPLAY"))
-  (acg/set-custom-frame-font (selected-frame)) ; Fontify current frame, if any
-  (add-to-list 'after-make-frame-functions #'acg/set-custom-frame-font)) ; Fontify any future frames
+Use (getenv \"DISPLAY\") to conditionally apply font
+configuration. Usually the DISPLAY variable only contains
+\"localhost\" when Forwarding X11 through an SSH connection,
+which is when we want to apply these configurations
+(because in those cases Emacs starts with a strange font)."
+  (interactive)
+  (with-selected-frame (or frame (selected-frame))
+    (when (string-match-p (regexp-quote "localhost") (getenv "DISPLAY")) ;; Condition based on value of DISPLAY
+      (cond
+       ((>= (display-pixel-height) 2160) (set-frame-parameter frame 'font "Hack-15")) ; 4k resolution
+       ((>= (display-pixel-height) 1440) (set-frame-parameter frame 'font "Hack-10.5")) ; 2560x1440 resolution
+       (t (set-frame-parameter frame 'font "Hack-9"))))))
+
+(acg/set-custom-frame-font (selected-frame)) ; Conditionally fontify current frame, if any
+(add-to-list 'after-make-frame-functions #'acg/set-custom-frame-font) ; Conditionally fontify any future frames
 
 
 (provide 'acg-ui)
