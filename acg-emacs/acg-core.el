@@ -80,12 +80,4 @@ bindings to the same command."
 (require 'acg-ui)
 
 
-;; Other configurations
-
-;; make EMACS use the PATHs specified in .bashrc
-(use-package exec-path-from-shell
-  :if (not (string-equal system-type "windows-nt"))
-  :config (exec-path-from-shell-initialize))
-
-
 (provide 'acg-core)
