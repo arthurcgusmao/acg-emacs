@@ -169,6 +169,11 @@ where code is and sending code to be evaluated in the REPL."
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o t") 'acg/jupyter-toggle-use-overlays-repl)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o r") 'jupyter-eval-remove-overlays)
 
-;; Hotfix
-(add-hook 'jupyter-repl-mode-hook
-          (lambda () (font-lock-mode 0)))
+
+;; Hotfix for freezing REPL
+(defun jupyter-repl-font-lock-override (_ignore beg end &optional verbose)
+  `(jit-lock-bounds ,beg . ,end))
+
+(advice-add #'jupyter-repl-font-lock-fontify-region :override #'jupyter-repl-font-lock-override)
+;; (advice-remove #'jupyter-repl-font-lock-fontify-region #'jupyter-repl-font-lock-override)
+
