@@ -113,5 +113,6 @@ previous file before displaying file at point."
 
 ;; Make Emacs work with ssh-ident
 (use-package ssh-ident
-  :straight (:host github :repo "arthurcgusmao/emacs-ssh-ident"))
+  :straight (:host github :repo "arthurcgusmao/emacs-ssh-ident")
+  :init (acg/add-to-env-path "~/.local/bin"))
 

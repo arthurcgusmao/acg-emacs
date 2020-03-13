@@ -44,6 +44,12 @@
         (setcdr (last list) elements)
       (set list-var elements)))
   (symbol-value list-var))
+
+(defun acg/add-to-env-path (path)
+  "Add PATH (first position) to the PATH environment variable"
+  (setenv "PATH" (concat (expand-file-name path)
+                         path-separator (getenv "PATH"))))
+
 
 ;; Removing unwanted keybindings from local modes
 
