@@ -83,12 +83,14 @@
 ;; ([down-mouse-2] . mouse-drag-drag)
 
 
-;; Windows - Title / Size / Splitting / Highlighting
+;; Emacs Frame and Windows - Title / Size / Splitting / Highlighting
 
 (setq frame-title-format "Emacs")
 
-(add-to-list 'default-frame-alist '(width . 160))
-(add-to-list 'default-frame-alist '(height . 80))
+(setq default-frame-alist
+      '((bottom + 0) (right + 0)        ; initial position
+        (width . 214) (height . 69)     ; initial size
+        (vertical-scroll-bars . nil)))  ; disable vertical bars
 
 ;; Allow splitting current window if size above one of these thresholds
 (setq split-width-threshold 160) ; How many columns to split side-by-side
