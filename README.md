@@ -26,6 +26,6 @@ change them to what works for you.
 
 See additional configurations for the Operating system you are using:
 
-- [Linux (Ubuntu)](./others/linux/)
-- [Windows](./others/windows/)
-- [WSL (Windows Subsystem for Linux)](./others/wsl/)
+- [Linux (Ubuntu)](./acg-emacs/others/linux/)
+- [Windows](./acg-emacs/others/windows/)
+- [WSL (Windows Subsystem for Linux)](./acg-emacs/others/wsl/)
