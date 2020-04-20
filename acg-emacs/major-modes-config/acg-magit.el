@@ -1,8 +1,5 @@
 (use-package magit)
 
-;; ;; Disable Emacs's built-in version control since not using it
-;; (setq vc-handled-backends nil)
-
 ;; Custom functions for visiting files
 
 (defun acg/magit-diff-visit-file (file)

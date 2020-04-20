@@ -61,4 +61,5 @@
         mouse-set-region
         repeat
         web-mode-mark-and-expand
+        wgrep-finish-edit
         ))

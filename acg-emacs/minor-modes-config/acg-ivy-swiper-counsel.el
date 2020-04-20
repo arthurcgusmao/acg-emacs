@@ -78,11 +78,6 @@ thing/symbol at point."
           #'ivy-format-function-line)
   :hook (after-init . ivy-rich-mode))
 
-
-;; Writable Grep package (use after ivy-occur (C-c C-o)); Key `w' enables writing
-(use-package wgrep)
-
-
 
 ;; isearch keybindings
 ;; (define-key overriding-terminal-local-map (kbd "S-SPC") nil) ; unbind S-SPC in isearch
