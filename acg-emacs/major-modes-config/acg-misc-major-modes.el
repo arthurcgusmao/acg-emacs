@@ -19,4 +19,6 @@
          (list
           '("\\.n3" . ttl-mode)
           '("\\.ttl" . ttl-mode))
-         auto-mode-alist)))
+         auto-mode-alist))
+  (setq ttl-indent-level 2)
+  (setq ttl-electric-punctuation nil))

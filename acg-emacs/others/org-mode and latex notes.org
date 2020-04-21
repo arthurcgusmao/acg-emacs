@@ -2,7 +2,7 @@ Here are some tips and snippets for easy access when writing org or latex files.
 
 #+LaTeX_CLASS: times-12-small-margin
 #+LaTeX_HEADER: \usepackage{times}
-#+TITLE: Your freaking title here
+#+TITLE: Your title here
 #+OPTIONS: toc:nil
 #+OPTIONS: num:nil
 to only include two levels in TOC:
