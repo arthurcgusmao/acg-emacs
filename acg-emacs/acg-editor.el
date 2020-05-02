@@ -114,7 +114,15 @@
 (use-package tramp
   :straight nil
   :config
-  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+  ;;; Make TRAMP faster
+  ;; Make VC ignore remote files
+  (setq vc-ignore-dir-regexp
+        (format "%s\\|%s"
+                vc-ignore-dir-regexp
+                tramp-file-name-regexp))
+  ;; Decrease verbosity of TRAMP logs
+  (setq tramp-verbose 1))
 
 
 (provide 'acg-editor)

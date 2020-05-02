@@ -24,10 +24,9 @@
                '(:eval (if buffer-read-only
                            " "
                          (if (buffer-modified-p) " 🖉" " 💾")))
-               
+
                ;; the buffer name; the file name as a tool tip
                '(:eval (propertize " %b" 'face 'acg/mode-line-common-bold))
-               
 
                ;; Line & Column numbers -- Use '%02l' to set to 2 chars at least; may prevent flickering
                "   (%l,%c)"
@@ -35,11 +34,15 @@
                " %p" ;; % above top
                ;; Current major mode for the buffer.
                "   📃 %m"
-               ;; Projectile indicator
-               '(:eval (format "   📁 %s" (projectile-project-name)))
-               ;; version control indicator
-               '(:eval (when (stringp vc-mode)
-	                 '(" 🔀" (vc-mode vc-mode))))
+
+               ;; ;; Project indication -- Do not show for remote files
+               ;; "  "
+               ;; ;; Projectile indicator
+               ;; ;; '(:eval (format " 📁 %s" (projectile-project-name)))
+               ;; ;; version control indicator
+               ;; '(:eval (when (stringp vc-mode)
+	       ;;           '(" 🔀" (vc-mode vc-mode))))
+
                ;; list of minor modes
-               ;; minor-mode-alist  
+               ;; minor-mode-alist
                ))
