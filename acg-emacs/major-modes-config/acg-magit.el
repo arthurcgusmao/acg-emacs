@@ -1,5 +1,8 @@
 (use-package magit)
 
+;; Disable Magit asking to save files
+(setq magit-save-repository-buffers nil)
+
 ;; Custom functions for visiting files
 
 (defun acg/magit-diff-visit-file (file)

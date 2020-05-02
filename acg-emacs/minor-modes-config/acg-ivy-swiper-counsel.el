@@ -40,7 +40,7 @@ thing/symbol at point."
 (use-package counsel
   :after ivy
   :bind  (("C-o" . counsel-find-file)
-   ("M-f" . counsel-git-grep)
+   ("M-f" . counsel-rg)
    ("C-S-O" . counsel-recentf)
    ("C-b" . counsel-switch-buffer)
    ("M-x" . counsel-M-x)

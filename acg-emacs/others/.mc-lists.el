@@ -25,6 +25,7 @@
         end-of-visual-line
         helm-mini
         indent-for-tab-command
+        indent-region
         keyboard-escape-quit
         keyboard-quit
         kill-line-or-region
