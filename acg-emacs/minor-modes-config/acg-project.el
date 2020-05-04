@@ -57,7 +57,7 @@ instance rooted in it."
         (setq pr (cons 'transient dir)))))
 
 (defun projectiny-find-file-in ()
-  "Visit a file (with completion) in PR's roots.
+  "Visit a file (with completion) in a project's roots.
 The completion default is the filename at point, if one is
 recognized."
   (interactive)
@@ -68,16 +68,18 @@ recognized."
 ;; @todo: Add additional keys to e.g. open magit of the project while
 ;; selecting the find (and then quit the minibuffer).
 
-;; (defun projectiny--find-file-all ()
-;;   "Visit a file (with completion) in all known projects.
-;; The completion default is the filename at point, if one is
-;; recognized."
-;;   (let* ((dirs
-;;           (mapcar (projectiny--read-known-projects) (project-roots pr))
-;;           (mapcar #'message (projectiny--read-known-projects))
-;;           (mapcar #'project-roots (projectiny--read-known-projects))
-;;           ))
-;;     (project-find-file-in (thing-at-point 'filename) dirs pr)))
+(defun projectiny-find-file-all ()
+  "Visit a file (with completion) in all known projects.
+The completion default is the filename at point, if one is
+recognized."
+  (interactive)
+  (let* ((proj-instances
+          (mapcar #'projectiny--project-get-instance
+                  (projectiny--read-known-projects)))
+         (all-files
+          (mapcan #'project-files proj-instances)))
+    (find-file (completing-read "Find file: " all-files))))
 
 
 (global-set-key (kbd "C-c p") 'projectiny-find-file-in)
+(global-set-key (kbd "M-O") 'projectiny-find-file-all)
