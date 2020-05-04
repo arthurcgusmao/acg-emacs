@@ -13,9 +13,10 @@
   "Add current project to known projects list."
   (interactive)
   (let* ((default-dir (cdr (project-current nil)))
-         (proj-dir (read-directory-name
-                    "Choose the project directory: "
-                    default-dir nil t)))
+         (proj-dir
+          (expand-file-name
+           (read-directory-name "Choose the project directory: "
+                                default-dir nil t))))
     ;; (expand-file-name (cdr (project-current t)))
     (append-to-file
      (concat "\n" proj-dir)
@@ -34,9 +35,13 @@
     (split-string (buffer-string) "\n" t)))
 
 (defun projectiny--choose-project ()
-  "Prompt the user to choose a project from the known list."
-  (completing-read "Choose project: "
-                   (projectiny--read-known-projects)))
+  "Prompt the user to choose a project from the known list.
+Shown directory names are abbreviated to increase readability."
+  (expand-file-name
+   (completing-read
+    "Choose project: "
+    (mapcar #'abbreviate-file-name
+            (projectiny--read-known-projects)))))
 
 (defun projectiny--project-get-instance (dir)
   "Return the project instance in DIR. If that directory is not a

@@ -67,6 +67,7 @@
       auto-save-default t               ; auto-save every buffer that visits a file
       auto-save-timeout 20              ; number of seconds idle time before auto-save (default: 30)
       auto-save-interval 200            ; number of keystrokes between auto-saves (default: 300)
+      require-final-newline t           ; always save file with newline at end
       )
 ;; disable autosave of sensitive data
 (setq auto-mode-alist
