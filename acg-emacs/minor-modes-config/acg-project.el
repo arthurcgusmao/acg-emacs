@@ -7,10 +7,13 @@
 (defcustom projectiny-known-projects-file
   (expand-file-name "projectiny-bookmarks"
                     user-emacs-directory)
-  "File that references known projects.")
+  "File that references bookmarked projects.")
 
 (defun projectiny-add-project ()
-  "Add current project to known projects list."
+  "Add a project (with completion) to the known projects file.
+
+The completion defaults to the root of the current project, which
+uses `project-current' to provide a smart suggestion."
   (interactive)
   (let* ((default-dir (cdr (project-current nil)))
          (proj-dir
@@ -26,7 +29,11 @@
       (write-file projectiny-known-projects-file))))
 
 (defun projectiny-edit-known-projects ()
-  "Open `projectiny-known-projects-file' for editing."
+  "Open the `projectiny-known-projects-file' for editing.
+
+Each line of the file should contain a directory path that
+correspond to root directory of a project the user want to
+bookmark."
   (interactive)
   (find-file projectiny-known-projects-file))
 
@@ -39,8 +46,9 @@
       (split-string (buffer-string) "\n" t))))
 
 (defun projectiny--choose-project ()
-  "Prompt the user to choose a project from the known list.
-Shown directory names are abbreviated to increase readability."
+  "Prompt the user to choose a project from the known list, and
+return its root directory path. Shown paths are abbreviated to
+increase readability."
   (expand-file-name
    (completing-read
     "Choose project: "
@@ -58,6 +66,7 @@ instance rooted in it."
 
 (defun projectiny-find-file-in ()
   "Visit a file (with completion) in a project's roots.
+
 The completion default is the filename at point, if one is
 recognized."
   (interactive)
@@ -70,6 +79,7 @@ recognized."
 
 (defun projectiny-find-file-all ()
   "Visit a file (with completion) in all known projects.
+
 The completion default is the filename at point, if one is
 recognized."
   (interactive)
