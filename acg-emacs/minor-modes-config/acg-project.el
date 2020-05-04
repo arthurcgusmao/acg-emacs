@@ -49,11 +49,12 @@ bookmark."
   "Prompt the user to choose a project from the known list, and
 return its root directory path. Shown paths are abbreviated to
 increase readability."
-  (expand-file-name
-   (completing-read
-    "Choose project: "
-    (mapcar #'abbreviate-file-name
-            (projectiny--read-known-projects)))))
+  (let ((default-directory ""))
+    (expand-file-name
+     (completing-read
+      "Choose project: "
+      (mapcar #'abbreviate-file-name
+              (projectiny--read-known-projects))))))
 
 (defun projectiny--project-get-instance (dir)
   "Return the project instance in DIR. If that directory is not a
@@ -70,12 +71,10 @@ instance rooted in it."
 The completion default is the filename at point, if one is
 recognized."
   (interactive)
-  (let* ((pr (projectiny--project-get-instance
-              (projectiny--choose-project)))
-        (dirs (project-roots pr)))
+  (let* ((default-directory (projectiny--choose-project)) ; Set default-directory to make further use of this variable meaningful
+         (pr (projectiny--project-get-instance default-directory))
+         (dirs (project-roots pr)))
     (project-find-file-in (thing-at-point 'filename) dirs pr)))
-;; @todo: Add additional keys to e.g. open magit of the project while
-;; selecting the find (and then quit the minibuffer).
 
 (defun projectiny-find-file-all ()
   "Visit a file (with completion) in all known projects.

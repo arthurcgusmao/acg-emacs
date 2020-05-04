@@ -8,6 +8,7 @@ thing/symbol at point."
 
 
 (use-package ivy
+  :after magit
   :config
   ;; (setq ivy-use-virtual-buffers t)  
 
@@ -22,6 +23,22 @@ thing/symbol at point."
   ;; do not quit the minibuffer when deletion error happens
   (setq ivy-on-del-error-function #'ignore)
 
+  (defun acg/ivy-magit-status-here ()
+    "Opens a magit-status buffer where the minibuffer was browsing
+into and quits the minibuffer."
+    (interactive)
+    ;; (message (file-name-directory
+    ;;         (concat (ivy-state-directory ivy-last)
+    ;;                 (ivy-state-current ivy-last))))
+    (let* ((default-directory
+             (file-name-directory
+              (concat (ivy-state-directory ivy-last)
+                      (ivy-state-current ivy-last))))
+           (buf (magit-status-setup-buffer)))
+      (setq acg/ivy-magit-buffer buf)
+      (ivy-quit-and-run
+        (switch-to-buffer acg/ivy-magit-buffer))))
+
   :bind
   (:map ivy-minibuffer-map
    ;; Makes ESC quit minibuffer
@@ -32,8 +49,8 @@ thing/symbol at point."
    ("<S-return>" . ivy-immediate-done)
    ("<C-return>" . ivy-restrict-to-matches)
    ("<return>" . ivy-alt-done)
-   ("TAB" . ivy-partial))
-  
+   ("TAB" . ivy-partial)
+   ("C-x g" . acg/ivy-magit-status-here))
   :hook (after-init . ivy-mode))
 
 
