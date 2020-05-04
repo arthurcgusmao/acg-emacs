@@ -16,11 +16,14 @@
          (proj-dir
           (expand-file-name
            (read-directory-name "Choose the project directory: "
-                                default-dir nil t))))
-    ;; (expand-file-name (cdr (project-current t)))
-    (append-to-file
-     (concat "\n" proj-dir)
-     nil projectiny-known-projects-file)))
+                                default-dir nil t)))
+         (known-projects (projectiny--read-known-projects)))
+    ;; Add new project to list
+    (add-to-list 'known-projects proj-dir)
+    ;; Write modified list to file
+    (with-temp-buffer
+      (insert (mapconcat 'identity known-projects "\n"))
+      (write-file projectiny-known-projects-file))))
 
 (defun projectiny-edit-known-projects ()
   "Open `projectiny-known-projects-file' for editing."
@@ -30,9 +33,10 @@
 (defun projectiny--read-known-projects ()
   "Read the list of known projects from
 `projectiny-known-projects-file'."
-  (with-temp-buffer
-    (insert-file-contents projectiny-known-projects-file)
-    (split-string (buffer-string) "\n" t)))
+  (when (file-exists-p projectiny-known-projects-file)
+    (with-temp-buffer
+      (insert-file-contents projectiny-known-projects-file)
+      (split-string (buffer-string) "\n" t))))
 
 (defun projectiny--choose-project ()
   "Prompt the user to choose a project from the known list.

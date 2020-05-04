@@ -29,8 +29,8 @@ thing/symbol at point."
    ([escape] . abort-recursive-edit) ; quit right away
    :map ivy-minibuffer-map
    ("S-SPC" . nil)
-   ("<C-return>" . ivy-immediate-done)
-   ("<S-return>" . ivy-restrict-to-matches)
+   ("<S-return>" . ivy-immediate-done)
+   ("<C-return>" . ivy-restrict-to-matches)
    ("<return>" . ivy-alt-done)
    ("TAB" . ivy-partial))
   
