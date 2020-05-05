@@ -31,6 +31,7 @@
         kill-line-or-region
         kill-line-or-region-backwards
         kill-sexp
+        markdown-outdent-or-delete
         mc/mark-all-in-region
         my-super-keyboard-quit
         org-self-insert-command
