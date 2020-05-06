@@ -24,20 +24,29 @@ thing/symbol at point."
   (setq ivy-on-del-error-function #'ignore)
 
   (defun acg/ivy-magit-status-here ()
-    "Opens a magit-status buffer where the minibuffer was browsing
-into and quits the minibuffer."
+    "Opens a magit-status buffer where the minibuffer was
+browsing into and quits the minibuffer."
     (interactive)
-    ;; (message (file-name-directory
-    ;;         (concat (ivy-state-directory ivy-last)
-    ;;                 (ivy-state-current ivy-last))))
-    (let* ((default-directory
-             (file-name-directory
-              (concat (ivy-state-directory ivy-last)
-                      (ivy-state-current ivy-last))))
-           (buf (magit-status-setup-buffer)))
-      (setq acg/ivy-magit-buffer buf)
-      (ivy-quit-and-run
-        (switch-to-buffer acg/ivy-magit-buffer))))
+    (setq acg/tmp/ivy-browsing-directory
+          (expand-file-name
+           (file-name-directory
+            (concat (ivy-state-directory ivy-last)
+                    (ivy-state-current ivy-last)))))
+    (ivy-quit-and-run
+      (magit-status-setup-buffer
+       acg/tmp/ivy-browsing-directory)))
+
+  (defun acg/ivy-dired-here ()
+    "Opens a dired buffer where the minibuffer was browsing into
+and quits the minibuffer."
+    (interactive)
+    (setq acg/tmp/ivy-browsing-directory
+          (expand-file-name
+           (file-name-directory
+            (concat (ivy-state-directory ivy-last)
+                    (ivy-state-current ivy-last)))))
+    (ivy-quit-and-run
+      (dired acg/tmp/ivy-browsing-directory)))
 
   :bind
   (:map ivy-minibuffer-map
@@ -50,7 +59,8 @@ into and quits the minibuffer."
    ("<C-return>" . ivy-restrict-to-matches)
    ("<return>" . ivy-alt-done)
    ("TAB" . ivy-partial)
-   ("C-x g" . acg/ivy-magit-status-here))
+   ("C-x g" . acg/ivy-magit-status-here)
+   ("C-x d" . acg/ivy-dired-here))
   :hook (after-init . ivy-mode))
 
 
