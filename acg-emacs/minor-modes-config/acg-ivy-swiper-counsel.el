@@ -8,9 +8,8 @@ thing/symbol at point."
 
 
 (use-package ivy
-  :after magit
   :config
-  ;; (setq ivy-use-virtual-buffers t)  
+  ;; (setq ivy-use-virtual-buffers t)
 
   ;; max size the minibuffer can grow up to
   (setq ivy-height 16)
@@ -23,30 +22,41 @@ thing/symbol at point."
   ;; do not quit the minibuffer when deletion error happens
   (setq ivy-on-del-error-function #'ignore)
 
-  (defun acg/ivy-magit-status-here ()
-    "Opens a magit-status buffer where the minibuffer was
-browsing into and quits the minibuffer."
-    (interactive)
-    (setq acg/tmp/ivy-browsing-directory
-          (expand-file-name
-           (file-name-directory
-            (concat (ivy-state-directory ivy-last)
-                    (ivy-state-current ivy-last)))))
-    (ivy-quit-and-run
-      (magit-status-setup-buffer
-       acg/tmp/ivy-browsing-directory)))
+  ;; "IVY HERE" set of functions
+  ;; ---------------------------
+  ;; Set of functions that run external commands on the directory of the file
+  ;; the user was browsing on.
 
-  (defun acg/ivy-dired-here ()
-    "Opens a dired buffer where the minibuffer was browsing into
+  (defun acg/ivy-get-browsing-location ()
+    "Returns the directory path of the last ivy selection. Meant
+to be called indirectly during an ivy minibuffer search."
+    (expand-file-name
+     (file-name-directory
+      (concat (ivy-state-directory ivy-last)
+              (ivy-state-current ivy-last)))))
+
+  (defun acg/ivy-here--magit-status ()
+    "Opens a magit-status buffer where the minibuffer was
+browsing on and quits the minibuffer."
+    (interactive)
+    (ivy-quit-and-run
+      (magit-status-setup-buffer (acg/ivy-get-browsing-location))))
+
+  (defun acg/ivy-here--dired ()
+    "Opens a dired buffer where the minibuffer was browsing on
 and quits the minibuffer."
     (interactive)
-    (setq acg/tmp/ivy-browsing-directory
-          (expand-file-name
-           (file-name-directory
-            (concat (ivy-state-directory ivy-last)
-                    (ivy-state-current ivy-last)))))
+    (ivy-quit-and-run (dired (acg/ivy-get-browsing-location))))
+
+  (defun acg/ivy-here--grep-vc-or-dir ()
+    "Performs an RG search on the project (or directory, if not a
+project) where the minibuffer was browsing on and quits the
+minibuffer."
+    (interactive)
     (ivy-quit-and-run
-      (dired acg/tmp/ivy-browsing-directory)))
+      (let ((default-directory (acg/ivy-get-browsing-location)))
+        (call-interactively 'prot/grep-vc-or-dir))))
+
 
   :bind
   (:map ivy-minibuffer-map
@@ -59,8 +69,9 @@ and quits the minibuffer."
    ("<C-return>" . ivy-restrict-to-matches)
    ("<return>" . ivy-alt-done)
    ("TAB" . ivy-partial)
-   ("C-x g" . acg/ivy-magit-status-here)
-   ("C-x d" . acg/ivy-dired-here))
+   ("C-x g" . acg/ivy-here--magit-status)
+   ("C-x d" . acg/ivy-here--dired)
+   ("M-s g" . acg/ivy-here--grep-vc-or-dir))
   :hook (after-init . ivy-mode))
 
 
@@ -90,7 +101,7 @@ and quits the minibuffer."
   (("C-f" . acg/swiper-thing-at-point-or-isearch)
    ("C-S-F" . swiper-all-thing-at-point)))
    ;; @todo: set C-f to restart search when in swiper
-  
+
 
 (use-package smex)
 
@@ -114,4 +125,3 @@ and quits the minibuffer."
 ;; (define-key isearch-mode-map "\C-g" 'isearch-repeat-forward)
 ;; (define-key isearch-mode-map (kbd "C-S-G") 'isearch-repeat-backward)
 ;; (define-key isearch-mode-map (kbd "C-S-V") 'isearch-yank-kill)
-
