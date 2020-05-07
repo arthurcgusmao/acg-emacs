@@ -89,7 +89,7 @@ previous file before displaying file at point."
 
 
 
-;; Follow guidelines when committing;
+;; Provide commit message guidelines/feedback when committing;
 ;; taken from https://protesilaos.com/dotemacs
 
 (use-package git-commit
@@ -109,6 +109,13 @@ previous file before displaying file at point."
   (git-commit-style-convention-checks
    '(non-empty-second-line
      overlong-summary-line)))
+
+;; Show word-granularity differences within diff hunks
+(use-package magit-diff
+  :straight nil
+  :after magit
+  :config
+  (setq magit-diff-refine-hunk t))
 
 
 ;; Make Emacs work with ssh-ident
