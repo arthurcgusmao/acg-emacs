@@ -5,25 +5,15 @@
          ("<mouse-1>" . ibuffer-visit-buffer)
          ("<C-mouse-1>" . ibuffer-mouse-toggle-mark)))
 
-;; Group buffers per Projectile project
-(use-package ibuffer-projectile
-  :after (ibuffer
-          projectile)
+(use-package ibuffer-vc
+  :after (ibuffer vc)
   :config
-  (defun acg/ibuffer-projectile-run ()
-    "Set up `ibuffer-projectile'."
-    (ibuffer-projectile-set-filter-groups)
-    (unless (eq ibuffer-sorting-mode 'alphabetic)
-      (ibuffer-do-sort-by-alphabetic)))
+  (add-hook 'ibuffer-hook #'ibuffer-vc-set-filter-groups-by-vc-root))
 
-  (add-hook 'ibuffer-sidebar-mode-hook #'acg/ibuffer-projectile-run)
-  (add-hook 'ibuffer-hook #'acg/ibuffer-projectile-run)
-  :custom
-  (ibuffer-projectile-prefix "Proj: "))
-
-;; Sidebar
 (use-package ibuffer-sidebar
+  :after (ibuffer ibuffer-vc)
   :commands (ibuffer-sidebar-toggle-sidebar)
   :config
+  (add-hook 'ibuffer-sidebar-mode-hook #'ibuffer-vc-set-filter-groups-by-vc-root)
   (setq ibuffer-sidebar-use-custom-font t)
   (setq ibuffer-sidebar-face `(:family "Sans Serif" :height 110)))
