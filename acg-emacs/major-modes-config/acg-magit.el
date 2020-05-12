@@ -55,14 +55,17 @@ previous file before displaying file at point."
   (define-key magit-mode-map (kbd "<C-up>") 'magit-section-backward-sibling)
   (define-key magit-mode-map (kbd "<C-down>") 'magit-section-forward-sibling)
 
-  (define-key magit-status-mode-map (kbd "M-1") nil)
-  (define-key magit-status-mode-map (kbd "M-2") nil)
-  (define-key magit-status-mode-map (kbd "M-3") nil)
-  (define-key magit-status-mode-map (kbd "M-4") nil)
-  (define-key magit-status-mode-map (kbd "C-c 1") 'magit-section-show-level-1-all)
-  (define-key magit-status-mode-map (kbd "C-c 2") 'magit-section-show-level-2-all)
-  (define-key magit-status-mode-map (kbd "C-c 3") 'magit-section-show-level-3-all)
-  (define-key magit-status-mode-map (kbd "C-c 4") 'magit-section-show-level-4-all)
+  (mapc               ; Programatically remap M-[1-4] for all desired mode-maps
+   (lambda (mode-map)
+     (define-key (symbol-value mode-map) (kbd "M-1") nil)
+     (define-key (symbol-value mode-map) (kbd "M-2") nil)
+     (define-key (symbol-value mode-map) (kbd "M-3") nil)
+     (define-key (symbol-value mode-map) (kbd "M-4") nil)
+     (define-key (symbol-value mode-map) (kbd "C-c 1") 'magit-section-show-level-1-all)
+     (define-key (symbol-value mode-map) (kbd "C-c 2") 'magit-section-show-level-2-all)
+     (define-key (symbol-value mode-map) (kbd "C-c 3") 'magit-section-show-level-3-all)
+     (define-key (symbol-value mode-map) (kbd "C-c 4") 'magit-section-show-level-4-all))
+   '(magit-status-mode-map magit-diff-mode-map))
 
   (define-key magit-file-section-map (kbd "<return>") 'acg/magit-diff-visit-file)
   (define-key magit-file-section-map (kbd "<C-return>") 'acg/magit-diff-display-file)
@@ -122,4 +125,3 @@ previous file before displaying file at point."
 (use-package ssh-ident
   :straight (:host github :repo "arthurcgusmao/emacs-ssh-ident")
   :init (acg/add-to-env-path "~/.local/bin"))
-
