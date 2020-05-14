@@ -130,7 +130,10 @@ user to choose a remote."
    ("<return>" . acg/magit-diff-visit-file)
    ("<C-return>" . acg/magit-diff-display-file)
    ("<S-return>" . acg/magit-diff-display-file-and-next)
-   ("<C-S-return>" . acg/magit-diff-display-file-and-previous)))
+   ("<C-S-return>" . acg/magit-diff-display-file-and-previous))
+  :commands
+  (acg/magit-open-remote-repo
+   acg/magit-open-remote-dwim))
 
 (use-package with-editor
   :bind
