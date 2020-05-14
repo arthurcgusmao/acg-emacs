@@ -3,7 +3,8 @@
   ;; Disable Magit asking to save files
   (setq magit-save-repository-buffers nil)
 
-  ;; Custom functions for visiting files
+
+  ;; Custom functions for VISITING FILES
 
   (defun acg/magit-diff-visit-file (file)
     "Same as `magit-diff-visit-file', but uses the default
@@ -31,6 +32,67 @@ previous file before displaying file at point."
     (interactive (list (magit-file-at-point t t)))
     (magit-previous-line)
     (magit-diff-visit-file--internal file nil #'display-buffer))
+
+
+  ;; Custom functions for OPENING the REMOTE REPOSITORY
+  ;; Adapted from https://gist.github.com/dotemacs/9a0433341e75e01461c9
+
+  (defun acg/parse-git-remote-url (url)
+  "If necessary, convert an SSH to HTTPS git remote location."
+  (if (string-match "^http" url)
+      url
+    (replace-regexp-in-string "\\(.*\\)@\\(.*\\):\\(.*\\)\\(\\.git?\\)"
+                              "https://\\2/\\3"
+                              url)))
+
+  (defun acg/magit-open-remote-repo ()
+    "Opens a remote repo URL. Prompts the user to choose a remote."
+    (interactive)
+    (let* ((remote-name (magit-read-remote "Choose remote repository"))
+           (url (magit-get "remote" remote-name "url")))
+      (browse-url (acg/parse-git-remote-url url))
+      (message "Opening repo %s" url)))
+
+  (defun acg/project-get-root-relative-path (&optional path)
+    "Returns PATH relative to a project root."
+    (let* ((path (expand-file-name (or path default-directory)))
+           (root-path (expand-file-name
+                       (cdr (project--find-in-directory path))))
+           (root-length (length root-path))
+           (rel-path (substring path root-length)))
+      rel-path))
+
+  (defun acg/magit-open-remote-dwim (&optional dir)
+    "Opens a remote repo URL in the exact DIR location. Prompts the
+user to choose a remote."
+    (interactive)
+    (let* ((file (buffer-file-name))
+           (dir (expand-file-name (or dir default-directory)))
+           (remote-name (magit-read-remote "Choose remote repository" nil t))
+           (url (acg/parse-git-remote-url
+                 (magit-get "remote" remote-name "url")))
+           ;; Identify remote hosting type (e.g., GitHub, GitLab, etc.)
+           (remote-hosting-type
+            (cond
+             ((string-match-p (regexp-quote "github") url) "GitHub")
+             ((string-match-p (regexp-quote "gitlab") url) "GitLab")
+             (t (completing-read "Choose remote hosting type:"
+                                 '("GitHub" "GitLab"))))))
+      ;; Adapt to GitLab's URL standard
+      (when (string= remote-hosting-type "GitLab")
+        (setq url (concat url "/-")))
+      ;; Adapt to differences in file and directory URL paths
+      (if file
+          (setq url (concat url "/blob/" (magit-get-current-branch)
+                            "/" (acg/project-get-root-relative-path file)))
+        (setq url (concat url "/tree/" (magit-get-current-branch)
+                          "/" (acg/project-get-root-relative-path dir))))
+      ;; Perform actions
+      (browse-url url)
+      (message "Opening %s" url)))
+
+
+  ;; Keybindings
 
   (mapc               ; Programatically remap M-[1-4] for all desired mode-maps
    (lambda (mode-map)
