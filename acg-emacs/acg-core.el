@@ -13,15 +13,21 @@
 (defconst acg/default-bib-file "~/Documents/Mendeley/library.bib"
   "Default bibliography file for references.")
 
-(defvar acg/backup-dir (concat user-emacs-directory "backups/")
-  "Emacs's default directory for backing up files.")
+(defvar acg/file-backup-dir (concat user-emacs-directory "file-backups/")
+  "Directory for backing up files.")
 (defvar acg/scratch-backup-dir (concat user-emacs-directory "scratch-backups/")
   "Backup directory for scratch buffers.")
+(defvar acg/history-dir (concat user-emacs-directory "history/")
+  "Direcotry for saving various types of history in Emacs, such
+  as minibuffer entries, recent opened files, cursor positions,
+  etc.")
 
-(if (not (file-exists-p acg/backup-dir))
-        (make-directory acg/backup-dir t))
+(if (not (file-exists-p acg/file-backup-dir))
+    (make-directory acg/file-backup-dir t))
 (if (not (file-exists-p acg/scratch-backup-dir))
-        (make-directory acg/scratch-backup-dir t))
+    (make-directory acg/scratch-backup-dir t))
+(if (not (file-exists-p acg/history-dir))
+    (make-directory acg/history-dir t))
 
 
 (defun acg/load-all-in-directory (dir)

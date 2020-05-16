@@ -1,102 +1,61 @@
-;; editor configurations
+;; Editor configurations
 
-;; warn when opening files bigger than 100MB
-(setq large-file-warning-threshold 100000000)
-
-;; disable truncation of line
-(set-default 'truncate-lines t)
-
-;; makes kill ring not mess with clipboard
-(setq x-select-enable-clipboard nil)
-
-;; consider hifened words as a single word
-(global-superword-mode 1)
-
-;; enable disabled advanced features
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'narrow-to-defun 'disabled nil)
-(put 'narrow-to-page 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-
-;; lets you undo and redo changes in the window configuration
-(winner-mode 1)
-
-;; automatically run fill-paragraph
-;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
-
-;; fill-paragraph function only leave one space after period instead of two
-(setq sentence-end-double-space nil)
-
-;; make scratch buffer always start as text-mode and not lisp-mode
-(setq initial-major-mode 'text-mode)
-
-;; visual line mode
-(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
-;; (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
-
-;; delete the selection with a keypress
-(delete-selection-mode t)
-
-;; Remove annoying ring bell
-(setq ring-bell-function 'ignore)
-
-;; MS Windows configs
-(if (string-equal system-type "windows-nt")
-    (progn
-      ;; disables the annoying ring bell when something goes wrong
-      (setq-default visible-bell t)
-      ;; enable the windows key to be processed by Emacs (instead of passed to Windows directly)
-      (setq w32-pass-lwindow-to-system nil
-            w32-lwindow-modifier 'super)
-      ;; default to unix coding system
-      (setq-default buffer-file-coding-system 'utf-8-unix)))
-
-
-;; files, buffers, backup, autosave
-
-;; from https://stackoverflow.com/a/18330742/5103881
-(setq backup-directory-alist `(("." . ,acg/backup-dir)))
-(setq make-backup-files t               ; backup of a file the first time it is saved.
-      backup-by-copying t               ; don't clobber symlinks
-      version-control t                 ; version numbers for backup files
-      delete-old-versions t             ; delete excess backup files silently
-      delete-by-moving-to-trash t
-      kept-old-versions 6               ; oldest versions to keep when a new numbered backup is made (default: 2)
-      kept-new-versions 9               ; newest versions to keep when a new numbered backup is made (default: 2)
-      auto-save-default t               ; auto-save every buffer that visits a file
-      auto-save-timeout 20              ; number of seconds idle time before auto-save (default: 30)
-      auto-save-interval 200            ; number of keystrokes between auto-saves (default: 300)
-      require-final-newline t           ; always save file with newline at end
-      )
-;; disable autosave of sensitive data
-(setq auto-mode-alist
-      (append
-       (list
-        '("\\.\\(vcf\\|gpg\\)$" . sensitive-minor-mode)
-        )
-       auto-mode-alist))
-
-;; saving the last session (for when you open emacs the next time)
-(desktop-save-mode 0)
-(setq desktop-dirname (concat user-emacs-directory "desktop/")
-      desktop-path (list desktop-dirname))
-
-;; keep a list of recently opened files
-(use-package recentf
+(use-package emacs
+  :straight nil
   :config
-  (setq recent-save-file (concat user-emacs-directory "recentf"))
-  (setq recentf-max-saved-items 300)
-  (setq recentf-max-menu-items 10)
-  :hook ((after-init . recentf-mode)))
+  (setq large-file-warning-threshold 100000000 ; Warn when opening files bigger than 100MB
+        require-final-newline t            ; Always save file with newline at end
+        x-select-enable-clipboard nil)     ; Makes kill ring not mess with clipboard
+  ;; Disable truncation of line
+  (set-default 'truncate-lines t)
+  ;; Consider hifened words as a single word
+  (global-superword-mode 1)
 
-;; kill minibuffer when it loses focus
-(defun stop-using-minibuffer ()
-  "kill the minibuffer"
-  (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
-    (abort-recursive-edit)))
-(add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
-(setq enable-recursive-minibuffers t)
+  ;; Enable advanced features (that are by default disabled)
+  (put 'downcase-region 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+  (put 'narrow-to-defun 'disabled nil)
+  (put 'narrow-to-page 'disabled nil)
+  (put 'narrow-to-region 'disabled nil)
+
+  ;; automatically run fill-paragraph
+  ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+  ;; fill-paragraph function only leave one space after period instead of two
+  (setq sentence-end-double-space nil)
+
+  ;; make scratch buffer always start as text-mode and not lisp-mode
+  (setq initial-major-mode 'text-mode)
+
+  ;; visual line mode
+  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+  ;; (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+
+  ;; delete the selection with a keypress
+  (delete-selection-mode t)
+
+  ;; Remove annoying ring bell
+  (setq ring-bell-function 'ignore)
+
+  ;; MS Windows configs
+  (if (string-equal system-type "windows-nt")
+      (progn
+        ;; disables the annoying ring bell when something goes wrong
+        (setq-default visible-bell t)
+        ;; enable the windows key to be processed by Emacs (instead of passed to Windows directly)
+        (setq w32-pass-lwindow-to-system nil
+              w32-lwindow-modifier 'super)
+        ;; default to unix coding system
+        (setq-default buffer-file-coding-system 'utf-8-unix)))
+
+  ;; Kill minibuffer when it loses focus
+  (defun stop-using-minibuffer ()
+    "kill the minibuffer"
+    (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
+      (abort-recursive-edit)))
+  (add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
+  (setq enable-recursive-minibuffers t)
+  )
 
 
 ;; tabs, indent, spacing
@@ -124,6 +83,76 @@
                 tramp-file-name-regexp))
   ;; Decrease verbosity of TRAMP logs
   (setq tramp-verbose 1))
+
+
+;; Record various types of history
+;; Adapted from https://protesilaos.com/dotemacs/#h:2733674b-51f9-494e-b34d-e8842ac4ef96
+
+;; Keep a list of recently opened files
+(use-package recentf
+  :straight nil
+  :config
+  (setq recent-save-file (concat acg/history-dir "recentf"))
+  (setq recentf-max-saved-items 300)
+  (setq recentf-max-menu-items 10)
+  :hook ((after-init . recentf-mode)))
+
+;; Remember minibuffer history for better suggestions
+(use-package savehist
+  :straight nil
+  :config
+  (setq savehist-file (concat acg/history-dir "savehist"))
+  (setq history-length 30000)
+  (setq history-delete-duplicates nil)
+  (setq savehist-save-minibuffer-history t)
+  ;; (setq savehist-additional-variables
+  ;;       '(command-history
+  ;;         ;; projectiny-find-file-in
+  ;;         ))
+  (savehist-mode 1))
+
+;; Remember where point was last time you visited a file
+(use-package saveplace
+  :straight nil
+  :config
+  (setq save-place-file (concat acg/history-dir "saveplace"))
+  (setq save-place-forget-unreadable-files t)
+  (save-place-mode 1))
+
+;; Backup and Autosave of files
+(use-package emacs
+  :straight nil
+  :config
+  ;; Adapted from https://stackoverflow.com/a/18330742/5103881
+  (setq backup-directory-alist `(("." . ,acg/file-backup-dir))
+        make-backup-files t               ; backup of a file the first time it is saved.
+        backup-by-copying t               ; don't clobber symlinks
+        version-control t                 ; version numbers for backup files
+        delete-old-versions t             ; delete excess backup files silently
+        delete-by-moving-to-trash t
+        kept-old-versions 6               ; oldest versions to keep when a new numbered backup is made (default: 2)
+        kept-new-versions 9               ; newest versions to keep when a new numbered backup is made (default: 2)
+        auto-save-default t               ; auto-save every buffer that visits a file
+        auto-save-timeout 20              ; number of seconds idle time before auto-save (default: 30)
+        auto-save-interval 200            ; number of keystrokes between auto-saves (default: 300)
+        )
+  ;; Disable autosave of sensitive data
+  (setq auto-mode-alist
+        (append
+         (list
+          '("\\.\\(vcf\\|gpg\\)$" . sensitive-minor-mode)
+          )
+         auto-mode-alist))
+
+  ;; Save the last session (for when you open emacs the next time)
+  (desktop-save-mode 0)
+  (setq desktop-dirname (concat user-emacs-directory "desktop/")
+        desktop-path (list desktop-dirname)))
+
+;; Navigate window configuration history
+(use-package winner
+  :straight nil
+  :hook (after-init-hook . winner-mode))
 
 
 (provide 'acg-editor)
