@@ -1,12 +1,3 @@
-(defun acg/swiper-thing-at-point-or-isearch (arg)
-  "Calls swiper or isearch-forward (if ARG is non-nil) with
-thing/symbol at point."
-  (interactive "P")
-  (if arg
-      (progn (isearch-forward))
-    (swiper-thing-at-point)))
-
-
 (use-package ivy
   :config
   ;; (setq ivy-use-virtual-buffers t)
@@ -94,6 +85,14 @@ minibuffer."
 
 (use-package swiper
   :config
+  (defun acg/swiper-thing-at-point-or-isearch (arg)
+    "Calls swiper or isearch-forward (if ARG is non-nil) with
+thing/symbol at point."
+    (interactive "P")
+    (if arg
+        (progn (isearch-forward))
+      (swiper-thing-at-point)))
+
   ;; preselect input
   (advice-add 'swiper-thing-at-point :before #'acg/with-marked-input)
   (advice-add 'swiper-all-thing-at-point :before #'acg/with-marked-input)
@@ -103,7 +102,7 @@ minibuffer."
    ;; @todo: set C-f to restart search when in swiper
 
 
-(use-package smex)
+(use-package amx)
 
 
 ;; Show rich descriptions after each ivy candidate option
