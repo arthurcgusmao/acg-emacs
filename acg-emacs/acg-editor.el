@@ -74,6 +74,7 @@
 (use-package tramp
   :straight nil
   :config
+  (setq tramp-persistency-file-name (concat acg/history-dir "tramp"))
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
   ;;; Make TRAMP faster
   ;; Make VC ignore remote files
@@ -92,7 +93,7 @@
 (use-package recentf
   :straight nil
   :config
-  (setq recent-save-file (concat acg/history-dir "recentf"))
+  (setq recentf-save-file (concat acg/history-dir "recentf"))
   (setq recentf-max-saved-items 300)
   (setq recentf-max-menu-items 10)
   :hook ((after-init . recentf-mode)))
@@ -102,13 +103,9 @@
   :straight nil
   :config
   (setq savehist-file (concat acg/history-dir "savehist"))
-  (setq history-length 30000)
+  (setq history-length 2000)
   (setq history-delete-duplicates nil)
   (setq savehist-save-minibuffer-history t)
-  ;; (setq savehist-additional-variables
-  ;;       '(command-history
-  ;;         ;; projectiny-find-file-in
-  ;;         ))
   (savehist-mode 1))
 
 ;; Remember where point was last time you visited a file

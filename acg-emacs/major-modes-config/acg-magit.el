@@ -142,6 +142,9 @@ user to choose a remote."
         ("C-s" . with-editor-finish)))
 
 (use-package transient
+  :config
+  (setq transient-history-file
+        (concat acg/history-dir "transient-history.el"))
   :bind
   (:map transient-map
         ("<escape>" . transient-quit-all)))

@@ -5,6 +5,9 @@
 (use-package projectiny
   :after project
   :straight (:host github :repo "arthurcgusmao/projectiny")
+  :config
+  (setq projectiny-known-projects-file
+        (concat acg/history-dir "projectiny-known-projects"))
   :bind
   (("M-o" . projectiny-find-file)
    ("M-O" . projectiny-find-file-all)

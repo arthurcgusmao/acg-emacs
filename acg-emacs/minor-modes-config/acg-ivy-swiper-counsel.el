@@ -102,7 +102,17 @@ thing/symbol at point."
    ;; @todo: set C-f to restart search when in swiper
 
 
-(use-package amx)
+;; Smartly sort minibuffer list of candidates based on history
+(use-package prescient
+  :config
+  (setq prescient-save-file (concat acg/history-dir "prescient-save.el"))
+  (prescient-persist-mode 1))
+(use-package ivy-prescient
+  :after counsel
+  :config (ivy-prescient-mode 1))
+(use-package company-prescient
+  :after company
+  :config (company-prescient-mode 1))
 
 
 ;; Show rich descriptions after each ivy candidate option
