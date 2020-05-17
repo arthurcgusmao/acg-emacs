@@ -152,4 +152,23 @@
   :hook (after-init-hook . winner-mode))
 
 
+;; Rebinding Emacs built-in commands
+(use-package emacs
+  :straight nil
+  :config
+  (acg/force-global-set-key "C-a" 'mark-whole-buffer)
+
+  ;; for MS Windows only
+  (if (string-equal system-type "windows-nt")
+      (and (global-set-key (kbd "<M-f4>") 'delete-frame)))
+
+  :bind
+  ("C-r" . repeat)
+  ("C-z" . undo)
+  ("C-S-Z" . redo)
+  ("C-S-SPC" . cycle-spacing)
+  ("C-S-J" . join-line))
+
+
+
 (provide 'acg-editor)
