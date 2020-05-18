@@ -3,14 +3,16 @@
 (use-package emacs
   :straight nil
   :config
-  (setq large-file-warning-threshold 100000000 ; Warn when opening files bigger than 100MB
-        require-final-newline t            ; Always save file with newline at end
-        x-select-enable-clipboard nil)     ; Makes kill ring not mess with clipboard
-  ;; Disable truncation of line
-  (set-default 'truncate-lines t)
+  (setq large-file-warning-threshold 100000000) ; Warn when opening files bigger than 100MB
+  (setq select-enable-clipboard nil) ; Makes kill ring not mess with clipboard
+
+  ;; Delete trailing whitespace every time before saving buffer
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+  (set-default 'truncate-lines t)    ; Disable truncation of line
+  (setq require-final-newline t)     ; Always save file with newline at end
   ;; Consider hifened words as a single word
   (global-superword-mode 1)
-
   ;; Enable advanced features (that are by default disabled)
   (put 'downcase-region 'disabled nil)
   (put 'upcase-region 'disabled nil)
