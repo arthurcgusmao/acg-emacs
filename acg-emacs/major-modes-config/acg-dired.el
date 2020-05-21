@@ -41,9 +41,8 @@ afterwards."
     (dired-display-file)
     (dired-hacks-previous-file))
 
-  :custom
   ;; Group directories together
-  (dired-listing-switches "--group-directories-first -al")
+  (setq dired-listing-switches "--group-directories-first -al")
 
   :bind
   (("C-x d" . dired-jump)

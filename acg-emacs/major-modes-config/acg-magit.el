@@ -1,3 +1,11 @@
+(use-package vc
+  :straight nil
+  :config
+  ;; Open the actual file when visiting symlink that points to a
+  ;; version-controlled file
+  (setq vc-follow-symlinks t))
+
+
 (use-package magit
   :config
   ;; Disable Magit asking to save files

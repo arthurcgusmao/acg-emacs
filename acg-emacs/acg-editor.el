@@ -172,5 +172,11 @@
   ("C-S-J" . join-line))
 
 
+(use-package auth-source
+  :straight nil
+  :config
+  ;; Never ask to save authentication credentials in a file
+  (setq auth-source-save-behavior nil))
+
 
 (provide 'acg-editor)
