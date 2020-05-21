@@ -1,21 +1,22 @@
-(use-package multi-term) ;; See description of the package in https://www.emacswiki.org/emacs/MultiTerm
+(use-package multi-term
+  :config ;; See description of the package in https://www.emacswiki.org/emacs/MultiTerm
+  (setq multi-term-program "/bin/bash")
 
-(setq multi-term-program "/bin/bash")
-
-(defun acg/new-term ()
-  (interactive)
-  (multi-term))
+  (defun acg/new-term ()
+    (interactive)
+    (multi-term)))
 
 
 ;; customizing colors
-(use-package eterm-256color)
+(use-package eterm-256color
+  :config
 
-;; 256 color support
-(add-hook 'term-mode-hook #'eterm-256color-mode)
-;; (remove-hook 'term-mode-hook #'eterm-256color-mode)
+  ;; 256 color support
+  (add-hook 'term-mode-hook #'eterm-256color-mode)
+  ;; (remove-hook 'term-mode-hook #'eterm-256color-mode)
 
-;; allow bold faces
-(setq eterm-256color-disable-bold nil)
+  ;; allow bold faces
+  (setq eterm-256color-disable-bold nil))
 
 ;; (custom-set-variables
 ;;  '(term-default-bg-color "#000000")        ;; background color (black)
