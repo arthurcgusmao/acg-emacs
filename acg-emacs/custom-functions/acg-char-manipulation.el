@@ -107,15 +107,17 @@ Version 2017-04-19"
 
 
 
-(defun acg/split-string-with-region-or-line ()
-  "Split and replace string in the current line or region."
+(defun acg/split-region-contents-into-lines ()
+  "Split the region contents into separate lines, using a
+separator regexp, for which the user is prompted. If region is
+inactive, operates on the current line."
   (interactive)
   (when (not (use-region-p))
     (acg/select-current-line))
   (let ((REGION-STRING (buffer-substring-no-properties
                         (region-beginning) (region-end)))
-        (SEPARATORS (read-string "Enter separators (leave blank for default): "
-                                nil nil split-string-default-separators)))
+        (SEPARATORS (read-string "Enter regexp separators (leave blank for default \"[ \\f\\t\\n\\r\\v]+\"): "
+                                 nil nil split-string-default-separators)))
     (delete-region (region-beginning) (region-end))
     (insert
      (string-join
