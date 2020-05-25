@@ -188,6 +188,11 @@ user to choose a remote."
   :config
   (setq magit-diff-refine-hunk t))
 
+;; Packages for git-related file major modes
+(use-package gitignore-mode)
+(use-package gitconfig-mode)
+(use-package gitattributes-mode)
+
 
 ;; Make Emacs work with ssh-ident
 (use-package ssh-ident
