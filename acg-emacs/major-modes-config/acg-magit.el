@@ -6,6 +6,15 @@
   (setq vc-follow-symlinks t))
 
 
+(use-package transient
+  :init
+  (setq transient-history-file
+        (concat acg/history-dir "transient-history.el"))
+  :bind
+  (:map transient-map
+        ("<escape>" . transient-quit-all)))
+
+
 (use-package magit
   :config
   ;; Disable Magit asking to save files
@@ -148,14 +157,6 @@ user to choose a remote."
   (:map with-editor-mode-map
         ("C-w" . with-editor-cancel)
         ("C-s" . with-editor-finish)))
-
-(use-package transient
-  :config
-  (setq transient-history-file
-        (concat acg/history-dir "transient-history.el"))
-  :bind
-  (:map transient-map
-        ("<escape>" . transient-quit-all)))
 
 
 ;; Provide commit message guidelines/feedback when committing;

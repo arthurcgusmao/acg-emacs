@@ -2,6 +2,7 @@
 *.el~
 anaconda-mode
 auto-save-list
+eshell
 file-backups
 history
 obsolete
