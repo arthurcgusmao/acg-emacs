@@ -65,10 +65,11 @@ previous file before displaying file at point."
   (defun acg/magit-open-remote-repo ()
     "Opens a remote repo URL. Prompts the user to choose a remote."
     (interactive)
-    (let* ((remote-name (magit-read-remote "Choose remote repository"))
-           (url (magit-get "remote" remote-name "url")))
-      (browse-url (acg/parse-git-remote-url url))
-      (message "Opening repo %s" url)))
+    (let* ((remote-name (magit-read-remote "Choose remote repository" nil t))
+           (url (magit-get "remote" remote-name "url"))
+           (parsed-url (acg/parse-git-remote-url url)))
+      (browse-url parsed-url)
+      (message "Opening repo %s" parsed-url)))
 
   (defun acg/project-get-root-relative-path (&optional path)
     "Returns PATH relative to a project root."
