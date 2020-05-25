@@ -15,7 +15,8 @@
         acg/kill-sexp
         acg/move-beginning-of-line
         acg/move-beginning-of-visual-line
-        acg/toggle-letter-case
+        acg/toggle-word-case
+        acg/toggle-word-separator
         acg/windows-clipboard-paste-replace-selection
         clipboard-kill-region
         clipboard-kill-ring-save
