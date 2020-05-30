@@ -114,49 +114,13 @@ see `acg/electric-indent-newline-as-previous-if-blank'."
             (previous-line)
             (setq prev-indent (current-indentation)))
           ;; Indent current line catching errors
-
-          ;; (catch 'indent-error
-          ;;   (unless electric-indent-inhibit
-          ;;     (condition-case-unless-debug ()
-          ;;         (indent-line-to prev-indent)
-          ;;       (error (throw 'indent-error nil)))))
-
           (let ((at-newline (<= pos (line-beginning-position))))
-            ;; (when at-newline
-            ;;   (let ((before (copy-marker (1- pos) t)))
-            ;;     (save-excursion
-            ;;       (unless
-            ;;           (or (memq indent-line-function
-            ;;                     electric-indent-functions-without-reindent)
-            ;;               electric-indent-inhibit)
-            ;;         ;; Don't reindent the previous line if the
-            ;;         ;; indentation function is not a real one.
-            ;;         (goto-char before)
-            ;;         (condition-case-unless-debug ()
-            ;;             ;; (indent-according-to-mode)
-            ;;             (indent-line-to prev-indent)
-            ;;           (error (throw 'indent-error nil))))
-            ;;       (unless (eq electric-indent-inhibit 'electric-layout-mode)
-            ;;         ;; Unless we're operating under
-            ;;         ;; `electric-layout-mode' (Bug#35254), the goal here
-            ;;         ;; will be to remove the trailing whitespace after
-            ;;         ;; reindentation of the previous line because that
-            ;;         ;; may have (re)introduced it.
-            ;;         (goto-char before)
-            ;;         ;; We were at EOL in marker `before' before the call
-            ;;         ;; to `indent-according-to-mode' but after we may
-            ;;         ;; not be (Bug#15767).
-            ;;         ;; (when (and (eolp))
-            ;;         ;;   (delete-horizontal-space t))
-            ;;         ))))
             (unless (and electric-indent-inhibit
                          (not at-newline))
               (condition-case-unless-debug ()
                   ;; (indent-according-to-mode)
                   (indent-line-to prev-indent)
-                (error (throw 'indent-error nil)))))
-
-          )
+                (error (throw 'indent-error nil))))))
       ;; If not using modification or not blank line above, back to default
       (funcall orig-fun))))
 
