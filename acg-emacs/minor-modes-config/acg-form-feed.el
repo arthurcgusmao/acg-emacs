@@ -13,7 +13,7 @@
 (defun insert-form-feed-below ()
   "Inserts form feed char below current line."
   (interactive)
-  (if (acg/current-line-empty-p)
+  (if (acg/line-empty-p)
       (progn
         (delete-region (line-beginning-position) (line-end-position)) ; deletes whitespace if any
         (insert 12)
@@ -27,7 +27,7 @@
 (defun insert-form-feed-above ()
   "Inserts form feed char above current line."
   (interactive)
-  (if (acg/current-line-empty-p)
+  (if (acg/line-empty-p)
       (insert 12)
     (progn (previous-line)
            (end-of-line)

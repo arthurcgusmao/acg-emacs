@@ -160,6 +160,9 @@
   :config
   (acg/force-global-set-key "C-a" 'mark-whole-buffer)
 
+  ;; Rebind C-[ and then use [control-bracketleft] to rebind in other places
+  (define-key input-decode-map (kbd "C-[") [control-bracketleft])
+
   ;; for MS Windows only
   (if (string-equal system-type "windows-nt")
       (and (global-set-key (kbd "<M-f4>") 'delete-frame)))

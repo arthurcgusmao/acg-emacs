@@ -1,9 +1,13 @@
-;; only helper functions in this buffer.
+;; This file contains helper functions that can be used by other files
 
-(defun acg/current-line-empty-p ()
+(defun acg/line-empty-p (&optional pos)
+  "Returns `t' if line (optionally, line at POS) is empty or
+composed only of whitespace. Adapted from
+https://emacs.stackexchange.com/a/16825/13589"
   (save-excursion
-    (beginning-of-line)
-    (looking-at "[[:space:]]*$")))
+    (goto-char (or pos (point)))
+    (= (current-indentation)
+       (- (line-end-position) (line-beginning-position)))))
 
 (defun acg/current-indentation-column-p ()
   (save-excursion
