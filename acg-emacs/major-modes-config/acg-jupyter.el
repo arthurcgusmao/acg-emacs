@@ -75,35 +75,30 @@ it with the default external app."
   (interactive)
   (let* ((var (read-string "Enter variable: "
                            (thing-at-point 'symbol)))
-         (type (jupyter-eval (format "type(%s)" var))))
+         (type (jupyter-eval (format "type(%s)" var)))
+         (tempfpath (concat temporary-file-directory "emacs-jupyter---"
+                            (format-time-string "%Y-%m-%d--%Hh%Mm%Ss--") var)))
     (pcase type
       ("pandas.core.frame.DataFrame"
-       (let ((tempfpath
-              (concat temporary-file-directory "emacs-jupyter--" var ".csv")))
-         (jupyter-eval (format "%s.to_csv('%s')" var tempfpath))
-         (acg/open-in-external-app (list tempfpath))
-         ))
+       (setq tempfpath (concat tempfpath ".csv"))
+       (jupyter-eval (format "%s.to_csv('%s')" var tempfpath))
+       (acg/open-in-external-app (list tempfpath)))
       ("pandas.core.series.Series"
-       (let ((tempfpath
-              (concat temporary-file-directory "emacs-jupyter--" var ".csv")))
-         (jupyter-eval (format "%s.to_csv('%s')" var tempfpath))
-         (acg/open-in-external-app (list tempfpath))
-         ))
+       (setq tempfpath (concat tempfpath ".csv"))
+       (jupyter-eval (format "%s.to_csv('%s')" var tempfpath))
+       (acg/open-in-external-app (list tempfpath)))
       ("numpy.ndarray"
-       (let ((tempfpath
-              (concat temporary-file-directory "emacs-jupyter--" var ".csv")))
-         (jupyter-eval (format "import numpy as np; np.savetxt('%s', %s, delimiter=',')" tempfpath var))
-         (acg/open-in-external-app (list tempfpath))))
+       (setq tempfpath (concat tempfpath ".csv"))
+       (jupyter-eval (format "import numpy as np; np.savetxt('%s', %s, delimiter=',')" tempfpath var))
+       (acg/open-in-external-app (list tempfpath)))
       ("str"
-       (let ((tempfpath
-              (concat temporary-file-directory "emacs-jupyter--" var ".txt")))
-         (jupyter-eval (format "with open('%s','w') as f: f.write(%s)" tempfpath var))
-         (acg/open-in-external-app (list tempfpath))))
+       (setq tempfpath (concat tempfpath ".txt"))
+       (jupyter-eval (format "with open('%s','w') as f: f.write(%s)" tempfpath var))
+       (acg/open-in-external-app (list tempfpath)))
       ("dict"
-       (let ((tempfpath
-              (concat temporary-file-directory "emacs-jupyter--" var ".json")))
-         (jupyter-eval (format "with open('%s','w') as f: f.write(json.dumps(%s, indent=4))" tempfpath var))
-         (acg/open-in-external-app (list tempfpath))))
+       (setq tempfpath (concat tempfpath ".json"))
+       (jupyter-eval (format "with open('%s','w') as f: f.write(json.dumps(%s, indent=4))" tempfpath var))
+       (acg/open-in-external-app (list tempfpath)))
       )))
 
 ;; Show value of the last variable that was assigned in Jupyter
@@ -168,3 +163,7 @@ where code is and sending code to be evaluated in the REPL."
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o") nil)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o t") 'acg/jupyter-toggle-use-overlays-repl)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o r") 'jupyter-eval-remove-overlays)
+
+
+;; To-Dos -- Functions to look into
+;;     - jupyter-completion-symbol-beginning -- What I want here is to complete on `pd.DataFram...' instead of just `DataFram...'; Check to see what is the exact use of this function and if that is not currently working or is
