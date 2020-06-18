@@ -9,6 +9,7 @@
 (setq org-startup-truncated nil)
 (setq org-startup-folded nil)
 
+
 ;; make code blocks pretty
 (setq org-src-fontify-natively t)
 ;; highlight latex related syntax
@@ -17,7 +18,7 @@
 
 
 ;; where to put latex preview images
-(setq org-latex-preview-ltxpng-directory (concat user-emacs-directory "latex-png-previews/"))
+(setq org-preview-latex-image-directory (concat temporary-file-directory "org-mode-ltximg-preview/"))
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 
 ;; configuring the latex-pdf generator
@@ -38,7 +39,7 @@
 
 
 ;; setting up keybindings
-(add-hook 'org-mode-hook 
+(add-hook 'org-mode-hook
           (lambda ()
             (define-key org-mode-map (kbd "<C-tab>") nil)
             (define-key org-mode-map (kbd "<S-iso-lefttab>") 'org-cycle)
@@ -49,7 +50,7 @@
             (define-key org-mode-map (kbd "C-k") nil)
             (define-key org-mode-map (kbd "C-y") nil)
             (define-key org-mode-map (kbd "C-t") nil)
-            
+
             (define-key org-mode-map (kbd "<S-right>") nil)
             (define-key org-mode-map (kbd "<S-left>") nil)
             (define-key org-mode-map (kbd "<S-up>") nil)
@@ -78,10 +79,10 @@
             (define-key org-mode-map (kbd "<M-return>") 'acg/org-meta-return-newline)
             (define-key org-mode-map (kbd "C-8") 'org-insert-heading-after-current)
             (define-key org-mode-map (kbd "M-8") 'org-insert-subheading-newline)
-            
+
             (define-key org-mode-map (kbd "<M-S-right>") nil)
             (define-key org-mode-map (kbd "<M-S-left>") nil)
-            
+
             ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-left>") 'org-cycle-backwards)
             ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-right>") 'org-cycle)
             (define-key org-mode-map (kbd "<M-left>") nil)
@@ -90,6 +91,8 @@
             (define-key org-mode-map (kbd "<f5>") (lambda () (interactive) (org-preview-latex-fragment 16)))
             (define-key org-mode-map (kbd "<f6>") 'org-preview-latex-fragment)
             (define-key org-mode-map (kbd "<f9>") 'org-latex-export-to-pdf)
+
+            (define-key org-mode-map (kbd "C-k") 'org-insert-link)
             ))
 
 
@@ -161,8 +164,8 @@
 ;;   (interactive)
 ;;   (call-rebinding-org-blank-behaviour 'org-insert-todo-heading-respect-content))
 
-;; (define-key org-mode-map (kbd "M-<return>") 'smart-org-meta-return-dwim) 
-;; (define-key org-mode-map (kbd "M-S-<return>") 'smart-org-insert-todo-heading-dwim) 
+;; (define-key org-mode-map (kbd "M-<return>") 'smart-org-meta-return-dwim)
+;; (define-key org-mode-map (kbd "M-S-<return>") 'smart-org-insert-todo-heading-dwim)
 ;; (define-key org-mode-map (kbd "C-<return>") 'smart-org-insert-heading-respent-content-dwim)
 ;; (define-key org-mode-map (kbd "C-S-<return>") 'smart-org-insert-todo-heading-respect-content-dwim)
 
@@ -247,3 +250,21 @@
     (org-clean-visibility-after-subtree-move)
     ;; move back to the initial column we were at
     (move-to-column col)))
+
+
+;; Org-download facilitates saving images
+(use-package org-download
+  :init
+  (setq org-download-image-dir "./img/")
+  (setq org-download-heading-lvl nil)
+  :hook ((org-mode . org-download-enable)
+         (dired-mode . org-download-enable))
+  :bind
+  (:map org-mode-map
+   ("C-c i i" . org-download-image)
+   ("C-c i r" . org-download-rename-at-point)
+   ("C-c i s" . org-download-screenshot)
+   :map dired-mode-map
+   ("C-c i i" . org-download-image)
+   ("C-c i r" . org-download-rename-at-point)
+   ("C-c i s" . org-download-screenshot)))

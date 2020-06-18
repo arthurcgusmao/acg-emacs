@@ -12,4 +12,7 @@
   (("M-o" . projectiny-find-file)
    ("M-O" . projectiny-find-file-all)
    ("C-M-o" . projectiny-find-file-in)
-   ("C-c p" . projectiny-find-file-in)))
+   ("C-c p" . projectiny-find-file-in))
+  :commands
+  (projectiny-add-project
+   projectiny-clean-known-projects))
