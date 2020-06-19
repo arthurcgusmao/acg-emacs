@@ -46,6 +46,7 @@ afterwards."
 
   :bind
   (("C-x d" . dired-jump)
+   ("C-M-d" . dired-jump)
    :map dired-mode-map
    ("C-o" . nil)
    ("q" . 'kill-current-buffer)

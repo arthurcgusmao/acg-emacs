@@ -61,7 +61,9 @@ minibuffer."
    ("<return>" . ivy-alt-done)
    ("TAB" . ivy-partial)
    ("C-x g" . acg/ivy-here--magit-status)
+   ("C-M-g" . acg/ivy-here--magit-status)
    ("C-x d" . acg/ivy-here--dired)
+   ("C-M-d" . acg/ivy-here--dired)
    ("M-s g" . acg/ivy-here--grep-vc-or-dir))
   :hook (after-init . ivy-mode))
 
