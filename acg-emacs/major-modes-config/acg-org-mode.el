@@ -71,7 +71,7 @@
             (define-key org-mode-map (kbd "C-<") 'org-shiftmetaleft)
             (define-key org-mode-map (kbd "C->") 'org-shiftmetaright)
 
-            (define-key org-mode-map (kbd "<return>") 'org-return)
+            (define-key org-mode-map (kbd "<return>") 'acg/org-return)
             (define-key org-mode-map (kbd "<C-return>") 'acg/org-smart-open-line-below)
             (define-key org-mode-map (kbd "<C-S-return>") 'acg/org-smart-open-line-above)
             (define-key org-mode-map (kbd "<M-return>") 'acg/org-open-line)
@@ -136,11 +136,17 @@
   (org-meta-return))
 
 
+;; (defun acg/soft-kill-line ()
+;;   "Same as `kill-line', but doesn't kill through newline."
+;;   (interactive)
+;;   (when (/= (save-excursion (end-of-line) (point)) (save-excursion (skip-chars-forward " \t") (point)))
+;;     (kill-line) t))
+
 (defun acg/soft-kill-line ()
   "Same as `kill-line', but doesn't kill through newline."
   (interactive)
-  (when (/= (save-excursion (end-of-line) (point)) (point))
-    (kill-line) t))
+  (kill-region (point) (line-end-position))
+  t)
 
 (defun acg/beginning-of-line-or-first-alphabetical-letter ()
   "Toggles cursor between beginning of line (column 0) and the
@@ -173,7 +179,7 @@ wraping region if on a table."
   (interactive)
   (org-check-before-invisible-edit 'insert)
   (cond ((org-at-table-p) (call-interactively #'org-table-wrap-region))
-	((org-in-item-p) (beginning-of-line) (org-insert-item) (org-metadown))
+	((org-in-item-p) (beginning-of-line) (org-insert-item) (org-metadown) (end-of-line))
 	(t (call-interactively #'acg/smart-open-line-below))))
 
 (defun acg/org-smart-open-line-above ()
@@ -186,14 +192,14 @@ wraping region if on a table."
         ;; For bullet items, we wanna check if we're either ON a list or right
         ;; after. In both cases we wanna add a new bullet item; hence the
         ;; following two separate lines.
-	((org-in-item-p) (beginning-of-line) (org-insert-item))
-        ((save-excursion (forward-line -1) (org-in-item-p)) (forward-line -1) (beginning-of-line) (org-insert-item) (org-metadown))
+	((org-in-item-p) (beginning-of-line) (org-insert-item) (skip-chars-forward " "))
+        ((save-excursion (forward-line -1) (org-in-item-p)) (forward-line -1) (beginning-of-line) (org-insert-item) (org-metadown) (end-of-line))
 	(t (call-interactively #'acg/smart-open-line-above))))
 
 (defun acg/org-open-line ()
   (interactive)
   (org-check-before-invisible-edit 'insert)
-  (cond ((org-in-item-p) (let ((p (point)) (kill-p (acg/soft-kill-line))) (beginning-of-line) (org-insert-item) (org-metadown) (when kill-p (yank)) (goto-char p)))
+  (cond ((org-in-item-p) (let ((p (point)) (kill-p (acg/soft-kill-line))) (beginning-of-line) (org-insert-item) (org-metadown) (end-of-line) (when kill-p (yank)) (goto-char p)))
 	(t (call-interactively #'acg/open-line))))
 
 (defun acg/org-newline-above ()
@@ -207,7 +213,7 @@ wraping region if on a table."
   "docstring"
   (interactive)
   (org-check-before-invisible-edit 'insert)
-  (cond ((org-in-item-p) (let ((kill-p (acg/soft-kill-line))) (beginning-of-line) (org-insert-item) (org-metadown) (when kill-p (save-excursion (yank)))))
+  (cond ((org-in-item-p) (let ((kill-p (acg/soft-kill-line))) (beginning-of-line) (org-insert-item) (org-metadown) (end-of-line) (if kill-p (save-excursion (yank)))))
 	(t (call-interactively #'org-return))))
 
 (defun acg/org-metaup (&optional arg)
