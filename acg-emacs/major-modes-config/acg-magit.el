@@ -126,6 +126,7 @@ user to choose a remote."
 
   :bind
   (("C-x g" . magit-status)
+   ("C-M-g" . magit-status)
    :map magit-status-mode-map
    ("<C-tab>" . nil)
    ("C-c <tab>" . magit-section-cycle)

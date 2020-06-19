@@ -1,42 +1,37 @@
-(defun acg/move-beginning-of-line (arg)
-  "Move point back to indentation of beginning of line.
-Move point to the first non-whitespace character on this line. If
-point is already there, move to the beginning of the line.
-Effectively toggle between the first non-whitespace character and
-the beginning of the line. If ARG is not nil or 1, move forward
-ARG - 1 lines first. If point reaches the beginning or end of the
-buffer, stop there. (function taken from prelude)"
+;; Adapted from
+;; https://www.reddit.com/r/emacs/comments/543ri3/beginningoflineorindentation/
+
+(defun acg/point-at-indentation-p ()
+  "Return non-nil if point is at indentation, nil otherwise."
+  (= (save-excursion (back-to-indentation) (point)) (point)))
+
+(defun acg/second-line-of-visual-line-p ()
+  "Return non-nil if point is at the second or more line of a
+  visual line."
+  (let ((line-move-visual t))
+    (= (save-excursion (line-move -1 t) (line-number-at-pos)) (line-number-at-pos))))
+
+(defun acg/beginning-of-line-or-indentation (arg)
+  "Toggle between beginning of line and point of indentation."
   (interactive "^p")
-  (setq arg (or arg 1))
+  (if (acg/point-at-indentation-p)
+      (beginning-of-line)
+    (back-to-indentation)))
 
-  ;; Move lines first
-  (when (/= arg 1)
-    (let ((line-move-visual nil))
-      (forward-line (1- arg))))
-
-  (let ((orig-point (point)))
-    (back-to-indentation)
-    (when (= orig-point (point))
-      (move-beginning-of-line 1))))
-
-(defun acg/move-beginning-of-visual-line (arg)
-  "Same as `acg/move-beginning-of-line' but for the visual line."
+(defun acg/beginning-of-visual-line-or-indentation (arg)
+  "Toggle between beginning of visual line and point of indentation."
   (interactive "^p")
-  (setq arg (or arg 1))
+  (if (or (acg/point-at-indentation-p)
+          (acg/second-line-of-visual-line-p))
+      (beginning-of-visual-line)
+    (back-to-indentation)))
 
-  ;; Move lines first
-  (when (/= arg 1)
-    (let ((line-move-visual nil))
-      (forward-line (1- arg))))
-
-  (let ((orig-point (point)))
-    (back-to-indentation)
-    (when (= orig-point (point))
-      (beginning-of-visual-line 1))))
+(fset 'acg/left-subword (acg/with-subword-mode #'backward-word))
+(fset 'acg/right-subword (acg/with-subword-mode #'forward-word))
 
 ;; keybindings
-(global-set-key (kbd "<home>") 'acg/move-beginning-of-visual-line)
-(global-set-key (kbd "<C-M-left>") 'acg/move-beginning-of-visual-line)
+(global-set-key (kbd "<home>") 'acg/beginning-of-visual-line-or-indentation)
+(global-set-key (kbd "<C-M-left>") 'acg/beginning-of-visual-line-or-indentation)
 (global-set-key (kbd "<C-M-right>") 'move-end-of-line)
-(global-set-key (kbd "<s-right>") (acg/with-subword-mode #'forward-word))
-(global-set-key (kbd "<s-left>") (acg/with-subword-mode #'backward-word))
+(global-set-key (kbd "<s-left>") 'acg/left-subword)
+(global-set-key (kbd "<s-right>") 'acg/right-subword)

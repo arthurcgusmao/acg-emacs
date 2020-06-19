@@ -24,6 +24,7 @@
         crux-kill-line-backwards
         crux-smart-open-line-above
         end-of-visual-line
+        fill-paragraph
         helm-mini
         indent-for-tab-command
         indent-region

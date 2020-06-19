@@ -50,13 +50,18 @@
 (use-package restore-point
   :straight (:host github :repo "arthurcgusmao/restore-point")
   :config
-  (dolist (f '(acg/mark-dwim
-               er/mark-defun
-               backward-paragraph
-               forward-paragraph
-               down-list
-               backward-up-list
-               python-nav-backward-up-list))
+  (dolist (f '(;; For marking regions
+               acg/mark-dwim er/mark-defun
+               ;; For movements across words, sexps, or related
+               acg/right-subword acg/left-subword
+               left-word right-word
+               sp-backward-sexp sp-forward-sexp
+               down-list backward-up-list python-nav-backward-up-list
+               backward-paragraph forward-paragraph
+               ;; For movements in the same line
+               back-to-indentation beginning-of-line beginning-of-visual-line
+               acg/beginning-of-visual-line-or-indentation move-end-of-line
+               ))
     (add-to-list 'rp/restore-point-commands f t))
   :hook (after-init . restore-point-mode))
 
