@@ -71,9 +71,11 @@
             (define-key org-mode-map (kbd "C->") 'org-shiftmetaright)
 
             (define-key org-mode-map (kbd "<return>") 'org-return-indent)
-            (define-key org-mode-map (kbd "<C-return>") nil)
-            (define-key org-mode-map (kbd "<C-S-return>") nil)
-            (define-key org-mode-map (kbd "<M-return>") 'acg/org-meta-return-newline)
+            (define-key org-mode-map (kbd "<C-return>") 'acg/org-smart-open-line-below)
+            (define-key org-mode-map (kbd "<C-S-return>") 'acg/org-smart-open-line-above)
+            (define-key org-mode-map (kbd "<M-return>") 'acg/org-open-line)
+            (define-key org-mode-map (kbd "<S-return>") 'acg/org-newline-above)
+            ;; (define-key org-mode-map (kbd "<M-return>") 'acg/org-meta-return-newline)
             (define-key org-mode-map (kbd "C-8") 'org-insert-heading-after-current)
             (define-key org-mode-map (kbd "M-8") 'org-insert-subheading-newline)
 
@@ -131,6 +133,45 @@
   (previous-line)
   (end-of-line)
   (org-meta-return))
+
+;; (setq org-list-end-re "^[ \t]*\n")
+(setq org-list-end-re "[ \t]*\n")
+
+(defun acg/org-smart-open-line-below ()
+  "`acg/smart-open-line-below' version for org-mode. Performs
+additional utilities like adding a bullet point if in a list or
+wraping region if on a table."
+  (interactive)
+  (org-check-before-invisible-edit 'insert)
+  (cond ((org-at-table-p) (call-interactively #'org-table-wrap-region))
+	((org-in-item-p) (beginning-of-line) (org-insert-item) (acg/move-lines 1))
+	(t (call-interactively #'acg/smart-open-line-below))))
+
+(defun acg/org-smart-open-line-above ()
+  "`acg/smart-open-line-above' version for org-mode. Performs
+additional utilities like adding a bullet point if in a list or
+wraping region if on a table."
+  (interactive)
+  (org-check-before-invisible-edit 'insert)
+  (cond ((org-at-table-p) (call-interactively #'org-table-wrap-region))
+        ;; For bullet items, we wanna check if we're either ON a list or right
+        ;; after. In both cases we wanna add a new bullet item; hence the
+        ;; following two separate lines.
+	((org-in-item-p) (beginning-of-line) (org-insert-item))
+        ((save-excursion (forward-line -1) (org-in-item-p)) (forward-line -1) (beginning-of-line) (org-insert-item) (acg/move-lines 1))
+	(t (call-interactively #'acg/smart-open-line-above))))
+
+(defun acg/org-open-line ()
+  (interactive)
+  (org-check-before-invisible-edit 'insert)
+  (cond ((org-in-item-p) (org-insert-item))
+	(t (call-interactively #'acg/open-line))))
+
+(defun acg/org-newline-above ()
+  (interactive)
+  (org-check-before-invisible-edit 'insert)
+  (cond ((org-in-item-p) (org-insert-item) (when (/= (save-excursion (end-of-line) (point)) (point)) (acg/move-lines -1)))
+	(t (call-interactively #'acg/newline-above))))
 
 
 (defun acg/org-metaup (&optional arg)

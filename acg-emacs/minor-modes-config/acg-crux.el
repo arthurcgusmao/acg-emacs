@@ -42,9 +42,13 @@ does not indent according to
       (forward-line 1)
       (indent-according-to-mode)))
 
+  (defun acg/smart-open-line-above ()
+    (interactive)
+    (crux-smart-open-line-above))
+
   :bind
   (("<C-return>" . acg/smart-open-line-below)
-   ("<C-S-return>" . crux-smart-open-line-above)
+   ("<C-S-return>" . acg/smart-open-line-above)
    ;; ("<M-return>" . indent-new-comment-line)
    ("<M-return>" . acg/open-line)
    ("C-j" . crux-top-join-line)))
