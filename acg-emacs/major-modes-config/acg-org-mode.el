@@ -64,13 +64,14 @@
             (define-key org-mode-map (kbd "<M-S-end>") 'show-subtree)
             (define-key org-mode-map (kbd "<M-S-home>") 'hide-subtree)
             (define-key org-mode-map (kbd "<M-end>") 'org-cycle)
+            (define-key org-mode-map (kbd "<home>") 'acg/org-beginning-of-visual-line-or-indentation)
             (define-key org-mode-map (kbd "<M-home>") 'org-cycle-backwards)
             (define-key org-mode-map (kbd "<C-M-end>") 'org-global-cycle)
             (define-key org-mode-map (kbd "<C-M-home>") 'acg/org-global-cycle-backwards)
             (define-key org-mode-map (kbd "C-<") 'org-shiftmetaleft)
             (define-key org-mode-map (kbd "C->") 'org-shiftmetaright)
 
-            (define-key org-mode-map (kbd "<return>") 'org-return-indent)
+            (define-key org-mode-map (kbd "<return>") 'org-return)
             (define-key org-mode-map (kbd "<C-return>") 'acg/org-smart-open-line-below)
             (define-key org-mode-map (kbd "<C-S-return>") 'acg/org-smart-open-line-above)
             (define-key org-mode-map (kbd "<M-return>") 'acg/org-open-line)
@@ -134,6 +135,34 @@
   (end-of-line)
   (org-meta-return))
 
+
+(defun acg/soft-kill-line ()
+  "Same as `kill-line', but doesn't kill through newline."
+  (interactive)
+  (when (/= (save-excursion (end-of-line) (point)) (point))
+    (kill-line) t))
+
+(defun acg/beginning-of-line-or-first-alphabetical-letter ()
+  "Toggles cursor between beginning of line (column 0) and the
+first alphabetical letter (a-zA-Z)."
+  (interactive)
+  (let ((p1 (point))
+        (p2 (save-excursion (beginning-of-line) (skip-chars-forward "^a-zA-Z\n") (point))))
+    (message "%s %s" p1 p2)
+    (if (eq p1 p2)
+        (beginning-of-line)
+      (goto-char p2))))
+
+(defun acg/org-beginning-of-visual-line-or-indentation (&optional arg)
+  "Org alternative for
+`acg/beginning-of-visual-line-or-indentation' that considers
+being inside a list and toggles cursor between first alphatical
+word in list (usually first word) and beginning of line."
+  (interactive "^p")
+  (if (org-in-item-p)
+      (acg/beginning-of-line-or-first-alphabetical-letter)
+      (acg/beginning-of-visual-line-or-indentation arg)))
+
 ;; (setq org-list-end-re "^[ \t]*\n")
 (setq org-list-end-re "[ \t]*\n")
 
@@ -144,7 +173,7 @@ wraping region if on a table."
   (interactive)
   (org-check-before-invisible-edit 'insert)
   (cond ((org-at-table-p) (call-interactively #'org-table-wrap-region))
-	((org-in-item-p) (beginning-of-line) (org-insert-item) (acg/move-lines 1))
+	((org-in-item-p) (beginning-of-line) (org-insert-item) (org-metadown))
 	(t (call-interactively #'acg/smart-open-line-below))))
 
 (defun acg/org-smart-open-line-above ()
@@ -158,21 +187,28 @@ wraping region if on a table."
         ;; after. In both cases we wanna add a new bullet item; hence the
         ;; following two separate lines.
 	((org-in-item-p) (beginning-of-line) (org-insert-item))
-        ((save-excursion (forward-line -1) (org-in-item-p)) (forward-line -1) (beginning-of-line) (org-insert-item) (acg/move-lines 1))
+        ((save-excursion (forward-line -1) (org-in-item-p)) (forward-line -1) (beginning-of-line) (org-insert-item) (org-metadown))
 	(t (call-interactively #'acg/smart-open-line-above))))
 
 (defun acg/org-open-line ()
   (interactive)
   (org-check-before-invisible-edit 'insert)
-  (cond ((org-in-item-p) (org-insert-item))
+  (cond ((org-in-item-p) (let ((p (point)) (kill-p (acg/soft-kill-line))) (beginning-of-line) (org-insert-item) (org-metadown) (when kill-p (yank)) (goto-char p)))
 	(t (call-interactively #'acg/open-line))))
 
 (defun acg/org-newline-above ()
   (interactive)
   (org-check-before-invisible-edit 'insert)
-  (cond ((org-in-item-p) (org-insert-item) (when (/= (save-excursion (end-of-line) (point)) (point)) (acg/move-lines -1)))
-	(t (call-interactively #'acg/newline-above))))
+  (cond
+   ((org-in-item-p) (let ((kill-p (acg/soft-kill-line))) (beginning-of-line) (org-insert-item) (when kill-p (save-excursion (yank)))))
+   (t (call-interactively #'acg/newline-above))))
 
+(defun acg/org-return ()
+  "docstring"
+  (interactive)
+  (org-check-before-invisible-edit 'insert)
+  (cond ((org-in-item-p) (let ((kill-p (acg/soft-kill-line))) (beginning-of-line) (org-insert-item) (org-metadown) (when kill-p (save-excursion (yank)))))
+	(t (call-interactively #'org-return))))
 
 (defun acg/org-metaup (&optional arg)
   "Same as `org-metaup' but just move lines up if region is
