@@ -38,6 +38,7 @@
         my-super-keyboard-quit
         org-self-insert-command
         prelude-move-beginning-of-line
+        python-indent-shift-left
         sp-backward-sexp
         sp-forward-sexp
         sp-forward-slurp-sexp

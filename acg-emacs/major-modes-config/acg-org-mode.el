@@ -362,3 +362,21 @@ active."
    ("C-c i i" . org-download-image)
    ("C-c i r" . org-download-rename-at-point)
    ("C-c i s" . org-download-screenshot)))
+
+
+;; Org babel Jupyter integration
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)
+   (jupyter . t)))
+
+(setq org-babel-default-header-args:jupyter-python
+      '((:async . "yes")
+        (:session . "py")
+        (:kernel . "python3")
+        ))
+
+;; Do not alter indentation in Org source blocks
+(setq org-src-preserve-indentation t)
