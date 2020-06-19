@@ -29,19 +29,16 @@ indentation in the current line."
   "Kill all characters in line and indent, or kill line
 if there are only white spaces in it."
   (interactive)
-  ;; Need to isolate `this-command', otherwise `kill-region' overrides it and
-  ;; then it propagates to `last-command' the next time this command is called.
-  (let ((this-command this-command))
-    (if (eq last-command this-command)
-        ;; Be smart: toggle between beginning of 'hard' line and previous line
-        ;; indentation when this function is called repetitively
-        (acg/toggle-line-indent)
-      (progn
-        (if (use-region-p)
-            (kill-region (region-beginning) (region-end)))
-        (end-of-line)
-        (kill-line 0)
-        (indent-according-to-mode)))))
+  (if (acg/line-empty-p)
+      ;; Be smart: toggle between beginning of 'hard' line and previous line
+      ;; indentation when line is already empty
+      (acg/toggle-line-indent)
+    (progn
+      (if (use-region-p)
+          (kill-region (region-beginning) (region-end)))
+      (end-of-line)
+      (kill-line 0)
+      (indent-according-to-mode))))
 
 (defun acg/kill-whole-line-or-region-lines ()
   "Kills the whole line (or lines defined by the region)."
