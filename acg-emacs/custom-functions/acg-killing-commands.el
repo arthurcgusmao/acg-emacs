@@ -5,7 +5,7 @@
       (kill-region (region-beginning) (region-end)))
   (progn
     (if (not (looking-at "[[:space:]]*$"))
-        (kill-line))))     
+        (kill-line))))
 
 (defun acg/kill-line-or-region-backwards ()
   "Kill line backwards (or lines defined by the region) and adjust the
@@ -16,15 +16,32 @@ indentation."
   (kill-line 0)
   (indent-according-to-mode))
 
-(use-package crux)
+(defun acg/toggle-line-indent ()
+  "Toggles between indentation according to mode and no
+indentation in the current line."
+  (interactive)
+  (let ((idnt (current-indentation)))
+    (indent-according-to-mode)
+    (when (= idnt (current-indentation))
+      (indent-line-to 0))))
+
 (defun acg/kill-whole-line-or-region-content ()
   "Kill all characters in line and indent, or kill line
 if there are only white spaces in it."
   (interactive)
-  (if (use-region-p)
-      (kill-region (region-beginning) (region-end)))
-  (end-of-line)
-  (crux-kill-line-backwards))
+  ;; Need to isolate `this-command', otherwise `kill-region' overrides it and
+  ;; then it propagates to `last-command' the next time this command is called.
+  (let ((this-command this-command))
+    (if (eq last-command this-command)
+        ;; Be smart: toggle between beginning of 'hard' line and previous line
+        ;; indentation when this function is called repetitively
+        (acg/toggle-line-indent)
+      (progn
+        (if (use-region-p)
+            (kill-region (region-beginning) (region-end)))
+        (end-of-line)
+        (kill-line 0)
+        (indent-according-to-mode)))))
 
 (defun acg/kill-whole-line-or-region-lines ()
   "Kills the whole line (or lines defined by the region)."
