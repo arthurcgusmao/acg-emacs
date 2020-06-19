@@ -70,9 +70,6 @@
             (define-key org-mode-map (kbd "C-<") 'org-shiftmetaleft)
             (define-key org-mode-map (kbd "C->") 'org-shiftmetaright)
 
-            (define-key org-mode-map (kbd "<M-up>") nil)
-            (define-key org-mode-map (kbd "<M-down>") nil)
-
             (define-key org-mode-map (kbd "<return>") 'org-return-indent)
             (define-key org-mode-map (kbd "<C-return>") nil)
             (define-key org-mode-map (kbd "<C-S-return>") nil)
@@ -82,7 +79,11 @@
 
             (define-key org-mode-map (kbd "<M-S-right>") nil)
             (define-key org-mode-map (kbd "<M-S-left>") nil)
+            (define-key org-mode-map (kbd "<M-S-up>") nil)
+            (define-key org-mode-map (kbd "<M-S-down>") nil)
 
+            (define-key org-mode-map (kbd "<M-up>") 'acg/org-metaup)
+            (define-key org-mode-map (kbd "<M-down>") 'acg/org-metadown)
             ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-left>") 'org-cycle-backwards)
             ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-right>") 'org-cycle)
             (define-key org-mode-map (kbd "<M-left>") nil)
@@ -130,6 +131,24 @@
   (previous-line)
   (end-of-line)
   (org-meta-return))
+
+
+(defun acg/org-metaup (&optional arg)
+  "Same as `org-metaup' but just move lines up if region is
+active."
+  (interactive "P")
+  (if (region-active-p)
+      (acg/move-lines-up arg)
+    (org-metaup arg)))
+
+(defun acg/org-metadown (&optional arg)
+  "Same as `org-metadown' but just move lines down if region is
+active."
+  (interactive "P")
+  (if (region-active-p)
+      (acg/move-lines-down arg)
+    (org-metadown arg)))
+
 
 
 ;; making org insert blank lines before headings

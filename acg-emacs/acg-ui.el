@@ -18,7 +18,7 @@
 (scroll-bar-mode -1)
 
 ;; Disable startup screen
-(setq inhibit-startup-screen t) 
+(setq inhibit-startup-screen t)
 
 
 ;; Help/Info Menus
@@ -51,7 +51,12 @@
   :straight (:host github :repo "arthurcgusmao/restore-point")
   :config
   (dolist (f '(acg/mark-dwim
-               er/mark-defun))
+               er/mark-defun
+               backward-paragraph
+               forward-paragraph
+               down-list
+               backward-up-list
+               python-nav-backward-up-list))
     (add-to-list 'rp/restore-point-commands f t))
   :hook (after-init . restore-point-mode))
 
