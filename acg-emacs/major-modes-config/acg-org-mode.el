@@ -135,18 +135,10 @@
   (end-of-line)
   (org-meta-return))
 
-
-;; (defun acg/soft-kill-line ()
-;;   "Same as `kill-line', but doesn't kill through newline."
-;;   (interactive)
-;;   (when (/= (save-excursion (end-of-line) (point)) (save-excursion (skip-chars-forward " \t") (point)))
-;;     (kill-line) t))
-
 (defun acg/soft-kill-line ()
   "Same as `kill-line', but doesn't kill through newline."
   (interactive)
-  (kill-region (point) (line-end-position))
-  t)
+  (kill-region (point) (line-end-position)))
 
 (defun acg/beginning-of-line-or-first-alphabetical-letter ()
   "Toggles cursor between beginning of line (column 0) and the
@@ -199,21 +191,21 @@ wraping region if on a table."
 (defun acg/org-open-line ()
   (interactive)
   (org-check-before-invisible-edit 'insert)
-  (cond ((org-in-item-p) (let ((p (point)) (kill-p (acg/soft-kill-line))) (beginning-of-line) (org-insert-item) (org-metadown) (end-of-line) (when kill-p (yank)) (goto-char p)))
+  (cond ((org-in-item-p) (let ((p (point))) (acg/soft-kill-line) (beginning-of-line) (org-insert-item) (org-metadown) (end-of-line) (yank) (goto-char p)))
 	(t (call-interactively #'acg/open-line))))
 
 (defun acg/org-newline-above ()
   (interactive)
   (org-check-before-invisible-edit 'insert)
   (cond
-   ((org-in-item-p) (let ((kill-p (acg/soft-kill-line))) (beginning-of-line) (org-insert-item) (when kill-p (save-excursion (yank)))))
+   ((org-in-item-p) (acg/soft-kill-line) (beginning-of-line) (org-insert-item) (save-excursion (yank)))
    (t (call-interactively #'acg/newline-above))))
 
 (defun acg/org-return ()
   "docstring"
   (interactive)
   (org-check-before-invisible-edit 'insert)
-  (cond ((org-in-item-p) (let ((kill-p (acg/soft-kill-line))) (beginning-of-line) (org-insert-item) (org-metadown) (end-of-line) (if kill-p (save-excursion (yank)))))
+  (cond ((org-in-item-p) (acg/soft-kill-line) (beginning-of-line) (org-insert-item) (org-metadown) (end-of-line) (save-excursion (yank)))
 	(t (call-interactively #'org-return))))
 
 (defun acg/org-metaup (&optional arg)
