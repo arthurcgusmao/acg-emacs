@@ -105,5 +105,5 @@ next keypress."
 function that starts with an initial input in the minibuffer."
   (run-with-idle-timer
    0 nil (lambda ()
-           (push 'C-S-right unread-command-events)
-           (push 'C-left unread-command-events))))
+           (push 'S-end unread-command-events)
+           (push 'home unread-command-events))))
