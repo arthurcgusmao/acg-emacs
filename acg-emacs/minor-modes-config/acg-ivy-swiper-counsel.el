@@ -110,10 +110,12 @@ thing/symbol at point."
   (setq prescient-save-file (concat acg/history-dir "prescient-save.el"))
   (prescient-persist-mode 1))
 (use-package ivy-prescient
-  :after counsel
-  :config (ivy-prescient-mode 1))
+  :after (prescient ivy)
+  :config
+  (setq ivy-prescient-sort-commands '(:not swiper swiper-isearch ivy-switch-buffer counsel-find-file counsel-recentf))
+  (ivy-prescient-mode 1))
 (use-package company-prescient
-  :after company
+  :after (prescient company)
   :config (company-prescient-mode 1))
 
 

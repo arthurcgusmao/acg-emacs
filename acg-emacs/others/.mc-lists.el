@@ -5,6 +5,7 @@
       '(
         acg/backward-kill-sexp
         acg/backward-kill-word
+        acg/beginning-of-visual-line-or-indentation
         acg/calc-eval
         acg/clipboard-kill-region-or-line
         acg/clipboard-kill-ring-save

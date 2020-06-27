@@ -8,7 +8,7 @@
   :after yasnippet)
 
 (use-package ivy-yasnippet
-  :after yasnippet
+  :after (yasnippet ivy)
   :bind
   (:map yas-minor-mode-map
         ("C-c <tab>" . ivy-yasnippet)))
