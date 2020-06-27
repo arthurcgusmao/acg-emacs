@@ -107,3 +107,17 @@ function that starts with an initial input in the minibuffer."
    0 nil (lambda ()
            (push 'S-end unread-command-events)
            (push 'home unread-command-events))))
+
+;; ;; not working -- don't know why
+;; (defun acg/with-filename-as-input (&rest args)
+;;   "Add current filename (if buffer associated to file) to
+;; minibuffer. To be used as advice before any function that targets
+;; files in the current directory."
+;;   (if (buffer-file-name)
+;;       (setq tmp/buffer-filename (file-name-nondirectory (buffer-file-name)))
+;;     (setq tmp/buffer-filename ""))
+;;   (run-with-idle-timer
+;;    0 nil (lambda ()
+;;              (insert tmp/buffer-filename)))
+;;   )
+;; (advice-add 'delete-file :before #'acg/with-filename-as-input)
