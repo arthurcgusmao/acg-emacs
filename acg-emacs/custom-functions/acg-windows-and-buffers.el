@@ -92,3 +92,16 @@ new buffer."
   (("C-S-T" . acg/reopen-killed-file)
    ("C-s" . save-buffer)
    ("C-S-s" . acg/save-buffer-as)))
+
+
+
+;; Move buffers across windows
+(use-package buffer-move
+  :straight (:host github :repo "raxod502/buffer-move")
+  :config
+  (setq buffer-move-behavior 'move)
+  :bind
+  ("<M-s-up>" . buf-move-up)
+  ("<M-s-down>" . buf-move-down)
+  ("<M-s-left>" . buf-move-left)
+  ("<M-s-right>" . buf-move-right))
