@@ -110,6 +110,7 @@ thing/symbol at point."
 (use-package prescient
   :config
   (setq prescient-save-file (concat acg/history-dir "prescient-save.el"))
+  (setq prescient-filter-method '(literal regexp))
   (prescient-persist-mode 1))
 (use-package ivy-prescient
   :after (prescient ivy)
