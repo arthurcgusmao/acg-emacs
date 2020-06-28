@@ -70,6 +70,8 @@ minibuffer."
 
 (use-package counsel
   :after ivy
+  :config
+  (advice-add 'counsel-rg :around #'acg/with-thing-at-point)
   :bind  (("C-o" . counsel-find-file)
    ("M-f" . counsel-rg)
    ("C-S-O" . counsel-recentf)

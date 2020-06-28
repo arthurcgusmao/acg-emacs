@@ -108,6 +108,15 @@ function that starts with an initial input in the minibuffer."
            (push 'S-end unread-command-events)
            (push 'home unread-command-events))))
 
+(defun acg/with-thing-at-point (orig-fun &rest args)
+  "Run function passing thing at point as its first argument. To
+be used as advice AROUND any function that starts with an initial
+input in the minibuffer."
+  (funcall orig-fun (regexp-quote
+                     (if ivy-mode
+                         (ivy-thing-at-point)
+                       (thing-at-point 'symbol)))))
+
 ;; ;; not working -- don't know why
 ;; (defun acg/with-filename-as-input (&rest args)
 ;;   "Add current filename (if buffer associated to file) to
