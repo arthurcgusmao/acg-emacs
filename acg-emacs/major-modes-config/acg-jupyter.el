@@ -167,3 +167,7 @@ where code is and sending code to be evaluated in the REPL."
 
 ;; To-Dos -- Functions to look into
 ;;     - jupyter-completion-symbol-beginning -- What I want here is to complete on `pd.DataFram...' instead of just `DataFram...'; Check to see what is the exact use of this function and if that is not currently working or is
+
+;; Hotfix
+(add-hook 'jupyter-repl-mode-hook
+          (lambda () (font-lock-mode 0)))
