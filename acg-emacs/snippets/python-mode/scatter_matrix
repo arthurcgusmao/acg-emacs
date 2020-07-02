@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: scatter_matrix
+# key: scamatrix
+# group : general
+# --
+def my_scatter_matrix(df):
+    # Scatter Matrix
+    axes = pd.plotting.scatter_matrix(df, alpha=0.3, figsize=(14,8), diagonal = 'kde')
+    # Add correlation numbers
+    corr = df.corr().as_matrix()
+    for i, j in zip(*np.triu_indices_from(axes, k=1)):
+        axes[i, j].annotate("%.3f" %corr[i,j], (0.8, 0.8), xycoords='axes fraction', ha='center', va='center')
+$0
