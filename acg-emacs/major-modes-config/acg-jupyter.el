@@ -97,7 +97,7 @@ it with the default external app."
        (acg/open-in-external-app (list tempfpath)))
       ("dict"
        (setq tempfpath (concat tempfpath ".json"))
-       (jupyter-eval (format "with open('%s','w') as f: f.write(json.dumps(%s, indent=4))" tempfpath var))
+       (jupyter-eval (format "import json; f=open('%s','w'); f.write(json.dumps(%s, indent=4)); f.close()" tempfpath var))
        (acg/open-in-external-app (list tempfpath)))
       )))
 
