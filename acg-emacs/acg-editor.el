@@ -7,6 +7,16 @@
   (setq select-enable-clipboard nil) ; Makes kill ring not mess with clipboard
 
   ;; Delete trailing whitespace every time before saving buffer
+  (defun acg/toggle-delete-whitespace-on-save ()
+    "Add/Removes `delete-trailing-whitespace' from `before-save-hook'."
+    (interactive)
+    (if (member #'delete-trailing-whitespace before-save-hook)
+        (progn
+          (remove-hook 'before-save-hook 'delete-trailing-whitespace)
+          (message "Disabled delete trailing whitespace on save"))
+      (add-hook 'before-save-hook 'delete-trailing-whitespace)
+      (message "Enabled delete trailing whitespace on save")))
+  ;; Start w/ delete whitespace on hook added
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
   (set-default 'truncate-lines t)    ; Disable truncation of line
