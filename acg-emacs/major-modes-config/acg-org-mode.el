@@ -11,6 +11,8 @@
 
 ;; make code blocks pretty
 (setq org-src-fontify-natively t)
+;; hide markup (emphasis, italic, bold)
+(setq org-hide-emphasis-markers t)
 ;; highlight latex related syntax
 (eval-after-load 'org
   '(setf org-highlight-latex-and-related '(latex script entities)))
