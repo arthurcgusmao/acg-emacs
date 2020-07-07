@@ -9,12 +9,27 @@
 (setq org-startup-truncated nil)
 (setq org-startup-folded nil)
 
-
 ;; make code blocks pretty
 (setq org-src-fontify-natively t)
 ;; highlight latex related syntax
 (eval-after-load 'org
   '(setf org-highlight-latex-and-related '(latex script entities)))
+;; custom fonts for src begin/end
+(set-face-attribute 'org-block nil
+                    :extend t
+                    :background "#050528")
+(set-face-attribute 'org-meta-line nil
+                    :inherit font-lock-comment-face
+                    :extend t :height 0.7
+                    :background "#050528"
+                    :foreground "#404071")
+;; Quickfix: use the same `org-meta-line' foreground for
+;; `org-latex-and-related', to fix some SRC metalines showing text in a
+;; different color after the underscore
+(set-face-attribute 'org-latex-and-related nil
+                    :foreground "#404071")
+;; Make Org export subscripts/superscripts only when part after _ or ^ is enclosed by {}
+(setq org-export-with-sub-superscripts (make-symbol "{}"))
 
 
 ;; where to put latex preview images
