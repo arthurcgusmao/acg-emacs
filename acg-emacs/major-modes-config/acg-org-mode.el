@@ -23,11 +23,12 @@
                     :extend t :height 0.7
                     :background "#050528"
                     :foreground "#404071")
-;; Quickfix: use the same `org-meta-line' foreground for
-;; `org-latex-and-related', to fix some SRC metalines showing text in a
-;; different color after the underscore
+;; Quickfix: disable `org-latex-and-related' foreground to fix some SRC
+;; metalines showing text in a different color after the underscore, and to
+;; also adapt it to `org-export-with-sub-superscripts' only working with {}, as
+;; configured below.
 (set-face-attribute 'org-latex-and-related nil
-                    :foreground "#404071")
+                    :foreground nil)
 ;; Make Org export subscripts/superscripts only when part after _ or ^ is enclosed by {}
 (setq org-export-with-sub-superscripts (make-symbol "{}"))
 
