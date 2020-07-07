@@ -385,6 +385,7 @@ active."
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
+   (shell . t)
    (python . t)
    (jupyter . t)))
 
