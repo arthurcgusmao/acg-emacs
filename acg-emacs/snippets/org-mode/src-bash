@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Bash Source Block
-# key: srcbash
+# key: bash
 # --
 #+BEGIN_SRC bash
 $0

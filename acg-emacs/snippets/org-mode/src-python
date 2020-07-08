@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Python Source Block
-# key: srcpy
+# key: py
 # --
 #+BEGIN_SRC python
 $0
