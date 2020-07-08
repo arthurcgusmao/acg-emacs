@@ -177,10 +177,10 @@ word in list (usually first word) and beginning of line."
   (interactive "^p")
   (if (org-in-item-p)
       (acg/beginning-of-line-or-first-alphabetical-letter)
-      (acg/beginning-of-visual-line-or-indentation arg)))
+    (acg/beginning-of-visual-line-or-indentation arg)))
 
 ;; (setq org-list-end-re "^[ \t]*\n")
-(setq org-list-end-re "[ \t]*\n")
+(setq org-list-end-re "[ \t]*$")
 
 (defun acg/org-smart-open-line-below ()
   "`acg/smart-open-line-below' version for org-mode. Performs
@@ -219,11 +219,21 @@ wraping region if on a table."
    ((org-in-item-p) (acg/soft-kill-line) (beginning-of-line) (org-insert-item) (save-excursion (yank)))
    (t (call-interactively #'acg/newline-above))))
 
+(defun acg/org-in-empty-item-p ()
+  "Return t if currently in an empty item (one containing just
+the bullet point, whitespaces, but no other character)."
+  (and (org-in-item-p)
+       (save-excursion
+         (beginning-of-line)
+         (skip-chars-forward "^a-zA-Z\n")
+         (looking-at "$"))))
+
 (defun acg/org-return ()
   "docstring"
   (interactive)
   (org-check-before-invisible-edit 'insert)
-  (cond ((org-in-item-p) (acg/soft-kill-line) (beginning-of-line) (org-insert-item) (org-metadown) (end-of-line) (save-excursion (yank)))
+  (cond ((acg/org-in-empty-item-p) (beginning-of-line) (kill-line) (insert "\n"))
+        ((org-in-item-p) (acg/soft-kill-line) (beginning-of-line) (org-insert-item) (org-metadown) (end-of-line) (save-excursion (yank)))
 	(t (call-interactively #'org-return))))
 
 (defun acg/org-metaup (&optional arg)
@@ -242,6 +252,11 @@ active."
       (acg/move-lines-down arg)
     (org-metadown arg)))
 
+
+;; Don't indent if previous blank lines are not
+(add-hook
+ 'org-mode-hook
+ (lambda () (setq acg/electric-indent-newline-as-previous-if-blank t)))
 
 
 ;; making org insert blank lines before headings
@@ -382,13 +397,14 @@ active."
    ("C-c i s" . org-download-screenshot)))
 
 
-;; Org babel Jupyter integration
+;; Org SRC blocks
 
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    (shell . t)
    (python . t)
+   ;; Org babel Jupyter integration -- Jupyter must be last
    (jupyter . t)))
 
 (setq org-babel-default-header-args:jupyter-python
