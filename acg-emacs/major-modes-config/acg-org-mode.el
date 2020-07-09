@@ -25,6 +25,12 @@
                     :extend t :height 0.7
                     :background "#050528"
                     :foreground "#404071")
+(set-face-attribute 'org-verbatim nil
+                    :inherit font-lock-constant-face
+                    :family "Monospace")
+(set-face-attribute 'org-code nil
+                    :inherit font-lock-constant-face
+                    :family "Monospace")
 ;; Quickfix: disable `org-latex-and-related' foreground to fix some SRC
 ;; metalines showing text in a different color after the underscore, and to
 ;; also adapt it to `org-export-with-sub-superscripts' only working with {}, as
