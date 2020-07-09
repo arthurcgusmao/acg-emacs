@@ -413,5 +413,8 @@ active."
         (:kernel . "python3")
         ))
 
+;; Do not asking when evaluating code
+(setq org-confirm-babel-evaluate nil)
+
 ;; Do not alter indentation in Org source blocks
 (setq org-src-preserve-indentation t)
