@@ -240,7 +240,8 @@ the bullet point, whitespaces, but no other character)."
   "Same as `org-metaup' but just move lines up if region is
 active."
   (interactive "P")
-  (if (region-active-p)
+  (if (or (region-active-p)
+          (org-in-src-block-p))
       (acg/move-lines-up arg)
     (org-metaup arg)))
 
@@ -248,7 +249,8 @@ active."
   "Same as `org-metadown' but just move lines down if region is
 active."
   (interactive "P")
-  (if (region-active-p)
+  (if (or (region-active-p)
+          (org-in-src-block-p))
       (acg/move-lines-down arg)
     (org-metadown arg)))
 
