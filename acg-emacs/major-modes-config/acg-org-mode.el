@@ -49,6 +49,10 @@
 (setq org-latex-pdf-process
       '("pdflatex %f" "bibtex %b" "pdflatex %f" "pdflatex %f"))
 
+;; Always redisplay inline images after executing and SRC block
+(eval-after-load 'org
+  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images))
+
 
 ;; org-ref package configurations
 (use-package org-ref)
