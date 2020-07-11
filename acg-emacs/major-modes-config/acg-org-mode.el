@@ -29,6 +29,7 @@
                     :inherit font-lock-constant-face
                     :family "Monospace")
 (set-face-attribute 'org-code nil
+                    :height 0.8
                     :inherit font-lock-constant-face
                     :family "Monospace")
 ;; Quickfix: disable `org-latex-and-related' foreground to fix some SRC
