@@ -2,11 +2,15 @@
 (use-package scss-mode)
 (use-package less-css-mode)
 (use-package rainbow-mode)
-(use-package markdown-mode)
 (use-package yaml-mode)
 (use-package scala-mode)
 (use-package dockerfile-mode)
 
+
+(use-package markdown-mode
+  :bind
+  (:map markdown-mode-map
+        ("C-k" . 'markdown-insert-link)))
 
 
 (use-package ttl-mode
