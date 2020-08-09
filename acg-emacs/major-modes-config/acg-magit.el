@@ -122,7 +122,7 @@ user to choose a remote."
      (define-key (symbol-value mode-map) (kbd "C-c 2") 'magit-section-show-level-2-all)
      (define-key (symbol-value mode-map) (kbd "C-c 3") 'magit-section-show-level-3-all)
      (define-key (symbol-value mode-map) (kbd "C-c 4") 'magit-section-show-level-4-all))
-   '(magit-status-mode-map magit-diff-mode-map))
+   '(magit-status-mode-map magit-diff-mode-map magit-process-mode-map))
 
   :bind
   (("C-x g" . magit-status)
