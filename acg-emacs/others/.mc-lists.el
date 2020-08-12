@@ -50,6 +50,8 @@
         subword-right
         web-mode-attribute-insert
         x-clipboard-yank
+        yaml-electric-dash-and-dot
+        yaml-electric-backspace
         yas-expand
         ))
 
