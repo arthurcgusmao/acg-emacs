@@ -19,12 +19,13 @@
 ;; custom fonts for src begin/end
 (set-face-attribute 'org-block nil
                     :extend t
+                    :height 0.9
                     :background "#050528")
 (set-face-attribute 'org-meta-line nil
                     :inherit font-lock-comment-face
-                    :extend t :height 0.7
+                    :extend t :height 0.67
                     :background "#050528"
-                    :foreground "#404071")
+                    :foreground "#3C3C6C")
 (set-face-attribute 'org-verbatim nil
                     :inherit font-lock-constant-face
                     :height 0.95
