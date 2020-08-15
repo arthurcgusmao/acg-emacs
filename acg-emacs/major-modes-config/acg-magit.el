@@ -114,6 +114,7 @@ user to choose a remote."
 
   (mapc               ; Programatically remap M-[1-4] for all desired mode-maps
    (lambda (mode-map)
+     (define-key (symbol-value mode-map) (kbd "<C-tab>") nil)
      (define-key (symbol-value mode-map) (kbd "M-1") nil)
      (define-key (symbol-value mode-map) (kbd "M-2") nil)
      (define-key (symbol-value mode-map) (kbd "M-3") nil)

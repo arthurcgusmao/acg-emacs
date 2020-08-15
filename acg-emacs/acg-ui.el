@@ -63,6 +63,8 @@
                acg/beginning-of-visual-line-or-indentation move-end-of-line
                ))
     (add-to-list 'rp/restore-point-commands f t))
+  :bind
+  ("<S-escape>" . rp/point-ring-nav-previous)
   :hook (after-init . restore-point-mode))
 
 ;; always keep some lines at bottom/top when scroll with keypad
