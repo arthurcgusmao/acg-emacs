@@ -149,10 +149,35 @@ where code is and sending code to be evaluated in the REPL."
 (setq jupyter-eval-overlay-prefix nil)
 
 
+;; Start REPL at different paths
+
+(defun acg/jupyter-run-repl-project-root ()
+  "Runs `jupyter-run-repl' at the project's root directory.
+Prompts for a directory if not in project."
+  (interactive)
+  (let ((default-directory
+          (or (cdr (project-current nil))
+              (read-directory-name "Not in project, choose dir: "
+                                   default-directory nil t))))
+    (call-interactively 'jupyter-run-repl)))
+
+(defun acg/jupyter-run-repl-elsewhere (&optional dir)
+  "Runs `jupyter-run-repl' with DIR as the default directory.
+Prompts for a directory if DIR is nil."
+  (interactive)
+  (let ((dir (or dir
+                 (read-directory-name "Choose dir: "
+                                      default-directory nil t))))
+    (call-interactively 'jupyter-run-repl)))
+
+
 ;; Keybindings
 (with-eval-after-load 'python
-  (define-key python-mode-map (kbd "C-c j") 'jupyter-run-repl))
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c r") 'jupyter-repl-restart-kernel)
+  (define-key python-mode-map (kbd "C-c j j") 'jupyter-run-repl)
+  (define-key python-mode-map (kbd "C-c j p") 'acg/jupyter-run-repl-project-root)
+  (define-key python-mode-map (kbd "C-c j e") 'acg/jupyter-run-repl-elsewhere))
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c j r") 'jupyter-repl-restart-kernel)
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c j i") 'jupyter-interrupt-kernel)
 
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-b") (acg/eval-with 'jupyter-eval-string 'mark-whole-buffer 'acg/add-last-var))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-p") (acg/eval-with 'jupyter-eval-string 'mark-page 'acg/add-last-var))
