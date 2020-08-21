@@ -85,6 +85,21 @@ any, similar to what a Jupyter REPL would do."
   (acg/call-process-region
    "autopep8" '("-") t nil 'mark-whole-buffer))
 
+;; Facilitate use of black inside Emacs.
+;; https://github.com/psf/black (Install w/ `pip install black')
+(defun acg/py-black-fill-paragraph ()
+  (interactive)
+  (acg/call-process-region
+   "xargs"
+   `("-0" "black" "--line-length" ,(number-to-string fill-column) "--code")
+   nil t 'mark-paragraph))
+(defun acg/py-black-buffer ()
+  (interactive)
+  (acg/call-process-region
+   "xargs"
+   `("-0" "black" "--line-length" ,(number-to-string fill-column) "--code")
+   t nil 'mark-whole-buffer))
+
 ;;;; DOCSTRINGS
 
 ;; Configure default behavior of fill-paragraph
