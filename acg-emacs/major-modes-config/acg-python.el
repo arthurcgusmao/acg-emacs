@@ -88,6 +88,8 @@ any, similar to what a Jupyter REPL would do."
 ;; https://github.com/humitos/py-docformatter.el
 (use-package py-docformatter
   :straight (:host github :repo "humitos/py-docformatter.el")
+  :config
+  (setq py-docformatter-options nil)
   :commands (py-docformatter-buffer))
 
 (defun acg/py-docformatter-dwim ()
@@ -107,7 +109,6 @@ docformatter on that."
           (mark-defun)))
       (let ((beg (region-beginning))
             (end (region-end)))
-        (message "wooo %s %s" beg end)
         (call-process-region beg end "docformatter" t t nil
                              (concat py-docformatter-options "-"))
         ;; Refontify altered region
