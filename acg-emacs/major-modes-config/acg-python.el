@@ -72,64 +72,44 @@ any, similar to what a Jupyter REPL would do."
 
 ;;;; CODE ONLY (not docstrings)
 
-;; Facilitates use of autopep8 inside Emacs.
+;; Facilitate use of autopep8 inside Emacs.
 ;; https://pypi.org/project/autopep8/ (Install w/ `pip install autopep8')
-;; https://github.com/paetzke/py-autopep8.el
-(use-package py-autopep8
-  :commands (py-autopep8-buffer))
+(defun acg/autopep8-fill-paragraph ()
+  (interactive)
+  (acg/call-process-region
+   "autopep8"
+   `("--max-line-length" ,(number-to-string fill-column) "-a" "-")
+   nil t 'mark-paragraph))
+(defun acg/autopep8-buffer ()
+  (interactive)
+  (acg/call-process-region
+   "autopep8" '("-") t nil 'mark-whole-buffer))
 
 ;;;; DOCSTRINGS
 
 ;; Configure default behavior of fill-paragraph
 (setq python-fill-docstring-style 'pep-257-nn)
 
-;; Facilitates use of docformatter inside Emacs.
+;; Facilitate use of docformatter inside Emacs.
 ;; https://github.com/myint/docformatter (Install w/ `pip install docformatter')
-;; https://github.com/humitos/py-docformatter.el
-(use-package py-docformatter
-  :straight (:host github :repo "humitos/py-docformatter.el")
-  :config
-  (setq py-docformatter-options nil)
-  :commands (py-docformatter-buffer))
-
-(defun acg/py-docformatter-dwim ()
-  "Replaces function at point with the output of docformatter.
-Docformatter handles only docstrings. If region is active, run
-docformatter on that."
+(defun acg/py-docformatter-fill-paragraph ()
   (interactive)
-  (progn
-    (let ((c (current-column))
-          (l (line-number-at-pos))
-          (old-buf-size (buffer-size)))
-      ;; (p (point))
-      (unless (region-active-p)
-        (if 'er/mark-outside-python-string
-            (progn (er/mark-outside-python-string)
-                   (beginning-of-line))
-          (mark-defun)))
-      (let ((beg (region-beginning))
-            (end (region-end)))
-        (call-process-region beg end "docformatter" t t nil
-                             (concat py-docformatter-options "-"))
-        ;; Refontify altered region
-        (let ((new-end (+ end (- (buffer-size) old-buf-size))))
-          (font-lock-fontify-region beg new-end nil))
-        ;; Restore position in buffer outside `save-excursion' because we want to
-        ;; get as close as we originally were. Unfortunately `save-excursion'
-        ;; does not behave as expected here.
-        (goto-line l)
-        (move-to-column c)))))
+  (acg/call-process-region
+   "docformatter" '("-") nil t 'er/mark-outside-python-string))
+(defun acg/py-docformatter-buffer ()
+  (interactive)
+  (acg/call-process-region
+   "docformatter" '("-") t nil 'mark-whole-buffer))
 
 ;;;; Putting it all together
 
 (defun acg/python-fill-paragraph ()
   "My version of python-fill-paragraph."
   (interactive)
-  (cond ((python-info-docstring-p) (acg/py-docformatter-dwim))
-        (t (python-fill-paragraph))))
+  (cond ((python-info-docstring-p) (acg/py-docformatter-fill-paragraph))
+        (t (acg/autopep8-fill-paragraph))))
 
 (define-key python-mode-map (kbd "C-p") 'acg/python-fill-paragraph)
-
 
 
 ;; Fix newline indentation (indent according to previous blank line)

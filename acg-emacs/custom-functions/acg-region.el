@@ -133,6 +133,47 @@ created by `acg/eval-with'."
                     BEG END)
                  (,eval-func BEG END)))))))
 
+
+(defun acg/call-process-region
+    (program args force-region whole-lines region-fun)
+  "Call PROGRAM on the region marked by REGION-FUN,
+replacing the region contents with the output.
+
+A wrapper around `call-process-region' that better handles error
+and point position. Improvements: raise an error when there is an
+error in the child process, instead of deleting the buffer
+contents; preserve position of point both after running the
+command and when undo.
+
+PROGRAM and ARGS are the same as in `call-process-region'.
+
+If FORCE-REGION is non-nil, calls REGION-FUN even if region is
+active. If WHOLE-LINES is non-nil, run
+`acg/expand-region-to-whole-lines' after REGION-FUN.
+
+REGION-FUN is a function that marks a region in the current
+buffer. It is called inside `save-mark-and-excursion' to prevent
+collateral effects, and receives no arguments."
+  (interactive)
+  (let ((buf (current-buffer))
+        beg end)
+    (save-mark-and-excursion
+      (when (or force-region
+                (not (region-active-p)))
+        (funcall region-fun)
+        (when whole-lines (acg/expand-region-to-whole-lines)))
+      (setq beg (region-beginning)
+            end (region-end)))
+    (save-restriction
+      (narrow-to-region beg end)
+      (with-temp-buffer
+        (insert-buffer buf)
+        (apply 'call-process-region 1 (1+ (buffer-size))
+               program t t nil args)
+        (let ((temp-buf (current-buffer)))
+          (with-current-buffer buf
+            (replace-buffer-contents temp-buf)))))))
+
 ;; --------------------------------------------------------------
 ;; CONFIGS
 
@@ -146,4 +187,3 @@ created by `acg/eval-with'."
       (progn
         (call-interactively (ad-get-orig-definition 'sort-lines)))
     ad-do-it))
-
