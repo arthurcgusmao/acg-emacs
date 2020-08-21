@@ -73,18 +73,20 @@
       scroll-preserve-screen-position t)
 
 ;; mouse scrolling
-(when (display-graphic-p)
+(use-package mwheel
+  :straight nil
+  :config
   (setq mouse-wheel-scroll-amount
         '(0.02 ((shift) . 0.06) ((control) . nil))) ; scroll wheel move 3 lines per scroll
   (setq mouse-wheel-progressive-speed nil) ; scroll speed always steady
   (setq mouse-wheel-tilt-scroll t)         ; scroll right/left
   (setq mouse-wheel-flip-direction t))     ; flip right/left direction
 
-;; disable middle-mouse button pasting
-(global-set-key [mouse-2] nil)
-;; let middle-mouse button drag scroll (mouse throwing)
 (use-package mouse-drag
   :config
+  ;; disable middle-mouse button pasting
+  (global-set-key [mouse-2] nil)
+  ;; let middle-mouse button drag scroll (mouse throwing)
   (setq mouse-throw-with-scroll-bar t)
   (setq mouse-drag-electric-col-scrolling t)
   :bind
