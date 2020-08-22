@@ -17,7 +17,9 @@ Adapted from https://protesilaos.com/codelog/2020-07-16-emacs-focused-editing/"
       (acg/variable-pitch-mode -1)
       (set-window-fringes (selected-window) nil))) ; Use default width
   :bind
-  ("<f12>" . acg/olivetti-mode))
+  ("<f12>" . acg/olivetti-mode)
+  :hook
+  (org-mode . acg/olivetti-mode))
 
 (use-package face-remap
   :commands acg/variable-pitch-mode
