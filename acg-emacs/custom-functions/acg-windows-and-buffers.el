@@ -30,7 +30,53 @@
     (interactive)
     (if (equal (buffer-name (current-buffer)) "*Messages*")
         (next-buffer)
-      (kill-buffer)))
+      (let ((last-nonmenu-event nil)) ;; Forces dialog box
+        (kill-buffer))))
+
+  (defun acg/kill-all-normal-buffers ()
+    "Kill all normal buffers (non-emacs buffers)."
+    (dolist (cur (buffer-list))
+      (if (not (equal (substring (buffer-name cur) 0 1) "*"))
+          (kill-buffer cur))))
+
+  (defun acg/save-some-buffers (&rest args)
+    "Similar to `save-some-buffers', with enhancements: shows
+buffer for each prompt, include scratch buffers in the prompt,
+then redisplays the buffer where the function was issued."
+    (interactive)
+    (save-window-excursion
+      ;; Display a single window to increase focus on the queried buffer
+      (delete-other-windows)
+      ;; First save any buffers that we're supposed to save
+      ;; unconditionally.  That way the following code won't ask
+      ;; about them.
+      (dolist (buffer (buffer-list))
+        (with-current-buffer buffer
+	  (when (and buffer-save-without-query (buffer-modified-p))
+	    (push (buffer-name) autosaved-buffers)
+	    (save-buffer))))
+      ;; Go through the list of "normal" buffers, displaying them and prompting
+      ;; for save.
+      (dolist (buffer (buffer-list))
+        (and (buffer-live-p buffer)
+	     (buffer-modified-p buffer)
+             (not (buffer-base-buffer buffer))
+             (or
+              (buffer-file-name buffer)
+              (with-current-buffer buffer
+                (or (eq buffer-offer-save 'always)
+                    (and buffer-offer-save
+                         (> (buffer-size) 0)))))
+             (display-buffer-same-window buffer '())
+             ;; Prompt user for saving
+             (let ((last-nonmenu-event nil)) ;; Forces dialog box
+               (yes-or-no-p
+                (format "  Save %s? " (buffer-name buffer))))
+             ;; Save buffer
+             (with-current-buffer buffer
+               (save-buffer))))))
+
+  (advice-add 'delete-frame :before #'acg/save-some-buffers)
 
   ;; Keybindings
   :bind
