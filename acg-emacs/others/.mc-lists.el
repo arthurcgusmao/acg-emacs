@@ -15,8 +15,10 @@
         acg/kill-line-or-region-backwards
         acg/kill-sexp
         acg/kill-whole-line-or-region-lines
+        acg/left-subword
         acg/move-beginning-of-line
         acg/move-beginning-of-visual-line
+        acg/right-subword
         acg/toggle-word-case
         acg/toggle-word-separator
         acg/windows-clipboard-paste-replace-selection
@@ -50,8 +52,8 @@
         subword-right
         web-mode-attribute-insert
         x-clipboard-yank
-        yaml-electric-dash-and-dot
         yaml-electric-backspace
+        yaml-electric-dash-and-dot
         yas-expand
         ))
 
