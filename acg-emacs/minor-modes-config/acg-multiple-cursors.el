@@ -1,19 +1,25 @@
-(use-package multiple-cursors)
+(use-package multiple-cursors
+  :config
+  ;; define custom location for file that saves which commands to run once/for-all
+  (setq mc/list-file (concat acg/acg-emacs-dir "others/.mc-lists.el"))
+  :bind
+  (("C-c m m" . mc/edit-lines)
+   ("C-c m n" . mc/mark-next-like-this)
+   ("C-c m p" . mc/mark-previous-like-this)
+   ("C-c m a" . mc/mark-all-like-this)
+   ("C-c m s" . mc/mark-all-symbols-like-this)
+   ("C-c m r" . mc/mark-all-in-region)
+   ("C-c m i l" . mc/insert-letters)
+   ("C-c m i n" . mc/insert-numbers)
+   ("C-c m v" . yank)
+   ("C-c m u p" . mc/mark-previous-like-this)
+   ("C-c m u n" . mc/mark-next-like-this)
 
-(global-set-key (kbd "C-c m m") 'mc/edit-lines)
-(global-set-key (kbd "C-c m n") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c m p") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c m a") 'mc/mark-all-like-this)
-(global-set-key (kbd "C-c m r") 'mc/mark-all-in-region)
-(global-set-key (kbd "C-c m i l") 'mc/insert-letters)
-(global-set-key (kbd "C-c m i n") 'mc/insert-numbers)
-(global-set-key (kbd "C-c m v") 'yank)
+   ("C-d" . mc/mark-next-like-this)
+   ("C-S-d" . mc/mark-all-like-this)
+   ("<M-S-up>" . mc/mark-previous-lines)
+   ("<M-S-down>" . mc/mark-next-lines)
 
-(define-key mc/keymap (kbd "<escape>") 'mc/keyboard-quit)
-(global-set-key (kbd "C-d") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-S-d") 'mc/mark-all-like-this)
-(global-set-key (kbd "<M-S-up>") 'mc/mark-previous-lines)
-(global-set-key (kbd "<M-S-down>") 'mc/mark-next-lines)
-
-;; define custom location for file that saves which commands to run once/for-all
-(setq mc/list-file (concat acg/acg-emacs-dir "others/.mc-lists.el"))
+   ("<C-down-mouse-1>" . mc/add-cursor-on-click)
+   :map mc/keymap
+   ("<escape>" . mc/keyboard-quit)))
