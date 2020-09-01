@@ -48,6 +48,15 @@ minibuffer."
       (let ((default-directory (acg/ivy-get-browsing-location)))
         (call-interactively 'prot/grep-vc-or-dir))))
 
+  (defun acg/ivy-here--counsel-rg ()
+    "Performs an RG search on the project (or directory, if not a
+project) where the minibuffer was browsing on and quits the
+minibuffer."
+    (interactive)
+    (ivy-quit-and-run
+      (let ((default-directory (acg/ivy-get-browsing-location)))
+        (call-interactively 'counsel-rg))))
+
 
   :bind
   (:map ivy-minibuffer-map
@@ -64,7 +73,8 @@ minibuffer."
    ("C-M-g" . acg/ivy-here--magit-status)
    ("C-x d" . acg/ivy-here--dired)
    ("C-M-d" . acg/ivy-here--dired)
-   ("M-s g" . acg/ivy-here--grep-vc-or-dir))
+   ("M-s g" . acg/ivy-here--grep-vc-or-dir)
+   ("M-f" . acg/ivy-here--counsel-rg))
   :hook (after-init . ivy-mode))
 
 
