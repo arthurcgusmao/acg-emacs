@@ -15,6 +15,9 @@
   (:map markdown-mode-map
         ("C-k" . 'markdown-insert-link)))
 
+;; Dependency for editing Markdown source blocks w/ <C-c '>
+(use-package edit-indirect)
+
 
 (use-package ttl-mode
   :config
