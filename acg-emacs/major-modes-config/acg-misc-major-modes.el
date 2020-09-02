@@ -8,6 +8,9 @@
 
 
 (use-package markdown-mode
+  :config
+  (setq markdown-disable-tooltip-prompt t)
+  (setq markdown-link-make-text-function 'acg/url-get-page-title)
   :bind
   (:map markdown-mode-map
         ("C-k" . 'markdown-insert-link)))

@@ -130,3 +130,20 @@ input in the minibuffer."
 ;;              (insert tmp/buffer-filename)))
 ;;   )
 ;; (advice-add 'delete-file :before #'acg/with-filename-as-input)
+
+
+(defun acg/url-get-page-title (url &optional timeout)
+  "Returns the page title of an URL. If TIMEOUT (in seconds)
+expires, return nil. Adapted from
+https://lists.gnu.org/archive/html/help-gnu-emacs/2010-07/msg00299.html"
+  (let ((timeout 1.2)
+        (title))
+    (with-current-buffer (url-retrieve-synchronously url t t timeout)
+      (unless (= (buffer-size) 0)
+        (goto-char (point-min))
+        (re-search-forward "<title>\\([^<]*\\)</title>" nil t 1)
+        (setq title (match-string 1))
+        (goto-char (point-min))
+        (re-search-forward "charset=\\([-0-9a-zA-Z]*\\)" nil t 1)
+        (decode-coding-string title (intern (downcase
+                                             (match-string 1))))))))

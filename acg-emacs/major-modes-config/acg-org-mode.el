@@ -267,6 +267,14 @@ active."
       (acg/move-lines-down arg)
     (org-metadown arg)))
 
+;; Make org-insert-link smartly parse a link description.
+(defun acg/org-link-make-description-function (link desc)
+  (cond (desc desc)
+        ((string-match-p "http.?://" link)
+         (acg/url-get-page-title link))
+        (t nil)))
+(setq org-link-make-description-function 'acg/org-link-make-description-function)
+
 
 ;; Don't indent if previous blank lines are not
 (add-hook
