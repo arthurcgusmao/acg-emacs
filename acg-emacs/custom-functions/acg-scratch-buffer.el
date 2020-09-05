@@ -1,7 +1,11 @@
-;; flag should be always buffer-local
-;;(make-variable-buffer-local 'acg/scratch-buffer)
-;; variable should not be deleted when major mode changes
-;;(put 'acg/scratch-buffer 'permanent-local t)
+(defvar acg/scratch-buffer nil
+  "Indicates whether buffer is a scratch buffer.")
+
+;; (defun acg/scratch-buffer-toggle-major-mode ()
+;;   (when (and acg/scratch-buffer
+;;              ;; (= buffer-size 0)
+;;              t)
+;;     ))
 
 (defun acg/scratch-buffer-create ()
   "Open a new empty buffer.
@@ -12,21 +16,37 @@ Version 2016-08-11"
     (switch-to-buffer -buf)
     (funcall initial-major-mode)
     (setq buffer-offer-save t)
-    (set (make-local-variable 'acg/scratch-buffer) t))
-  (put 'acg/scratch-buffer 'permanent-local t))
+    (make-variable-buffer-local 'acg/scratch-buffer)
+    ;; Flag variable should not be deleted when major mode changes
+    (put 'acg/scratch-buffer 'permanent-local t)
+    (setq acg/scratch-buffer t)))
+
+(defun acg/scratch-buffer-unflag (&optional buffer)
+  "Unset buffer as scratch buffer."
+  (let ((buffer (or buffer (current-buffer))))
+    (with-current-buffer buffer
+      (setq acg/scratch-buffer nil))))
+(add-hook 'after-save-hook 'acg/scratch-buffer-unflag)
+
+(defun acg/scratch-buffer-p (&optional buffer)
+  "Indicates whether buffer is a scratch buffer."
+  (let ((buffer (or buffer (current-buffer))))
+    (with-current-buffer buffer
+      acg/scratch-buffer)))
+
+(defun acg/scratch-buffer-modified-p (&optional buffer)
+  "Indicates if buffer is scratch and has been modified."
+  (let ((buffer (or buffer (current-buffer))))
+    (and (acg/scratch-buffer-p buffer)
+         (buffer-modified-p buffer))))
 
 (defun acg/scratch-buffer-kill-query-function ()
-  (if (and (not buffer-file-name)   ;; buffer is not visiting a file
-           (buffer-modified-p)      ;; buffer has been modified
-	   (boundp 'acg/scratch-buffer))
-      (if 'acg/scratch-buffer ;; buffer is an acg/scratch created buffer
-      	  (yes-or-no-p "Scratch buffer modified. Kill it anyway? "))
+  (if (acg/scratch-buffer-modified-p)
+      (yes-or-no-p "Scratch buffer modified; kill anyway? ")
     t))
 
 
-
-;; making backup of unsaved acg/scratch buffers
-
+;; Making backups of unsaved scratch buffers
 (defun acg/scratch-buffer-save-backup ()
   "Write the contents of *scratch* to the file name
   PERSISTENT-SCRATCH-FILENAME, making a backup copy in
@@ -34,34 +54,28 @@ Version 2016-08-11"
   (let ((buffers (buffer-list)))
     (while buffers
       (with-current-buffer (get-buffer (car buffers))
-        (if (and (not buffer-file-name)   ;; buffer is not visiting a file
-                 (buffer-modified-p)      ;; buffer has been modified
-                 (boundp 'acg/scratch-buffer))
-            (if 'acg/scratch-buffer ;; buffer is acg/scratch created buffer
-                (write-file (concat
-                             acg/scratch-backup-dir
-                             (format-time-string "%Y-%m-%d--%Hh%Mm%Ss--")
-                             (buffer-name))))
+        (if (acg/scratch-buffer-modified-p)
+            (write-file (concat
+                         acg/scratch-backup-dir
+                         (format-time-string "%Y-%m-%d--%Hh%Mm%Ss--")
+                         (buffer-name)))
           t))
       (setq buffers (cdr buffers)))))
 
-
 
-;; configuring and initializing
+;; Configuring and initializing
 
-;; run query before killing if buffer is acg/scratch-buffer
+;; Run query before killing if buffer is acg/scratch-buffer
 (add-to-list 'kill-buffer-query-functions 'acg/scratch-buffer-kill-query-function)
-;; adds the hook to be run whenever emacs is killed
+;; Adds the hook to be run whenever emacs is killed
 (push #'acg/scratch-buffer-save-backup kill-emacs-hook)
 
-
-;; keybindings
+;; Keybindings
 (global-unset-key (kbd "C-n"))
 (global-set-key (kbd "C-n") 'acg/scratch-buffer-create)
 
-
 
-;; removing the default scratch buffer
+;; Remove the default scratch buffer
 
 (defun acg/initial-buffer-choice ()
   (if (get-buffer "*scratch*")
