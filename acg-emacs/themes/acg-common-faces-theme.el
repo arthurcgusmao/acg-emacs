@@ -3,7 +3,7 @@
 
 (custom-theme-set-faces
  'acg-common-faces
- 
+
  ;; mode line
  ;; '(mode-line
  ;;   ((t (:background "#203" :foreground "#ddd" :box
@@ -12,12 +12,12 @@
    ((t (:inherit mode-line :background "#555"
                  :foreground "#bbb" :box (:line-width 1 :color "#777")
                  :weight light))))
- 
+
  ;; minimap
  '(minimap-active-region-background
    ((((background dark)) (:background "#2A2A2A222222"))
     (t (:background "#D3D3D3222222"))) nil :group)
- 
+
  ;; markdown and org-mode
  '(markdown-header-face-1 ((t (:inherit outline-1 :foreground "#0CF" :weight bold :height 1.5))))
  '(markdown-header-face-2 ((t (:inherit outline-2 :foreground "#0EA" :weight bold :height 1.3))))
@@ -35,7 +35,7 @@
  '(org-level-6 ((t (:inherit outline-6 :foreground "#D60" :weight bold :height 1.0))))
  '(org-level-7 ((t (:inherit outline-7 :foreground "#90E" :weight bold :height 1.0))))
  '(org-level-8 ((t (:inherit outline-8 :foreground "#0FF" :weight bold :height 1.0))))
- 
+
  ;; parent matching
  ;; '(show-paren-match
  ;;   ((t (:background "#085" :foreground "white"))))
@@ -46,19 +46,15 @@
  '(show-paren-mismatch
    ((t (:foreground "red" :weight bold))))
 
- ;; tabbar
- '(tabbar-button ((t (:inherit tabbar-default :weight normal))))
- '(tabbar-button-highlight ((t (:inherit tabbar-default))))
- '(tabbar-default ((t (:inherit default :background "#3d3c3a" :foreground
+ ;; tab-line
+ '(tab-line ((t (:inherit default :background "#3d3c3a" :foreground
                                 "#999":weight medium :overline nil :underline
                                 nil :height 0.9 :widthtype semi-condensed))))
- '(tabbar-highlight ((t (:inherit tabbar-default :background "#FA9"))))
- '(tabbar-modified ((t (:inherit tabbar-default))))
- '(tabbar-selected
-   ((t (:inherit tabbar-default :background "#BBBBBF" :foreground "#333"))))
- '(tabbar-selected-modified ((t (:inherit tabbar-selected))))
- '(tabbar-separator ((t (:inherit tabbar-default :background "#333"))))
- '(tabbar-unselected ((t (:inherit tabbar-default))))
+ '(tab-line-tab ((t (:inherit tab-line :background "#8d8986" :foreground "#333"))))
+ '(tab-line-tab-inactive ((t (:inherit tab-line-tab :background "#7d7a77"))))
+ '(tab-line-tab-current
+   ((t (:inherit tab-line-tab :background "#BBBBBF"))))
+ '(tab-line-highlight ((t (:inherit tab-line-tab :background "#FA9"))))
 
  ;; fringe
  '(fringe ((t (:foreground "orange" :background "#3d3c3a"))))
