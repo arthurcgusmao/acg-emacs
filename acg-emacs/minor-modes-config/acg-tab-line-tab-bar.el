@@ -6,12 +6,13 @@
   (defun acg/tab-line-tab-name-buffer (buffer &optional _buffers)
     "Custom version of `tab-line-tab-name-buffer', function that
 generates the name of each tab in tab-line."
-    (let ((buffer-name (buffer-name buffer)))
+    (let* ((buffer-name (buffer-name buffer))
+           (tab-name (concat " " buffer-name " ")))
       (if (and (buffer-modified-p buffer)
                (or (buffer-file-name buffer)
                    (acg/scratch-buffer-p buffer)))
-          (concat "✎ " buffer-name)
-        buffer-name)))
+          (concat " " (make-string 1 #x23FA) tab-name)
+        tab-name)))
 
   (defun acg/update-tab-line-format ()
     "Same as `update-tab-line-format' but disregards cache. To be
