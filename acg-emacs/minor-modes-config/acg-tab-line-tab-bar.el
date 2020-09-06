@@ -39,6 +39,25 @@ generates the name of each tab in tab-line."
     (add-to-list 'unmodified-buffer-hook 'acg/update-tab-line-format t))
 
 
+  ;; Dissociate tab-line from window buffers. What I want to have is tab-line
+  ;; as a completely separate abstraction, where the tabs order is a separate
+  ;; ordering.
+  (defun acg/tab-line-tabs-func ()
+    "Wrapper around `tab-line-tabs-window-buffers' that preserves
+the original order of the buffers in the tab-line."
+    (let* ((order (window-parameter nil 'tab-line-order)) ; Use window-parameter to store order
+           (order (seq-filter #'buffer-live-p order)))     ; Filter out dead buffers
+      ;; Add current buffer to list, if missing
+      (unless (or (member (current-buffer) order)
+                  nil)      ; TODO: filter out undesired buffers, like TRAMP
+        (setq order (append order (list (current-buffer)))))
+      (set-window-parameter nil 'tab-line-order order)))
+
+  (setq tab-line-tabs-function 'acg/tab-line-tabs-func)
+  ;; (setq tab-line-tabs-function 'tab-line-tabs-window-buffers)
+  ;; (set-window-parameter nil 'tab-line-order nil)
+
+
   (defun acg/tab-line-get-current-pos ()
     "Return current position in the tab-line."
     (let ((tabs (funcall tab-line-tabs-function)))
@@ -49,21 +68,16 @@ generates the name of each tab in tab-line."
              (eq buffer tab)
            (eq buffer (cdr (assq 'buffer tab))))))))
 
-  ;; Better handler for next/prev tab functions, without crazy behavior
   (defun acg/tab-line-goto-pos (pos)
     "Switches to the tab number POS in the selected window.
 Exhibits recursive or loop-like behavior when POS is < 0 or
 > (length tabs)."
     (interactive)
     (let* ((tabs (funcall tab-line-tabs-function))
-           (pos (mod pos (length tabs))) ; Correction for loop-like behavior
-           (curr-pos (acg/tab-line-get-current-pos)))
-      ;; Hacky way of handling this, because the implemented functions do not
-      ;; support a better one.
-      (cond ((> pos curr-pos)
-             (next-buffer (- pos curr-pos)))
-            ((< pos curr-pos)
-             (previous-buffer (- curr-pos pos))))))
+           (pos (mod pos (length tabs))) ; Correction to have loop-like behavior
+           (tab (nth pos tabs))
+           (buffer (if (bufferp tab) tab (cdr (assq 'buffer tab)))))
+      (switch-to-buffer buffer)))
 
   (defun acg/tab-line-walk (delta)
     "Moves forward DELTA tabs in the selected window."
@@ -82,6 +96,8 @@ Exhibits recursive or loop-like behavior when POS is < 0 or
     (let ((window (and (listp mouse-event) (posn-window (event-start mouse-event)))))
       (with-selected-window (or window (selected-window))
         (acg/tab-line-walk -1))))
+
+  ;; TODO: modify <M-q> to operate only on tabs when tab-line is active
 
   :bind
   (("<C-tab>" . tab-line-switch-to-next-tab)
