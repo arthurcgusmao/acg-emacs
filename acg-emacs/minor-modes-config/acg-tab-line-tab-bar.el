@@ -1,7 +1,7 @@
 (use-package tab-line
   :straight nil
   :config
-  ;; (global-tab-line-mode t)
+  ;;; Make tabs show modified state
 
   (defun acg/tab-line-tab-name-buffer (buffer &optional _buffers)
     "Custom version of `tab-line-tab-name-buffer', function that
@@ -14,7 +14,8 @@ generates the name of each tab in tab-line."
         buffer-name)))
 
   (defun acg/update-tab-line-format ()
-    "Same as `update-tab-line-format' but disregards cache."
+    "Same as `update-tab-line-format' but disregards cache. To be
+used when one wants to 'forcefully' update the tabs state."
     (let* ((tabs (funcall tab-line-tabs-function))
            (cache-key (list tabs
                             (window-buffer)
@@ -39,6 +40,8 @@ generates the name of each tab in tab-line."
     (add-to-list 'unmodified-buffer-hook 'acg/update-tab-line-format t))
 
 
+  ;;; Order buffers by first opened
+
   ;; Dissociate tab-line from window buffers. What I want to have is tab-line
   ;; as a completely separate abstraction, where the tabs order is a separate
   ;; ordering.
@@ -46,10 +49,10 @@ generates the name of each tab in tab-line."
     "Wrapper around `tab-line-tabs-window-buffers' that preserves
 the original order of the buffers in the tab-line."
     (let* ((order (window-parameter nil 'tab-line-order)) ; Use window-parameter to store order
-           (order (seq-filter #'buffer-live-p order)))     ; Filter out dead buffers
+           (order (seq-filter #'buffer-live-p order))     ; Filter out dead buffers
+           (order (seq-filter #'acg/tab-line-filter order))) ; Filter desired buffers
       ;; Add current buffer to list, if missing
-      (unless (or (member (current-buffer) order)
-                  nil)      ; TODO: filter out undesired buffers, like TRAMP
+      (unless (member (current-buffer) order)
         (setq order (append order (list (current-buffer)))))
       (set-window-parameter nil 'tab-line-order order)))
 
@@ -57,6 +60,17 @@ the original order of the buffers in the tab-line."
   ;; (setq tab-line-tabs-function 'tab-line-tabs-window-buffers)
   ;; (set-window-parameter nil 'tab-line-order nil)
 
+  ;; Filter only desired buffers
+  (defun acg/tab-line-filter (buffer)
+    "Filter only buffers that should be displayed in tab-line."
+    (let ((buffer-name (string-trim-left (buffer-name buffer))))
+      (if (eq buffer (current-buffer)) t  ; Never discard current-buffer
+        (not (or
+              (string-equal "*" (substring buffer-name 0 1)) ; Remove * Emacs buffers
+              )))))
+
+
+  ;;; Move better across tabs
 
   (defun acg/tab-line-get-current-pos ()
     "Return current position in the tab-line."

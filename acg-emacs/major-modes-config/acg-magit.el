@@ -17,8 +17,8 @@
 
 (use-package magit
   :config
-  ;; Disable Magit asking to save files
-  (setq magit-save-repository-buffers nil)
+  (setq magit-save-repository-buffers nil) ; Disable Magit asking to save files
+  (setq magit-uniquify-buffer-names nil)   ; Make magit buffers be wrapped w/ *
 
 
   ;; Custom functions for VISITING FILES
