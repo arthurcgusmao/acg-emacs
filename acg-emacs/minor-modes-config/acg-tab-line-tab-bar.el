@@ -38,6 +38,51 @@ generates the name of each tab in tab-line."
   (eval-after-load 'unmodified-buffer
     (add-to-list 'unmodified-buffer-hook 'acg/update-tab-line-format t))
 
+
+  (defun acg/tab-line-get-current-pos ()
+    "Return current position in the tab-line."
+    (let ((tabs (funcall tab-line-tabs-function)))
+      (seq-position
+       tabs (current-buffer)
+       (lambda (tab buffer)
+         (if (bufferp tab)
+             (eq buffer tab)
+           (eq buffer (cdr (assq 'buffer tab))))))))
+
+  ;; Better handler for next/prev tab functions, without crazy behavior
+  (defun acg/tab-line-goto-pos (pos)
+    "Switches to the tab number POS in the selected window.
+Exhibits recursive or loop-like behavior when POS is < 0 or
+> (length tabs)."
+    (interactive)
+    (let* ((tabs (funcall tab-line-tabs-function))
+           (pos (mod pos (length tabs))) ; Correction for loop-like behavior
+           (curr-pos (acg/tab-line-get-current-pos)))
+      ;; Hacky way of handling this, because the implemented functions do not
+      ;; support a better one.
+      (cond ((> pos curr-pos)
+             (next-buffer (- pos curr-pos)))
+            ((< pos curr-pos)
+             (previous-buffer (- curr-pos pos))))))
+
+  (defun acg/tab-line-walk (delta)
+    "Moves forward DELTA tabs in the selected window."
+    (acg/tab-line-goto-pos (+ (acg/tab-line-get-current-pos) delta)))
+
+  ;; Redefine existing functions
+  (defun tab-line-switch-to-next-tab (&optional mouse-event)
+    "@acg modification for `tab-line-switch-to-next-tab'."
+    (interactive (list last-nonmenu-event))
+    (let ((window (and (listp mouse-event) (posn-window (event-start mouse-event)))))
+      (with-selected-window (or window (selected-window))
+        (acg/tab-line-walk 1))))
+  (defun tab-line-switch-to-prev-tab (&optional mouse-event)
+    "@acg modification for `tab-line-switch-to-prev-tab'."
+    (interactive (list last-nonmenu-event))
+    (let ((window (and (listp mouse-event) (posn-window (event-start mouse-event)))))
+      (with-selected-window (or window (selected-window))
+        (acg/tab-line-walk -1))))
+
   :bind
   (("<C-tab>" . tab-line-switch-to-next-tab)
    ("<C-S-iso-lefttab>" . tab-line-switch-to-prev-tab) ;; for Linux
