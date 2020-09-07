@@ -34,6 +34,9 @@
                     :height 0.8
                     :inherit font-lock-constant-face
                     :family "Monospace")
+(set-face-attribute 'org-quote nil
+                    :inherit '(variable-pitch org-block)
+                    :slant 'italic)
 ;; Quickfix: disable `org-latex-and-related' foreground to fix some SRC
 ;; metalines showing text in a different color after the underscore, and to
 ;; also adapt it to `org-export-with-sub-superscripts' only working with {}, as
