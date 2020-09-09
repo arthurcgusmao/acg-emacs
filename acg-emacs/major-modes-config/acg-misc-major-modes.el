@@ -12,6 +12,8 @@
   :config
   (setq markdown-disable-tooltip-prompt t)
   (setq markdown-link-make-text-function 'acg/url-get-page-title)
+  (setq markdown-enable-math t)
+  (setq markdown-fontify-code-blocks-natively t)
   :bind
   (:map markdown-mode-map
         ("C-k" . 'markdown-insert-link)))
