@@ -5,6 +5,7 @@
 (use-package yaml-mode)
 (use-package scala-mode)
 (use-package dockerfile-mode)
+(use-package csv-mode)
 
 
 (use-package markdown-mode
