@@ -183,7 +183,7 @@ collateral effects, and receives no arguments."
 (defadvice sort-lines (around advice-sort-lines activate)
   (interactive "P\nr")
   (acg/expand-region-to-whole-lines)
-  (if (interactive-p)
+  (if (called-interactively-p 'any)
       (progn
         (call-interactively (ad-get-orig-definition 'sort-lines)))
     ad-do-it))
