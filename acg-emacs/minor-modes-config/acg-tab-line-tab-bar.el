@@ -14,31 +14,33 @@ generates the name of each tab in tab-line."
           (concat " " (make-string 1 #x23FA) tab-name)
         tab-name)))
 
-  (defun acg/update-tab-line-format ()
-    "Same as `update-tab-line-format' but disregards cache. To be
-used when one wants to 'forcefully' update the tabs state."
-    (let* ((tabs (funcall tab-line-tabs-function))
-           (cache-key (list tabs
-                            (window-buffer)
-                            (window-parameter nil 'tab-line-hscroll))))
-      (cdr (set-window-parameter
-            nil 'tab-line-cache
-            (cons cache-key (tab-line-format-template tabs))))))
+  (defun acg/update-tab-line-format-all-tabs ()
+    "Same as `update-tab-line-format' but disregards cache and
+for all tabs. To be used when one wants to 'forcefully' update
+all tabs state."
+    (dolist (window (window-list-1 nil 'ignore 'visible))
+      (let* ((tabs (funcall tab-line-tabs-function))
+             (cache-key (list tabs
+                              (window-buffer)
+                              (window-parameter window 'tab-line-hscroll))))
+        (cdr (set-window-parameter
+              window 'tab-line-cache
+              (cons cache-key (tab-line-format-template tabs)))))))
 
   (defun acg/update-tab-line-format-first-change ()
     (set-buffer-modified-p t)
-    (acg/update-tab-line-format))
+    (acg/update-tab-line-format-all-tabs))
 
   (setq tab-line-tab-name-function 'acg/tab-line-tab-name-buffer)
   (setq tab-line-close-button-show nil) ; Never show "x" (close tab) button
 
   ;; Handle updates of the buffer modified indicator
-  (add-hook 'after-save-hook 'acg/update-tab-line-format)
-  (add-hook 'first-change-hook 'acg/update-tab-line-format-first-change)
+  (add-hook 'after-save-hook 'acg/update-tab-line-format-all-tabs)
+  (add-hook 'first-change-hook 'acg/update-tab-line-format-first-change 90)
 
   ;; Update when buffer unmodified -- requires `unmodified-buffer' to be loaded first
   (eval-after-load 'unmodified-buffer
-    (add-to-list 'unmodified-buffer-hook 'acg/update-tab-line-format t))
+    (add-hook 'unmodified-buffer-hook 'acg/update-tab-line-format-all-tabs))
 
 
   ;;; Order buffers by first opened
