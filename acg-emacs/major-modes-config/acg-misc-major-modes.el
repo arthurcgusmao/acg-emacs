@@ -14,6 +14,8 @@
   (setq markdown-link-make-text-function 'acg/url-get-page-title)
   (setq markdown-enable-math t)
   (setq markdown-fontify-code-blocks-natively t)
+  (setq markdown-hide-urls t)
+  (setq markdown-hide-markup t)
   :bind
   (:map markdown-mode-map
         ("C-k" . 'markdown-insert-link)))
