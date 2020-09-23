@@ -175,7 +175,8 @@ Prompts for a directory if DIR is nil."
 (with-eval-after-load 'python
   (define-key python-mode-map (kbd "C-c j j") 'jupyter-run-repl)
   (define-key python-mode-map (kbd "C-c j p") 'acg/jupyter-run-repl-project-root)
-  (define-key python-mode-map (kbd "C-c j e") 'acg/jupyter-run-repl-elsewhere))
+  (define-key python-mode-map (kbd "C-c j e") 'acg/jupyter-run-repl-elsewhere)
+  (define-key python-mode-map (kbd "C-c j a") 'jupyter-repl-associate-buffer))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c j r") 'jupyter-repl-restart-kernel)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c j i") 'jupyter-repl-interrupt-kernel)
 
