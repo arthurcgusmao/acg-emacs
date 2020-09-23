@@ -72,6 +72,8 @@
         mc/mark-previous-lines
         mouse-set-region
         repeat
+        tab-line-switch-to-next-tab
+        tab-line-switch-to-prev-tab
         web-mode-mark-and-expand
         wgrep-finish-edit
         ))
