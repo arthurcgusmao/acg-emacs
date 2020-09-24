@@ -3,5 +3,6 @@
 # key: --df1
 # group : debug
 # --
-df1 = pd.DataFrame({'a': [1, 2, 3], 'b': [10, 20, 30]})
+df1 = pd.DataFrame({'a': [1, 2, 3], 'b': [10, 20, 30]},
+                   index=pd.to_datetime(['2020-09-23', '2020-09-24', '2020-09-25']))
 $0
