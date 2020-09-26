@@ -200,3 +200,15 @@ user to choose a remote."
 (use-package ssh-ident
   :straight (:host github :repo "arthurcgusmao/emacs-ssh-ident")
   :init (acg/add-to-env-path "~/.local/bin"))
+
+
+;; Highlight uncommitted changes on the left side of a file buffer and on dired
+(use-package diff-hl
+  :straight (:host github :repo "dgutov/diff-hl")
+  :config
+  (global-diff-hl-mode)                 ; Enable mode on buffers
+  (diff-hl-flydiff-mode) ; Update diff on buffer modification (no need to save it)
+  :hook
+  (magit-pre-refresh . diff-hl-magit-pre-refresh) ; Magit integration
+  (magit-post-refresh . diff-hl-magit-post-refresh)
+  (dired-mode . diff-hl-dired-mode)) ; Enable mode on dired
