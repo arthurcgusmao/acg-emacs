@@ -7,9 +7,6 @@
 
 
 (use-package transient
-  :init
-  (setq transient-history-file
-        (concat acg/history-dir "transient-history.el"))
   :bind
   (:map transient-map
         ("<escape>" . transient-quit-all)))

@@ -9,3 +9,7 @@ obsolete
 scratch-backups
 straight
 local-settings.el
+/transient/
+/places
+/url/
+/bookmarks

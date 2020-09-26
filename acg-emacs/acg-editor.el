@@ -124,7 +124,6 @@
 (use-package saveplace
   :straight nil
   :config
-  (setq save-place-file (concat acg/history-dir "saveplace"))
   (setq save-place-forget-unreadable-files t)
   (save-place-mode 1))
 
