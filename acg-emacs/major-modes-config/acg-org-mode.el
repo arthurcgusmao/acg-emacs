@@ -61,9 +61,9 @@
 
 
 ;; org-ref package configurations
-(use-package org-ref)
-(setq reftex-default-bibliography acg/default-bib-file
-      org-ref-default-bibliography acg/default-bib-file)
+(use-package org-ref
+  :config
+  (setq org-ref-default-bibliography acg/default-bib-file))
 
 ;; see org-ref for use of these variables
 ;; (setq org-ref-bibliography-notes (concat user-emacs-directory "bibliography/notes.org")

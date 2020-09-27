@@ -11,7 +11,7 @@
 ;;     (add-to-list 'exec-path "~/.miniconda3/bin"))
 ;; ;; Note: commented-out since being managed by conda package now
 
-(defconst acg/default-bib-file "~/Documents/Mendeley/library.bib"
+(defconst acg/default-bib-file "~/Documents/zotero.bib"
   "Default bibliography file for references.")
 
 (defvar acg/file-backup-dir (concat user-emacs-directory "file-backups/")

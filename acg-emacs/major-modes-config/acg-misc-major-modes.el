@@ -16,9 +16,16 @@
   (setq markdown-fontify-code-blocks-natively t)
   (setq markdown-hide-urls t)
   (setq markdown-hide-markup t)
+
+  (defun acg/markdown-setup ()
+    (reftex-mode)
+    (setq-local reftex-cite-format "[@%l]"))
+
   :bind
   (:map markdown-mode-map
-        ("C-k" . 'markdown-insert-link)))
+        ("C-k" . 'markdown-insert-link))
+  :hook
+  (markdown-mode . acg/markdown-setup))
 
 ;; Dependency for editing Markdown source blocks w/ <C-c '>
 (use-package edit-indirect)
