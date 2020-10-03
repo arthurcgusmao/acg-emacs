@@ -23,6 +23,14 @@ Adapted from https://spwhitton.name/blog/entry/expandregionlines/"
     (end-of-line)
     (activate-mark)))
 
+(defun acg/with-expanded-region-to-whole-lines (orig-fun &rest args)
+  "Run function but expanding region to whole lines, then restore
+excursion. To be used as advice AROUND any function that acts
+upon the selected region."
+  (save-mark-and-excursion
+    (acg/expand-region-to-whole-lines)
+    (funcall orig-fun (region-beginning) (region-end))))
+
 (defun acg/unindent-string (str &optional pad)
   "Returns a modified version of STRING by unindenting it by the
 length of its minimum indent.

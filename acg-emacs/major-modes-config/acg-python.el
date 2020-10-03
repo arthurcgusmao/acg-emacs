@@ -2,36 +2,10 @@
   :straight nil
   :config
   (setq python-indent-offset 4)
+  ;; Customized behavior of indent functions
+  (advice-add 'python-indent-shift-left :around #'acg/with-expanded-region-to-whole-lines)
+  (advice-add 'python-indent-shift-right :around #'acg/with-expanded-region-to-whole-lines)
 
-  ;; customized indentation
-
-  ;; (defun acg/python-indent-shift-left ()
-  ;;   )
-
-  ;; (defun acg/python-indent-line ()
-  ;;   "Custom indentation for python major mode. Indents line to next
-  ;; tab-stop if necessary."
-  ;;   (interactive)
-  ;;   (if (acg/line-empty-p)
-  ;;       (python-indent-line nil)
-  ;;     (let ((start-pos (point))
-  ;;           (current-indentation (acg/current-indentation-column-p)))
-  ;;       (let ((mod (% current-indentation python-indent-offset)))
-  ;;         (if (> mod 0)
-  ;;             (progn
-  ;;               (indent-line-to (* (+ (/ current-indentation python-indent-offset)
-  ;;                                     1) python-indent-offset))
-  ;;               (goto-char (+ start-pos (- 4 mod)))))
-  ;;         (if (< (current-column) (acg/current-indentation-column-p))
-  ;;             (back-to-indentation))))))
-
-  ;; (defun acg/python-override-indent-for-tab ()
-  ;;   "Locally overrides the function `indent-for-tab-command'."
-  ;;   (make-local-variable 'indent-line-function)
-  ;;   (setq indent-line-function 'acg/python-indent-line))
-
-  ;; (add-hook 'python-mode-hook 'acg/python-override-indent-for-tab)
-  ;; ;; (remove-hook 'python-mode-hook 'acg/python-override-indent-for-tab)
 
   (defun acg/python-shell-send-region (beg end)
     "Similar to `python-shell-send-region' but displays output if
