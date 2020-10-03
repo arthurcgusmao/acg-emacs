@@ -18,6 +18,7 @@
         acg/left-subword
         acg/move-beginning-of-line
         acg/move-beginning-of-visual-line
+        acg/org-beginning-of-visual-line-or-indentation
         acg/right-subword
         acg/toggle-word-case
         acg/toggle-word-separator
@@ -27,6 +28,7 @@
         clipboard-paste-replace-selection
         crux-kill-line-backwards
         crux-smart-open-line-above
+        cycle-spacing
         end-of-visual-line
         fill-paragraph
         helm-mini
@@ -61,6 +63,7 @@
 (setq mc/cmds-to-run-once
       '(
         acg/scratch-buffer-create
+        acg/swiper-thing-at-point-or-isearch
         acg/tabbar-backward
         counsel-M-x
         crux-switch-to-previous-buffer
