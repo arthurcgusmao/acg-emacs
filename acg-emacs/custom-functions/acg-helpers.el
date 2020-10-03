@@ -104,7 +104,7 @@ next keypress."
   "Mark input of minibuffer. To be used as advice before any
 function that starts with an initial input in the minibuffer."
   (run-with-idle-timer
-   0 nil (lambda ()
+   0.1 nil (lambda ()
            (push 'S-end unread-command-events)
            (push 'home unread-command-events))))
 
