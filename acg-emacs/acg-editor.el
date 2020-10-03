@@ -81,6 +81,11 @@
 ;; smart tab behavior - indent or complete
 (setq tab-always-indent 'complete)
 
+(define-key indent-rigidly-map (kbd "<right>") 'indent-rigidly-right-to-tab-stop)
+(define-key indent-rigidly-map (kbd "<left>") 'indent-rigidly-left-to-tab-stop)
+(define-key indent-rigidly-map (kbd "<S-right>") 'indent-rigidly-right)
+(define-key indent-rigidly-map (kbd "<S-left>") 'indent-rigidly-left)
+
 
 ;; remote access (TRAMP)
 (use-package tramp
