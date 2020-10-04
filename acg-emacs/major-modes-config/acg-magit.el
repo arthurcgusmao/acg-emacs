@@ -99,7 +99,8 @@ user to choose a remote."
       ;; Adapt to differences in file and directory URL paths
       (if file
           (setq url (concat url "/blob/" (magit-get-current-branch)
-                            "/" (acg/project-get-root-relative-path file)))
+                            "/" (acg/project-get-root-relative-path file)
+                            (format "#L%d" (line-number-at-pos)))) ; Add current line to anchor
         (setq url (concat url "/tree/" (magit-get-current-branch)
                           "/" (acg/project-get-root-relative-path dir))))
       ;; Perform actions
