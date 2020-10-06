@@ -117,6 +117,11 @@ input in the minibuffer."
                          (ivy-thing-at-point)
                        (thing-at-point 'symbol)))))
 
+(defun acg/with-mark-active (&rest args)
+  "Keep mark active after command. To be used as advice AFTER any
+function that sets `deactivate-mark' to t."
+  (setq deactivate-mark nil))
+
 ;; ;; not working -- don't know why
 ;; (defun acg/with-filename-as-input (&rest args)
 ;;   "Add current filename (if buffer associated to file) to

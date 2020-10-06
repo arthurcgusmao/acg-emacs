@@ -54,6 +54,8 @@ whitespace)"
        (progn (back-to-indentation) (point))
        (progn (end-of-line) (skip-chars-backward " \t") (point))))))
 
+(advice-add 'acg/clipboard-kill-ring-save :after #'acg/with-mark-active)
+
 
 (defun acg/clipboard-kill-region-or-line ()
   "Cuts the current selected region (or line content, in the same fashion as

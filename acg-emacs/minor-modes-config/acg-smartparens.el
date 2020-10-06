@@ -13,6 +13,9 @@
   (show-smartparens-global-mode t)
   (show-paren-mode -1)
 
+  ;; Do not unselect region after wrapping it w/ pair
+  (advice-add 'sp-wrap :after #'acg/with-mark-active)
+
   ;; Remove default keybindings and set new ones
   (sp--update-override-key-bindings
    'sp-override-key-bindings
