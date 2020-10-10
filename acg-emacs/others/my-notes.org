@@ -7,8 +7,23 @@
 
 ** Magit
 
-*** Commit Fixup (command `cf` -- `magit-commit-fixup`)
+*** Commit Fixup (command `cF` -- `magit-commit-fixup`)
 Add staged changes to a commit different than the last one.
 
 *** Commit Reword (command `cw` -- `magit-commit-reword`)
 Modify the last commit's message.
+
+** Handle Git conflicts
+*** Smerge mode
+Type =C-c ^ C-h= to enter the help buffer.
+The usual commands are:
+- =C-c ^ u= for upper commit
+- =C-c ^ l= for lower commit
+- =C-c ^ a= for all (both) commit
+
+*** Ediff
+Ediff shows in multiple windows:
+- Version A
+- Version B
+- Result preview after you resolve conflicts
+- The common ancestor of both versions
