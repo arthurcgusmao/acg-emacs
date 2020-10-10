@@ -9,6 +9,9 @@
 (setq org-startup-truncated nil)
 (setq org-startup-folded nil)
 
+
+;;; Fonts and Appearence
+
 ;; make code blocks pretty
 (setq org-src-fontify-natively t)
 ;; hide markup (emphasis, italic, bold)
@@ -279,11 +282,16 @@ active."
 (setq org-link-make-description-function 'acg/org-link-make-description-function)
 
 
+;;; Indentation
+
 ;; Don't indent if previous blank lines are not
 (add-hook
  'org-mode-hook
  (lambda () (setq acg/electric-indent-newline-as-previous-if-blank t)))
 
+;; Make C-> and C-< operate on whole region lines
+(advice-add 'org-shiftmetaright :around #'acg/with-expanded-region-to-whole-lines-noargs)
+(advice-add 'org-shiftmetaleft :around #'acg/with-expanded-region-to-whole-lines-noargs)
 
 ;; making org insert blank lines before headings
 ;; for more, see:

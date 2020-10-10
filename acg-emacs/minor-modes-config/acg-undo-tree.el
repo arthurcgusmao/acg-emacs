@@ -1,12 +1,13 @@
 (use-package undo-tree
   :config
-  ;; sensible undo
+  ;; Sensible undo
   (global-undo-tree-mode)
 
-  ;; autosave the undo-tree history
+  ;; Autosave the undo-tree history
   (setq undo-tree-auto-save-history nil)
   ;; (setq undo-tree-history-directory-alist `((".*" . ,(expand-file-name (concat user-emacs-directory "undo-tree-history/")))))
 
+  ;; Custom commands to preserve active region when undoing
   (defun acg/undo-tree-undo (&optional arg)
     "Same as `undo-tree-undo' but does not deactivate selected region."
     (interactive "*P")
@@ -21,6 +22,7 @@
       (undo-tree-redo arg)
       (setq deactivate-mark nil)))
 
+  ;; Keybindings
   (acg/force-global-set-key "M-z" 'undo-tree-visualize)
   :bind
   (:map undo-tree-map

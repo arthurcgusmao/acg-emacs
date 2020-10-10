@@ -31,6 +31,14 @@ upon the selected region."
     (acg/expand-region-to-whole-lines)
     (funcall orig-fun (region-beginning) (region-end))))
 
+(defun acg/with-expanded-region-to-whole-lines-noargs (orig-fun &rest args)
+  "Same as `acg/with-expanded-region-to-whole-lines' but pass no
+arguments to ORIG-FUN."
+  (save-mark-and-excursion
+    (acg/expand-region-to-whole-lines)
+    (funcall orig-fun)))
+
+
 (defun acg/unindent-string (str &optional pad)
   "Returns a modified version of STRING by unindenting it by the
 length of its minimum indent.
