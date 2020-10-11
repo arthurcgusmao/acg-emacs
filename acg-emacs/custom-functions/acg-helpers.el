@@ -148,6 +148,10 @@ https://lists.gnu.org/archive/html/help-gnu-emacs/2010-07/msg00299.html"
         (goto-char (point-min))
         (re-search-forward "<title>\\([^<]*\\)</title>" nil t 1)
         (setq title (match-string 1))
+        (unless title
+          ;; Try to fallback to <h1> tag if no <title>
+          (re-search-forward "<h1\\(.*>\\)\\([^<]*\\)</h1>" nil t 1)
+          (setq title (match-string 2)))
         (goto-char (point-min))
         (re-search-forward "charset=\"?\\([-0-9a-zA-Z]*\\)" nil t 1)
         (decode-coding-string title (intern (downcase
