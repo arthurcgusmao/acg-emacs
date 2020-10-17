@@ -1,21 +1,21 @@
-(use-package olivetti
+(use-package visual-fill-column
   :config
-  (setq-default olivetti-body-width 80)
-
-  (define-minor-mode acg/olivetti-mode
-    "Toggle buffer-local `olivetti-mode' with additional configs.
-
-Adapted from https://protesilaos.com/codelog/2020-07-16-emacs-focused-editing/"
-    :init-value nil
-    :global nil
-    (if acg/olivetti-mode
-        (progn
-          (olivetti-mode 1)
-          (set-window-fringes (selected-window) 0 0))
-      (olivetti-mode -1)
-      (set-window-fringes (selected-window) nil))) ; Use default width
+  (defun acg/toggle-visual-fill-column-and-center ()
+    "Alternates between any of: (a) `visual-fill-column-mode'
+disabled, (b) `visual-fill-column-mode' enabled, (c)
+`visual-fill-column-mode' enabled with text centered."
+    (interactive)
+    (cond ((not visual-fill-column-mode)
+           (visual-fill-column-mode 1))
+          ((and visual-fill-column-mode
+                (not visual-fill-column-center-text))
+           (setq visual-fill-column-center-text t)
+           (visual-fill-column-mode 1))
+          (t
+           (visual-fill-column-mode -1)
+           (setq visual-fill-column-center-text nil))))
   :bind
-  ("<S-f12>" . acg/olivetti-mode))
+  ("<S-f12>" . acg/toggle-visual-fill-column-and-center))
 
 (use-package face-remap
   :commands acg/variable-pitch-mode
