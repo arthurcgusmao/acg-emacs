@@ -11,15 +11,11 @@ Adapted from https://protesilaos.com/codelog/2020-07-16-emacs-focused-editing/"
     (if acg/olivetti-mode
         (progn
           (olivetti-mode 1)
-          (acg/variable-pitch-mode)
           (set-window-fringes (selected-window) 0 0))
       (olivetti-mode -1)
-      (acg/variable-pitch-mode -1)
       (set-window-fringes (selected-window) nil))) ; Use default width
   :bind
-  ("<f12>" . acg/olivetti-mode)
-  :hook
-  (org-mode . acg/olivetti-mode))
+  ("<S-f12>" . acg/olivetti-mode))
 
 (use-package face-remap
   :commands acg/variable-pitch-mode
@@ -43,7 +39,18 @@ toggle `org-variable-pitch-minor-mode' instead."
   ;; - DejaVu Sans, Condensed
   (set-face-attribute 'variable-pitch nil
                       :family "DejaVu Sans"
-                      :width 'condensed))
+                      :width 'condensed)
+  ;; Make fixed-pitch use the same attribute as the default face. For some
+  ;; reason, using "Monospace" which is the default in faces.el created a
+  ;; slightly different face.
+  (set-face-attribute 'fixed-pitch nil
+                      :family (face-attribute 'default :family))
+
+  :bind
+  ("<f12>" . acg/variable-pitch-mode)
+  :hook
+  (org-mode . acg/variable-pitch-mode)
+  (markdown-mode . acg/variable-pitch-mode))
 
 (use-package org-variable-pitch
   :after face-remap)

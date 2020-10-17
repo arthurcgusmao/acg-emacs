@@ -19,7 +19,8 @@
 
   (defun acg/markdown-setup ()
     (reftex-mode)
-    (setq-local reftex-cite-format "[@%l]"))
+    (setq-local reftex-cite-format "[@%l]")
+    (markdown-toggle-url-hiding 1))
 
   :bind
   (:map markdown-mode-map
