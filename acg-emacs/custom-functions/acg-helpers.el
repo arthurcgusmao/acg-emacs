@@ -141,18 +141,12 @@ function that sets `deactivate-mark' to t."
   "Returns the page title of an URL. If TIMEOUT (in seconds)
 expires, return nil. Adapted from
 https://lists.gnu.org/archive/html/help-gnu-emacs/2010-07/msg00299.html"
-  (let ((timeout 1.2)
-        (title))
-    (with-current-buffer (url-retrieve-synchronously url t t timeout)
+  (let ((timeout (or timeout 3))
+        title dom)
+    (with-current-buffer (url-retrieve-synchronously
+                          url t t timeout)
       (unless (= (buffer-size) 0)
-        (goto-char (point-min))
-        (re-search-forward "<title>\\([^<]*\\)</title>" nil t 1)
-        (setq title (match-string 1))
-        (unless title
-          ;; Try to fallback to <h1> tag if no <title>
-          (re-search-forward "<h1\\(.*>\\)\\([^<]*\\)</h1>" nil t 1)
-          (setq title (match-string 2)))
-        (goto-char (point-min))
-        (re-search-forward "charset=\"?\\([-0-9a-zA-Z]*\\)" nil t 1)
-        (decode-coding-string title (intern (downcase
-                                             (match-string 1))))))))
+        (setq dom (libxml-parse-html-region
+                   (point-min) (point-max)))
+        (setq title (car (dom-strings
+                          (dom-by-tag dom 'title))))))))
