@@ -27,3 +27,6 @@ Ediff shows in multiple windows:
 - Version B
 - Result preview after you resolve conflicts
 - The common ancestor of both versions
+
+*** Git/Magit
+Keep *theirs* refers to the newest commits that are being rebased (the commits being "moved"), and keep *ours* refers to the branch that you are rebasing onto.
