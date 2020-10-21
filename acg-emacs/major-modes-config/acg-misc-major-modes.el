@@ -12,6 +12,12 @@
 (use-package scala-mode)
 (use-package yaml-mode)
 
+(use-package conf-mode
+  :straight nil
+  :mode (("\\.ini$" . conf-windows-mode)
+         ("\\.toml$" . conf-toml-mode)
+         ("Pipfile$" . conf-toml-mode)))
+
 
 (use-package markdown-mode
   :config
