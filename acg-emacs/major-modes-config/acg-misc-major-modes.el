@@ -1,11 +1,16 @@
-
-(use-package scss-mode)
+;; HTML & related
 (use-package less-css-mode)
-(use-package rainbow-mode)
-(use-package yaml-mode)
-(use-package scala-mode)
+(use-package scss-mode)
+(use-package rainbow-mode) ; color color strings (e.g., "#00FF00")
+
+;; Docker, Kubernetes, etc.
+(use-package docker :bind ("C-c d" . docker))
 (use-package dockerfile-mode)
+
+;; Misc
 (use-package csv-mode)
+(use-package scala-mode)
+(use-package yaml-mode)
 
 
 (use-package markdown-mode
