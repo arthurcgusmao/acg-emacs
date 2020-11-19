@@ -13,3 +13,6 @@ bibliography file."
     (interactive)
     (let ((file (read-file-name "Select bib file:")))
       (add-to-list 'reftex-default-bibliography file))))
+
+;; Pandoc integration with Emacs
+(use-package pandoc-mode)
