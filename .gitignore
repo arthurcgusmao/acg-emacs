@@ -1,15 +1,19 @@
+# Patterns
 *.elc
 *.el~
-anaconda-mode
-auto-save-list
-eshell
-file-backups
-history
-obsolete
-scratch-backups
-straight
-local-settings.el
+
+# Specific files/dirs
+/anaconda-mode/
+/auto-save-list/
+/eshell/
+/file-backups/
+/history/
+/obsolete/
+/request/
+/scratch-backups/
+/straight/
 /transient/
-/places
 /url/
 /bookmarks
+/local-settings.el
+/places
