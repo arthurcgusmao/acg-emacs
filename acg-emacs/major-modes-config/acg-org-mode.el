@@ -8,6 +8,7 @@
 (setq org-adapt-indentation nil)
 (setq org-startup-truncated nil)
 (setq org-startup-folded nil)
+(setq org-list-allow-alphabetical t)
 
 
 ;;; Fonts and Appearence
