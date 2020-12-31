@@ -127,6 +127,8 @@ thing/symbol at point."
   :after (prescient ivy)
   :config
   (setq ivy-prescient-sort-commands '(:not swiper swiper-isearch ivy-switch-buffer counsel-find-file counsel-recentf))
+  ;; Hack to make Ivy not use Prescient sorting method in find-file (see https://github.com/raxod502/prescient.el/issues/64)
+  (ivy--alist-set 'ivy-sort-functions-alist #'read-file-name-internal #'ivy-sort-file-function-default)
   (ivy-prescient-mode 1))
 (use-package company-prescient
   :after (prescient company)
