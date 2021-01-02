@@ -1,0 +1,3 @@
+** Emacs Jupyter
+
+- Save image by `M-x image-save` when image under point [ref: https://github.com/dzop/emacs-jupyter/issues/149];

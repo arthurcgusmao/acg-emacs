@@ -1,11 +1,6 @@
-* My personal notes on Emacs packages and related
+* My personal notes on Magit and related
 
-** Emacs Jupyter
-
-- Save image by `M-x image-save` when image under point [ref: https://github.com/dzop/emacs-jupyter/issues/149];
-
-
-** Magit
+** Magit Commands
 
 *** Commit Fixup (command `cF` -- `magit-commit-fixup`)
 Add staged changes to a commit different than the last one.
