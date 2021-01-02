@@ -1,4 +1,11 @@
-Here are some tips and snippets for easy access when writing org or latex files.
+* Org Mode Notes
+
+** General tips
+*** Narrowing
+I'd like to narrow to this section so I press =C-x n s=.
+
+** Latex Integration
+Here are some tips and snippets for easy access when using Org Mode to write Latex or related files.
 
 #+LaTeX_CLASS: times-12-small-margin
 #+LaTeX_HEADER: \usepackage{times}
@@ -10,5 +17,4 @@ to only include two levels in TOC:
 
 
 bibliographystyle:unsrt
-bibliography:~/Documents/Mendeley/library.bib
-
+bibliography:~/Documents/zotero.bib
