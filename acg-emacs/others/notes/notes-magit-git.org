@@ -29,6 +29,12 @@ pick 3644b44 Fix Dockerfile
 
 Learnt from [[http://www.howardism.org/Technical/Emacs/magit-squashing.html][Squashing Commits with Magit]].
 
+*** View commits that touched the current file
+#+BEGIN_SRC
+M-x magit-log-buffer-file
+#+END_SRC
+
+
 ** Handle Git conflicts
 *** Smerge mode
 Type =C-c ^ C-h= to enter the help buffer.
