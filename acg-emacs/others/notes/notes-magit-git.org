@@ -12,19 +12,19 @@ Modify the last commit's message.
 Following commands:
 - Open rebase interactive on a commit of your choice. This can be done by using the =r i= command with the cursor on a line of a commit in, e.g., the log buffer.
 - The rebase interactive buffer will open. There, the commits appear in reversed order (oldest first).
-- Press =s= on the commits you want to squash. That commit will be squashed into the next commit that will not be squashed.
-  - For it to work, you must have at least two commits that will not be squashed: the first and the last.
-  - If you wanna change the commits order, you can do so by moving the lines up and down in the interactive buffer. This way you can keep a commit that is not the last one as the "non-squashed" commit.
+- Press =s= on the commits you want to squash. That commit will be squashed into the *previous* commit that will not be squashed.
+  - For it to work, you must have at least one commit that will not be squashed: the first (oldest).
+  - If you wanna change the commits order, you can do so by moving the lines up and down in the interactive buffer. This way you can keep a commit that is not the oldest one as the "non-squashed" commit.
 - Finish your rebase.
 
 Below is an example of how your interactive buffer would look like right before you finish your rebase. Commit =946710d= is the commit you are rebasing onto (where your cursor was when you pressed =r i=). Commits =a009be1= to =5deefdd= will be squashed into =3644b44=.
 
 #+BEGIN_SRC text
 pick 946710d Add Heroku config file
+pick 3644b44 Fix Dockerfile
 squash a009be1 Deploy Heroku: set port on Dockerfile
 squash a65a91b Deploy Heroku: try removing EXPOSE
 squash 5deefdd Deploy Heroku: Make app not try to fetch data
-pick 3644b44 Fix Dockerfile
 #+END_SRC
 
 Learnt from [[http://www.howardism.org/Technical/Emacs/magit-squashing.html][Squashing Commits with Magit]].
