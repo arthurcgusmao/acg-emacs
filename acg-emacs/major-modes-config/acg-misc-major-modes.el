@@ -19,6 +19,9 @@
          ("\\.toml$" . conf-toml-mode)
          ("Pipfile$" . conf-toml-mode)))
 
+;; Databases
+(use-package cql-mode) ; Cassandra
+
 
 (use-package markdown-mode
   :config
