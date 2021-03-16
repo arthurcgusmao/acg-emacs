@@ -49,6 +49,9 @@
   ;; Remove annoying ring bell
   (setq ring-bell-function 'ignore)
 
+  ;; Avoid performance issues in files with very long lines.
+  (global-so-long-mode 1)
+
   ;; MS Windows configs
   (if (string-equal system-type "windows-nt")
       (progn
