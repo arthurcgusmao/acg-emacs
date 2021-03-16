@@ -10,7 +10,6 @@
 ;; Misc
 (use-package csv-mode)
 (use-package scala-mode)
-(use-package rst-mode :straight nil)
 (use-package yaml-mode)
 
 (use-package conf-mode
