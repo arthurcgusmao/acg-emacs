@@ -144,6 +144,8 @@ user to choose a remote."
    ("q" . magit-kill-this-buffer)
    ("<C-up>" . magit-section-backward-sibling)
    ("<C-down>" . magit-section-forward-sibling)
+   :map magit-popup-mode-map
+   ([escape] . magit-popup-quit)
    :map magit-file-section-map
    ("<return>" . acg/magit-diff-visit-file)
    ("<C-return>" . acg/magit-diff-display-file)

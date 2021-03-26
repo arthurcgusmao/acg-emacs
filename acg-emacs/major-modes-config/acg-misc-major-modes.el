@@ -6,6 +6,8 @@
 ;; Docker, Kubernetes, etc.
 (use-package docker :bind ("C-c d" . docker))
 (use-package dockerfile-mode)
+(use-package kubernetes
+  :commands (kubernetes-overview))
 
 ;; Misc
 (use-package csv-mode)
