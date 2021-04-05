@@ -143,7 +143,7 @@ new buffer."
 
 ;; Move buffers across windows
 (use-package buffer-move
-  :straight (:host github :repo "raxod502/buffer-move")
+  :straight (:host github :repo "lukhas/buffer-move")
   :config
   (setq buffer-move-behavior 'move)
   :bind
