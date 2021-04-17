@@ -135,6 +135,12 @@
             (define-key org-mode-map (kbd "<f9>") 'org-latex-export-to-pdf)
 
             (define-key org-mode-map (kbd "C-k") 'org-insert-link)
+            (define-key org-mode-map (kbd "C-e") 'org-edit-special)
+
+            ;; Org src map
+            (define-key org-src-mode-map (kbd "C-e") 'org-edit-src-exit)
+            (define-key org-src-mode-map (kbd "C-s") 'acg/org-edit-src-save-exit)
+            (define-key org-src-mode-map (kbd "C-w") 'acg/org-edit-src-confirm-abort)
             ))
 
 
@@ -281,6 +287,21 @@ active."
          (acg/url-get-page-title link))
         (t nil)))
 (setq org-link-make-description-function 'acg/org-link-make-description-function)
+
+
+(defun acg/org-edit-src-save-exit ()
+  "Performs both `org-edit-src-save' and `org-edit-src-exit'."
+  (interactive)
+  (org-edit-src-save)
+  (org-edit-src-exit))
+
+(defun acg/org-edit-src-confirm-abort ()
+  "Same as `org-edit-src-abort' but asks for confirmation first."
+  (interactive)
+  (when (or (not (buffer-modified-p))
+            (y-or-n-p
+             "Abort changes to this Org Src code block?"))
+    (org-edit-src-abort)))
 
 
 ;;; Indentation

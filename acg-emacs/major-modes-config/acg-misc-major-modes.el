@@ -46,12 +46,34 @@
 
   :bind
   (:map markdown-mode-map
-        ("C-k" . 'markdown-insert-link))
+        ("C-k" . 'markdown-insert-link)
+        ("C-e" . 'markdown-edit-code-block))
   :hook
   (markdown-mode . acg/markdown-setup))
 
 ;; Dependency for editing Markdown source blocks w/ <C-c '>
-(use-package edit-indirect)
+(use-package edit-indirect
+  :config
+  (defun acg/edit-indirect-save-commit ()
+    "Same as `edit-indirect-commit' but also saves the original buffer."
+    (interactive)
+    (edit-indirect-commit)
+    (save-buffer))
+
+  (defun acg/edit-indirect-abort-confirm ()
+    "Same as `edit-indirect-abort' but asks for confirmation first."
+    (interactive)
+    (when (or (not (buffer-modified-p))
+              (y-or-n-p
+               "Abort changes to this `edit-indirect' code block?"))
+      (edit-indirect-abort)))
+
+  :bind
+  (:map edit-indirect-mode-map
+        ("C-c C-c" . nil)
+        ("C-e" . edit-indirect-commit)
+        ("C-s" . acg/edit-indirect-save-commit)
+        ("C-w" . acg/edit-indirect-abort-confirm)))
 
 
 (use-package ttl-mode
