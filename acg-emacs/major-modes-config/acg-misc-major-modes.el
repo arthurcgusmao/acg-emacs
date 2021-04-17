@@ -33,6 +33,12 @@
   (setq markdown-hide-urls t)
   (setq markdown-hide-markup t)
 
+  ;; Inherit faces from Org
+  (set-face-attribute 'markdown-code-face nil :inherit 'org-block :family "Monospace")
+  (set-face-attribute 'markdown-language-keyword-face nil :inherit 'org-block-begin-line)
+  (set-face-attribute 'markdown-inline-code-face nil :inherit 'org-verbatim)
+  (set-face-attribute 'markdown-markup-face nil :inherit 'org-verbatim)
+
   (defun acg/markdown-setup ()
     (reftex-mode)
     (setq-local reftex-cite-format "[@%l]")

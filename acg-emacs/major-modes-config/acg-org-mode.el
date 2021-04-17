@@ -32,7 +32,7 @@
                     :foreground "#3C3C6C")
 (set-face-attribute 'org-verbatim nil
                     :inherit font-lock-constant-face
-                    :height 0.95
+                    :height 0.9
                     :family "Monospace")
 (set-face-attribute 'org-code nil
                     :height 0.8

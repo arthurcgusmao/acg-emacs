@@ -18,3 +18,16 @@ to only include two levels in TOC:
 
 bibliographystyle:unsrt
 bibliography:~/Documents/zotero.bib
+
+
+** Source blocks
+*** Shell commands in source blocks
+Use the =:dir </path/to/dir/>= argument to run a shell script in another location
+#+BEGIN_SRC bash :dir ~/Projects/
+ls | head -n 3
+#+END_SRC
+
+#+RESULTS:
+| acg-windows             |
+| archive                 |
+| arthurcgusmao.github.io |
