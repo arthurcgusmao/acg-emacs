@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Bash code block
+# key: bash
+# --
+\`\`\`bash
+$0
+\`\`\`
