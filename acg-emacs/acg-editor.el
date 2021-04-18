@@ -184,12 +184,20 @@
   (if (string-equal system-type "windows-nt")
       (and (global-set-key (kbd "<M-f4>") 'delete-frame)))
 
+  (defun acg/widen-recenter ()
+    "Same as `widen' but run `recenter' afterwards."
+    (interactive)
+    (widen)
+    (recenter))
+
   :bind
+  ("C-l" . recenter)
   ("C-r" . repeat)
   ("C-z" . undo)
   ("C-S-Z" . redo)
   ("C-S-SPC" . cycle-spacing)
-  ("C-S-J" . join-line))
+  ("C-S-J" . join-line)
+  ("C-x n w" . acg/widen-recenter))
 
 
 (use-package auth-source
