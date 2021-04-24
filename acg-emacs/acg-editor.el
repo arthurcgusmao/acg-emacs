@@ -49,8 +49,19 @@
   ;; Remove annoying ring bell
   (setq ring-bell-function 'ignore)
 
+
   ;; Avoid performance issues in files with very long lines.
+
+  ;; Emacs supports text in scripts whose ordering of display is from right to
+  ;; left; however, digits and Latin text in these scripts are still displayed
+  ;; left to right. This feature adds to the amount of line scans which can
+  ;; cause Emacs to hang; disabling it when not using such scripts can increase
+  ;; performance.
+  (setq-default bidi-paragraph-direction 'left-to-right)
+  (setq bidi-inhibit-bpa t)
+  ;; Automatically try to improve performance for files with long lines.
   (global-so-long-mode 1)
+
 
   ;; MS Windows configs
   (if (string-equal system-type "windows-nt")
