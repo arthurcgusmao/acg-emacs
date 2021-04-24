@@ -66,3 +66,29 @@
           (set-frame-name "Terminal")))))
 
 (add-to-list 'after-make-frame-functions #'acg/update-term-frame)
+
+
+
+;; vterm is a full fledged new terminal emulator
+(use-package vterm
+  :config
+  (defun acg/vterm-paste-from-clipboard ()
+    "Similar to `vterm-yank' but works with content from the
+clipboard."
+    (interactive)
+    (vterm-insert (gui--selection-value-internal 'CLIPBOARD)))
+
+  :bind
+  (:map vterm-mode-map
+        ("<tab>" . vterm-send-tab)
+        ("M-q" . nil)
+        ("C-w" . nil)
+        ("C-o" . nil)
+        ("C-S-o" . nil)
+        ("<escape>" . nil)
+        ("C-v" . acg/vterm-paste-from-clipboard)
+        ("C-S-v" . acg/vterm-paste-from-clipboard))
+  (:map vterm-copy-mode-map
+        ("C-c C-c" . vterm-copy-mode-done)))
+;; Useful commands:
+;; - C-c C-t (vterm-copy-mode) - transforms the buffer into fundamental mode; useful for copying text
