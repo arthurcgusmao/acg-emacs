@@ -64,18 +64,6 @@
   (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images))
 
 
-;; org-ref package configurations
-(use-package org-ref
-  :config
-  (setq org-ref-default-bibliography acg/default-bib-file))
-
-;; see org-ref for use of these variables
-;; (setq org-ref-bibliography-notes (concat user-emacs-directory "bibliography/notes.org")
-;; org-ref-pdf-directory (concat user-emacs-directory "bibliography/bibtex-pdfs/"))
-
-(use-package org-ref)
-
-
 ;; setting up keybindings
 (add-hook 'org-mode-hook
           (lambda ()
@@ -452,7 +440,7 @@ active."
    ("C-c i r" . org-download-rename-at-point)
    ("C-c i s" . org-download-screenshot)))
 
-;; Org YouTube makes it possible to exhibit YouTube and Images from the web
+;; Org YouTube makes it possible to exhibit Images from the web and YouTube videos
 ;; with `org-toggle-inline-images'.
 (use-package org-yt
   :straight (:host github :repo "TobiasZawada/org-yt")

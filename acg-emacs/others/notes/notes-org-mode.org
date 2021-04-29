@@ -4,20 +4,33 @@
 *** Narrowing
 I'd like to narrow to this section so I press =C-x n s=.
 
+
 ** Latex Integration
 Here are some tips and snippets for easy access when using Org Mode to write Latex or related files.
 
+#+BEGIN_SRC org
 #+LaTeX_CLASS: times-12-small-margin
-#+LaTeX_HEADER: \usepackage{times}
 #+TITLE: Your title here
+#+AUTHOR: Author Name
+# Times new roman usually looks better:
+#+LaTeX_HEADER: \usepackage{times}
+# To disable ToC and/or section numbers:
 #+OPTIONS: toc:nil
 #+OPTIONS: num:nil
-to only include two levels in TOC:
+# To only include two levels in ToC:
 #+OPTIONS: toc:2
+# Paragraph configurations
+#     Indent first paragraph of section too
+#+LaTeX_HEADER: \usepackage{indentfirst}
+#     Instead of indentation, separate paragraphs by vertical space.
+#+LaTeX_HEADER: \usepackage{parskip}
 
 
 bibliographystyle:unsrt
-bibliography:~/Documents/zotero.bib
+bibliography:~/Documents/zotero.bib,localfile.bib
+#+END_SRC
+
+Use =C-c ]= to add citation using completion.
 
 
 ** Source blocks
