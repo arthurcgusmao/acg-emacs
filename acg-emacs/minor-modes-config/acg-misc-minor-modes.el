@@ -12,7 +12,10 @@
   (add-to-list 'reftex-default-bibliography acg/default-bib-file))
 
 (use-package bibtex
-  :straight nil
+  :straight nil)
+
+(use-package ivy-bibtex
+  :after ivy bibtex
   :config
   (add-to-list 'bibtex-completion-bibliography acg/default-bib-file))
 
@@ -22,7 +25,7 @@
   :config
   (add-to-list 'org-ref-default-bibliography acg/default-bib-file)
 
-  ;; see org-ref for use of these variables
+  ;; @todo: See org-ref for use of these variables
   ;; (setq org-ref-bibliography-notes (concat user-emacs-directory "bibliography/notes.org")
   ;; org-ref-pdf-directory (concat user-emacs-directory "bibliography/bibtex-pdfs/"))
   )
