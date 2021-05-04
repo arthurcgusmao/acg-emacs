@@ -2,8 +2,8 @@
 
 (use-package zenburn-theme)
 (use-package anti-zenburn-theme)
-(use-package modus-operandi-theme)
-(use-package modus-vivendi-theme)
+(use-package modus-themes
+  :straight (:host gitlab :repo "protesilaos/modus-themes"))
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'custom-theme-load-path (concat acg/acg-emacs-dir "themes"))
