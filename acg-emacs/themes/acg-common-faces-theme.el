@@ -52,4 +52,29 @@
  )
 
 
+;;; Functions for handling themes
+
+(defun acg/disable-all-themes ()
+  "Loop over all enabled themes and disable them."
+  (interactive)
+  (mapcar 'disable-theme custom-enabled-themes))
+
+(defun acg/load-theme-disable-others (&optional theme)
+  "Loads a single theme, deactivating all of the others."
+  (interactive)
+  (acg/disable-all-themes)
+  (if theme
+      (load-theme theme t)
+    (call-interactively 'load-theme)))
+
+(defun acg/acg-theme-switch ()
+  "Switches between the light and dark themes with a single
+command."
+  (interactive)
+  (let ((next-theme 'acg-dark))
+    (when (member 'acg-dark custom-enabled-themes)
+      (setq next-theme 'acg-light))
+    (acg/load-theme-disable-others next-theme)))
+
+
 (provide-theme 'acg-common-faces)
