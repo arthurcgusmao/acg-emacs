@@ -1,0 +1,9 @@
+* EXWM (Emacs X Window Manager)
+
+
+
+
+** References
+
+1. [[https://github.com/ch11ng/exwm][GitHub - ch11ng/exwm: Emacs X Window Manager]]
+2. [[https://github.com/ch11ng/exwm/wiki][Wiki · EXWM · GitHub]]

@@ -1,0 +1,30 @@
+
+
+
+
+
+The package =ct= provides color functionalities. They even have a [[https://notes.neeasade.net/color-spaces.html][blog post]] to
+describe ways of reasoning around colors, as Prot mentioned in his [[https://protesilaos.com/dotemacs/#h:755d055b-ef80-4f63-af08-ce9e931de30c][dotemacs]].
+
+#+BEGIN_SRC emacs-lisp
+(use-package ct)
+#+END_SRC
+
+The distance between colors is 100.
+#+BEGIN_SRC emacs-lisp
+(ct-name-distance "#ffffff" "#000000")
+#+END_SRC
+
+#+RESULTS:
+: 99.99978721318817
+
+
+This is how to "invert" a color (i.e., flip it on the lightness spectrum)
+#+BEGIN_SRC emacs-lisp
+(ct-lab-lighten "#050528"
+                (- 100 (* 1.5 (ct-name-distance "#050528" "#000000")))
+                )
+#+END_SRC
+
+#+RESULTS:
+: #c0bee9

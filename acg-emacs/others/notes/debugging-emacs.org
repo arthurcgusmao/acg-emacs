@@ -1,0 +1,8 @@
+* Debugging Emacs
+
+** =profiler.el=
+The built-in Emacs profiler. Usage:
+- =M-x profiler-start=
+- Reproduce what you want to debug
+- =M-x profiler-stop=
+- =M-x profiler-report=
