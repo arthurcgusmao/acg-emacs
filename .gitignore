@@ -1,10 +1,12 @@
 # Patterns
 *.elc
 *.el~
+session.*
 
 # Specific files/dirs
 /anaconda-mode/
 /auto-save-list/
+/elpa
 /eshell/
 /file-backups/
 /history/
