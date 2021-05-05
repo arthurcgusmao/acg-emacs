@@ -7,6 +7,7 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'custom-theme-load-path (concat acg/acg-emacs-dir "themes"))
+(setq custom-safe-themes t)             ; Never ask to confirm when loading themes
 (load-theme 'acg-dark t)
 
 
