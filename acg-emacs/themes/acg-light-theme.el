@@ -57,6 +57,20 @@
  ;; emacs-jupyter
  '(jupyter-eval-overlay ((t (:background "#F87440" :foreground "#621e04"
                                          :height 0.8))))
+
+ ;; Org-mode
+ ;; custom fonts for src begin/end
+ '(org-block
+   ((t (:extend t :height 0.9 :background "#aaa9d2"))))
+ '(org-meta-line
+   ((t (:inherit font-lock-comment-face :extend t :height 0.67 :background "#aaa9d2" :foreground "#7f7fa6"))))
+ '(org-verbatim
+   ((t (:inherit font-lock-constant-face :height 0.9 :family "Monospace"))))
+ '(org-code
+   ((t (:height 0.8 :inherit font-lock-constant-face :family "Monospace"))))
+ '(org-quote
+   ((t (:inherit (variable-pitch org-block) :slant italic))))
+
  )
 
 

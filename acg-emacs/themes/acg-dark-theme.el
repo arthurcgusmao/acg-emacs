@@ -7,7 +7,7 @@
 
 (custom-theme-set-faces
  'acg-dark
- 
+
  '(default
     ((t (:inherit nil :stipple nil :background "#1B1B2A" :foreground "#ddd"
                   :inverse-video nil :box nil :strike-through nil
@@ -51,6 +51,20 @@
  ;;                                         :height 0.8))))
  '(jupyter-eval-overlay ((t (:background "#621e04" :foreground "#F87440"
                                          :height 0.8))))
+
+ ;; Org-mode
+ ;; custom fonts for src begin/end
+ '(org-block
+   ((t (:extend t :height 0.9 :background "#050528"))))
+ '(org-meta-line
+   ((t (:inherit font-lock-comment-face :extend t :height 0.67 :background "#050528" :foreground "#3C3C6C"))))
+ '(org-verbatim
+   ((t (:inherit font-lock-constant-face :height 0.9 :family "Monospace"))))
+ '(org-code
+   ((t (:height 0.8 :inherit font-lock-constant-face :family "Monospace"))))
+ '(org-quote
+   ((t (:inherit (variable-pitch org-block) :slant italic))))
+
  )
 
 

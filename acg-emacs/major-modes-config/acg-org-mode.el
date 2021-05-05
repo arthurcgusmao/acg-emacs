@@ -20,27 +20,7 @@
 ;; highlight latex related syntax
 (eval-after-load 'org
   '(setf org-highlight-latex-and-related '(latex script entities)))
-;; custom fonts for src begin/end
-(set-face-attribute 'org-block nil
-                    :extend t
-                    :height 0.9
-                    :background "#050528")
-(set-face-attribute 'org-meta-line nil
-                    :inherit font-lock-comment-face
-                    :extend t :height 0.67
-                    :background "#050528"
-                    :foreground "#3C3C6C")
-(set-face-attribute 'org-verbatim nil
-                    :inherit font-lock-constant-face
-                    :height 0.9
-                    :family "Monospace")
-(set-face-attribute 'org-code nil
-                    :height 0.8
-                    :inherit font-lock-constant-face
-                    :family "Monospace")
-(set-face-attribute 'org-quote nil
-                    :inherit '(variable-pitch org-block)
-                    :slant 'italic)
+
 ;; Quickfix: disable `org-latex-and-related' foreground to fix some SRC
 ;; metalines showing text in a different color after the underscore, and to
 ;; also adapt it to `org-export-with-sub-superscripts' only working with {}, as
