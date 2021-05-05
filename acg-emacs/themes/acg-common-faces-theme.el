@@ -4,15 +4,6 @@
 (custom-theme-set-faces
  'acg-common-faces
 
- ;; mode line
- ;; '(mode-line
- ;;   ((t (:background "#203" :foreground "#ddd" :box
- ;;                    (:line-width 2 :color "#203" :style released-button)))))
- '(mode-line-inactive
-   ((t (:inherit mode-line :background "#555"
-                 :foreground "#bbb" :box (:line-width 1 :color "#777")
-                 :weight light))))
-
  ;; minimap
  '(minimap-active-region-background
    ((((background dark)) (:background "#2A2A2A222222"))
@@ -56,10 +47,6 @@
    ((t (:inherit tab-line-tab :background "#BBBBBF"))))
  '(tab-line-highlight ((t (:inherit tab-line-tab :background "#FA9"))))
 
- ;; fringe
- '(fringe ((t (:foreground "orange" :background "#3d3c3a"))))
- ;; border (buffer separator)
- '(vertical-border ((t (:foreground "#3d3c3a"))))
  ;; linum
  '(linum ((t (:inherit fringe :weight normal :foreground "#6d6c6a"))))
  )

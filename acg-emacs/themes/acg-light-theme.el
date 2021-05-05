@@ -53,6 +53,10 @@
  '(mode-line
    ((t (:background "#ab89c2" :foreground "#203" :box
                     (:line-width 2 :color "#ab89c2" :style released-button)))))
+ '(mode-line-inactive
+   ((t (:inherit mode-line :background "#bbb"
+                 :foreground "#555" :box (:line-width 1 :color "#999")
+                 :weight light))))
 
  ;; emacs-jupyter
  '(jupyter-eval-overlay ((t (:background "#F87440" :foreground "#621e04"
@@ -61,9 +65,9 @@
  ;; Org-mode
  ;; custom fonts for src begin/end
  '(org-block
-   ((t (:extend t :height 0.9 :background "#aaa9d2"))))
+   ((t (:extend t :height 0.9 :background "#c0bee9"))))
  '(org-meta-line
-   ((t (:inherit font-lock-comment-face :extend t :height 0.67 :background "#aaa9d2" :foreground "#7f7fa6"))))
+   ((t (:inherit font-lock-comment-face :extend t :height 0.67 :background "#c0bee9" :foreground "#7f7fa6"))))
  '(org-verbatim
    ((t (:inherit font-lock-constant-face :height 0.9 :family "Monospace"))))
  '(org-code
@@ -71,6 +75,10 @@
  '(org-quote
    ((t (:inherit (variable-pitch org-block) :slant italic))))
 
+ ;; fringe
+ '(fringe ((t (:foreground "orange" :background "#d3d2d0"))))
+ ;; border (buffer separator)
+ '(vertical-border ((t (:foreground "#d3d2d0"))))
  )
 
 
