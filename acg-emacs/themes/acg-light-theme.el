@@ -2,29 +2,27 @@
 
 (load-theme 'acg-common-faces)
 
-(set-face-background 'hl-line "#f3f3f3")
-(set-cursor-color "#000000")
+(set-face-background 'hl-line "#fff")
+(set-cursor-color "#000")
 
 (custom-theme-set-faces
  'acg-light
 
  '(default
-    ((t (:inherit nil :stipple nil :background "#ffffff" :foreground "#141414"
+    ((t (:inherit nil :stipple nil :background "#f3f3f3" :foreground "#141414"
                   :inverse-video nil :box nil :strike-through nil
                   :overline nil :underline nil :slant normal :weight normal))))
- ;; '(font-lock-builtin-face ((t (:foreground "#88d"))))
- '(font-lock-builtin-face ((t (:foreground "#a63234"))))
- '(font-lock-comment-face ((t (:foreground "#a6a6a6" :slant italic))))
- '(font-lock-constant-face ((t (:foreground "#006666" :weight bold))))
- '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#a18365"))))
- ;; '(font-lock-function-name-face ((t (:foreground "#7F33A9"))))
- ;; '(font-lock-function-name-face ((t (:foreground "#9D1353"))))
- '(font-lock-function-name-face ((t (:foreground "#0086b3" :weight bold))))
- '(font-lock-keyword-face ((t (:foreground "#19198f" :weight bold))))
- '(font-lock-string-face ((t (:foreground "#b85c00"))))
- '(font-lock-type-face ((t (:foreground "purple" :weight bold))))
- '(font-lock-variable-name-face ((t (:foreground "#0f7742"))))
- '(region ((t (:background "#a4d8e5"))))
+ '(font-lock-builtin-face ((t (:foreground "#a22"))))
+ '(font-lock-comment-face ((t (:foreground "#999" :slant italic))))
+ '(font-lock-constant-face ((t (:foreground "#066" :weight bold))))
+ ;; '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#a18365"))))
+ '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#a78"))))
+ '(font-lock-function-name-face ((t (:foreground "#08a" :weight bold))))
+ '(font-lock-keyword-face ((t (:foreground "#118" :weight bold))))
+ '(font-lock-string-face ((t (:foreground "#940"))))
+ '(font-lock-type-face ((t (:foreground "#80d" :weight bold))))
+ '(font-lock-variable-name-face ((t (:foreground "#063"))))
+ '(region ((t (:background "#add"))))
 
  '(helm-buffer-directory ((t (:inherit helm-ff-directory))))
  '(helm-buffer-file ((t (:foreground "black"))))
@@ -48,10 +46,10 @@
  ;; '(vertical-border ((t (:foreground "gray"))))
 
  '(mode-line
-   ((t (:background "#ab89c2" :foreground "#203" :box
-                    (:line-width 2 :color "#ab89c2" :style released-button)))))
+   ((t (:background "#b9c" :foreground "#203" :box
+                    (:line-width 2 :color "#b9c" :style released-button)))))
  '(mode-line-inactive
-   ((t (:inherit mode-line :background "#bbb"
+   ((t (:inherit mode-line :background "#ccc"
                  :foreground "#555" :box (:line-width 1 :color "#999")
                  :weight light))))
 
@@ -65,7 +63,7 @@
    ((t (:extend t :height 0.9 :background "#e9e9df"))))
  '(org-meta-line
    ;; ((t (:inherit font-lock-comment-face :extend t :height 0.67 :background "#e9e9df" :foreground "#bfbfb7"))))
-   ((t (:inherit font-lock-comment-face :extend t :height 0.67 :background "#fafaf9" :foreground "#b1b1a7"))))
+   ((t (:inherit font-lock-comment-face :extend t :height 0.67 :foreground "#b1b1a7"))))
  '(org-verbatim
    ((t (:inherit (fixed-pitch font-lock-constant-face) :height 0.9))))
  '(org-code
