@@ -13,7 +13,6 @@
                   :inverse-video nil :box nil :strike-through nil
                   :overline nil :underline nil :slant normal :weight normal))))
  '(font-lock-builtin-face ((t (:foreground "#7ce"))))
- ;; '(font-lock-comment-face ((t (:foreground "#666" :slant italic))))
  '(font-lock-comment-face ((t (:foreground "#648" :slant italic))))
  '(font-lock-constant-face ((t (:foreground "#7ec"))))
  '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#88d"))))
@@ -67,12 +66,19 @@
  '(org-code
    ((t (:inherit (fixed-pitch font-lock-constant-face) :height 0.8))))
  '(org-quote
-   ((t (:inherit (variable-pitch org-block) :slant italic))))
+   ((t (:inherit (variable-pitch org-block) :foreground "#bbb" :slant italic))))
 
  ;; fringe
  '(fringe ((t (:foreground "orange" :background "#3d3c3a"))))
  ;; border (buffer separator)
  '(vertical-border ((t (:foreground "#3d3c3a"))))
+
+ ;; tab-line
+ '(tab-line ((t (:inherit default :inherit variable-pitch :background "#3d3c3a" :foreground "#999" :overline nil :underline nil :height 0.9))))
+ '(tab-line-tab ((t (:inherit tab-line :background "#8d8986" :foreground "#333"))))
+ '(tab-line-tab-inactive ((t (:inherit tab-line-tab :background "#7d7a77"))))
+ '(tab-line-tab-current ((t (:inherit tab-line-tab :background "#BBBBBF"))))
+ '(tab-line-highlight ((t (:inherit tab-line-tab :background "#FA9"))))
  )
 
 

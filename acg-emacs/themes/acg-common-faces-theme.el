@@ -37,16 +37,6 @@
  '(show-paren-mismatch
    ((t (:foreground "red" :weight bold))))
 
- ;; tab-line
- '(tab-line ((t (:inherit default :inherit variable-pitch :background "#3d3c3a"
-                          :foreground "#999" :overline nil :underline nil
-                          :height 0.9))))
- '(tab-line-tab ((t (:inherit tab-line :background "#8d8986" :foreground "#333"))))
- '(tab-line-tab-inactive ((t (:inherit tab-line-tab :background "#7d7a77"))))
- '(tab-line-tab-current
-   ((t (:inherit tab-line-tab :background "#BBBBBF"))))
- '(tab-line-highlight ((t (:inherit tab-line-tab :background "#FA9"))))
-
  ;; linum
  '(linum ((t (:inherit fringe :weight normal :foreground "#6d6c6a"))))
  )

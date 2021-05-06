@@ -15,6 +15,7 @@
 
 ;; make code blocks pretty
 (setq org-src-fontify-natively t)
+(setq org-fontify-quote-and-verse-blocks t)
 ;; hide markup (emphasis, italic, bold)
 (setq org-hide-emphasis-markers t)
 ;; highlight latex related syntax
