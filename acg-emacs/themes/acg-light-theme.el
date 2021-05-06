@@ -69,9 +69,9 @@
  '(org-meta-line
    ((t (:inherit font-lock-comment-face :extend t :height 0.67 :background "#c0bee9" :foreground "#7f7fa6"))))
  '(org-verbatim
-   ((t (:inherit font-lock-constant-face :height 0.9 :family "Monospace"))))
+   ((t (:inherit (fixed-pitch font-lock-constant-face) :height 0.9))))
  '(org-code
-   ((t (:height 0.8 :inherit font-lock-constant-face :family "Monospace"))))
+   ((t (:inherit (fixed-pitch font-lock-constant-face) :height 0.8))))
  '(org-quote
    ((t (:inherit (variable-pitch org-block) :slant italic))))
 

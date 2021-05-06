@@ -34,7 +34,7 @@
   (setq markdown-hide-markup t)
 
   ;; Inherit faces from Org
-  (set-face-attribute 'markdown-code-face nil :inherit 'org-block :family "Monospace")
+  (set-face-attribute 'markdown-code-face nil :inherit '(org-block fixed-pitch))
   (set-face-attribute 'markdown-language-keyword-face nil :inherit 'org-block-begin-line)
   (set-face-attribute 'markdown-inline-code-face nil :inherit 'org-verbatim)
   (set-face-attribute 'markdown-markup-face nil :inherit 'org-verbatim)
