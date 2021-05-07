@@ -191,9 +191,13 @@ user to choose a remote."
   (setq magit-diff-refine-hunk t))
 
 ;; Packages for git-related file major modes
-(use-package gitignore-mode)
-(use-package gitconfig-mode)
 (use-package gitattributes-mode)
+(use-package gitconfig-mode)
+(use-package gitignore-mode
+  :config
+  ;; Add support to .dockerignore
+  (add-to-list 'auto-mode-alist
+               (cons "/.dockerignore\\'" 'gitignore-mode)))
 
 
 ;; Make Emacs work with ssh-ident
