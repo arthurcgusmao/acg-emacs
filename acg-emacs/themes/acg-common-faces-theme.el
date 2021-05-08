@@ -27,6 +27,10 @@
  '(org-level-7 ((t (:inherit outline-7 :foreground "#90E" :weight bold :height 1.0))))
  '(org-level-8 ((t (:inherit outline-8 :foreground "#0FF" :weight bold :height 1.0))))
 
+ '(org-document-title ((t (:inherit org-document-info :weight bold :height 1.7))))
+ '(org-document-info ((t (:foreground "#90E"))))
+ '(org-document-info-keyword ((t (:inherit org-meta-line))))
+
  ;; parent matching
  ;; '(show-paren-match
  ;;   ((t (:background "#085" :foreground "white"))))

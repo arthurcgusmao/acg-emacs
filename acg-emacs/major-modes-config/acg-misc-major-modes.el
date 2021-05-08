@@ -7,7 +7,9 @@
 (use-package docker :bind ("C-c d" . docker))
 (use-package dockerfile-mode)
 (use-package kubernetes
-  :commands (kubernetes-overview))
+  :commands (kubernetes-overview)
+  :bind
+  ("C-c k" . kubernetes-overview))
 
 ;; Misc
 (use-package csv-mode)
