@@ -39,7 +39,6 @@
   (set-face-attribute 'markdown-code-face nil :inherit '(org-block fixed-pitch))
   (set-face-attribute 'markdown-language-keyword-face nil :inherit 'org-block-begin-line)
   (set-face-attribute 'markdown-inline-code-face nil :inherit 'org-verbatim)
-  (set-face-attribute 'markdown-markup-face nil :inherit 'org-verbatim)
 
   (defun acg/markdown-setup ()
     (reftex-mode)
