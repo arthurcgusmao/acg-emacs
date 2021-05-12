@@ -30,7 +30,7 @@
  '(markdown-markup-face ((t (:foreground "#888"))))
 
  '(org-document-title ((t (:inherit org-document-info :weight bold :height 1.7))))
- '(org-document-info ((t (:foreground "#90E"))))
+ '(org-document-info ((t (:foreground "#A6D"))))
  '(org-document-info-keyword ((t (:inherit org-meta-line))))
 
  ;; parent matching
@@ -63,7 +63,7 @@
       (load-theme theme t)
     (call-interactively 'load-theme)))
 
-(defun acg/acg-theme-switch ()
+(defun acg/acg-theme-toggle ()
   "Switches between the light and dark themes with a single
 command."
   (interactive)
