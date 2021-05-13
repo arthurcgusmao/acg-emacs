@@ -16,6 +16,43 @@
   ;; Do not unselect region after wrapping it w/ pair
   (advice-add 'sp-wrap :after #'acg/with-mark-active)
 
+
+  ;; Utility functions
+
+  (defun acg/sp-replace-pair (&optional pair)
+    "Replace the wrapping pair of current sexp."
+    (interactive)
+    (let* ((fw-sexp (sp-get-sexp))
+           (bw-sexp (sp-get-sexp t))
+           (at-end nil)
+           ;; Select target sexp
+           (sexp (cond
+                  ((eq (sp-get bw-sexp :end) (point))
+                   (progn (setq at-end t) bw-sexp))
+                  ((eq (sp-get fw-sexp :beg) (point))
+                   fw-sexp)
+                  (t
+                   (sp-get-enclosing-sexp)))))
+      (save-mark-and-excursion
+        ;; Replace sexp pair
+        (goto-char (sp-get sexp :beg))
+        (sp-mark-sexp)
+        (sp-wrap-with-pair
+         (or pair
+             (completing-read "Replace pair: "
+                              (mapcar 'car sp-pair-list))))
+        (sp-unwrap-sexp))
+      ;; Return cursor to end of sexp for consistency
+      (when at-end
+        (sp-forward-sexp))))
+
+  (defun acg/sp-cycle-pair ()
+    "Cycle the wrapping pair of current sexp."
+    (interactive)
+    ;; @todo
+    )
+
+
   ;; Remove default keybindings and set new ones
   (sp--update-override-key-bindings
    'sp-override-key-bindings
@@ -68,7 +105,10 @@
      ("M-<left>" . sp-backward-sexp)
      ("M-t" . sp-transpose-sexp)
      ("M-S-T" . sp-transpose-hybrid-sexp)
-     ("<M-delete>"))))
+     ("<M-delete>")
+     ("M-[" . acg/sp-cycle-pair)
+     ("M-{" . acg/sp-replace-pair)
+     )))
 
 ;; Related keybinding
 ;; @TODO: rebind function below
