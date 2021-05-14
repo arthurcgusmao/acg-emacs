@@ -6,3 +6,9 @@ The built-in Emacs profiler. Usage:
 - Reproduce what you want to debug
 - =M-x profiler-stop=
 - =M-x profiler-report=
+
+** Memory report
+(Emacs >= 28.1) Function =memory-report= gives a summary of where Emacs is using memory currently.
+
+** Benchmark
+(Emacs >= 28.1) Function =benchmark-call= to measure the execution time of a function.

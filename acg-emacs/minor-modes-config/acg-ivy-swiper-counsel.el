@@ -117,6 +117,9 @@ thing/symbol at point."
    ;; @todo: set C-f to restart search when in swiper
 
 
+;; @todo: use variable `isearch-repeat-on-direction-change' in Emacs >= 28.1
+
+
 ;; Smartly sort minibuffer list of candidates based on history
 (use-package prescient
   :config
