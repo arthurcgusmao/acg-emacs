@@ -3,6 +3,9 @@
   :config
   (require 'smartparens-config)
 
+  ;; Add new pairs
+  (sp-pair "<" ">")
+
   (setq sp-base-key-bindings 'paredit)
   (setq sp-autoskip-closing-pair 'always)
   (setq sp-hybrid-kill-entire-symbol nil)
