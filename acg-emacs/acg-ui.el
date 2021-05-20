@@ -9,6 +9,7 @@
 (add-to-list 'custom-theme-load-path (concat acg/acg-emacs-dir "themes"))
 (setq custom-safe-themes t)             ; Never ask to confirm when loading themes
 (load-theme 'acg-dark t)
+(global-set-key (kbd "M-<f12>") 'acg/acg-themes-toggle)
 
 
 ;; Remove unnecessary things

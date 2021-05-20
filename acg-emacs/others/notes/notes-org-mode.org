@@ -44,3 +44,15 @@ ls | head -n 3
 | acg-windows             |
 | archive                 |
 | arthurcgusmao.github.io |
+
+
+
+* Org-ref package
+** Figures
+Add a label to the figure's caption with =label:<fig1>= then reference it with =ref:<fig1>.=
+#+BEGIN_SRC org
+#+CAPTION: <Figure caption here> label:fig1
+[[file:img/figure1.png]]
+
+This is depicted in Figure ref:fig1.
+#+END_SRC

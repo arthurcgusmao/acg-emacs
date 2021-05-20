@@ -63,7 +63,7 @@
       (load-theme theme t)
     (call-interactively 'load-theme)))
 
-(defun acg/acg-theme-toggle ()
+(defun acg/acg-themes-toggle ()
   "Switches between the light and dark themes with a single
 command."
   (interactive)
