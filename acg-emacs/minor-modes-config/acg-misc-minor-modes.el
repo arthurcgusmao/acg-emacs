@@ -12,7 +12,10 @@
   (add-to-list 'reftex-default-bibliography acg/default-bib-file))
 
 (use-package bibtex
-  :straight nil)
+  :straight nil
+  :bind
+  (:map bibtex-mode-map
+        ("C-j" . nil)))
 
 (use-package ivy-bibtex
   :after ivy bibtex
@@ -28,7 +31,15 @@
   ;; @todo: See org-ref for use of these variables
   ;; (setq org-ref-bibliography-notes (concat user-emacs-directory "bibliography/notes.org")
   ;; org-ref-pdf-directory (concat user-emacs-directory "bibliography/bibtex-pdfs/"))
-  )
+  :bind
+  (:map org-ref-cite-keymap
+        ("<S-up>" . nil)                ; Previously org-ref-sort-citation-link
+        ("<S-right>" . nil) ; Previously (lambda nil (interactive) (org-ref-swap-citation-link 1)))
+        ("<S-left>" . nil) ; Previously (lambda nil (interactive) (org-ref-swap-citation-link -1)))
+        ("<C-right>" . nil)
+        ("<C-left>" . nil)
+        ("<C-M-right>" . org-ref-next-key)
+        ("<C-M-left>" . org-ref-previous-key)))
 
 (defun acg/reftex-bibtex-add-to-default-bibliography ()
   "Prompts the user for a filepath to add to the default
