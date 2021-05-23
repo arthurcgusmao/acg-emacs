@@ -104,7 +104,7 @@ next keypress."
   "Mark input of minibuffer. To be used as advice before any
 function that starts with an initial input in the minibuffer."
   (run-with-idle-timer
-   0.1 nil (lambda ()
+   0.05 nil (lambda ()
            (push 'S-end unread-command-events)
            (push 'home unread-command-events))))
 
@@ -115,7 +115,7 @@ input in the minibuffer."
   (funcall orig-fun (regexp-quote
                      (if ivy-mode
                          (ivy-thing-at-point)
-                       (thing-at-point 'symbol)))))
+                       (or (thing-at-point 'symbol) "")))))
 
 (defun acg/with-mark-active (&rest args)
   "Keep mark active after command. To be used as advice AFTER any
