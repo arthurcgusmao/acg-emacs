@@ -135,7 +135,8 @@ new buffer."
     (find-file filename))
 
   :bind
-  (("C-S-T" . acg/reopen-killed-file)
+  (("C-o" . find-file)
+   ("C-S-T" . acg/reopen-killed-file)
    ("C-s" . save-buffer)
    ("C-S-s" . acg/save-buffer-as)))
 
