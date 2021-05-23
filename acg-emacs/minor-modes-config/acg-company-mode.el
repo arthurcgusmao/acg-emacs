@@ -11,7 +11,7 @@
                                  dired-mode
                                  ))
 ;; enable company in all modes except the ones above
-(add-hook 'after-init-hook 'global-company-mode)
+;; (add-hook 'after-init-hook 'global-company-mode)
 
 
 ;; decrease delay before autocompletion popup shows
