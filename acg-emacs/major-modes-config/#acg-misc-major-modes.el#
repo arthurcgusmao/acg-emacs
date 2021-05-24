@@ -41,7 +41,7 @@
   (set-face-attribute 'markdown-inline-code-face nil :inherit 'org-verbatim)
 
   ;; Add new src (code) block syntaxes
-  (add-to-list 'markdown-code-lang-modes '("console" . sh-mode))
+  (append-to-list 'markdown-code-lang-modes '(("console" . sh-mode)))
 
   (defun acg/markdown-setup ()
     (reftex-mode)
