@@ -76,10 +76,6 @@
 
 ;;   :bind
 ;;   (:map ivy-minibuffer-map
-;;    ;; Makes ESC quit minibuffer
-;;    ;; (define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit) ; quit or deselect text
-;;    ([escape] . abort-recursive-edit) ; quit right away
-;;    :map ivy-minibuffer-map
 ;;    ("S-SPC" . nil)
 ;;    ("<S-return>" . ivy-immediate-done)
 ;;    ("<C-return>" . ivy-restrict-to-matches)
@@ -94,79 +90,12 @@
 ;;   :hook (after-init . ivy-mode))
 
 
-;; (use-package counsel
-;;   :after ivy
-;;   :config
-;;   (advice-add 'counsel-rg :before #'acg/with-marked-input)
-;;   (advice-add 'counsel-rg :around #'acg/with-thing-at-point)
-;;   :bind  (("C-o" . counsel-find-file)
-;;    ("M-f" . counsel-rg)
-;;    ("C-S-O" . counsel-recentf)
-;;    ("C-b" . counsel-switch-buffer)
-;;    ("M-x" . counsel-M-x)
-;;    ("<f1> f" . counsel-describe-function)
-;;    ("<f1> v" . counsel-describe-variable)
-;;    ("<f1> l" . counsel-find-library)
-;;    ("<f2> i" . counsel-info-lookup-symbol)
-;;    ("<f2> u" . counsel-unicode-char)
-;;    :map minibuffer-local-map
-;;    ("C-r" . counsel-minibuffer-history))
-;;   :hook (ivy-mode-hook . counsel-mode))
-
-
-;; (use-package swiper
-;;   :config
-;;   (defun acg/swiper-thing-at-point-or-isearch (arg)
-;;     "Calls swiper or isearch-forward (if ARG is non-nil) with
-;; thing/symbol at point."
-;;     (interactive "P")
-;;     (if arg
-;;         (progn (isearch-forward))
-;;       (swiper-thing-at-point)))
-
-;;   ;; preselect input
-;;   (advice-add 'swiper-thing-at-point :before #'acg/with-marked-input)
-;;   (advice-add 'swiper-all-thing-at-point :before #'acg/with-marked-input)
-;;   :bind
-;;   (("C-f" . acg/swiper-thing-at-point-or-isearch)
-;;    ("C-S-F" . swiper-all-thing-at-point)))
-;;    ;; @todo: set C-f to restart search when in swiper
-
-
-;; ;; @todo: use variable `isearch-repeat-on-direction-change' in Emacs >= 28.1
-
-
-;; ;; Smartly sort minibuffer list of candidates based on history
-;; (use-package prescient
-;;   :config
-;;   (setq prescient-save-file (concat acg/history-dir "prescient-save.el"))
-;;   (setq prescient-filter-method '(literal regexp))
-;;   (prescient-persist-mode 1))
-;; (use-package ivy-prescient
-;;   :after (prescient ivy)
-;;   :config
-;;   (setq ivy-prescient-sort-commands '(:not swiper swiper-isearch ivy-switch-buffer counsel-find-file counsel-recentf))
-;;   ;; Hack to make Ivy not use Prescient sorting method in find-file (see https://github.com/raxod502/prescient.el/issues/64)
-;;   (ivy--alist-set 'ivy-sort-functions-alist #'read-file-name-internal #'ivy-sort-file-function-default)
-;;   (ivy-prescient-mode 1))
-;; (use-package company-prescient
-;;   :after (prescient company)
-;;   :config (company-prescient-mode 1))
-
-
-;; ;; Show rich descriptions after each ivy candidate option
-;; (use-package ivy-rich
-;;   :config
-;;   ; Show abbreviated filepaths
-;;   (setq ivy-rich-path-style 'abbreviate)
-;;   ;; Recommended setting (don't know why, it's said in the package description)
-;;   (setcdr (assq t ivy-format-functions-alist)
-;;           #'ivy-format-function-line)
-;;   :hook (after-init . ivy-rich-mode))
 
 
 ;; isearch keybindings
 ;; (define-key overriding-terminal-local-map (kbd "S-SPC") nil) ; unbind S-SPC in isearch
+
+;; ;; @todo: use variable `isearch-repeat-on-direction-change' in Emacs >= 28.1
 
 ;; old isearch keybindings
 ;; (define-key isearch-mode-map "\C-f" 'isearch-forward)
@@ -177,40 +106,110 @@
 
 
 
-;; Experimenting with Vertico
+;; General completion configs
+(use-package emacs
+  :config
+  (setq completion-ignore-case t)
+  (setq read-file-name-completion-ignore-case t)
+  (setq read-buffer-completion-ignore-case t))
+
+
+
+;; Vertico is a more minimalistic completion than Ivy
 (use-package vertico
   :init
-  (vertico-mode))
+  (vertico-mode 1)
+  :config
+  ;; Disable features that don't go well w/ Vertico
+  (advice-add #'vertico--setup :after
+              (lambda (&rest _)
+                (setq-local completion-auto-help nil
+                            completion-show-inline-help nil)))
+  :bind
+  (:map vertico-map
+        ("<S-return>" . vertico-exit-input)
+        ;; ("<C-return>" . vert) ; @todo: see how to narrow selection in vertico -- dual of ivy-restrict-to-matches
+        ))
+
+
 
 ;; Marginalia = Ivy-rich for Vertico
 (use-package marginalia
   :after vertico
   :init
   (marginalia-mode)
-
-  :config
-  (defun marginalia-annotate-yasnippet (cand)
-    ;; NOTE: Maybe there's a less indirect way to do this :/.
-    (when-let* ((cand (marginalia--full-candidate cand))
-                (template (alist-get cand consult-yasnippet--snippets nil nil #'string-equal))
-                (key (yas--template-key template)))
-      (concat " " (propertize (concat "[" key "]")
-                              ;; TODO: custom face
-                              'face 'font-lock-type-face))))
-
-  (push '(yasnippet . marginalia-annotate-yasnippet) marginalia-annotators-light)
-  (push '(yasnippet . marginalia-annotate-yasnippet) marginalia-annotators-heavy)
+  ;; @todo: replace ivy-yasnippet
   )
 
-(use-package emacs
-  :config
-  (setq completion-ignore-case t)
-  (setq read-file-name-completion-ignore-case t)
-  (setq read-buffer-completion-ignore-case t)
-  )
+
 
 (use-package consult
   :config
+  (setq consult-line-start-from-top t)
+  (setq consult-line-point-placement 'match-end)
+
+;;  ;; Try and fix consult line 'wrapped around' behavior
+
+;;   (defun consult--line-candidates (top)
+;;     "Return list of line candidates; start from top if TOP non-nil."
+;;     (consult--forbid-minibuffer)
+;;     (consult--fontify-all)
+;;     (let* ((default-cand)
+;;            (candidates)
+;;            (line (line-number-at-pos (point-min) consult-line-numbers-widen))
+;;            (curr-line (line-number-at-pos (point) consult-line-numbers-widen))
+;;            (default-delta most-positive-fixnum))
+;;       (consult--each-line beg end
+;;         (let ((str (consult--buffer-substring beg end)))
+;;           (unless (string-blank-p str)
+;;             (let ((cand (consult--location-candidate str (point-marker) line))
+;;                   (delta (abs (- curr-line line))))
+;;               (push cand candidates)
+;;               (when (< delta default-delta)
+;;                 (setq default-cand candidates
+;;                       default-delta delta))))
+;;           (setq line (1+ line))))
+;;       (unless candidates
+;;         (user-error "No lines"))
+;;       (cons (car default-cand)
+;;             (nreverse
+;;              (if top
+;;                  candidates
+;;                (let ((before (cdr default-cand)))
+;;                  (setcdr default-cand nil)
+;;                  (nconc before candidates)))))))
+
+;;   (defun consult-line (&optional initial start)
+;;   "Search for a matching line and jump to the line beginning.
+
+;; The default candidate is a non-empty line closest to point.
+;; This command obeys narrowing. Optional INITIAL input can be provided.
+;; The search starting point is changed if the START prefix argument is set.
+;; The symbol at point and the last `isearch-string' is added to the future history."
+;;   (interactive (list nil (not (not current-prefix-arg))))
+;;   (let ((candidates (consult--with-increased-gc
+;;                      (consult--line-candidates
+;;                       (not (eq start consult-line-start-from-top))))))
+;;     (consult--read
+;;      (cdr candidates)
+;;      :prompt "Go to line: "
+;;      :annotate (consult--line-prefix)
+;;      :category 'consult-location
+;;      :sort nil
+;;      :require-match t
+;;      ;; Always add last isearch string to future history
+;;      :add-history (list (thing-at-point 'symbol) isearch-string)
+;;      :history '(:input consult--line-history)
+;;      :lookup #'consult--line-match
+;;      ;; :default (car candidates)
+;;      :default nil
+;;      ;; Add isearch-string as initial input if starting from isearch
+;;      :initial (or initial
+;;                   (and isearch-mode (prog1 isearch-string (isearch-done))))
+;;      :state (consult--jump-state)))
+;;   (vertico--goto 3))
+
+
 
   ;;; Make completion-at-point work in the minibuffer
 
@@ -267,16 +266,25 @@ directory."
      "rg --null --line-buffered --color=ansi --max-columns=1000 --smart-case --no-heading --line-number . -e ARG OPTS"
      (rg-project-root default-directory) initial))
 
+  ;; Preselect input
   (advice-add 'consult-line :around #'acg/with-thing-at-point)
   (advice-add 'consult-line :before #'acg/with-marked-input)
+  ;; (advice-remove 'consult-line 'acg/with-thing-at-point)
+  ;; (advice-remove 'consult-line 'acg/with-marked-input)
   (advice-add 'acg/consult-ripgrep-project :around #'acg/with-thing-at-point)
   (advice-add 'acg/consult-ripgrep-project :before #'acg/with-marked-input)
 
   :bind
   ;; ("C-M-i" . acg/corfu-orderless-completion-at-point)
   (("C-f" . consult-line)
+   ("C-S-F" . consult-multi-occur) ;; @todo: default to all buffers, do not ask
    ("M-f" . acg/consult-ripgrep-project)
-   ("C-M-S-i" . acg/consult-completion-at-point)))
+   ;; @todo: set C-f to restart search when in consult-line & others
+   ("C-M-S-i" . acg/consult-completion-at-point)
+   ("C-S-O" . consult-recent-file) ; @todo: disable preview of files
+   ("M-g g" . consult-goto-line)
+   (:map minibuffer-local-map
+         ("C-r" . consult-history))))
 
 ;; (use-package orderless
 ;;   :ensure t
@@ -291,33 +299,52 @@ directory."
   (setq completion-category-overrides '((file (styles . (partial-completion))))))
 
 
+
+;; Corfu does completion-at-point
+
 (use-package corfu
   :config
-  (corfu-global-mode 1)
-
   ;;; Completion with orderless and ability to type text for selection
 
   ;; This section implements functions to make the functionality described
   ;; above work.
 
-  (defun acg/corfu-completion-at-point ()
+  ;; (defun acg/corfu-complete ()
+  ;;   (interactive)
+  ;;   (if (corfu-complete)
+  ;;       (message "yes")
+  ;;     (message "no")))
+  ;; (define-key corfu-map (kbd "TAB") 'acg/corfu-complete)
+
+  ;; (defun acg/corfu-complete--insert-space (&rest args)
+  ;;   (insert " "))
+  ;; (advice-add 'corfu-complete :after #'acg/corfu-complete--insert-space)
+
+  (defun acg/corfu-complete ()
     "Adds a space after calling `completion-at-point' so
 orderless can do its magic."
-    (interactive )
-    (when (completion-at-point)
-      (insert " ")))
+    (interactive)
+    (when (completion-at-point) (insert " ")))
 
-  (defun acg/completion--in-region--advice (start end collection &optional predicate)
-    (setq acg/completion-in-region--original-text `(,start ,end ,(buffer-substring start end))))
-  (advice-add 'completion--in-region :after #'acg/completion--in-region--advice)
+  (defvar acg/completion-in-region--original-input nil
+    "Store START, END, and BUFFER-SUBSTRING information of the
+last call to `completion-in-region'.")
+
+  (defun acg/completion--in-region--save-input (start end collection &optional predicate)
+    "Updates the value of `acg/completion-in-region--original-input'.
+To be used as advice after `completion--in-region'."
+    (setq acg/completion-in-region--original-input
+          `(,start ,end ,(buffer-substring start end))))
+
+  (advice-add 'completion--in-region :after #'acg/completion--in-region--save-input)
   ;; (advice-remove 'completion--in-region 'acg/completion--in-region--advice)
 
   (defun acg/corfu-abort ()
     (interactive)
     ;; Replace region with original text
-    (let ((beg (nth 0 acg/completion-in-region--original-text))
-          (end (nth 1 acg/completion-in-region--original-text))
-          (txt (nth 2 acg/completion-in-region--original-text)))
+    (let ((beg (nth 0 acg/completion-in-region--original-input))
+          (end (nth 1 acg/completion-in-region--original-input))
+          (txt (nth 2 acg/completion-in-region--original-input)))
       (when (> (point) end)
         (setq end (point)))
       (delete-region beg end)
@@ -326,34 +353,11 @@ orderless can do its magic."
     (corfu-abort))
 
 
-  ;;; Smart TAB behavior
-
-  (defun acg/indent-or-corfu-complete-at-point ()
-  "Indent the current line or region (using function supplied as argument), or
-complete the common part."
-  (interactive)
-  (cond
-   ((use-region-p)
-    (indent-region (region-beginning) (region-end)))
-   ((let ((old-point (point))
-          (old-tick (buffer-chars-modified-tick))
-          (tab-always-indent t))
-      (call-interactively #'indent-for-tab-command)
-      (when (and (eq old-point (point))
-                 (eq old-tick (buffer-chars-modified-tick))
-                 ;; do not run complete-common when blank chars before is
-                 (not (or (eq (char-before) 10)                         ; newline
-                          (eq (char-before) 32)                         ; whitespace
-                          (eq (char-before) 41)                         ; )
-                          (eq (char-before) 93)                         ; ]
-                          (eq (char-before) 125))))                     ; }
-        (acg/corfu-completion-at-point))))))
-
-
+  (corfu-global-mode 1)
   :bind
-  (("TAB" . acg/indent-or-corfu-complete-at-point)
-   :map corfu-map
-   ("<escape>" . acg/corfu-abort)))
+  (:map corfu-map
+        ("TAB" . acg/corfu-complete)
+        ("<escape>" . acg/corfu-abort)))
 
 
 
