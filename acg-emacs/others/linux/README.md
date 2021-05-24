@@ -66,7 +66,7 @@ The `./configure` step accepts arguments. `--with-modules` builds Emacs with dyn
 
 ```console
 ./autogen.sh
-./configure --with-xml2 --with-rsvg --with-modules CC=clang
+./configure --with-xml2 --with-rsvg --with-modules --with-mailutils --with-native-compilation
 make -j4
 ```
 
