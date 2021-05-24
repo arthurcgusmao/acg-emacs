@@ -90,7 +90,8 @@ then redisplays the buffer where the function was issued."
    ("C-q" . delete-window)
 
    ;; (acg/force-global-set-key (kbd "C-w") 'acg/kill-buffer)
-   ("C-w" . acg/kill-buffer)))
+   ("C-w" . acg/kill-buffer)
+   ("C-b" . switch-to-buffer)))
 
 
 

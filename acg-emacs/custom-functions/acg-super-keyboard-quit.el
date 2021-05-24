@@ -12,9 +12,11 @@ sequence."
   (message "Quit"))
 
 
+
 ;;; Keybindings
 
 ;;;; ESC always quits
+
 ;; For the minibuffer, deliberately use `abort-recursive-edit' instead of
 ;; `minibuffer-keyboard-quit' because the latter will not quit when text is
 ;; selected in the minibuffer.
