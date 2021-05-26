@@ -6,16 +6,17 @@ session.*
 # Specific files/dirs
 /anaconda-mode/
 /auto-save-list/
+/bookmarks
+/eln-cache/
 /elpa
 /eshell/
 /file-backups/
 /history/
+/local-settings.el
 /obsolete/
+/places
 /request/
 /scratch-backups/
 /straight/
 /transient/
 /url/
-/bookmarks
-/local-settings.el
-/places
