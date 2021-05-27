@@ -23,7 +23,7 @@
                ;; was this buffer modified since the last save?
                '(:eval (if buffer-read-only
                            " "
-                         (if (buffer-modified-p) " 🖉" " 💾")))
+                         (if (buffer-modified-p) " ✏️" " 💾")))
 
                ;; the buffer name; the file name as a tool tip
                '(:eval (propertize " %b" 'face 'acg/mode-line-common-bold))

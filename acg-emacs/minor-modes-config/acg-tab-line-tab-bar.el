@@ -11,7 +11,7 @@ generates the name of each tab in tab-line."
       (if (and (buffer-modified-p buffer)
                (or (buffer-file-name buffer)
                    (acg/scratch-buffer-p buffer)))
-          (concat " " (make-string 1 #x23FA) tab-name)
+          (concat " •" tab-name)
         tab-name)))
 
   (defun acg/update-tab-line-format-all-tabs ()

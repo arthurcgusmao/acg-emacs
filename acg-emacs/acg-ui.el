@@ -174,14 +174,15 @@ thresholds are not met."
 ;; Unhighlight inactive windows
 
 ;; Not working properly
-(use-package auto-dim-other-buffers)
-(add-hook 'after-init-hook
-          (lambda ()
-            (when (fboundp 'auto-dim-other-buffers-mode)
-              (auto-dim-other-buffers-mode 0)
-              (set-face-background 'auto-dim-other-buffers-face (face-background 'fringe))
-              ;; (set-face-background 'auto-dim-other-buffers-face "#445")
-              )))
+(use-package auto-dim-other-buffers
+  :init
+  (add-hook 'after-init-hook
+            (lambda ()
+              (when (fboundp 'auto-dim-other-buffers-mode)
+                (auto-dim-other-buffers-mode 0)
+                (set-face-background 'auto-dim-other-buffers-face (face-background 'fringe))
+                ;; (set-face-background 'auto-dim-other-buffers-face "#445")
+                ))))
 
 ;; ;; Also didn't work properly
 ;; (defun highlight-selected-window ()
@@ -217,20 +218,25 @@ thresholds are not met."
 ;; Configure font in Remote Environments, usually using XLaunch. For whatever
 ;; reason Emacs does not start with XFCE4's default monospace font
 (defun acg/set-custom-frame-font (&optional frame)
-  "Set my custom font for the frame.
-
-Use (getenv \"DISPLAY\") to conditionally apply font
-configuration. Usually the DISPLAY variable only contains
-\"localhost\" when Forwarding X11 through an SSH connection,
-which is when we want to apply these configurations
-(because in those cases Emacs starts with a strange font)."
+  "Set my custom font configs for the frame."
   (interactive)
   (with-selected-frame (or frame (selected-frame))
+    ;; Use (getenv "DISPLAY") to conditionally apply font
+    ;; configuration. Usually the DISPLAY variable only contains
+    ;; "localhost" when Forwarding X11 through an SSH connection,
+    ;; which is when we want to apply these configurations
+    ;; (because in those cases Emacs starts with a strange font).
     (when (string-match-p (regexp-quote "localhost") (getenv "DISPLAY")) ;; Condition based on value of DISPLAY
       (cond
        ((>= (display-pixel-height) 2160) (set-frame-parameter frame 'font "Hack-15")) ; 4k resolution
-       ((>= (display-pixel-height) 1440) (set-frame-parameter frame 'font "Hack-10.5")) ; 2560x1440 resolution
-       (t (set-frame-parameter frame 'font "Hack-9"))))))
+       ((>= (display-pixel-height) 1440) (set-frame-parameter frame 'font "Hack-10")) ; 2560x1440 resolution
+       (t (set-frame-parameter frame 'font "Hack-9"))))
+
+    ;; Emoji: 😄, 🤦, 🏴󠁧󠁢󠁳󠁣󠁴󠁿
+    (set-fontset-font t 'symbol "Noto Color Emoji")
+    (set-fontset-font t 'symbol "Apple Color Emoji" nil 'append)
+    (set-fontset-font t 'symbol "Segoe UI Emoji" nil 'append)
+    (set-fontset-font t 'symbol "Symbola" nil 'append)))
 
 (acg/set-custom-frame-font (selected-frame)) ; Conditionally fontify current frame, if any
 (add-to-list 'after-make-frame-functions #'acg/set-custom-frame-font) ; Conditionally fontify any future frames
@@ -259,6 +265,5 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 (global-set-key (kbd "C-x C--") 'acg/zoom-frame-out)
 (global-set-key (kbd "<C-down-mouse-4>") 'acg/zoom-frame)
 (global-set-key (kbd "<C-down-mouse-5>") 'acg/zoom-frame-out)
-
 
 (provide 'acg-ui)

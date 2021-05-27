@@ -66,7 +66,9 @@ The `./configure` step accepts arguments. `--with-modules` builds Emacs with dyn
 
 ```console
 ./autogen.sh
-./configure --with-xml2 --with-rsvg --with-modules --with-mailutils --with-native-compilation
+./configure --with-xml2 --with-rsvg --with-modules --with-mailutils\
+    --with-cairo\               # For emoji support
+    --with-native-compilation   # Warning: I had issues with it last time (probably used wrong branch)
 make -j4
 ```
 
