@@ -12,3 +12,9 @@ The built-in Emacs profiler. Usage:
 
 ** Benchmark
 (Emacs >= 28.1) Function =benchmark-call= to measure the execution time of a function.
+
+** Systemctl status
+To debug the emacs daemon service configured via =systemctl=:
+#+BEGIN_SRC bash
+systemctl --user status emacsd
+#+END_SRC
