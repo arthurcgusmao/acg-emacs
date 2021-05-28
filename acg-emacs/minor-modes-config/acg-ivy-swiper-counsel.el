@@ -177,34 +177,30 @@
 
 ;;  ;; Try and fix consult line 'wrapped around' behavior
 
-;;   (defun consult--line-candidates (top)
-;;     "Return list of line candidates; start from top if TOP non-nil."
-;;     (consult--forbid-minibuffer)
-;;     (consult--fontify-all)
-;;     (let* ((default-cand)
-;;            (candidates)
-;;            (line (line-number-at-pos (point-min) consult-line-numbers-widen))
-;;            (curr-line (line-number-at-pos (point) consult-line-numbers-widen))
-;;            (default-delta most-positive-fixnum))
-;;       (consult--each-line beg end
-;;         (let ((str (consult--buffer-substring beg end)))
-;;           (unless (string-blank-p str)
-;;             (let ((cand (consult--location-candidate str (point-marker) line))
-;;                   (delta (abs (- curr-line line))))
-;;               (push cand candidates)
-;;               (when (< delta default-delta)
-;;                 (setq default-cand candidates
-;;                       default-delta delta))))
-;;           (setq line (1+ line))))
-;;       (unless candidates
-;;         (user-error "No lines"))
-;;       (cons (car default-cand)
-;;             (nreverse
-;;              (if top
-;;                  candidates
-;;                (let ((before (cdr default-cand)))
-;;                  (setcdr default-cand nil)
-;;                  (nconc before candidates)))))))
+  ;; (defun consult--line-candidates (top)
+  ;; "Return list of line candidates; start from top if TOP non-nil."
+  ;; (consult--forbid-minibuffer)
+  ;; (consult--fontify-all)
+  ;; (let* ((default-cand)
+  ;;        (candidates)
+  ;;        (line (line-number-at-pos (point-min) consult-line-numbers-widen))
+  ;;        (curr-line (line-number-at-pos (point) consult-line-numbers-widen)))
+  ;;   (consult--each-line beg end
+  ;;     (let ((str (consult--buffer-substring beg end)))
+  ;;       (unless (string-blank-p str)
+  ;;         (push (consult--location-candidate str (point-marker) line) candidates)
+  ;;         (when (and (not default-cand) (>= line curr-line))
+  ;;           (setq default-cand candidates)))
+  ;;       (setq line (1+ line))))
+  ;;   (unless candidates
+  ;;     (user-error "No lines"))
+  ;;   (setq acg/consult-line--offset (length (cdr default-cand)))
+  ;;   (nreverse
+  ;;    (if top
+  ;;        candidates
+  ;;      (let ((before (cdr default-cand)))
+  ;;        (setcdr default-cand nil)
+  ;;        (nconc before candidates))))))
 
 ;;   (defun consult-line (&optional initial start)
 ;;   "Search for a matching line and jump to the line beginning.
@@ -236,6 +232,10 @@
 ;;      :state (consult--jump-state)))
 ;;   (vertico--goto 3))
 
+  (defun acg/consult-line ()
+    (interactive)
+    (let ((vertico-cycle t))
+      (call-interactively 'consult-line)))
 
 
   ;;; Make completion-at-point work in the minibuffer
@@ -303,7 +303,7 @@ directory."
 
   :bind
   ;; ("C-M-i" . acg/corfu-orderless-completion-at-point)
-  (("C-f" . consult-line)
+  (("C-f" . acg/consult-line)
    ("C-S-F" . consult-multi-occur) ;; @todo: default to all buffers, do not ask
    ("M-f" . acg/consult-ripgrep-project)
    ;; @todo: set C-f to restart search when in consult-line & others
