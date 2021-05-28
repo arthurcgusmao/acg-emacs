@@ -15,6 +15,7 @@ session.*
 /local-settings.el
 /obsolete/
 /places
+/projects
 /request/
 /scratch-backups/
 /straight/
