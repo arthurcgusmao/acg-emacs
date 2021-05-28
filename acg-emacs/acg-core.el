@@ -100,11 +100,11 @@ bindings to the same command."
 
 ;; Requiring Files
 
-(require 'acg-editor)
+(load "acg-editor")
 (acg/load-all-in-directory (concat acg/acg-emacs-dir "custom-functions"))
 (acg/load-all-in-directory (concat acg/acg-emacs-dir "minor-modes-config"))
 (acg/load-all-in-directory (concat acg/acg-emacs-dir "major-modes-config"))
-(require 'acg-ui)
+(load "acg-ui")
 
 
 (provide 'acg-core)

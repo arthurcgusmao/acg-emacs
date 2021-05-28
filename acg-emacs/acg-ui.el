@@ -266,5 +266,3 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 (global-set-key (kbd "C-x C--") 'acg/zoom-frame-out)
 (global-set-key (kbd "<C-down-mouse-4>") 'acg/zoom-frame)
 (global-set-key (kbd "<C-down-mouse-5>") 'acg/zoom-frame-out)
-
-(provide 'acg-ui)
