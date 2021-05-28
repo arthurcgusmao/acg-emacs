@@ -145,8 +145,11 @@
 
 (use-package consult
   :config
-  (setq consult-line-start-from-top t)
+  (setq consult-line-start-from-top nil)
   (setq consult-line-point-placement 'match-end)
+
+  ;; @todo: Use `vertico--goto' to make vertico selected candidate start from
+  ;; the current line!
 
 ;;  ;; Try and fix consult line 'wrapped around' behavior
 
@@ -303,6 +306,8 @@ directory."
 ;; Corfu does completion-at-point
 
 (use-package corfu
+  :init
+  (corfu-global-mode)
   :config
   ;;; Completion with orderless and ability to type text for selection
 
@@ -352,11 +357,9 @@ To be used as advice after `completion--in-region'."
     ;; Call regular abort function
     (corfu-abort))
 
-
-  (corfu-global-mode 1)
   :bind
   (:map corfu-map
-        ("TAB" . acg/corfu-complete)
+        ("<tab>" . acg/corfu-complete)
         ("<escape>" . acg/corfu-abort)))
 
 
