@@ -17,6 +17,11 @@
   (setq magit-save-repository-buffers nil) ; Disable Magit asking to save files
   (setq magit-uniquify-buffer-names nil)   ; Make magit buffers be wrapped w/ *
 
+  ;; Integrate with ssh-ident
+  (add-to-list 'magit-process-password-prompt-regexps
+               "^\\(Enter \\)?[Pp]assphrase for [^ ]*: ?$")
+  (add-to-list 'magit-process-password-prompt-regexps
+               "^Bad passphrase, try again for [^ ]*: ?$")
 
   ;; Custom functions for VISITING FILES
 
@@ -199,11 +204,6 @@ user to choose a remote."
   (add-to-list 'auto-mode-alist
                (cons "/.dockerignore\\'" 'gitignore-mode)))
 
-
-;; Make Emacs work with ssh-ident
-(use-package ssh-ident
-  :straight (:host github :repo "arthurcgusmao/emacs-ssh-ident")
-  :init (acg/add-to-env-path "~/.local/bin"))
 
 
 ;; Highlight uncommitted changes on the left side of a file buffer and on dired
