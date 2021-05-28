@@ -50,7 +50,8 @@
 
 ;; restore point (cursor) position when scrolling or marking w/ ESC or C-g
 (use-package restore-point
-  :straight (:host github :repo "arthurcgusmao/restore-point")
+  :straight (:host github :protocol ssh
+                   :repo "arthurcgusmao/restore-point")
   :config
   (dolist (f '(;; For marking regions
                acg/mark-dwim er/mark-defun

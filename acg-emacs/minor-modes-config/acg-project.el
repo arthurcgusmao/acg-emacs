@@ -4,7 +4,8 @@
 
 (use-package projectiny
   :after project
-  :straight (:host github :repo "arthurcgusmao/projectiny")
+  :straight (:host github :protocol ssh
+                   :repo "arthurcgusmao/projectiny")
   :config
   (setq projectiny-known-projects-file
         (concat acg/history-dir "projectiny-known-projects"))
