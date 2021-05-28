@@ -108,12 +108,26 @@
 
 ;; General completion configs
 (use-package emacs
+  :straight nil
   :config
   (setq completion-ignore-case t)
   (setq read-file-name-completion-ignore-case t)
   (setq read-buffer-completion-ignore-case t))
 
+(use-package minibuffer
+  :straight nil
+  :config
+  (defun acg/minibuffer-smart-backspace ()
+    "Same as <backspace> but acts differently when finding files."
+    (interactive)
+    (if (and minibuffer-completing-file-name
+             (= (char-before) ?/))
+        (acg/backward-kill-word)
+      (call-interactively 'delete-backward-char)))
 
+  :bind
+  (:map minibuffer-local-map
+        ("<backspace>" . acg/minibuffer-smart-backspace)))
 
 ;; Vertico is a more minimalistic completion than Ivy
 (use-package vertico
@@ -125,9 +139,19 @@
               (lambda (&rest _)
                 (setq-local completion-auto-help nil
                             completion-show-inline-help nil)))
+
+  (defun acg/vertico-smart-exit ()
+    "Same as `vertico-exit' but enters directory when finding files."
+    (interactive)
+    (if (and minibuffer-completing-file-name
+             (string= (substring (vertico--candidate) -1) "/"))
+        (vertico-insert)
+      (call-interactively 'vertico-exit)))
+
   :bind
   (:map vertico-map
         ("<S-return>" . vertico-exit-input)
+        ("<return>" . acg/vertico-smart-exit)
         ;; ("<C-return>" . vert) ; @todo: see how to narrow selection in vertico -- dual of ivy-restrict-to-matches
         ))
 
