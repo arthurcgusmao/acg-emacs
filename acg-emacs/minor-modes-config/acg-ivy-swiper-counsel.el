@@ -13,82 +13,6 @@
 ;;   ;; do not quit the minibuffer when deletion error happens
 ;;   (setq ivy-on-del-error-function #'ignore)
 
-;;   ;; "IVY HERE" set of functions
-;;   ;; ---------------------------
-;;   ;; Set of functions that run external commands on the directory of the file
-;;   ;; the user was browsing on.
-
-;;   (defun acg/ivy-get-browsing-location ()
-;;     "Returns the directory path of the last ivy selection. Meant
-;; to be called indirectly during an ivy minibuffer search."
-;;     (expand-file-name
-;;      (file-name-directory
-;;       (concat (ivy-state-directory ivy-last)
-;;               (ivy-state-current ivy-last)))))
-
-;;   (defun acg/ivy-here--magit-status ()
-;;     "Opens a magit-status buffer where the minibuffer was
-;; browsing on and quits the minibuffer."
-;;     (interactive)
-;;     (ivy-quit-and-run
-;;       (magit-status-setup-buffer (acg/ivy-get-browsing-location))))
-
-;;   (defun acg/ivy-here--dired ()
-;;     "Opens a dired buffer where the minibuffer was browsing on
-;; and quits the minibuffer."
-;;     (interactive)
-;;     (ivy-quit-and-run (dired (acg/ivy-get-browsing-location))))
-
-;;   (defun acg/ivy-here--grep-vc-or-dir ()
-;;     "Performs an RG search on the project (or directory, if not a
-;; project) where the minibuffer was browsing on and quits the
-;; minibuffer."
-;;     (interactive)
-;;     (ivy-quit-and-run
-;;       (let ((default-directory (acg/ivy-get-browsing-location)))
-;;         (call-interactively 'prot/grep-vc-or-dir))))
-
-;;   (defun acg/ivy-here--counsel-rg ()
-;;     "Performs an RG search on the project (or directory, if not a
-;; project) where the minibuffer was browsing on and quits the
-;; minibuffer."
-;;     (interactive)
-;;     (ivy-quit-and-run
-;;       (let ((default-directory (acg/ivy-get-browsing-location)))
-;;         (call-interactively 'counsel-rg))))
-
-;;   (defun acg/ivy-alt-done-all ()
-;;     ""
-;;     (interactive)
-;;     (let ((compls (all-completions "" (ivy-state-collection ivy-last))))
-;;       (mapc #'find-file-noselect (cdr compls))
-;;       (find-file (car compls)))
-
-;;     (let (alt-done-fn)
-;;       (cond ((or arg (ivy--prompt-selected-p))
-;;              (ivy-immediate-done))
-;;             ((setq alt-done-fn (ivy-alist-setting ivy-alt-done-functions-alist))
-;;              (funcall alt-done-fn))
-;;             (t
-;;              (ivy-done))))
-;;     )
-
-
-;;   :bind
-;;   (:map ivy-minibuffer-map
-;;    ("S-SPC" . nil)
-;;    ("<S-return>" . ivy-immediate-done)
-;;    ("<C-return>" . ivy-restrict-to-matches)
-;;    ("<return>" . ivy-alt-done)
-;;    ("TAB" . ivy-partial)
-;;    ("C-x g" . acg/ivy-here--magit-status)
-;;    ("C-M-g" . acg/ivy-here--magit-status)
-;;    ("C-x d" . acg/ivy-here--dired)
-;;    ("C-M-d" . acg/ivy-here--dired)
-;;    ("M-s g" . acg/ivy-here--grep-vc-or-dir)
-;;    ("M-f" . acg/ivy-here--counsel-rg))
-;;   :hook (after-init . ivy-mode))
-
 
 
 
@@ -114,20 +38,6 @@
   (setq read-file-name-completion-ignore-case t)
   (setq read-buffer-completion-ignore-case t))
 
-(use-package minibuffer
-  :straight nil
-  :config
-  (defun acg/minibuffer-smart-backspace ()
-    "Same as <backspace> but acts differently when finding files."
-    (interactive)
-    (if (and minibuffer-completing-file-name
-             (= (char-before) ?/))
-        (acg/backward-kill-word)
-      (call-interactively 'delete-backward-char)))
-
-  :bind
-  (:map minibuffer-local-map
-        ("<backspace>" . acg/minibuffer-smart-backspace)))
 
 ;; Vertico is a more minimalistic completion than Ivy
 (use-package vertico
@@ -140,6 +50,14 @@
                 (setq-local completion-auto-help nil
                             completion-show-inline-help nil)))
 
+  (defun acg/minibuffer-smart-backspace ()
+    "Same as <backspace> but acts differently when finding files."
+    (interactive)
+    (if (and minibuffer-completing-file-name
+             (= (char-before) ?/))
+        (acg/backward-kill-word)
+      (call-interactively 'delete-backward-char)))
+
   (defun acg/vertico-smart-exit ()
     "Same as `vertico-exit' but enters directory when finding files."
     (interactive)
@@ -148,11 +66,58 @@
         (vertico-insert)
       (call-interactively 'vertico-exit)))
 
+
+  ;;; Make commands use the current minibuffer input
+
+  ;; Very similar to Embark, but I created these custom functions
+  ;; because Embark required an extra keybinding to be assigned.
+
+  (defun acg/vertico--candidate-dir ()
+    "Gets the default directory of the current candidate."
+    (let ((cand (vertico--candidate)))
+      (cond
+       (minibuffer-completing-file-name
+        (file-name-directory
+         (expand-file-name cand)))
+       ((get-buffer cand)
+        (with-current-buffer cand
+          default-directory))
+       (t
+        (file-name-directory
+         (expand-file-name cand))))))
+
+  (defun acg/vertico-embark--magit ()
+    (interactive)
+    (embark--quit-and-run
+     'magit-status
+     (locate-dominating-file (acg/vertico--candidate-dir) ".git")))
+
+  (defun acg/vertico-embark--dired ()
+    (interactive)
+    (embark--quit-and-run
+     'dired
+     (acg/vertico--candidate-dir)))
+
+  (defun acg/vertico-embark--consult-ripgrep ()
+    (interactive)
+    (embark--quit-and-run
+     'consult-ripgrep
+     (locate-dominating-file (acg/vertico--candidate-dir) ".git")))
+
+
   :bind
   (:map vertico-map
         ("<S-return>" . vertico-exit-input)
         ("<return>" . acg/vertico-smart-exit)
+        ("<backspace>" . acg/minibuffer-smart-backspace)
+
         ;; ("<C-return>" . vert) ; @todo: see how to narrow selection in vertico -- dual of ivy-restrict-to-matches
+
+        ("C-x g" . acg/vertico-embark--magit)
+        ("C-M-g" . acg/vertico-embark--magit)
+        ("C-x d" . acg/vertico-embark--dired)
+        ("C-M-d" . acg/vertico-embark--dired)
+        ("M-f" . acg/vertico-embark--consult-ripgrep)
         ))
 
 
