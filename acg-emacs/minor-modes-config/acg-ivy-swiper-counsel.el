@@ -14,6 +14,83 @@
 ;;   (setq ivy-on-del-error-function #'ignore)
 
 
+;; General completion configs
+(use-package emacs
+  :straight nil
+  :config
+  (setq completion-ignore-case t)
+  (setq read-file-name-completion-ignore-case t)
+  (setq read-buffer-completion-ignore-case t))
+
+
+;; (use-package orderless
+;;   :ensure t
+;;   :custom (completion-styles '(orderless))
+;;   :config
+;;   ;; (setq orderless-style-dispatchers '())
+;;   )
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless))
+  (setq completion-category-defaults nil)
+  (setq completion-category-overrides '((file (styles . (partial-completion))))))
+
+
+(use-package isearch
+  :straight nil
+  :config
+  (setq isearch-repeat-on-direction-change t)
+  :bind
+  (:map isearch-mode-map
+        ("<escape>" . isearch-abort)
+        ("C-r" . consult-isearch)
+        ("C-s" . nil)
+        ("<up>" . isearch-repeat-backward)
+        ("<down>" . isearch-repeat-forward)))
+
+(use-package ctrlf
+  :config
+  (defun acg/smart-ctrlf-forward (&optional initial-contents)
+    (interactive)
+    ;; Mark input -- `acg/with-marked-input' doesn't work due to `ctrlf' weird input method
+    (run-with-idle-timer 0.05 nil (lambda () (mark-whole-buffer)))
+    (ctrlf-forward 'regexp nil (or initial-contents "")))
+
+  (advice-add 'acg/smart-ctrlf-forward :around #'acg/with-thing-at-point)
+
+  (setq ctrlf-minibuffer-bindings
+        '(([remap abort-recursive-edit]
+           . ctrlf-cancel)
+          ([remap minibuffer-keyboard-quit]
+           . ctrlf-cancel)
+          ([remap minibuffer-beginning-of-buffer]
+           . ctrlf-first-match)
+          ([remap beginning-of-buffer]
+           . ctrlf-first-match)
+          ([remap end-of-buffer]
+           . ctrlf-last-match)
+          ([remap scroll-up-command]
+           . ctrlf-next-page)
+          ([remap scroll-down-command]
+           . ctrlf-previous-page)
+          ([remap recenter-top-bottom]
+           . ctrlf-recenter-top-bottom)
+          ("M-s o" . ctrlf-occur)
+          ("M-c" . ctrlf-toggle-case-fold-search)
+          ("M-s c" . ctrlf-toggle-case-fold-search)
+          ("M-r" . ctrlf-toggle-regexp)
+          ("M-s r" . ctrlf-toggle-regexp)
+          ("M-s _" . ctrlf-toggle-symbol)
+          ("M-s s" . ctrlf-change-search-style)
+          ("C-o c" . ctrlf-toggle-case-fold-search)
+          ("C-o s" . ctrlf-change-search-style)
+          ;; Custom
+          ("<up>" . ctrlf-backward-regexp)
+          ("<down>" . ctrlf-forward-regexp)))
+
+  (ctrlf-mode +1)
+  :bind
+  ("M-s f" . acg/smart-ctrlf-forward))
 
 
 ;; isearch keybindings
@@ -30,13 +107,6 @@
 
 
 
-;; General completion configs
-(use-package emacs
-  :straight nil
-  :config
-  (setq completion-ignore-case t)
-  (setq read-file-name-completion-ignore-case t)
-  (setq read-buffer-completion-ignore-case t))
 
 
 ;; Vertico is a more minimalistic completion than Ivy
@@ -131,6 +201,7 @@
   )
 
 
+
 
 (use-package consult
   :config
@@ -197,10 +268,11 @@
 ;;      :state (consult--jump-state)))
 ;;   (vertico--goto 3))
 
-  (defun acg/consult-line ()
-    (interactive)
-    (let ((vertico-cycle t))
-      (call-interactively 'consult-line)))
+  (defun acg/consult-line (&optional arg)
+    (interactive "P")
+    (let ((fun (if arg 'consult-outline 'consult-line))
+          (vertico-cycle t))
+      (call-interactively fun)))
 
 
   ;;; Make completion-at-point work in the minibuffer
@@ -266,6 +338,7 @@ directory."
   (advice-add 'acg/consult-ripgrep-project :around #'acg/with-thing-at-point)
   (advice-add 'acg/consult-ripgrep-project :before #'acg/with-marked-input)
 
+
   :bind
   ;; ("C-M-i" . acg/corfu-orderless-completion-at-point)
   (("C-f" . acg/consult-line)
@@ -276,19 +349,11 @@ directory."
    ("C-S-O" . consult-recent-file) ; @todo: disable preview of files
    ("M-g g" . consult-goto-line)
    (:map minibuffer-local-map
-         ("C-r" . consult-history))))
+         ("C-r" . consult-history))
+   (:map consult-isearch-map
+         ("<up>" . consult-isearch-reverse)
+         ("<down>" . consult-isearch-forward))))
 
-;; (use-package orderless
-;;   :ensure t
-;;   :custom (completion-styles '(orderless))
-;;   :config
-;;   ;; (setq orderless-style-dispatchers '())
-;;   )
-(use-package orderless
-  :init
-  (setq completion-styles '(orderless))
-  (setq completion-category-defaults nil)
-  (setq completion-category-overrides '((file (styles . (partial-completion))))))
 
 
 
