@@ -2,7 +2,6 @@
 
 (load-theme 'acg-common-faces t)
 
-(set-face-background 'hl-line "#000000")
 (set-cursor-color "#FFFFFF")
 
 (custom-theme-set-faces
@@ -12,6 +11,7 @@
     ((t (:inherit nil :stipple nil :background "#1B1B2A" :foreground "#ddd"
                   :inverse-video nil :box nil :strike-through nil
                   :overline nil :underline nil :slant normal :weight normal))))
+ '(hl-line ((t (:background "#000000"))))
  '(font-lock-builtin-face ((t (:foreground "#7ce"))))
  '(font-lock-comment-face ((t (:foreground "#648" :slant italic))))
  '(font-lock-constant-face ((t (:foreground "#7ec"))))

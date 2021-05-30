@@ -1,9 +1,4 @@
-;; (use-package project
-;;   :straight nil
-;;   :bind (("M-o" . project-find-file)))
-
 (use-package projectiny
-  :after project
   :straight (:host github :protocol ssh
                    :repo "arthurcgusmao/projectiny")
   :config

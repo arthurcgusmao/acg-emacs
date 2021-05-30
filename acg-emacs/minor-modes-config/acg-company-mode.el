@@ -1,7 +1,6 @@
 (use-package company)
 (use-package company-quickhelp)
 (use-package crux)
-(use-package counsel)
 
 ;; disable on some modes
 (setq company-global-modes '(not magit-mode
@@ -49,7 +48,6 @@ complete the common part."
                           (eq (char-before) 93)                         ; ]
                           (eq (char-before) 125))))                     ; }
         (company-complete-common)
-        ;; (counsel-company)
         )))))
 
 ;; keybindings
