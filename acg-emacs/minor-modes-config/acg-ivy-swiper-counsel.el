@@ -1,20 +1,5 @@
-;; (use-package ivy
-;;   :config
-;;   ;; (setq ivy-use-virtual-buffers t)
+;;; General completion configurations
 
-;;   ;; max size the minibuffer can grow up to
-;;   (setq ivy-height 16)
-;;   ;; configure regular expression of the search
-;;   (setq ivy-re-builders-alist
-;;         '((swiper-isearch . regexp-quote)
-;;           (t . ivy--regex-ignore-order)))
-;;   ;; remove initial ^ from search
-;;   (setq ivy-initial-inputs-alist nil)
-;;   ;; do not quit the minibuffer when deletion error happens
-;;   (setq ivy-on-del-error-function #'ignore)
-
-
-;; General completion configs
 (use-package emacs
   :straight nil
   :config
@@ -22,19 +7,14 @@
   (setq read-file-name-completion-ignore-case t)
   (setq read-buffer-completion-ignore-case t))
 
-
-;; (use-package orderless
-;;   :ensure t
-;;   :custom (completion-styles '(orderless))
-;;   :config
-;;   ;; (setq orderless-style-dispatchers '())
-;;   )
 (use-package orderless
   :init
   (setq completion-styles '(orderless))
   (setq completion-category-defaults nil)
   (setq completion-category-overrides '((file (styles . (partial-completion))))))
 
+
+;;; Traditional search within buffer
 
 (use-package isearch
   :straight nil
@@ -58,58 +38,19 @@
 
   (advice-add 'acg/smart-ctrlf-forward :around #'acg/with-thing-at-point)
 
-  (setq ctrlf-minibuffer-bindings
-        '(([remap abort-recursive-edit]
-           . ctrlf-cancel)
-          ([remap minibuffer-keyboard-quit]
-           . ctrlf-cancel)
-          ([remap minibuffer-beginning-of-buffer]
-           . ctrlf-first-match)
-          ([remap beginning-of-buffer]
-           . ctrlf-first-match)
-          ([remap end-of-buffer]
-           . ctrlf-last-match)
-          ([remap scroll-up-command]
-           . ctrlf-next-page)
-          ([remap scroll-down-command]
-           . ctrlf-previous-page)
-          ([remap recenter-top-bottom]
-           . ctrlf-recenter-top-bottom)
-          ("M-s o" . ctrlf-occur)
-          ("M-c" . ctrlf-toggle-case-fold-search)
-          ("M-s c" . ctrlf-toggle-case-fold-search)
-          ("M-r" . ctrlf-toggle-regexp)
-          ("M-s r" . ctrlf-toggle-regexp)
-          ("M-s _" . ctrlf-toggle-symbol)
-          ("M-s s" . ctrlf-change-search-style)
-          ("C-o c" . ctrlf-toggle-case-fold-search)
-          ("C-o s" . ctrlf-change-search-style)
-          ;; Custom
-          ("<up>" . ctrlf-backward-regexp)
-          ("<down>" . ctrlf-forward-regexp)))
+  ;; Define keybindings (ctrlf uses this variable instead of a keymap)
+  (append-to-list 'ctrlf-minibuffer-bindings
+                  '(("<up>" . ctrlf-backward-regexp)
+                    ("<down>" . ctrlf-forward-regexp)))
 
   (ctrlf-mode +1)
   :bind
   ("M-s f" . acg/smart-ctrlf-forward))
 
-
-;; isearch keybindings
-;; (define-key overriding-terminal-local-map (kbd "S-SPC") nil) ; unbind S-SPC in isearch
-
-;; ;; @todo: use variable `isearch-repeat-on-direction-change' in Emacs >= 28.1
-
-;; old isearch keybindings
-;; (define-key isearch-mode-map "\C-f" 'isearch-forward)
-;; (define-key isearch-mode-map "\C-g" 'isearch-repeat-forward)
-;; (define-key isearch-mode-map (kbd "C-S-G") 'isearch-repeat-backward)
-;; (define-key isearch-mode-map (kbd "C-S-V") 'isearch-yank-kill)
-
-
 
 
+;;; Minibuffer vertical completion
 
-
-;; Vertico is a more minimalistic completion than Ivy
 (use-package vertico
   :init
   (vertico-mode 1)
@@ -187,12 +128,10 @@
         ("C-M-g" . acg/vertico-embark--magit)
         ("C-x d" . acg/vertico-embark--dired)
         ("C-M-d" . acg/vertico-embark--dired)
-        ("M-f" . acg/vertico-embark--consult-ripgrep)
-        ))
+        ("M-f" . acg/vertico-embark--consult-ripgrep)))
 
 
-
-;; Marginalia = Ivy-rich for Vertico
+;; Minibuffer metadata enhancement
 (use-package marginalia
   :after vertico
   :init
@@ -211,7 +150,7 @@
   ;; @todo: Use `vertico--goto' to make vertico selected candidate start from
   ;; the current line!
 
-;;  ;; Try and fix consult line 'wrapped around' behavior
+  ;; Try and fix consult line 'wrapped around' behavior
 
   ;; (defun consult--line-candidates (top)
   ;; "Return list of line candidates; start from top if TOP non-nil."
@@ -269,13 +208,15 @@
 ;;   (vertico--goto 3))
 
   (defun acg/consult-line (&optional arg)
+    "Runs `consult-line' with `vertico-cycle' ON. Also, switches to
+`consult-outline' if prefix argument provided."
     (interactive "P")
     (let ((fun (if arg 'consult-outline 'consult-line))
           (vertico-cycle t))
       (call-interactively fun)))
 
 
-  ;;; Make completion-at-point work in the minibuffer
+  ;;;; Make completion-at-point work in the minibuffer
 
   (defun acg/consult-completion-in-region (start end collection &optional predicate)
     "Prompt for completion of region in the minibuffer if non-unique.
@@ -319,7 +260,7 @@ Use as a value for `completion-in-region-function'."
       (completion-at-point)))
 
 
-  ;;; Improve isearch, grep, search by line commands
+  ;;;; Improve isearch, grep, search by line commands
 
   (defun acg/consult-ripgrep-project (&optional initial)
     "Same as `consult-ripgrep' but defaults to project
@@ -364,33 +305,22 @@ directory."
 
 
 
-;; Corfu does completion-at-point
+;;; `completion-at-point' packages
 
 (use-package corfu
-  :init
-  (corfu-global-mode)
   :config
   ;;; Completion with orderless and ability to type text for selection
 
-  ;; This section implements functions to make the functionality described
-  ;; above work.
-
-  ;; (defun acg/corfu-complete ()
-  ;;   (interactive)
-  ;;   (if (corfu-complete)
-  ;;       (message "yes")
-  ;;     (message "no")))
-  ;; (define-key corfu-map (kbd "TAB") 'acg/corfu-complete)
-
-  ;; (defun acg/corfu-complete--insert-space (&rest args)
-  ;;   (insert " "))
-  ;; (advice-add 'corfu-complete :after #'acg/corfu-complete--insert-space)
+  ;; Add space to completion so orderless can do its magic
 
   (defun acg/corfu-complete ()
     "Adds a space after calling `completion-at-point' so
 orderless can do its magic."
     (interactive)
     (when (completion-at-point) (insert " ")))
+
+
+  ;; Make corfu-abort remove the extra space added above
 
   (defvar acg/completion-in-region--original-input nil
     "Store START, END, and BUFFER-SUBSTRING information of the
@@ -418,33 +348,8 @@ To be used as advice after `completion--in-region'."
     ;; Call regular abort function
     (corfu-abort))
 
+  (corfu-global-mode +1)
   :bind
   (:map corfu-map
         ("<tab>" . acg/corfu-complete)
         ("<escape>" . acg/corfu-abort)))
-
-
-
-
-;; Test and debug
-;; (compl)
-
-
-;; (setq acg/anticipate-deactivate-mark-flag t)
-
-;; ;; (defun acg/maybe-anticipate-deselection (&rest args)
-;; ;;   (when (and delete-selection-mode
-;; ;;              (region-active-p)
-;; ;;              acg/anticipate-deselection-flag)
-;; ;;       (setq deactivate-mark t)
-;; ;;     (funcall orig-fun args)))
-
-;; (defun acg/maybe-anticipate-deactivate-mark ()
-;;   (when (and delete-selection-mode
-;;              (region-active-p)
-;;              acg/anticipate-deactivate-mark-flag)
-;;     (deactivate-mark)
-;;     (setq acg/anticipate-deactivate-mark-flag nil)
-;;     (message this-command)))
-
-;; (advice-add 'minibuffer-keyboard-quit :before #'acg/maybe-anticipate-deactivate-mark)
