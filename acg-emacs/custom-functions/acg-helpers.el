@@ -56,7 +56,7 @@ that corresponds to the respective letter offset (e.g., 0 -> a, 1
 (global-set-key (kbd "<S-f3>") 'kmacro-insert-letter)
 
 
-;; Word mode helpers (subword and superword modes)
+;;; Word mode helpers (subword and superword modes)
 
 (defun acg/get-word-mode ()
   "Returns the current active word mode (superword or subword) or
@@ -88,7 +88,7 @@ activation; original word mode is restored automatically."
          (acg/reset-word-mode word-mode 'subword-mode)))))
 
 
-;; Keychord helpers
+;;; Keychord helpers
 
 (defun acg/set-transient-key (key command)
   "Set a transient keybinding that can be captured only in the
@@ -98,11 +98,11 @@ next keypress."
     (set-transient-map kmap)))
 
 
-;; Select minibuffer input
+;;; Customize minibuffer input
 
 (defun acg/with-marked-input (&rest args)
-  "Mark input of minibuffer. To be used as advice before any
-function that starts with an initial input in the minibuffer."
+  "Mark minibuffer input. To be used as advice BEFORE any function
+that starts with an initial input in the minibuffer."
   (run-with-idle-timer
    0.05 nil (lambda ()
            (push 'S-end unread-command-events)
@@ -122,6 +122,17 @@ input in the minibuffer."
 function that sets `deactivate-mark' to t."
   (setq deactivate-mark nil))
 
+(defun acg/with-space-added (&rest args)
+  "Add space to minibuffer input. To be used as advice BEFORE any
+function operating on a completion style that uses spaces to
+distinguish words."
+  (run-with-idle-timer
+   0.05 nil (lambda () (push '32 unread-command-events))
+   ;; 32 is symbol for space, see link below for more
+   ;; https://emacs.stackexchange.com/a/36253/13589
+   ))
+
+
 ;; ;; not working -- don't know why
 ;; (defun acg/with-filename-as-input (&rest args)
 ;;   "Add current filename (if buffer associated to file) to
@@ -136,6 +147,8 @@ function that sets `deactivate-mark' to t."
 ;;   )
 ;; (advice-add 'delete-file :before #'acg/with-filename-as-input)
 
+
+;;; URL functions
 
 (defun acg/url-get-page-title (url &optional timeout)
   "Returns the page title of an URL. If TIMEOUT (in seconds)
