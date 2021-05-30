@@ -33,9 +33,10 @@
 complete the common part."
   (interactive)
   (cond
-   ((use-region-p)
+   ((use-region-p) ; Region active => always indent
     (indent-region (region-beginning) (region-end)))
-   ((let ((old-point (point))
+   (t
+    (let ((old-point (point))
           (old-tick (buffer-chars-modified-tick))
           (tab-always-indent t))
       (call-interactively #'indent-for-tab-command)
@@ -54,3 +55,10 @@ complete the common part."
 (define-key company-active-map (kbd "M-h") #'company-quickhelp-mode)
 (define-key company-active-map (kbd "<escape>") #'company-abort)
 (define-key company-mode-map (kbd "<tab>") #'acg/company-indent-or-complete-common)
+
+
+(use-package company-anaconda
+  :after anaconda-mode
+  :config
+  (eval-after-load "company"
+    '(add-to-list 'company-backends 'company-anaconda)))

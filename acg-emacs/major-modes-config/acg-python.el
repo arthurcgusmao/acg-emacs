@@ -108,9 +108,3 @@ any, similar to what a Jupyter REPL would do."
 
 (use-package anaconda-mode
   :hook (python-mode . anaconda-mode))
-
-(use-package company-anaconda
-  :after anaconda-mode
-  :config
-  (eval-after-load "company"
-    '(add-to-list 'company-backends 'company-anaconda)))
