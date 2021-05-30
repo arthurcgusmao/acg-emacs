@@ -1,0 +1,7 @@
+# -*- mode: gitignore; -*-
+
+## Files that rg commands should ignore, such as `acg/consult-ripgrep-project`
+
+# Emacs backup files
+\#*\#
+.\#*
