@@ -15,9 +15,9 @@
         (acg/indent-buffer)
         (message "Indented buffer.")))))
 
-;; keybindings
-(global-set-key (kbd "C-i") (crux-with-region-or-line indent-region))
-(global-set-key (kbd "C-S-I") 'acg/indent-region-or-buffer)
+;; ;; keybindings
+;; (global-set-key (kbd "C-i") (crux-with-region-or-line indent-region))
+;; (global-set-key (kbd "C-S-I") 'acg/indent-region-or-buffer)
 
 
 ;; Fix newline indentation in electric-mode, for modes like Python

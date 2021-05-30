@@ -313,16 +313,7 @@ directory."
   :config
   ;;; Completion with orderless and ability to type text for selection
 
-  ;; Add space to completion so orderless can do its magic
-
-  (defun acg/corfu-complete ()
-    "Adds a space after calling `completion-at-point' so
-orderless can do its magic."
-    (interactive)
-    (when (completion-at-point) (insert " ")))
-
-
-  ;; Make corfu-abort remove the extra space added above
+  ;; Make corfu-abort delete chars typed during the selection was active
 
   (defvar acg/completion-in-region--original-input nil
     "Store START, END, and BUFFER-SUBSTRING information of the
@@ -333,9 +324,6 @@ last call to `completion-in-region'.")
 To be used as advice after `completion--in-region'."
     (setq acg/completion-in-region--original-input
           `(,start ,end ,(buffer-substring start end))))
-
-  (advice-add 'completion--in-region :after #'acg/completion--in-region--save-input)
-  ;; (advice-remove 'completion--in-region 'acg/completion--in-region--advice)
 
   (defun acg/corfu-abort ()
     (interactive)
@@ -350,8 +338,18 @@ To be used as advice after `completion--in-region'."
     ;; Call regular abort function
     (corfu-abort))
 
+  (defun acg/corfu--setup ()
+    "Adds advices for improving Corfu behavior."
+    (if corfu-global-mode
+        (progn
+          ;; Add space to completion so orderless can do its magic
+          (advice-add 'completion-at-point :before #'acg/with-space-added)
+          (advice-add 'completion--in-region :after #'acg/completion--in-region--save-input))
+      (advice-remove 'completion-at-point 'acg/with-space-added)
+      (advice-remove 'completion--in-region 'acg/completion--in-region--advice)))
+
   (corfu-global-mode +1)
+  :hook (corfu-global-mode . acg/corfu--setup)
   :bind
   (:map corfu-map
-        ("<tab>" . acg/corfu-complete)
         ("<escape>" . acg/corfu-abort)))
