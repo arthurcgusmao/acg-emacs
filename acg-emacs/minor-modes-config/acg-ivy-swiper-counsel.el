@@ -325,6 +325,13 @@ Use as a value for `completion-in-region-function'."
     "Same as `consult-ripgrep' but defaults to project
 directory."
     (interactive)
+    ;; Mark input compensating for the initial #
+    (run-with-idle-timer
+     0.05 nil (lambda ()
+                (push 'S-end unread-command-events)
+                (push 'right unread-command-events)
+                (push 'home unread-command-events)))
+    ;; Call original command
     (consult--grep
      "rg"
      "rg --null --line-buffered --color=ansi --max-columns=1000 --smart-case --no-heading --line-number . -e ARG OPTS"
@@ -335,8 +342,8 @@ directory."
   (advice-add 'consult-line :before #'acg/with-marked-input)
   ;; (advice-remove 'consult-line 'acg/with-thing-at-point)
   ;; (advice-remove 'consult-line 'acg/with-marked-input)
+
   (advice-add 'acg/consult-ripgrep-project :around #'acg/with-thing-at-point)
-  (advice-add 'acg/consult-ripgrep-project :before #'acg/with-marked-input)
 
 
   :bind
