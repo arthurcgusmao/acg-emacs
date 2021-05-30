@@ -1,8 +1,8 @@
 # My Emacs configurations
 
-My Emacs configurations. Master branch supports Emacs 27; for Emacs 26 see
-tags. It has been tested mainly on Ubuntu, but I do have a few (outdated)
-adaptations to run it on Windows as well.
+My Emacs configurations. Master branch supports Emacs 28; for older versions
+see tags. There are tags for the lattest commit run on a particular operating
+system too.
 
 If you have contributions, questions, etc., feel free to get in touch.
 
