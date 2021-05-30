@@ -86,16 +86,18 @@
   (defun acg/vertico--candidate-dir ()
     "Gets the default directory of the current candidate."
     (let ((cand (vertico--candidate)))
-      (cond
-       (minibuffer-completing-file-name
-        (file-name-directory
-         (expand-file-name cand)))
-       ((get-buffer cand)
-        (with-current-buffer cand
-          default-directory))
-       (t
-        (file-name-directory
-         (expand-file-name cand))))))
+      (if (string-empty-p cand)
+          default-directory
+        (cond
+         (minibuffer-completing-file-name
+          (file-name-directory
+           (expand-file-name cand)))
+         ((get-buffer cand)
+          (with-current-buffer cand
+            default-directory))
+         (t
+          (file-name-directory
+           (expand-file-name cand)))))))
 
   (defun acg/vertico-embark--magit ()
     (interactive)
