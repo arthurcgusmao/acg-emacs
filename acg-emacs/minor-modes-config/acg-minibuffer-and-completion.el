@@ -348,8 +348,8 @@ To be used as advice after `completion--in-region'."
       (advice-remove 'completion-at-point 'acg/with-space-added)
       (advice-remove 'completion--in-region 'acg/completion--in-region--advice)))
 
-  (corfu-global-mode +1)
-  :hook (corfu-global-mode . acg/corfu--setup)
+  :hook ((corfu-global-mode . acg/corfu--setup)
+         (after-init . corfu-global-mode))
   :bind
   (:map corfu-map
         ("<escape>" . acg/corfu-abort)))
