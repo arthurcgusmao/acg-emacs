@@ -51,7 +51,7 @@ git clean -xdf
 
 #### Remove conda from `.bashrc`
 
-For some reason, Anaconda breaks Emacs build. Comment out the part that includes conda in `.bashrc` to make the installation process.
+For some reason, Conda breaks Emacs build. Comment out the part that includes conda in `.bashrc` to make the installation process.
 
 #### Build
 

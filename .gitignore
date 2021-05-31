@@ -2,8 +2,10 @@
 *.elc
 *.el~
 session.*
+.lsp-session-*
 
 # Specific files/dirs
+/.cache/
 /anaconda-mode/
 /auto-save-list/
 /bookmarks

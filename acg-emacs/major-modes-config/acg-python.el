@@ -104,7 +104,3 @@ any, similar to what a Jupyter REPL would do."
         ("<f8>" . python-shell-send-buffer)
         ("C-c C-y" . run-python)
         ))
-
-
-(use-package anaconda-mode
-  :hook (python-mode . anaconda-mode))

@@ -25,7 +25,6 @@ sequence."
 (define-key minibuffer-local-completion-map [escape] 'abort-recursive-edit)
 (define-key minibuffer-local-must-match-map [escape] 'abort-recursive-edit)
 (define-key minibuffer-local-isearch-map [escape] 'abort-recursive-edit)
-(eval-after-load "anaconda-mode-view-mode" '(define-key anaconda-mode-view-mode-map [escape] 'kill-buffer-and-window))
 (global-set-key [escape] 'acg/super-keyboard-quit)
 (acg/force-global-set-key "C-c <escape>" 'acg/dummy-quit)
 ;; Rebind ESC functions to C-<escape>
