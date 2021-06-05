@@ -42,7 +42,8 @@ afterwards."
     (dired-hacks-previous-file))
 
   ;; Group directories together
-  (setq dired-listing-switches "--group-directories-first -al")
+  (unless (string-equal system-type "darwin") ; Doesn't work on Mac without root permissions
+    (setq dired-listing-switches "--group-directories-first -al"))
 
   :bind
   (("C-x d" . dired-jump)
