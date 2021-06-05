@@ -195,6 +195,14 @@
   (if (string-equal system-type "windows-nt")
       (and (global-set-key (kbd "<M-f4>") 'delete-frame)))
 
+  ;; for MacOS
+  (when (string-equal system-type "darwin")
+    (setq mac-command-modifier 'ctrl)
+    (setq mac-option-modifier 'meta)
+    (setq mac-control-modifier 'super)
+    ;; (setq mac-function-modifier 'super)
+    )
+
   (defun acg/widen-recenter ()
     "Same as `widen' but run `recenter' afterwards."
     (interactive)
