@@ -4,30 +4,16 @@
   (if (use-region-p)
       (let ((clipboard-paste-region-beginning (region-beginning)))
         (delete-region (region-beginning) (region-end))
-        (x-clipboard-yank)
+        (clipboard-yank)
         (indent-region clipboard-paste-region-beginning (region-end))
         )
     (let ((clipboard-paste-point-start (point)))
-      (x-clipboard-yank)
+      (clipboard-yank)
       (indent-region clipboard-paste-point-start (point))
       )))
 
 
 (defun acg/clipboard-paste-replace-selection ()
-  "Paste text from clipboard overwriting the current selection"
-  (interactive)
-  (if (use-region-p)
-      (let ((clipboard-paste-region-beginning (region-beginning)))
-        (delete-region (region-beginning) (region-end))
-        (x-clipboard-yank)
-        ;; (indent-region clipboard-paste-region-beginning (region-end))
-        )
-    (let ((clipboard-paste-point-start (point)))
-      (x-clipboard-yank)
-      ;; (indent-region clipboard-paste-point-start (point))
-      )))
-
-(defun acg/windows-clipboard-paste-replace-selection ()
   "Paste text from clipboard overwriting the current selection"
   (interactive)
   (if (use-region-p)
@@ -76,9 +62,3 @@ whitespace)"
 (global-set-key (kbd "C-S-V") 'acg/clipboard-paste-replace-selection)
 (global-set-key (kbd "C-v") 'acg/clipboard-paste-replace-selection)
 (global-set-key (kbd "<S-insert>") 'acg/clipboard-paste-replace-selection) ;; compatibility with CopyQ (OS clipboard history software)
-
-;; Windows keybindings
-(if (string-equal system-type "windows-nt")
-    (and (global-set-key (kbd "C-S-V") 'acg/windows-clipboard-paste-replace-selection)
-         (global-set-key (kbd "C-v") 'acg/windows-clipboard-paste-replace-selection)
-         (global-set-key (kbd "<S-insert>") 'acg/windows-clipboard-paste-replace-selection)))
