@@ -6,11 +6,6 @@
 (defconst acg/acg-emacs-dir (file-name-directory (or load-file-name (buffer-file-name)))
   "Directory where acg-emacs is installed.")
 
-;; ;; Add miniconda binaries to executables path
-;; (if (string-equal system-type "gnu/linux")
-;;     (add-to-list 'exec-path "~/.miniconda3/bin"))
-;; ;; Note: commented-out since being managed by conda package now
-
 (defconst acg/default-bib-file "~/Documents/zotero.bib"
   "Default bibliography file for references.")
 
@@ -53,9 +48,17 @@
   (symbol-value list-var))
 
 (defun acg/add-to-env-path (path)
-  "Add PATH (first position) to the PATH environment variable"
+  "Add PATH (first position) to the PATH environment variable of
+Emacs, used when running a shell in Emacs."
   (setenv "PATH" (concat (expand-file-name path)
                          path-separator (getenv "PATH"))))
+
+(defun acg/add-to-env-path-and-exec-path (path)
+  "Adds PATH to both the PATH env var and `exec-path'. The former
+is used when running a shell; the latter is used for Emacs to
+find executables."
+  (acg/add-to-env-path path)
+  (add-to-list 'exec-path (expand-file-name path)))
 
 
 ;; Removing unwanted keybindings from local modes
