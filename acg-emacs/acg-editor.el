@@ -216,7 +216,9 @@
   ("C-S-Z" . redo)
   ("C-S-SPC" . cycle-spacing)
   ("C-S-J" . join-line)
-  ("C-x n w" . acg/widen-recenter))
+  ("C-x n w" . acg/widen-recenter)
+  ("<end>" . move-end-of-line)
+  )
 
 
 (use-package auth-source

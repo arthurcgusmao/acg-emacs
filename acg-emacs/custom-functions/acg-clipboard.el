@@ -1,14 +1,23 @@
+;; Handler for MacOS
+(when (string-equal system-type "darwin")
+  (defun x-clipboard-yank ()
+    "Alternative version of `clipboard-yank' for MacOS since the
+original mixes the clipboard content with the kill ring."
+    (interactive)
+    (insert (shell-command-to-string "pbpaste"))))
+
+
 (defun acg/clipboard-paste-replace-selection-indent ()
   "Paste text from clipboard overwriting the current selection"
   (interactive)
   (if (use-region-p)
       (let ((clipboard-paste-region-beginning (region-beginning)))
         (delete-region (region-beginning) (region-end))
-        (clipboard-yank)
+        (x-clipboard-yank)
         (indent-region clipboard-paste-region-beginning (region-end))
         )
     (let ((clipboard-paste-point-start (point)))
-      (clipboard-yank)
+      (x-clipboard-yank)
       (indent-region clipboard-paste-point-start (point))
       )))
 
@@ -19,11 +28,11 @@
   (if (use-region-p)
       (let ((clipboard-paste-region-beginning (region-beginning)))
         (delete-region (region-beginning) (region-end))
-        (clipboard-yank)
+        (x-clipboard-yank)
         ;; (indent-region clipboard-paste-region-beginning (region-end))
         )
     (let ((clipboard-paste-point-start (point)))
-      (clipboard-yank)
+      (x-clipboard-yank)
       ;; (indent-region clipboard-paste-point-start (point))
       )))
 

@@ -227,7 +227,7 @@ thresholds are not met."
     ;; "localhost" when Forwarding X11 through an SSH connection,
     ;; which is when we want to apply these configurations
     ;; (because in those cases Emacs starts with a strange font).
-    (when (string-match-p (regexp-quote "localhost") (getenv "DISPLAY")) ;; Condition based on value of DISPLAY
+    (when (string= "localhost" (getenv "DISPLAY")) ;; Condition based on value of DISPLAY
       (cond
        ((>= (display-pixel-height) 2160) (set-frame-parameter frame 'font "Hack-15")) ; 4k resolution
        ((>= (display-pixel-height) 1440) (set-frame-parameter frame 'font "Hack-10")) ; 2560x1440 resolution
@@ -297,7 +297,7 @@ frame if FRAME is nil, and to 1 if AMT is nil."
                  ;; was this buffer modified since the last save?
                  '(:eval (if buffer-read-only
                              " "
-                           (if (buffer-modified-p) " ✏️" " 💾")))
+                           (if (buffer-modified-p) " 🖋 " " 💾")))
 
                  ;; the buffer name; the file name as a tool tip
                  '(:eval (propertize " %b" 'face 'acg/mode-line-common-bold))
