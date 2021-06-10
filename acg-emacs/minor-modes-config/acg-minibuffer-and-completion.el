@@ -117,11 +117,20 @@
      'consult-ripgrep
      (locate-dominating-file (acg/vertico--candidate-dir) ".git")))
 
+    (defun acg/vertico-buffer-insert ()
+    "Inserts or 'pastes' the current candidate into the buffer from
+which the completion originates."
+    (interactive)
+    (let ((cand (vertico--candidate)))
+      (embark--quit-and-run
+       'insert cand)))
+
 
   :bind
   (:map vertico-map
         ("<S-return>" . vertico-exit-input)
         ("<return>" . acg/vertico-smart-exit)
+        ("M-<return>" . acg/vertico-buffer-insert)
         ("<backspace>" . acg/minibuffer-smart-backspace)
 
         ;; ("<C-return>" . vert) ; @todo: see how to narrow selection in vertico -- dual of ivy-restrict-to-matches
