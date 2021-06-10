@@ -41,9 +41,13 @@ afterwards."
     (dired-display-file)
     (dired-hacks-previous-file))
 
+  ;; MacOS correction to use "GNU" ls instead of MacOS's ls -- from https://emacs.stackexchange.com/a/29101/13589
+  (when (string-equal system-type "darwin")
+    (setq insert-directory-program "gls"))
+
   ;; Group directories together
-  (unless (string-equal system-type "darwin") ; Doesn't work on Mac without root permissions
-    (setq dired-listing-switches "--group-directories-first -al"))
+  (setq dired-listing-switches "--group-directories-first -al")
+
 
   :bind
   (("C-x d" . dired-jump)
