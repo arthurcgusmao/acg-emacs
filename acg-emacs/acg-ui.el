@@ -216,31 +216,45 @@ thresholds are not met."
            (push 'acg/fontify-frame-mswindows after-make-frame-functions))) ;; Fontify any future frames
 
 
-;; Configure font in Remote Environments, usually using XLaunch. For whatever
-;; reason Emacs does not start with XFCE4's default monospace font
-(defun acg/set-custom-frame-font (&optional frame)
-  "Set my custom font configs for the frame."
+(defun acg/set-flexible-frame-font (font &optional frame)
+  "Set different font sizes depending on the display
+size/resolution, using FONT as the base font."
   (interactive)
   (with-selected-frame (or frame (selected-frame))
-    ;; Use (getenv "DISPLAY") to conditionally apply font
-    ;; configuration. Usually the DISPLAY variable only contains
-    ;; "localhost" when Forwarding X11 through an SSH connection,
-    ;; which is when we want to apply these configurations
-    ;; (because in those cases Emacs starts with a strange font).
-    (when (string= "localhost" (getenv "DISPLAY")) ;; Condition based on value of DISPLAY
-      (cond
-       ((>= (display-pixel-height) 2160) (set-frame-parameter frame 'font "Hack-15")) ; 4k resolution
-       ((>= (display-pixel-height) 1440) (set-frame-parameter frame 'font "Hack-10")) ; 2560x1440 resolution
-       (t (set-frame-parameter frame 'font "Hack-9"))))
+    (cond
+     ((>= (display-pixel-height) 2160) (set-frame-parameter frame 'font (concat font "-17"))) ; 4k resolution
+     ((>= (display-pixel-height) 1440) (set-frame-parameter frame 'font (concat font "-14"))) ; 2560x1440 resolution
+     (t (set-frame-parameter frame 'font (concat font "-12"))))))
+
+;; Configure font in Remote Environments, usually using XLaunch. For whatever
+;; reason Emacs does not start with XFCE4's default monospace font
+(defun acg/update-frame-font (&optional frame)
+  "Set my custom font configs for the frame."
+  (interactive)
+
+    (cond
+     ;; Use (getenv "DISPLAY") to conditionally apply font
+     ;; configuration. Usually the DISPLAY variable only contains
+     ;; "localhost" when Forwarding X11 through an SSH connection,
+     ;; which is when we want to apply these configurations
+     ;; (because in those cases Emacs starts with a strange font).
+     ((string= "localhost" (getenv "DISPLAY")) ;; Condition based on value of DISPLAY
+      (acg/set-flexible-frame-font "Hack" frame))
+     ;; MacOS
+     ((string-equal system-type "darwin")
+      (acg/set-flexible-frame-font "Menlo" frame))
+     ;; Linux
+     (t
+      (acg/set-flexible-frame-font "Ubuntu-Mono" frame)))
 
     ;; Emoji: 😄, 🤦, 🏴󠁧󠁢󠁳󠁣󠁴󠁿
     (set-fontset-font t 'symbol "Noto Color Emoji")
     (set-fontset-font t 'symbol "Apple Color Emoji" nil 'append)
     (set-fontset-font t 'symbol "Segoe UI Emoji" nil 'append)
-    (set-fontset-font t 'symbol "Symbola" nil 'append)))
+    (set-fontset-font t 'symbol "Symbola" nil 'append))
 
-(acg/set-custom-frame-font (selected-frame)) ; Conditionally fontify current frame, if any
-(add-to-list 'after-make-frame-functions #'acg/set-custom-frame-font) ; Conditionally fontify any future frames
+(acg/update-frame-font (selected-frame)) ; Conditionally fontify current frame, if any
+(add-to-list 'after-make-frame-functions #'acg/update-frame-font) ; Conditionally fontify any future frames
 
 
 ;; Resize the whole frame, and not only a window

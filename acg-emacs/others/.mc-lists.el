@@ -43,6 +43,7 @@
         markdown-outdent-or-delete
         mc/mark-all-in-region
         my-super-keyboard-quit
+        org-end-of-line
         org-self-insert-command
         org-yank
         prelude-move-beginning-of-line
