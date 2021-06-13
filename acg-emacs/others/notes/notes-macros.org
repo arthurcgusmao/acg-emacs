@@ -1,0 +1,59 @@
+* Macros on Emacs
+
+- Run command =edit-kbd-macro= to edit a macro;
+- Commands can be written between double angle brackets, e.g., =<<beginning-of-buffer>>=
+
+
+*** Example of macro
+#+BEGIN_SRC txt
+;; Keyboard Macro Editor.  Press C-c C-c to finish; press C-x k RET to cancel.
+;; Original keys: 2*<C-S-right> S-C-c M-1 200*<C-up> <<ctrlf-forward-literal>> S-C-v RET M-1 <right> 2*<C-S-right> S-C-c M-1 <<ctrlf-forward-literal>> S-C-v RET M-1 <right> 2*<C-S-right> S-C-c M-1 <<ctrlf-forward-literal>> S-C-v RET M-1 <right> 2*<C-S-right> S-C-c M-1 <<ctrlf-forward-literal>> S-C-v RET M-1 <right> <C-S-right> S-C-c M-1 <C-right> <C-backspace> S-C-v M-1 <C-M-left> <down>
+
+Command: last-kbd-macro
+Key: none
+
+Macro:
+
+2*<C-S-right>
+S-C-c			;; acg/clipboard-kill-ring-save
+M-1			;; other-window
+<<beginning-of-buffer>>		;; beginning-of-buffer
+<<ctrlf-forward-literal>>	;; ctrlf-forward-literal
+S-C-v			;; acg/clipboard-paste-replace-selection
+RET			;; newline
+M-1			;; other-window
+<right>			;; right-char
+2*<C-S-right>
+S-C-c			;; acg/clipboard-kill-ring-save
+M-1			;; other-window
+<<ctrlf-forward-literal>>	;; ctrlf-forward-literal
+S-C-v			;; acg/clipboard-paste-replace-selection
+RET			;; newline
+M-1			;; other-window
+<right>			;; right-char
+2*<C-S-right>
+S-C-c			;; acg/clipboard-kill-ring-save
+M-1			;; other-window
+<<ctrlf-forward-literal>>	;; ctrlf-forward-literal
+S-C-v			;; acg/clipboard-paste-replace-selection
+RET			;; newline
+M-1			;; other-window
+<right>			;; right-char
+2*<C-S-right>
+S-C-c			;; acg/clipboard-kill-ring-save
+M-1			;; other-window
+<<ctrlf-forward-literal>>	;; ctrlf-forward-literal
+S-C-v			;; acg/clipboard-paste-replace-selection
+RET			;; newline
+M-1			;; other-window
+<right>			;; right-char
+<C-S-right>
+S-C-c			;; acg/clipboard-kill-ring-save
+M-1			;; other-window
+<C-right>		;; right-word
+<C-backspace>		;; acg/backward-kill-word
+S-C-v			;; acg/clipboard-paste-replace-selection
+M-1			;; other-window
+<C-M-left>		;; acg/beginning-of-visual-line-or-indentation
+<down>			;; next-line
+#+END_SRC
