@@ -123,3 +123,10 @@ inactive, operates on the current line."
      (string-join
       (split-string REGION-STRING SEPARATORS)
       "\n"))))
+
+
+(defun acg/flush-empty-lines ()
+  "Runs `flush-lines' and pre-fill the prompt with a set of chars
+that correspond to whitespace or newlines."
+  (interactive)
+  (flush-lines "^[ \\f\\t\\n\\r\\v	]*[]?$"))
