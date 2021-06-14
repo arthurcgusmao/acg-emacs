@@ -95,6 +95,7 @@ active."
 
 (acg/force-global-set-key "<M-delete>" 'acg/kill-sexp)
 (acg/force-global-set-key "<s-delete>" (acg/with-subword-mode #'kill-word))
+(acg/force-global-set-key "s-<kp-delete>" (acg/with-subword-mode #'kill-word)) ; For MacOS
 (global-set-key (kbd "<M-S-delete>") 'acg/kill-whole-line-or-region-lines-and-move-up)
 
 (acg/force-global-set-key "<C-S-backspace>" 'acg/kill-line-or-region-backwards)

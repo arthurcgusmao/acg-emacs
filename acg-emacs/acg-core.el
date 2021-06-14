@@ -60,6 +60,11 @@ find executables."
   (acg/add-to-env-path path)
   (add-to-list 'exec-path (expand-file-name path)))
 
+;; MacOS: add macports directory to executable path
+(when (string-equal system-type "darwin")
+  (acg/add-to-env-path-and-exec-path "~/.macports/bin")
+  (acg/add-to-env-path-and-exec-path "~/.local/bin"))
+
 
 ;; Removing unwanted keybindings from local modes
 

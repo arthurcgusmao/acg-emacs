@@ -201,6 +201,10 @@
     (setq mac-option-modifier 'meta)
     (setq mac-control-modifier 'super)
     ;; (setq mac-function-modifier 'super)
+
+    ;; Remap ctrl-tab
+    (define-key key-translation-map [s-tab] (kbd "<C-tab>"))
+    (define-key key-translation-map [S-s-tab] (kbd "<C-S-tab>"))
     )
 
   (defun acg/widen-recenter ()
