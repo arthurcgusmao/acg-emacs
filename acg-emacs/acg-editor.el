@@ -205,6 +205,10 @@
     ;; Remap ctrl-tab
     (define-key key-translation-map [s-tab] (kbd "<C-tab>"))
     (define-key key-translation-map [S-s-tab] (kbd "<C-S-tab>"))
+    (define-key key-translation-map [s-home] (kbd "<home>"))
+    (define-key key-translation-map [s-end] (kbd "<end>"))
+    (define-key key-translation-map [s-prior] (kbd "<prior>"))
+    (define-key key-translation-map [s-next] (kbd "<next>"))
     )
 
   (defun acg/widen-recenter ()
