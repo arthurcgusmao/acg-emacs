@@ -184,7 +184,7 @@ Prompts for a directory if DIR is nil."
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-p") (acg/eval-with 'jupyter-eval-string 'mark-page 'acg/add-last-var))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-c") (acg/eval-with 'jupyter-eval-string 'acg/mark-dwim 'acg/add-last-var))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-l") (acg/eval-with 'jupyter-eval-string 'acg/expand-region-to-whole-lines 'acg/unindent-add-last-var))
-(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-d") 'acg/jupyter-send-defun-body)
+(define-key jupyter-repl-interaction-mode-map (kbd "C-c C-d") (acg/eval-with 'jupyter-eval-string 'acg/mark-defun-body 'acg/unindent-add-last-var))
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-e") 'acg/jupyter-open-python-variable-external-app)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o") nil)
 (define-key jupyter-repl-interaction-mode-map (kbd "C-c C-o t") 'acg/jupyter-toggle-use-overlays-repl)
