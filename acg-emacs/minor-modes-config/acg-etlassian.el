@@ -47,4 +47,11 @@ Initial assumption is the Git branch of the current project."
 
 (provide 'etlassian)
 
-;;; projectiny.el ends here
+;;; etlassian.el ends here
+
+
+
+;; My customizations
+
+(setq etlassian-urls-file
+      (concat acg/history-dir "etlassian-urls"))

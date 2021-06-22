@@ -62,7 +62,7 @@ Version 2015-12-10"
     (shell-command (concat "cmder-in-dir.ahk " default-directory)))
     ;; (w32-shell-execute "cmd" (replace-regexp-in-string "/" "\\" default-directory t t)))
    ((string-equal system-type "darwin")
-    (message "Mac not supported. File a bug report or pull request."))
+    (shell-command (concat "open -a Hyper " default-directory)))
    ((string-equal system-type "gnu/linux")
     (let ((process-connection-type nil))
       (start-process "" nil "x-terminal-emulator"
