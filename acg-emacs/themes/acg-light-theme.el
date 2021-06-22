@@ -46,12 +46,9 @@
  ;; '(vertical-border ((t (:foreground "gray"))))
 
  '(mode-line
-   ((t (:background "#b9c" :foreground "#203" :box
-                    (:line-width 2 :color "#b9c" :style released-button)))))
+   ((t (:background "#7F5AB6" :foreground "#ffffff" :box (:line-width 3 :style flat-button)))))
  '(mode-line-inactive
-   ((t (:inherit mode-line :background "#ccc"
-                 :foreground "#555" :box (:line-width 1 :color "#999")
-                 :weight light))))
+   ((t (:background "#9985b6" :foreground "#d9d1e6" :box (:line-width 3 :style flat-button)))))
 
  ;; emacs-jupyter
  '(jupyter-eval-overlay ((t (:background "#F87440" :foreground "#621e04"

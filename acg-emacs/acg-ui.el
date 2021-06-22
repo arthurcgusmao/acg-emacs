@@ -292,18 +292,6 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 (use-package emacs
   :straight nil
   :config
-  (make-face 'acg/mode-line-common)
-  (set-face-attribute 'acg/mode-line-common nil
-                      ;; :foreground "#777"
-                      :foreground (face-attribute 'mode-line :foreground)
-                      :weight 'ultralight
-                      )
-  (make-face 'acg/mode-line-common-bold)
-  (set-face-attribute 'acg/mode-line-common-bold nil
-                      :foreground (face-attribute 'acg/mode-line-common :foreground)
-                      :weight 'bold
-                      )
-
   ;; use setq-default to set it for /all/ modes
   (setq-default mode-line-format
                 (list
@@ -314,7 +302,7 @@ frame if FRAME is nil, and to 1 if AMT is nil."
                            (if (buffer-modified-p) " 🖋 " " 💾")))
 
                  ;; the buffer name; the file name as a tool tip
-                 '(:eval (propertize " %b" 'face 'acg/mode-line-common-bold))
+                 '(:eval (propertize " %b" 'face 'mode-line-emphasis))
 
                  ;; Line & Column numbers -- Use '%02l' to set to 2 chars at least; may prevent flickering
                  "   (%l,%c)"

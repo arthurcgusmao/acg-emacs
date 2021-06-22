@@ -42,12 +42,9 @@
 
  ;; mode line
  '(mode-line
-   ((t (:background "#203" :foreground "#ddd" :box
-                    (:line-width 2 :color "#203" :style released-button)))))
+   ((t (:background "#5f4388" :foreground "#ffffff" :box (:line-width 3 :style flat-button)))))
  '(mode-line-inactive
-   ((t (:inherit mode-line :background "#555"
-                 :foreground "#bbb" :box (:line-width 1 :color "#777")
-                 :weight light))))
+   ((t (:background "#736488" :foreground "#c8c1d4" :box (:line-width 3 :style flat-button)))))
 
  ;; emacs-jupyter
  ;; '(jupyter-eval-overlay ((t (:background "#000066" :foreground "#9999FF"
