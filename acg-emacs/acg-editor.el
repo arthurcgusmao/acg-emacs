@@ -49,6 +49,9 @@
   ;; Remove annoying ring bell
   (setq ring-bell-function 'ignore)
 
+  ;; Disable marking the region between mark and point
+  (transient-mark-mode -1)
+
 
   ;; Avoid performance issues in files with very long lines.
 

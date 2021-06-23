@@ -49,7 +49,8 @@ whitespace)"
        (progn (back-to-indentation) (point))
        (progn (end-of-line) (skip-chars-backward " \t") (point))))))
 
-(advice-add 'acg/clipboard-kill-ring-save :after #'acg/with-mark-active)
+;; (advice-add 'acg/clipboard-kill-ring-save :after #'acg/with-mark-active)
+;; (advice-remove 'acg/clipboard-kill-ring-save 'acg/with-mark-active)
 
 
 (defun acg/clipboard-kill-region-or-line ()
