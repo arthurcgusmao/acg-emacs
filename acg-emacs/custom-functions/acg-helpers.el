@@ -112,10 +112,40 @@ that starts with an initial input in the minibuffer."
   "Run function passing thing at point as its first argument. To
 be used as advice AROUND any function that starts with an initial
 input in the minibuffer."
-  (funcall orig-fun (regexp-quote
-                     (if ivy-mode
-                         (ivy-thing-at-point)
-                       (or (thing-at-point 'symbol) "")))))
+  (let ((old-point (point))
+        initial-str beg end)
+    (setq initial-str
+          (regexp-quote
+           (cond (ivy-mode
+                  (ivy-thing-at-point))
+                 ((region-active-p)
+                  (setq beg (region-beginning))
+                  (setq end (region-end))
+                  (buffer-substring beg end))
+                 (t
+                  (or (thing-at-point 'symbol t) "")))))
+    (deactivate-mark)
+
+    ;; ;; (setq transient-mark-mode nil)
+    ;; (setq inhibit-quit t)
+    ;; (with-local-quit
+    ;;   (funcall orig-fun initial-str))
+
+    ;; @todo: restoring active region is still not working when `orig-fun'
+    ;; aborts (e.g., user press ESC)
+
+    (funcall orig-fun initial-str)
+
+    ;; Reactivate active region if point remained on the same position afterwards.
+    (when (or (= (point) end)
+              (= (point) beg))
+      (set-mark beg)
+      (activate-mark)
+      (setq transient-mark-mode '(only)) ; Make cursor movement deactivate the region
+      ;; Restore cursor position in the selection
+      (when (not (= old-point end))
+        (exchange-point-and-mark))
+      (setq deactivate-mark nil))))
 
 (defun acg/with-mark-active (&rest args)
   "Keep mark active after command. To be used as advice AFTER any
