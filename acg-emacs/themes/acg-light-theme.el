@@ -16,7 +16,7 @@
  '(font-lock-comment-face ((t (:foreground "#999" :slant italic))))
  '(font-lock-constant-face ((t (:foreground "#066" :weight bold))))
  ;; '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#a18365"))))
- '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#a78"))))
+ '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#c08c9d"))))
  '(font-lock-function-name-face ((t (:foreground "#08a" :weight bold))))
  '(font-lock-keyword-face ((t (:foreground "#118" :weight bold))))
  '(font-lock-string-face ((t (:foreground "#940"))))
