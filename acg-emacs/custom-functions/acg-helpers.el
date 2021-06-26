@@ -114,6 +114,7 @@ be used as advice AROUND any function that starts with an initial
 input in the minibuffer."
   (let ((old-point (point))
         initial-str beg end)
+    ;; Smartly define initial string to be passed to original function
     (setq initial-str
           (regexp-quote
            (cond (ivy-mode
@@ -124,28 +125,23 @@ input in the minibuffer."
                   (buffer-substring beg end))
                  (t
                   (or (thing-at-point 'symbol t) "")))))
+    ;; Deactivate mark so the function behavior is not affected by it
     (deactivate-mark)
-
-    ;; ;; (setq transient-mark-mode nil)
-    ;; (setq inhibit-quit t)
-    ;; (with-local-quit
-    ;;   (funcall orig-fun initial-str))
-
-    ;; @todo: restoring active region is still not working when `orig-fun'
-    ;; aborts (e.g., user press ESC)
-
-    (funcall orig-fun initial-str)
-
+    ;; Do not quit this wrapper function if the user quits the original one
+    ;; @todo: not working -- how to prevent quit from quitting the wrapper function too?
+    (with-local-quit
+      (funcall orig-fun initial-str))
     ;; Reactivate active region if point remained on the same position afterwards.
     (when (or (= (point) end)
               (= (point) beg))
-      (set-mark beg)
-      (activate-mark)
-      (setq transient-mark-mode '(only)) ; Make cursor movement deactivate the region
-      ;; Restore cursor position in the selection
-      (when (not (= old-point end))
-        (exchange-point-and-mark))
-      (setq deactivate-mark nil))))
+      (let ((transient-mark-mode 'only)) ; Make cursor movement deactivate the region
+        (set-mark beg)
+        (activate-mark)
+        ;; (setq transient-mark-mode 'only) ; Make cursor movement deactivate the region
+        ;; Restore cursor position in the selection
+        (when (not (= old-point end))
+          (exchange-point-and-mark))
+        (setq deactivate-mark nil)))))
 
 (defun acg/with-mark-active (&rest args)
   "Keep mark active after command. To be used as advice AFTER any
