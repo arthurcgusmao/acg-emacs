@@ -245,7 +245,7 @@ size/resolution, using FONT as the base font."
       (acg/set-flexible-frame-font "Menlo" frame))
      ;; Linux
      (t
-      (acg/set-flexible-frame-font "Ubuntu-Mono" frame)))
+      (acg/set-flexible-frame-font "Ubuntu Mono" frame)))
 
     ;; Emoji: 😄, 🤦, 🏴󠁧󠁢󠁳󠁣󠁴󠁿
     (set-fontset-font t 'symbol "Noto Color Emoji")
