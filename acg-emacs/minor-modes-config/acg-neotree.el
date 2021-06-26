@@ -1,6 +1,6 @@
 (use-package neotree
-  (:host github :protocol ssh
-         :repo "arthurcgusmao/emacs-neotree")
+  :straight (:host github :protocol ssh
+                   :repo "arthurcgusmao/emacs-neotree")
 
   :config
   (setq neo-window-fixed-size nil)      ; Allow resizing neotree window
