@@ -8,7 +8,9 @@
   :bind
   (:map wgrep-mode-map
         ("C-s" . wgrep-finish-edit)
-        ("C-w" . wgrep-abort-changes)))
+        ("C-w" . wgrep-abort-changes)
+        :map grep-mode-map
+        ("C-e" . wgrep-change-to-wgrep-mode)))
 
 ;; Riggrep package
 ;;  Configs adapted from https://protesilaos.com/dotemacs/
