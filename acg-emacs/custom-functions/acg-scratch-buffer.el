@@ -71,8 +71,7 @@ Version 2016-08-11"
 (push #'acg/scratch-buffer-save-backup kill-emacs-hook)
 
 ;; Keybindings
-(global-unset-key (kbd "C-n"))
-(global-set-key (kbd "C-n") 'acg/scratch-buffer-create)
+(global-set-key (kbd "C-t") 'acg/scratch-buffer-create)
 
 
 ;; Remove the default scratch buffer

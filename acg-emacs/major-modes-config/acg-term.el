@@ -79,16 +79,17 @@ clipboard."
     (vterm-insert (gui--selection-value-internal 'CLIPBOARD)))
 
   :bind
-  (:map vterm-mode-map
-        ("<tab>" . vterm-send-tab)
-        ("M-q" . nil)
-        ("C-w" . nil)
-        ("C-o" . nil)
-        ("C-S-o" . nil)
-        ("<escape>" . nil)
-        ("C-v" . acg/vterm-paste-from-clipboard)
-        ("C-S-v" . acg/vterm-paste-from-clipboard))
-  (:map vterm-copy-mode-map
-        ("C-c C-c" . vterm-copy-mode-done)))
+  (("C-c v" . vterm)
+   :map vterm-mode-map
+   ("<tab>" . vterm-send-tab)
+   ("M-q" . nil)
+   ("C-w" . nil)
+   ("C-o" . nil)
+   ("C-S-o" . nil)
+   ("<escape>" . nil)
+   ("C-v" . acg/vterm-paste-from-clipboard)
+   ("C-S-v" . acg/vterm-paste-from-clipboard)
+   :map vterm-copy-mode-map
+   ("C-c C-c" . vterm-copy-mode-done)))
 ;; Useful commands:
 ;; - C-c C-t (vterm-copy-mode) - transforms the buffer into fundamental mode; useful for copying text

@@ -219,6 +219,7 @@
 
   :bind
   ("C-l" . recenter)
+  ("C-n" . make-frame-command)
   ("C-r" . repeat)
   ("C-z" . undo)
   ("C-S-Z" . redo)
