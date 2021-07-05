@@ -97,16 +97,18 @@ user to choose a remote."
              ((string-match-p (regexp-quote "github") url) "GitHub")
              ((string-match-p (regexp-quote "gitlab") url) "GitLab")
              (t (completing-read "Choose remote hosting type:"
-                                 '("GitHub" "GitLab"))))))
+                                 '("GitHub" "GitLab")))))
+           (branch-or-hash (or (magit-get-current-branch) ; @todo: should get only remote branches!
+                               (magit-rev-hash "HEAD"))))
       ;; Adapt to GitLab's URL standard
       (when (string= remote-hosting-type "GitLab")
         (setq url (concat url "/-")))
       ;; Adapt to differences in file and directory URL paths
       (if file
-          (setq url (concat url "/blob/" (magit-get-current-branch)
+          (setq url (concat url "/blob/" branch-or-hash
                             "/" (acg/project-get-root-relative-path file)
                             (format "#L%d" (line-number-at-pos)))) ; Add current line to anchor
-        (setq url (concat url "/tree/" (magit-get-current-branch)
+        (setq url (concat url "/tree/" branch-or-hash
                           "/" (acg/project-get-root-relative-path dir))))
       ;; Perform actions
       (browse-url url)
