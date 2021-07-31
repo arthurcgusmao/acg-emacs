@@ -3,24 +3,25 @@
 (use-package scss-mode)
 (use-package rainbow-mode) ; color color strings (e.g., "#00FF00")
 
-;; Docker, Kubernetes, etc.
+;; DevOps: Docker, Kubernetes, etc.
 (use-package docker :bind ("C-c d" . docker))
 (use-package dockerfile-mode)
 (use-package kubernetes
   :commands (kubernetes-overview)
   :bind
   ("C-c k" . kubernetes-overview))
-
-;; Misc
-(use-package csv-mode)
-(use-package scala-mode)
-(use-package yaml-mode)
-
 (use-package conf-mode
   :straight nil
   :mode (("\\.ini$" . conf-windows-mode)
          ("\\.toml$" . conf-toml-mode)
          ("Pipfile$" . conf-toml-mode)))
+(use-package hcl-mode)
+(use-package terraform-mode)
+
+;; Misc
+(use-package csv-mode)
+(use-package scala-mode)
+(use-package yaml-mode)
 
 ;; Databases
 (use-package cql-mode) ; Cassandra
