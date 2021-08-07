@@ -14,6 +14,7 @@
         acg/kill-line-or-region
         acg/kill-line-or-region-backwards
         acg/kill-sexp
+        acg/kill-whole-line-or-region-content
         acg/kill-whole-line-or-region-lines
         acg/left-subword
         acg/move-beginning-of-line

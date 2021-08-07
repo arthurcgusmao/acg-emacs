@@ -1,3 +1,9 @@
+;; Tree sitter is a better alternative for parsing syntax trees
+(use-package tree-sitter)
+(use-package tree-sitter-langs)
+(use-package tree-sitter-indent)
+
+
 ;; HTML & related
 (use-package less-css-mode)
 (use-package scss-mode)
@@ -15,13 +21,16 @@
   :mode (("\\.ini$" . conf-windows-mode)
          ("\\.toml$" . conf-toml-mode)
          ("Pipfile$" . conf-toml-mode)))
+(use-package yaml-mode)
 (use-package hcl-mode)
 (use-package terraform-mode)
 
 ;; Misc
 (use-package csv-mode)
 (use-package scala-mode)
-(use-package yaml-mode)
+(use-package csharp-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode)))
 
 ;; Databases
 (use-package cql-mode) ; Cassandra
