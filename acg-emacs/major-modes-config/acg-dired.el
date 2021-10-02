@@ -3,6 +3,10 @@
   :config
   (put 'dired-find-alternate-file 'disabled nil) ;; enable disabled command
 
+  ;; When copying or moving files, automatically infer the destination
+  ;; directory if another dired window is open.
+  (setq dired-dwim-target t)
+
   (defun acg/dired-alternate-up-directory (&optional other-window)
     "Run Dired on parent directory of current directory.
 Taken from https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer"
@@ -55,6 +59,7 @@ afterwards."
    :map dired-mode-map
    ("C-o" . nil)
    ("q" . 'kill-current-buffer)
+   ;; ("q" . 'bury-buffer)
    ("<return>" . 'dired-find-alternate-file)
    ;; ("<C-return>" . 'dired-find-file)
    ("<C-return>" . 'dired-display-file)
@@ -74,3 +79,8 @@ afterwards."
 
 (use-package dired-sidebar
   :commands (dired-sidebar-toggle-sidebar))
+
+;; Dired ranger implements a "clipboard" for copying files in Dired.
+;; https://github.com/Fuco1/dired-hacks#dired-ranger
+(use-package dired-ranger
+  :after dired)
