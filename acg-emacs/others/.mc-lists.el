@@ -56,6 +56,7 @@
         sp-unwrap-sexp
         subword-left
         subword-right
+        wdired--self-insert
         web-mode-attribute-insert
         x-clipboard-yank
         yaml-electric-backspace
