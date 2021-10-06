@@ -315,6 +315,16 @@ directory."
 
 
 
+(use-package consult-dir
+  :straight (:host github :protocol ssh
+                   :repo "karthink/consult-dir")
+  :after consult
+  :bind (("C-x C-d" . consult-dir)
+         :map vertico-map
+         ("C-x C-d" . consult-dir)
+         ("C-x C-j" . consult-dir-jump-file)))
+
+
 
 ;;; `completion-at-point' packages
 
