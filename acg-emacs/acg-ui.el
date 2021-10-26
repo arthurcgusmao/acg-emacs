@@ -289,6 +289,19 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 ;; http://amitp.blogspot.com.br/2011/08/emacs-custom-mode-line.html
 ;; http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html
 
+(defface mode-line-folder-face
+  '((t (:inherit mode-line-face :foreground "#afa5c0")))
+  "Face for the directory part of the filename in the modeline.")
+
+;; (set-face-attribute 'mode-line-folder-face nil
+;;     :inherit 'mode-line-face
+;;     :foreground "#afa5c0")
+
+;; (set-face-attribute 'mode-line-folder-face nil
+;;     :inherit nil
+;;     :foreground nil)
+
+
 (use-package emacs
   :straight nil
   :config
@@ -296,29 +309,41 @@ frame if FRAME is nil, and to 1 if AMT is nil."
   (setq-default mode-line-format
                 (list
                  "%n " ; Print "Narrow" if region is narrowed
-                 ;; was this buffer modified since the last save?
-                 '(:eval (if buffer-read-only
-                             " "
-                           (if (buffer-modified-p) " 🖋 " " 💾")))
+
+                 '(:eval (if (buffer-file-name)
+                             (propertize (acg/shorten-directory default-directory 30) 'face 'mode-line-folder-face)
+                          "  "))
 
                  ;; the buffer name; the file name as a tool tip
-                 '(:eval (propertize " %b" 'face 'mode-line-emphasis))
+                 '(:eval (propertize "%b" 'face 'mode-line-emphasis))
+
+                 ;; Buffer write/modification information
+                 "  "
+                 '(:eval (if buffer-read-only
+                             (if (buffer-file-name) "🔒" " ")
+                           (if (buffer-modified-p) "🖋 " "💾")))
 
                  ;; Line & Column numbers -- Use '%02l' to set to 2 chars at least; may prevent flickering
-                 "   (%l,%c)"
+                 " (%l,%c)"
                  ;; Relative position, size of file
                  " %p" ;; % above top
                  ;; Current major mode for the buffer.
-                 "   📃 %m"
+                 ;; "   📃 %m"
+                 "   📜 %m"
 
                  ;; ;; Project indication -- Do not show for remote files
                  ;; "  "
                  ;; ;; Projectile indicator
                  ;; ;; '(:eval (format " 📁 %s" (projectile-project-name)))
-                 ;; ;; version control indicator
-                 ;; '(:eval (when (stringp vc-mode)
-	         ;;           '(" 🔀" (vc-mode vc-mode))))
 
-                 ;; list of minor modes
+                 ;; Version control indicator
+                 '(:eval (when (stringp vc-mode)
+	                   ;; '("  🔀" (vc-mode vc-mode))))
+	                   `("   🔖"
+                             " " ,(propertize (acg/last-part-of-path (vc-root-dir)) 'face 'mode-line-emphasis)
+                             " |" (vc-mode vc-mode)
+                             )))
+
+                 ;; List of minor modes
                  ;; minor-mode-alist
                  )))
