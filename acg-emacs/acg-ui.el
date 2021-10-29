@@ -232,26 +232,26 @@ size/resolution, using FONT as the base font."
   "Set my custom font configs for the frame."
   (interactive)
 
-    (cond
-     ;; Use (getenv "DISPLAY") to conditionally apply font
-     ;; configuration. Usually the DISPLAY variable only contains
-     ;; "localhost" when Forwarding X11 through an SSH connection,
-     ;; which is when we want to apply these configurations
-     ;; (because in those cases Emacs starts with a strange font).
-     ((string= "localhost" (getenv "DISPLAY")) ;; Condition based on value of DISPLAY
-      (acg/set-flexible-frame-font "Hack" frame))
-     ;; MacOS
-     ((string-equal system-type "darwin")
-      (acg/set-flexible-frame-font "Menlo" frame))
-     ;; Linux
-     (t
-      (acg/set-flexible-frame-font "Ubuntu Mono" frame)))
+  (cond
+   ;; Use (getenv "DISPLAY") to conditionally apply font
+   ;; configuration. Usually the DISPLAY variable only contains
+   ;; "localhost" when Forwarding X11 through an SSH connection,
+   ;; which is when we want to apply these configurations
+   ;; (because in those cases Emacs starts with a strange font).
+   ((string= "localhost" (getenv "DISPLAY")) ;; Condition based on value of DISPLAY
+    (acg/set-flexible-frame-font "Hack" frame))
+   ;; MacOS
+   ((string-equal system-type "darwin")
+    (acg/set-flexible-frame-font "Menlo" frame))
+   ;; Linux
+   (t
+    (acg/set-flexible-frame-font "Ubuntu Mono" frame)))
 
-    ;; Emoji: 😄, 🤦, 🏴󠁧󠁢󠁳󠁣󠁴󠁿
-    (set-fontset-font t 'symbol "Noto Color Emoji")
-    (set-fontset-font t 'symbol "Apple Color Emoji" nil 'append)
-    (set-fontset-font t 'symbol "Segoe UI Emoji" nil 'append)
-    (set-fontset-font t 'symbol "Symbola" nil 'append))
+  ;; Emoji: 😄, 🤦, 🏴󠁧󠁢󠁳󠁣󠁴󠁿
+  (set-fontset-font t 'symbol "Noto Color Emoji")
+  (set-fontset-font t 'symbol "Apple Color Emoji" nil 'append)
+  (set-fontset-font t 'symbol "Segoe UI Emoji" nil 'append)
+  (set-fontset-font t 'symbol "Symbola" nil 'append))
 
 (acg/update-frame-font (selected-frame)) ; Conditionally fontify current frame, if any
 (add-to-list 'after-make-frame-functions #'acg/update-frame-font) ; Conditionally fontify any future frames
@@ -302,6 +302,22 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 ;;     :foreground nil)
 
 
+
+(defun acg/calculate-mode-line-folder-length ()
+  "Returns a dynamically adjusted length of the file path to be
+exhibited in the mode line."
+  (let ((wd (window-width)))
+    (cond ((< wd 80) 0)
+          ((< wd 90) 5)
+          ((< wd 100) 10)
+          ((< wd 120) 15)
+          ((< wd 130) 20)
+          ((< wd 140) 35)
+          ((< wd 150) 50)
+          ((< wd 160) 60)
+          ((< wd 180) 80)
+          (t 100))))
+
 (use-package emacs
   :straight nil
   :config
@@ -311,8 +327,10 @@ frame if FRAME is nil, and to 1 if AMT is nil."
                  "%n " ; Print "Narrow" if region is narrowed
 
                  '(:eval (if (buffer-file-name)
-                             (propertize (acg/shorten-directory default-directory 30) 'face 'mode-line-folder-face)
-                          "  "))
+                             (propertize
+                              (acg/shorten-directory default-directory (acg/calculate-mode-line-folder-length))
+                              'face 'mode-line-folder-face)
+                           "  "))
 
                  ;; the buffer name; the file name as a tool tip
                  '(:eval (propertize "%b" 'face 'mode-line-emphasis))
