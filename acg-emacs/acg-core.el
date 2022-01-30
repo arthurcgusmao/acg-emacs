@@ -62,6 +62,8 @@ find executables."
 
 ;; Add local binary dirs to path
 (acg/add-to-env-path-and-exec-path "~/.local/bin")
+(when (file-directory-p "~/.opt/bin")
+  (acg/add-to-env-path-and-exec-path "~/.opt/bin"))
 (when (string-equal system-type "darwin")
   (acg/add-to-env-path-and-exec-path "~/.macports/bin"))
 
