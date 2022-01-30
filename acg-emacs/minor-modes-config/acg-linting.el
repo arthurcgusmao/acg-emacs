@@ -8,3 +8,6 @@
 (use-package flycheck-grammarly
   :config
   (setq flycheck-grammarly-check-time 0.8))
+
+
+(use-package apheleia)

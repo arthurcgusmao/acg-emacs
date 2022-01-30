@@ -50,6 +50,7 @@
         org-yank
         prelude-move-beginning-of-line
         python-indent-shift-left
+        python-indent-shift-right
         sp-backward-sexp
         sp-forward-sexp
         sp-forward-slurp-sexp
