@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: dd
+# key: dd
+# group : general
+# --
+import dask.dataframe as dd
+$0

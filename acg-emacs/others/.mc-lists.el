@@ -19,6 +19,7 @@
         acg/left-subword
         acg/move-beginning-of-line
         acg/move-beginning-of-visual-line
+        acg/newline-above
         acg/org-beginning-of-visual-line-or-indentation
         acg/org-smart-open-line-below
         acg/right-subword
