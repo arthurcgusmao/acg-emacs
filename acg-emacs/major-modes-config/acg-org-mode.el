@@ -10,6 +10,11 @@
 (setq org-startup-folded nil)
 (setq org-list-allow-alphabetical t)
 
+;; Export both source code and its results by default
+(setq org-babel-default-header-args
+      (cons '(:exports . "both")
+            (assq-delete-all :exports org-babel-default-header-args)))
+
 
 ;;; Fonts and Appearence
 
