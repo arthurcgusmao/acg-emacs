@@ -52,6 +52,28 @@ afterwards."
   ;; Group directories together
   (setq dired-listing-switches "--group-directories-first -al")
 
+  ;;; Other utility functions
+  (defun prot-dired-limit-regexp (regexp omit)
+    "Limit Dired to keep files matching REGEXP. Taken from
+https://protesilaos.com/emacs/dotemacs
+
+With optional OMIT argument as a prefix (\\[universal-argument]),
+exclude files matching REGEXP.
+
+Restore the buffer with \\<dired-mode-map>`\\[revert-buffer]'."
+    (interactive
+     (list
+      (read-regexp
+       (concat "Files "
+               (when current-prefix-arg
+                 (propertize "NOT " 'face 'warning))
+               "matching PATTERN: ")
+       nil 'prot-dired--limit-hist)
+      current-prefix-arg))
+    (dired-mark-files-regexp regexp)
+    (unless omit (dired-toggle-marks))
+    (dired-do-kill-lines)
+    (add-to-history 'prot-dired--limit-hist regexp))
 
   :bind
   (("C-x d" . dired-jump)
@@ -70,6 +92,7 @@ afterwards."
    ([C-mouse-2] . 'dired-mouse-find-file-other-window) ;; not working @todo
    ([mouse-2] . 'acg/dired-mouse-find-alternate-file)))
 
+
 (use-package dired-subtree
   :after dired
   :bind
@@ -77,8 +100,10 @@ afterwards."
    ("<tab>" . 'dired-subtree-cycle)
    ("<S-iso-lefttab>" . 'dired-subtree-remove)))
 
+
 (use-package dired-sidebar
   :commands (dired-sidebar-toggle-sidebar))
+
 
 ;; Dired ranger implements a "clipboard" for copying files in Dired.
 ;; https://github.com/Fuco1/dired-hacks#dired-ranger
