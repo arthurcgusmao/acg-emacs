@@ -31,6 +31,9 @@
 (use-package csharp-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode)))
+(use-package json-mode
+  :config
+  (setq js-indent-level 2))
 (use-package powershell)
 
 ;; Databases
