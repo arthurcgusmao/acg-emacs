@@ -81,9 +81,11 @@
         mc/mark-next-lines
         mc/mark-previous-lines
         mouse-set-region
+        recompile
         repeat
         tab-line-switch-to-next-tab
         tab-line-switch-to-prev-tab
+        undefined
         web-mode-mark-and-expand
         wgrep-finish-edit
         ))
