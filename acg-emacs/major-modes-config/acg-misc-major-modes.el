@@ -10,6 +10,7 @@
 (use-package rainbow-mode) ; color color strings (e.g., "#00FF00")
 
 ;; DevOps: Docker, Kubernetes, etc.
+(use-package bazel)
 (use-package docker :bind ("C-c d" . docker))
 (use-package dockerfile-mode)
 (use-package kubernetes
