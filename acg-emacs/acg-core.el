@@ -61,6 +61,7 @@ find executables."
   (add-to-list 'exec-path (expand-file-name path)))
 
 ;; Add local binary dirs to path
+(acg/add-to-env-path-and-exec-path "/usr/local/bin")
 (acg/add-to-env-path-and-exec-path "~/.local/bin")
 (when (file-directory-p "~/.opt/bin")
   (acg/add-to-env-path-and-exec-path "~/.opt/bin"))

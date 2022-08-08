@@ -309,8 +309,8 @@ directory."
    ("M-g g" . consult-goto-line)
    (:map minibuffer-local-map
          ("C-r" . consult-history))
-   (:map consult-isearch-map
-         ("<up>" . consult-isearch-reverse)
+   (:map consult-isearch-history-map
+         ("<up>" . consult-isearch-backward)
          ("<down>" . consult-isearch-forward))))
 
 
