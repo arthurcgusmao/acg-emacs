@@ -55,3 +55,12 @@ In MacOS, the commands executed by the applescript or the Karabiner will not hav
 ```bash
 PATH=$HOME/.opt/bin/:$PATH acg-emacs
 ```
+
+## Package dependencies
+
+Some packages require you to install binaries that would normally be available on Linux but not on MacOS:
+```bash
+brew install\
+    gls      # For Embark
+    ripgrep  # For Consult & related
+```

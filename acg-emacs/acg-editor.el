@@ -197,9 +197,9 @@
 
   ;; for MacOS
   (when (string-equal system-type "darwin")
-    (setq mac-command-modifier 'ctrl)
-    (setq mac-option-modifier 'meta)
-    (setq mac-control-modifier 'super)
+    (setq mac-command-modifier 'meta)
+    (setq mac-option-modifier 'super)
+    (setq mac-control-modifier 'ctrl)
     ;; (setq mac-function-modifier 'super)
 
     ;; Remap ctrl-tab

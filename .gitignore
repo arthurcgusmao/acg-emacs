@@ -23,6 +23,7 @@ session.*
 /straight/
 /transient/
 /url/
+/org-persist/
 
 # Misc
 .DS_Store
