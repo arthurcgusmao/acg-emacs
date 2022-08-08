@@ -284,10 +284,10 @@ directory."
                 (push 'right unread-command-events)
                 (push 'home unread-command-events)))
     ;; Call original command
-    (consult--grep
-     "rg"
-     (concat "rg --ignore-file " acg/acg-emacs-dir "others/.rgignore" " --null --line-buffered --color=ansi --max-columns=1000 --smart-case --no-heading --line-number . -e ARG OPTS")
-     (rg-project-root default-directory) initial))
+    (consult--grep "rg"
+                   #'consult--ripgrep-builder
+                   (rg-project-root default-directory)
+                   initial))
 
   ;; Preselect input
   (advice-add 'consult-line :around #'acg/with-thing-at-point)
