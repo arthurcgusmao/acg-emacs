@@ -26,6 +26,7 @@
         acg/toggle-word-case
         acg/toggle-word-separator
         acg/windows-clipboard-paste-replace-selection
+        append-or-remove-comma-to-eol
         clipboard-kill-region
         clipboard-kill-ring-save
         clipboard-paste-replace-selection
