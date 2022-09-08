@@ -6,6 +6,7 @@
 Same as in for Linux (see [./../linux/README.md](./../linux/README.md)), with the difference that dependencies have to be installed with macports or homebrew. I use macports, so I installed the dependencies below (taken from [here](https://github.com/jimeh/build-emacs-for-macos)):
 ```text
 autoconf
+automake
 coreutils
 curl
 expat
