@@ -133,6 +133,7 @@ user to choose a remote."
   :bind
   (("C-x g" . magit-status)
    ("C-M-g" . magit-status)
+   ("C-x G" . magit-dispatch)
    :map magit-status-mode-map
    ("<C-tab>" . nil)
    ("C-c <tab>" . magit-section-cycle)
@@ -171,7 +172,6 @@ user to choose a remote."
 
 ;; Provide commit message guidelines/feedback when committing;
 ;; taken from https://protesilaos.com/dotemacs
-
 (use-package git-commit
   :after magit
   :custom
@@ -216,3 +216,6 @@ user to choose a remote."
   (magit-pre-refresh . diff-hl-magit-pre-refresh) ; Magit integration
   (magit-post-refresh . diff-hl-magit-post-refresh)
   (dired-mode . diff-hl-dired-mode)) ; Enable mode on dired
+
+;; Show commit message of current line (comparable to VSCode GitLens)
+(use-package vc-msg)
