@@ -116,6 +116,18 @@ next keypress."
     (define-key kmap (kbd key) command)
     (set-transient-map kmap)))
 
+(defvar acg/with-double-keypress-timer nil
+  "Timer for identifying double keypresses.")
+
+(defmacro acg/with-double-keypress (1st-cmd 2nd-cmd &optional timer-in-ms)
+  (setq acg/with-double-keypress-timer timer-in-ms)
+  `(defun ,(intern (concat "acg/" (symbol-name 1st-cmd) "-OR-" (symbol-name 2nd-cmd))) ()
+     (interactive)
+     (if (and (eq this-command last-command)
+              (or (not acg/with-double-keypress-timer)
+                  (eq t t)))                ; TODO: Check for timer.
+         (command-execute ',2nd-cmd)
+       (command-execute ',1st-cmd))))
 
 ;;; Customize minibuffer input
 

@@ -78,6 +78,8 @@ then redisplays the buffer where the function was issued."
 
   (advice-add 'delete-frame :before #'acg/save-some-buffers)
 
+  (global-set-key (kbd "C-b") (acg/with-double-keypress switch-to-buffer vertico-next))
+
   ;; Keybindings
   :bind
   (("M-1" . other-window)
@@ -90,13 +92,15 @@ then redisplays the buffer where the function was issued."
    ("C-q" . delete-window)
 
    ;; (acg/force-global-set-key (kbd "C-w") 'acg/kill-buffer)
-   ("C-w" . acg/kill-buffer)
-   ("C-b" . switch-to-buffer)))
+   ("C-w" . acg/kill-buffer)))
 
 
 
 (use-package crux
   :bind
+  ;; TODO: Maybe try to make a feature like Cmd+Tab in which
+  ;; when keeping Cmd pressed we keep going down the list of
+  ;; buffers.
   (("M-q" . crux-switch-to-previous-buffer)))
 
 
