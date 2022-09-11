@@ -129,8 +129,8 @@ which the completion originates."
   :bind
   (:map vertico-map
         ("<S-return>" . vertico-exit-input)
-        ("<return>" . acg/vertico-smart-exit)
-        ("M-<return>" . acg/vertico-buffer-insert)
+        ("RET" . acg/vertico-smart-exit)
+        ("M-RET" . acg/vertico-buffer-insert)
         ("<backspace>" . acg/minibuffer-smart-backspace)
 
         ;; ("<C-return>" . vert) ; @todo: see how to narrow selection in vertico -- dual of ivy-restrict-to-matches

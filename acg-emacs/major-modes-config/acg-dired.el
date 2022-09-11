@@ -82,7 +82,7 @@ Restore the buffer with \\<dired-mode-map>`\\[revert-buffer]'."
    ("C-o" . nil)
    ("q" . 'kill-current-buffer)
    ;; ("q" . 'bury-buffer)
-   ("<return>" . 'dired-find-alternate-file)
+   ("RET" . 'dired-find-alternate-file)
    ;; ("<C-return>" . 'dired-find-file)
    ("<C-return>" . 'dired-display-file)
    ("<S-return>" . 'acg/dired-display-file-and-next)

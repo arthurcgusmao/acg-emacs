@@ -9,4 +9,4 @@
   (back-to-indentation))
 
 ;; keybindings
-(global-set-key (kbd "<S-return>") 'acg/newline-above)
+(global-set-key (kbd "<S-return>") 'acg/newline-above)  ;; TODO: Make it work for terminal somehow.

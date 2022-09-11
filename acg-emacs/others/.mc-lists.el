@@ -62,6 +62,7 @@
         subword-left
         subword-right
         wdired--self-insert
+        wdired-next-line
         web-mode-attribute-insert
         x-clipboard-yank
         yaml-electric-backspace

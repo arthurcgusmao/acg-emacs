@@ -155,7 +155,7 @@ user to choose a remote."
    :map magit-popup-mode-map
    ([escape] . magit-popup-quit)
    :map magit-file-section-map
-   ("<return>" . acg/magit-diff-visit-file)
+   ("RET" . acg/magit-diff-visit-file)
    ("<C-return>" . acg/magit-diff-display-file)
    ("<S-return>" . acg/magit-diff-display-file-and-next)
    ("<C-S-return>" . acg/magit-diff-display-file-and-previous))

@@ -188,8 +188,8 @@
   :config
   (acg/force-global-set-key "C-a" 'mark-whole-buffer)
 
-  ;; Rebind C-[ and then use [control-bracketleft] to rebind in other places
-  (define-key input-decode-map (kbd "C-[") [control-bracketleft])
+  ;; ;; Rebind C-[ and then use [control-bracketleft] to rebind in other places
+  ;; (define-key input-decode-map (kbd "C-[") [control-bracketleft])
 
   ;; for MS Windows only
   (if (string-equal system-type "windows-nt")
@@ -209,6 +209,13 @@
     (define-key key-translation-map [s-end] (kbd "<end>"))
     (define-key key-translation-map [s-prior] (kbd "<prior>"))
     (define-key key-translation-map [s-next] (kbd "<next>"))
+
+    ;; Map GUI keys to logical keys (that work in the terminal)
+    (define-key function-key-map [(control return)] [?\C-\r])
+
+    (define-key function-key-map [(control shift iso-lefttab)] [(control shift tab)])
+    (define-key function-key-map [(meta shift iso-lefttab)] [(meta shift tab)])
+    (define-key function-key-map [(meta control shift iso-lefttab)] [(meta control shift tab)])
     )
 
   (defun acg/widen-recenter ()

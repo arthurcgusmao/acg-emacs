@@ -83,12 +83,12 @@
             (define-key org-mode-map (kbd "C-<") 'org-shiftmetaleft)
             (define-key org-mode-map (kbd "C->") 'org-shiftmetaright)
 
-            (define-key org-mode-map (kbd "<return>") 'acg/org-return)
+            (define-key org-mode-map (kbd "RET") 'acg/org-return)
             (define-key org-mode-map (kbd "<C-return>") 'acg/org-smart-open-line-below)
             (define-key org-mode-map (kbd "<C-S-return>") 'acg/org-smart-open-line-above)
-            (define-key org-mode-map (kbd "<M-return>") 'acg/org-open-line)
+            (define-key org-mode-map (kbd "<M-RET>") 'acg/org-open-line)
             (define-key org-mode-map (kbd "<S-return>") 'acg/org-newline-above)
-            ;; (define-key org-mode-map (kbd "<M-return>") 'acg/org-meta-return-newline)
+            ;; (define-key org-mode-map (kbd "<M-RET>") 'acg/org-meta-return-newline)
             (define-key org-mode-map (kbd "C-8") 'org-insert-heading-after-current)
             (define-key org-mode-map (kbd "M-8") 'org-insert-subheading-newline)
 
@@ -321,7 +321,7 @@ active."
 ;;   (interactive)
 ;;   (call-rebinding-org-blank-behaviour 'org-insert-todo-heading-respect-content))
 
-;; (define-key org-mode-map (kbd "M-<return>") 'smart-org-meta-return-dwim)
+;; (define-key org-mode-map (kbd "M-RET") 'smart-org-meta-return-dwim)
 ;; (define-key org-mode-map (kbd "M-S-<return>") 'smart-org-insert-todo-heading-dwim)
 ;; (define-key org-mode-map (kbd "C-<return>") 'smart-org-insert-heading-respent-content-dwim)
 ;; (define-key org-mode-map (kbd "C-S-<return>") 'smart-org-insert-todo-heading-respect-content-dwim)

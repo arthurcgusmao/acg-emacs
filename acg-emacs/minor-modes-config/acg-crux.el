@@ -46,9 +46,13 @@ does not indent according to
     (interactive)
     (crux-smart-open-line-above))
 
+  (defun acg/rename-this-file ()
+    (interactive)
+    (crux-rename-buffer-and-file))
+
   :bind
   (("<C-return>" . acg/smart-open-line-below)
    ("<C-S-return>" . acg/smart-open-line-above)
-   ;; ("<M-return>" . indent-new-comment-line)
-   ("<M-return>" . acg/open-line)
+   ;; ("<M-RET>" . indent-new-comment-line)
+   ("<M-RET>" . acg/open-line)
    ("C-j" . crux-top-join-line)))
