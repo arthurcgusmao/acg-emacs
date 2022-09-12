@@ -3,33 +3,20 @@
 
 ## Emacs installation
 
-Same as in for Linux (see [./../linux/README.md](./../linux/README.md)), with the difference that dependencies have to be installed with macports or homebrew. I use macports, so I installed the dependencies below (taken from [here](https://github.com/jimeh/build-emacs-for-macos)):
-```text
-autoconf
-automake
-coreutils
-curl
-expat
-gcc
-gmp
-gnu-sed
-gnutls
-jansson
-libffi
-libgccjit
-libiconv
-librsvg
-libtasn1
-libunistring
-libxml2
-little-cms2
-mailutils
-make
-ncurses
-nettle
-pkg-config
-texinfo
-zlib
+Same as in for Linux (see [./../linux/README.md](./../linux/README.md)), with the difference that dependencies have to be installed with macports or homebrew. I use homebrew, so I installed the dependencies below (adapted from [here](https://github.com/jimeh/build-emacs-for-macos)):
+```bash
+brew install autoconf automake coreutils curl expat gcc gmp gnu-sed gnutls jansson libffi libgccjit libiconv librsvg libtasn1 libunistring libxml2 little-cms2 mailutils make ncurses nettle pkg-config texinfo zlib
+```
+
+Additionally, install Xcode via the App Store, open the app, accept the license, and run:
+```bash
+sudo xcode-select --install
+```
+
+Then, for the `./configure` step, I used:
+```bash
+./autogen.sh
+./configure --with-xml2 --with-rsvg --with-modules --with-mailutils --with-dbus --with-debug --with-json --with-no-frame-refocus --with-xwidgets --with-cairo --with-native-compilation
 ```
 
 After running `make install`, the output will be placed on a `./nextstep` directory. Move or copy it to the `~/Applications` dir:
