@@ -46,6 +46,7 @@
         markdown-outdent-or-delete
         mc/mark-all-in-region
         my-super-keyboard-quit
+        next-error-no-select
         org-end-of-line
         org-force-self-insert
         org-self-insert-command
