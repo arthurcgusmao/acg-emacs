@@ -127,7 +127,9 @@
   (setq recentf-save-file (concat acg/history-dir "recentf"))
   (setq recentf-max-saved-items 300)
   (setq recentf-max-menu-items 10)
-  :hook ((after-init . recentf-mode)))
+  (run-at-time (* 10 60) (* 10 60) 'recentf-save-list)
+  (recentf-mode 1))
+
 
 ;; Remember minibuffer history for better suggestions
 (use-package savehist
