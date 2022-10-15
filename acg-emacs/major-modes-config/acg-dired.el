@@ -3,6 +3,8 @@
   :config
   (put 'dired-find-alternate-file 'disabled nil) ;; enable disabled command
 
+  (add-hook 'dired-mode-hook #'dired-hide-details-mode)
+
   ;; When copying or moving files, automatically infer the destination
   ;; directory if another dired window is open.
   (setq dired-dwim-target t)
@@ -95,6 +97,8 @@ Restore the buffer with \\<dired-mode-map>`\\[revert-buffer]'."
 
 (use-package dired-subtree
   :after dired
+  :config
+  (setq dired-subtree-line-prefix "    ")
   :bind
   (:map dired-mode-map
    ("<tab>" . 'dired-subtree-cycle)
