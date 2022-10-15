@@ -148,6 +148,12 @@ where code is and sending code to be evaluated in the REPL."
 ;; Remove prefix from overlay
 (setq jupyter-eval-overlay-prefix nil)
 
+;; Avoid y-or-n-p questions when killing REPL buffers
+(defadvice jupyter-repl-kill-buffer-query-function (around auto-confirm compile activate)
+  (cl-letf (((symbol-function 'yes-or-no-p) (lambda (&rest args) t))
+            ((symbol-function 'y-or-n-p) (lambda (&rest args) t)))
+    ad-do-it))
+
 
 ;; Start REPL at different paths
 
@@ -156,7 +162,7 @@ where code is and sending code to be evaluated in the REPL."
 Prompts for a directory if not in project."
   (interactive)
   (let ((default-directory
-          (or (cdr (project-current nil))
+          (or (project-root (project-current nil))
               (read-directory-name "Not in project, choose dir: "
                                    default-directory nil t))))
     (call-interactively 'jupyter-run-repl)))
