@@ -66,7 +66,8 @@ find executables."
 (when (file-directory-p "~/.opt/bin")
   (acg/add-to-env-path-and-exec-path "~/.opt/bin"))
 (when (string-equal system-type "darwin")
-  (acg/add-to-env-path-and-exec-path "~/.macports/bin"))
+  (acg/add-to-env-path-and-exec-path "~/.macports/bin")
+  (acg/add-to-env-path-and-exec-path "/opt/homebrew/bin"))
 
 
 ;; Removing unwanted keybindings from local modes

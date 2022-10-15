@@ -15,8 +15,9 @@ sudo xcode-select --install
 
 Then, for the `./configure` step, I used:
 ```bash
-./autogen.sh
-./configure --with-xml2 --with-rsvg --with-modules --with-mailutils --with-dbus --with-debug --with-json --with-no-frame-refocus --with-xwidgets --with-cairo --with-native-compilation
+# Use MacOS's default C++ compiler (clang); otherwise, `AppKit.h` was not being found:
+export CC=clang
+./autogen.sh && ./configure --with-xml2 --with-rsvg --with-modules --with-mailutils --with-dbus --with-json --with-xwidgets --with-cairo --with-native-compilation
 ```
 
 After running `make install`, the output will be placed on a `./nextstep` directory. Move or copy it to the `~/Applications` dir:
