@@ -4,7 +4,8 @@
     "Alternative version of `clipboard-yank' for MacOS since the
 original mixes the clipboard content with the kill ring."
     (interactive)
-    (insert (shell-command-to-string "pbpaste"))))
+    (insert (acg/with-default-directory-in-client-machine
+             (lambda () (shell-command-to-string "pbpaste"))))))
 
 
 (defun acg/clipboard-paste-replace-selection-indent ()
