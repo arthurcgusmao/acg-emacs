@@ -55,66 +55,66 @@
           (lambda ()
             (define-key org-mode-map (kbd "<C-tab>") nil)
             (define-key org-mode-map (kbd "<S-iso-lefttab>") 'org-cycle)
-            (define-key org-mode-map (kbd "C-a") nil)
+            (define-key org-mode-map (kbd "M-a") nil)
             (define-key org-mode-map (kbd "C-e") nil)
-            (define-key org-mode-map (kbd "M-e") nil)
-            (define-key org-mode-map (kbd "C-j") nil)
-            (define-key org-mode-map (kbd "C-k") nil)
-            (define-key org-mode-map (kbd "C-y") nil)
-            (define-key org-mode-map (kbd "C-t") nil)
+            (define-key org-mode-map (kbd "M-e") 'org-edit-special)
+            (define-key org-mode-map (kbd "M-j") nil)
+            (define-key org-mode-map (kbd "M-k") 'execute-extended-command)
+            (define-key org-mode-map (kbd "M-K") 'org-insert-link)
+            (define-key org-mode-map (kbd "M-y") nil)
+            (define-key org-mode-map (kbd "M-t") nil)
 
-            (define-key org-mode-map (kbd "<S-right>") nil)
             (define-key org-mode-map (kbd "<S-left>") nil)
+            (define-key org-mode-map (kbd "<S-right>") nil)
             (define-key org-mode-map (kbd "<S-up>") nil)
             (define-key org-mode-map (kbd "<S-down>") nil)
-            (define-key org-mode-map (kbd "<C-S-right>") nil)
-            (define-key org-mode-map (kbd "<C-S-left>") nil)
-            (define-key org-mode-map [remap backward-paragraph] nil)
-            (define-key org-mode-map [remap forward-paragraph] nil)
-            (define-key org-mode-map (kbd "<C-S-up>") nil)
-            (define-key org-mode-map (kbd "<C-S-down>") nil)
-            (define-key org-mode-map (kbd "<M-S-end>") 'show-subtree)
-            (define-key org-mode-map (kbd "<M-S-home>") 'hide-subtree)
-            (define-key org-mode-map (kbd "<M-end>") 'org-cycle)
-            (define-key org-mode-map (kbd "<home>") 'acg/org-beginning-of-visual-line-or-indentation)
-            (define-key org-mode-map (kbd "<M-home>") 'org-cycle-backwards)
-            (define-key org-mode-map (kbd "<C-M-end>") 'org-global-cycle)
-            (define-key org-mode-map (kbd "<C-M-home>") 'acg/org-global-cycle-backwards)
-            (define-key org-mode-map (kbd "C-<") 'org-shiftmetaleft)
-            (define-key org-mode-map (kbd "C->") 'org-shiftmetaright)
-
-            (define-key org-mode-map (kbd "RET") 'acg/org-return)
-            (define-key org-mode-map (kbd "<C-return>") 'acg/org-smart-open-line-below)
-            (define-key org-mode-map (kbd "<C-S-return>") 'acg/org-smart-open-line-above)
-            (define-key org-mode-map (kbd "<M-RET>") 'acg/org-open-line)
-            (define-key org-mode-map (kbd "<S-return>") 'acg/org-newline-above)
-            ;; (define-key org-mode-map (kbd "<M-RET>") 'acg/org-meta-return-newline)
-            (define-key org-mode-map (kbd "C-8") 'org-insert-heading-after-current)
-            (define-key org-mode-map (kbd "M-8") 'org-insert-subheading-newline)
+            (define-key org-mode-map (kbd "<M-left>") nil)
+            (define-key org-mode-map (kbd "<M-right>") nil)
+            (define-key org-mode-map (kbd "<M-up>") 'org-backward-paragraph)
+            (define-key org-mode-map (kbd "<M-down>") 'org-forward-paragraph)
+            (define-key org-mode-map (kbd "<C-left>") nil)
+            (define-key org-mode-map (kbd "<C-right>") nil)
+            (define-key org-mode-map (kbd "<C-up>") 'acg/org-metaup)
+            (define-key org-mode-map (kbd "<C-down>") 'acg/org-metadown)
+            ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<C-left>") 'org-cycle-backwards)
+            ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<C-right>") 'org-cycle)
 
             (define-key org-mode-map (kbd "<M-S-right>") nil)
             (define-key org-mode-map (kbd "<M-S-left>") nil)
             (define-key org-mode-map (kbd "<M-S-up>") nil)
             (define-key org-mode-map (kbd "<M-S-down>") nil)
+            (define-key org-mode-map (kbd "<C-S-end>") 'show-subtree)
+            (define-key org-mode-map (kbd "<C-S-home>") 'hide-subtree)
+            (define-key org-mode-map (kbd "<C-end>") 'org-cycle)
+            (define-key org-mode-map (kbd "<home>") 'acg/org-beginning-of-visual-line-or-indentation)
+            (define-key org-mode-map (kbd "<C-home>") 'org-cycle-backwards)
+            (define-key org-mode-map (kbd "<C-M-end>") 'org-global-cycle)
+            (define-key org-mode-map (kbd "<C-M-home>") 'acg/org-global-cycle-backwards)
+            (define-key org-mode-map (kbd "M-<") 'org-shiftmetaleft)
+            (define-key org-mode-map (kbd "M->") 'org-shiftmetaright)
 
-            (define-key org-mode-map (kbd "<M-up>") 'acg/org-metaup)
-            (define-key org-mode-map (kbd "<M-down>") 'acg/org-metadown)
-            ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-left>") 'org-cycle-backwards)
-            ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<M-right>") 'org-cycle)
-            (define-key org-mode-map (kbd "<M-left>") nil)
-            (define-key org-mode-map (kbd "<M-right>") nil)
+            (define-key org-mode-map (kbd "RET") 'acg/org-return)
+            (define-key org-mode-map (kbd "<M-return>") 'acg/org-smart-open-line-below)
+            (define-key org-mode-map (kbd "<M-S-return>") 'acg/org-smart-open-line-above)
+            (define-key org-mode-map (kbd "<C-RET>") 'acg/org-open-line)
+            (define-key org-mode-map (kbd "<S-return>") 'acg/org-newline-above)
+            ;; (define-key org-mode-map (kbd "<M-RET>") 'acg/org-meta-return-newline)
+            (define-key org-mode-map (kbd "M-8") 'org-insert-heading-after-current)
+            (define-key org-mode-map (kbd "C-8") 'org-insert-subheading-newline)
+
+            (define-key org-mode-map (kbd "<C-S-left>") nil)
+            (define-key org-mode-map (kbd "<C-S-up>") nil)
+            (define-key org-mode-map (kbd "<C-S-down>") nil)
+
 
             (define-key org-mode-map (kbd "<f5>") (lambda () (interactive) (org-preview-latex-fragment 16)))
             (define-key org-mode-map (kbd "<f6>") 'org-preview-latex-fragment)
             (define-key org-mode-map (kbd "<f9>") 'org-latex-export-to-pdf)
 
-            (define-key org-mode-map (kbd "C-k") 'org-insert-link)
-            (define-key org-mode-map (kbd "C-e") 'org-edit-special)
-
             ;; Org src map
-            (define-key org-src-mode-map (kbd "C-e") 'org-edit-src-exit)
-            (define-key org-src-mode-map (kbd "C-s") 'acg/org-edit-src-save-exit)
-            (define-key org-src-mode-map (kbd "C-w") 'acg/org-edit-src-confirm-abort)
+            (define-key org-src-mode-map (kbd "M-e") 'org-edit-src-exit)
+            (define-key org-src-mode-map (kbd "M-s") 'acg/org-edit-src-save-exit)
+            (define-key org-src-mode-map (kbd "M-w") 'acg/org-edit-src-confirm-abort)
             ))
 
 
@@ -277,6 +277,18 @@ active."
              "Abort changes to this Org Src code block?"))
     (org-edit-src-abort)))
 
+;; TODO: Make a macro that automatically creates the functions below.
+
+(defun acg/org-forward-paragraph ()
+  "Circumvent Org mode's overriding of `forward-paragraph'."
+  (interactive)
+  (org-forward-paragraph))
+
+(defun acg/org-backward-paragraph ()
+  "Circumvent Org mode's overriding of `backward-paragraph'."
+  (interactive)
+  (org-backward-paragraph))
+
 
 ;;; Indentation
 
@@ -285,7 +297,7 @@ active."
  'org-mode-hook
  (lambda () (setq acg/electric-indent-newline-as-previous-if-blank t)))
 
-;; Make C-> and C-< operate on whole region lines
+;; Make M-> and M-< operate on whole region lines
 (advice-add 'org-shiftmetaright :around #'acg/with-expanded-region-to-whole-lines-noargs)
 (advice-add 'org-shiftmetaleft :around #'acg/with-expanded-region-to-whole-lines-noargs)
 
@@ -321,10 +333,10 @@ active."
 ;;   (interactive)
 ;;   (call-rebinding-org-blank-behaviour 'org-insert-todo-heading-respect-content))
 
-;; (define-key org-mode-map (kbd "M-RET") 'smart-org-meta-return-dwim)
-;; (define-key org-mode-map (kbd "M-S-<return>") 'smart-org-insert-todo-heading-dwim)
-;; (define-key org-mode-map (kbd "C-<return>") 'smart-org-insert-heading-respent-content-dwim)
-;; (define-key org-mode-map (kbd "C-S-<return>") 'smart-org-insert-todo-heading-respect-content-dwim)
+;; (define-key org-mode-map (kbd "C-RET") 'smart-org-meta-return-dwim)
+;; (define-key org-mode-map (kbd "C-S-<return>") 'smart-org-insert-todo-heading-dwim)
+;; (define-key org-mode-map (kbd "M-<return>") 'smart-org-insert-heading-respent-content-dwim)
+;; (define-key org-mode-map (kbd "M-S-<return>") 'smart-org-insert-todo-heading-respect-content-dwim)
 
 
 ;; crazyly trying to fix the subtree moving behavior

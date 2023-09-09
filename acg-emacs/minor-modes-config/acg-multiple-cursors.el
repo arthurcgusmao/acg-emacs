@@ -15,11 +15,11 @@
    ("C-c m u p" . mc/mark-previous-like-this)
    ("C-c m u n" . mc/mark-next-like-this)
 
-   ("C-d" . mc/mark-next-like-this)
-   ("C-S-d" . mc/mark-all-like-this)
-   ("<M-S-up>" . mc/mark-previous-lines)
-   ("<M-S-down>" . mc/mark-next-lines)
+   ("M-d" . mc/mark-next-like-this)
+   ("M-D" . mc/mark-all-like-this)
+   ("<C-S-up>" . mc/mark-previous-lines)
+   ("<C-S-down>" . mc/mark-next-lines)
 
-   ("<C-down-mouse-1>" . mc/add-cursor-on-click)
+   ("<M-down-mouse-1>" . mc/add-cursor-on-click)
    :map mc/keymap
    ("<escape>" . mc/keyboard-quit)))

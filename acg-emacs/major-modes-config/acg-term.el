@@ -31,7 +31,7 @@
         ("C-c C-e" . term-send-esc)
         ("C-p" . previous-line)
         ("C-n" . next-line)
-        ("C-s" . isearch-forward)
+        ("M-s" . isearch-forward)
         ("C-r" . isearch-backward)
         ;; ("C-m" . term-send-return)
         ;; ("C-y" . term-paste)

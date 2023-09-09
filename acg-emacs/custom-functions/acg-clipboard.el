@@ -68,8 +68,8 @@ whitespace)"
 
 
 ;;keybindings
-(global-set-key (kbd "C-S-C") 'acg/clipboard-kill-ring-save)
-(global-set-key (kbd "C-S-X") 'acg/clipboard-kill-region-or-line)
-(global-set-key (kbd "C-S-V") 'acg/clipboard-paste-replace-selection)
+(global-set-key (kbd "M-c") 'acg/clipboard-kill-ring-save)
+(global-set-key (kbd "M-x") 'acg/clipboard-kill-region-or-line)
+(global-set-key (kbd "M-v") 'acg/clipboard-paste-replace-selection)
 (global-set-key (kbd "C-v") 'acg/clipboard-paste-replace-selection)
 (global-set-key (kbd "<S-insert>") 'acg/clipboard-paste-replace-selection) ;; compatibility with CopyQ (OS clipboard history software)

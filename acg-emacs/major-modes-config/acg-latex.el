@@ -1,5 +1,5 @@
 (defun acg/latex-initialization ()
-  (define-key latex-mode-map (kbd "C-j") nil)
+  (define-key latex-mode-map (kbd "M-j") nil)
   (define-key latex-mode-map (kbd "C-c C-j") 'tex-terminate-paragraph)
   (define-key latex-mode-map (kbd "<C-return>") nil)
   (define-key latex-mode-map (kbd "C-c <C-return>") 'tex-feed-input)

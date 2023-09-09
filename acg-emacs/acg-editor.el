@@ -188,7 +188,7 @@
 (use-package emacs
   :straight nil
   :config
-  (acg/force-global-set-key "C-a" 'mark-whole-buffer)
+  (acg/force-global-set-key "M-a" 'mark-whole-buffer)
 
   ;; ;; Rebind C-[ and then use [control-bracketleft] to rebind in other places
   ;; (define-key input-decode-map (kbd "C-[") [control-bracketleft])
@@ -204,20 +204,20 @@
     (setq mac-control-modifier 'ctrl)
     ;; (setq mac-function-modifier 'super)
 
-    ;; Remap ctrl-tab
-    (define-key key-translation-map [s-tab] (kbd "<C-tab>"))
-    (define-key key-translation-map [S-s-tab] (kbd "<C-S-tab>"))
-    (define-key key-translation-map [s-home] (kbd "<home>"))
-    (define-key key-translation-map [s-end] (kbd "<end>"))
-    (define-key key-translation-map [s-prior] (kbd "<prior>"))
-    (define-key key-translation-map [s-next] (kbd "<next>"))
+    ;; ;; Remap ctrl-tab
+    ;; (define-key key-translation-map [s-tab] (kbd "<C-tab>"))
+    ;; (define-key key-translation-map [S-s-tab] (kbd "<C-S-tab>"))
+    ;; (define-key key-translation-map [s-home] (kbd "<home>"))
+    ;; (define-key key-translation-map [s-end] (kbd "<end>"))
+    ;; (define-key key-translation-map [s-prior] (kbd "<prior>"))
+    ;; (define-key key-translation-map [s-next] (kbd "<next>"))
 
     ;; Map GUI keys to logical keys (that work in the terminal)
-    (define-key function-key-map [(control return)] [?\C-\r])
+    (define-key function-key-map [(meta return)] [?\M-\r])
 
-    (define-key function-key-map [(control shift iso-lefttab)] [(control shift tab)])
-    (define-key function-key-map [(meta shift iso-lefttab)] [(meta shift tab)])
-    (define-key function-key-map [(meta control shift iso-lefttab)] [(meta control shift tab)])
+    ;; (define-key function-key-map [(control shift iso-lefttab)] [(control shift tab)])
+    ;; (define-key function-key-map [(meta shift iso-lefttab)] [(meta shift tab)])
+    ;; (define-key function-key-map [(meta control shift iso-lefttab)] [(meta control shift tab)])
     )
 
   (defun acg/widen-recenter ()
@@ -227,13 +227,17 @@
     (recenter))
 
   :bind
-  ("C-l" . recenter)
-  ("C-n" . make-frame-command)
-  ("C-r" . repeat)
-  ("C-z" . undo)
-  ("C-S-Z" . redo)
-  ("C-S-SPC" . cycle-spacing)
-  ("C-S-J" . join-line)
+  ("C-s" . nil)
+  ("M-k" . execute-extended-command)
+  ("M-<up>" . backward-paragraph)
+  ("M-<down>" . forward-paragraph)
+  ("M-l" . recenter)
+  ("M-n" . make-frame-command)
+  ("M-r" . repeat)
+  ("M-z" . undo)
+  ("M-Z" . redo)
+  ("<M-S-SPC>" . cycle-spacing)
+  ("M-J" . join-line)
   ("C-x n w" . acg/widen-recenter)
   ("<end>" . move-end-of-line)
   )

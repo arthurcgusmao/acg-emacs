@@ -34,7 +34,7 @@ line afterwards."
   :bind
   (:map occur-mode-map
         ("d" . acg/occur-kill-line)
-        ("<C-return>" . occur-mode-display-occurrence)
+        ("<M-return>" . occur-mode-display-occurrence)
         ("<S-return>" . acg/occur-mode-display-occurrence-and-next)
-        ("<C-S-return>" . acg/occur-mode-display-occurrence-and-previous)
-        ("C-o" . nil)))
+        ("<M-S-return>" . acg/occur-mode-display-occurrence-and-previous)
+        ("M-o" . nil)))

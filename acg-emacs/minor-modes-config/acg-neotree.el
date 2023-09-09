@@ -8,5 +8,5 @@
   (setq neo-smart-open t)               ; Automatically find current file when showing neotree
 
   :bind
-  ("M-d" . neotree-show)
-  ("M-D" . neotree-hide))
+  ("C-d" . neotree-show)
+  ("C-D" . neotree-hide))

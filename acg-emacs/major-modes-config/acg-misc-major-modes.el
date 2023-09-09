@@ -65,8 +65,8 @@
 
   :bind
   (:map markdown-mode-map
-        ("C-k" . 'markdown-insert-link)
-        ("C-e" . 'markdown-edit-code-block))
+        ("M-k" . 'markdown-insert-link)
+        ("M-e" . 'markdown-edit-code-block))
   :hook
   (markdown-mode . acg/markdown-setup))
 
@@ -90,9 +90,9 @@
   :bind
   (:map edit-indirect-mode-map
         ("C-c C-c" . nil)
-        ("C-e" . edit-indirect-commit)
-        ("C-s" . acg/edit-indirect-save-commit)
-        ("C-w" . acg/edit-indirect-abort-confirm)))
+        ("M-e" . edit-indirect-commit)
+        ("M-s" . acg/edit-indirect-save-commit)
+        ("M-w" . acg/edit-indirect-abort-confirm)))
 
 
 (use-package ttl-mode

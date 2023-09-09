@@ -3,4 +3,4 @@
   :config
   :bind
   (:map gnus-group-mode-map
-        ("C-w" . nil)))
+        ("M-w" . nil)))

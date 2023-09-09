@@ -66,12 +66,12 @@ Version 2016-08-11"
 ;; Configuring and initializing
 
 ;; Run query before killing if buffer is acg/scratch-buffer
-(add-to-list 'kill-buffer-query-functions 'acg/scratch-buffer-kill-query-function)
+;; (add-to-list 'kill-buffer-query-functions 'acg/scratch-buffer-kill-query-function)
 ;; Adds the hook to be run whenever emacs is killed
 (push #'acg/scratch-buffer-save-backup kill-emacs-hook)
 
 ;; Keybindings
-(global-set-key (kbd "C-t") 'acg/scratch-buffer-create)
+(global-set-key (kbd "M-t") 'acg/scratch-buffer-create)
 
 
 ;; Remove the default scratch buffer

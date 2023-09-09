@@ -15,8 +15,8 @@
 (use-package bicycle
   :after outline
   :bind (:map outline-minor-mode-map
-              ("M-a" . bicycle-cycle)
-              ("M-A" . bicycle-cycle-global)))
+              ("C-a" . bicycle-cycle)
+              ("C-A" . bicycle-cycle-global)))
 
 (use-package outline-minor-faces
   :after outline

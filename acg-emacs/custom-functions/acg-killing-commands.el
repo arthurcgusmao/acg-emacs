@@ -89,17 +89,17 @@ active."
 ;;     (looking-at "[[:space:]]*$")))
 
 ;; bindings
-(acg/force-global-set-key "<C-backspace>" 'acg/backward-kill-word)
+(acg/force-global-set-key "<M-backspace>" 'acg/backward-kill-word)
 (global-set-key (kbd "<s-backspace>") (acg/with-subword-mode #'acg/backward-kill-word))
-(acg/force-global-set-key "<M-backspace>" 'acg/backward-kill-sexp)
+(acg/force-global-set-key "<C-backspace>" 'acg/backward-kill-sexp)
 
-(acg/force-global-set-key "<M-delete>" 'acg/kill-sexp)
+(acg/force-global-set-key "<C-delete>" 'acg/kill-sexp)
 (acg/force-global-set-key "<s-delete>" (acg/with-subword-mode #'kill-word))
 (acg/force-global-set-key "s-<kp-delete>" (acg/with-subword-mode #'kill-word)) ; For MacOS
-(global-set-key (kbd "<M-S-delete>") 'acg/kill-whole-line-or-region-lines-and-move-up)
+(global-set-key (kbd "<C-S-delete>") 'acg/kill-whole-line-or-region-lines-and-move-up)
 
-(acg/force-global-set-key "<C-S-backspace>" 'acg/kill-line-or-region-backwards)
-(acg/force-global-set-key "<C-S-delete>" 'acg/kill-line-or-region)
+(acg/force-global-set-key "<M-S-backspace>" 'acg/kill-line-or-region-backwards)
+(acg/force-global-set-key "<M-S-delete>" 'acg/kill-line-or-region)
 
 (global-set-key (kbd "<S-delete>") 'acg/kill-whole-line-or-region-lines)
 (acg/force-global-set-key "<S-backspace>" 'acg/kill-whole-line-or-region-content)

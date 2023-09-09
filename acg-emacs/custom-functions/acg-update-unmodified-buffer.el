@@ -1,4 +1,6 @@
 (use-package unmodified-buffer
   :straight (:host github :protocol ssh
                    :repo "arthurcgusmao/unmodified-buffer")
-  :hook (after-init . unmodified-buffer-global-mode))
+  :config
+  (setq unmodified-buffer-ignore-remote t)
+  (unmodified-buffer-global-mode 1))

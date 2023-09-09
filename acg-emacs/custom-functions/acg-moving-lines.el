@@ -56,5 +56,5 @@
   (acg/move-lines (or n 1)))
 
 ;; binding
-(global-set-key (kbd "<M-up>") 'acg/move-lines-up)
-(global-set-key (kbd "<M-down>") 'acg/move-lines-down)
+(global-set-key (kbd "<s-up>") 'acg/move-lines-up)
+(global-set-key (kbd "<s-down>") 'acg/move-lines-down)

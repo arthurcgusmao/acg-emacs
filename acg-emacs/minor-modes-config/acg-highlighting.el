@@ -12,4 +12,4 @@
   (setq goggles-pulse-iterations 10)
   (setq goggles-pulse-delay 0.03)
   (setq goggles-pulse t) ;; keep highlighted or just pulse highlight
-  (goggles-mode +1))
+  (goggles-mode 1))

@@ -81,17 +81,17 @@ Restore the buffer with \\<dired-mode-map>`\\[revert-buffer]'."
   (("C-x d" . dired-jump)
    ("C-M-d" . dired-jump)
    :map dired-mode-map
-   ("C-o" . nil)
+   ("M-o" . nil)
    ("q" . 'kill-current-buffer)
    ;; ("q" . 'bury-buffer)
    ("RET" . 'dired-find-alternate-file)
-   ;; ("<C-return>" . 'dired-find-file)
-   ("<C-return>" . 'dired-display-file)
+   ;; ("<M-return>" . 'dired-find-file)
+   ("<M-return>" . 'dired-display-file)
    ("<S-return>" . 'acg/dired-display-file-and-next)
-   ("<C-S-return>" . 'acg/dired-display-file-and-previous)
+   ("<M-S-return>" . 'acg/dired-display-file-and-previous)
    ("<backspace>" . 'acg/dired-alternate-up-directory)
-   ("<C-backspace>" . 'dired-up-directory)
-   ([C-mouse-2] . 'dired-mouse-find-file-other-window) ;; not working @todo
+   ("<M-backspace>" . 'dired-up-directory)
+   ([M-mouse-2] . 'dired-mouse-find-file-other-window) ;; not working @todo
    ([mouse-2] . 'acg/dired-mouse-find-alternate-file)))
 
 

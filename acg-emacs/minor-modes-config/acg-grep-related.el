@@ -7,8 +7,8 @@
   (setq wgrep-change-readonly-file t)
   :bind
   (:map wgrep-mode-map
-        ("C-s" . wgrep-finish-edit)
-        ("C-w" . wgrep-abort-changes)
+        ("M-s" . wgrep-finish-edit)
+        ("M-w" . wgrep-abort-changes)
         :map grep-mode-map
         ("C-e" . wgrep-change-to-wgrep-mode)))
 
@@ -44,11 +44,11 @@ This function is meant to be mapped to a key in `rg-mode-map'."
     (let ((pattern (car rg-pattern-history)))
       (rg-save-search-as-name (concat "«" pattern "»"))))
 
-  :bind (("M-s g" . prot/grep-vc-or-dir)
+  :bind (("C-s g" . prot/grep-vc-or-dir)
          :map rg-mode-map
          ("s" . prot/rg-save-search-as-name)
-         ;; ("C-n" . next-line)
-         ;; ("C-p" . previous-line)
-         ;; ("M-n" . rg-next-file)
-         ;; ("M-p" . rg-prev-file)
+         ;; ("M-n" . next-line)
+         ;; ("M-p" . previous-line)
+         ;; ("C-n" . rg-next-file)
+         ;; ("C-p" . rg-prev-file)
          ))

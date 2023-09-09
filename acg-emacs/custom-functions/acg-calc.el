@@ -10,7 +10,7 @@
            (buffer-substring (region-beginning) (region-end))))
       (delete-region (region-beginning) (region-end))
       (insert (calc-eval selected-text))
-      (define-key calc-mode-map (kbd "C-w") nil)))
+      (define-key calc-mode-map (kbd "M-w") nil)))
 
   (defun acg/calc-paste-and-eval ()
     "Evaluates expression in the kill-ring and pastes the result"

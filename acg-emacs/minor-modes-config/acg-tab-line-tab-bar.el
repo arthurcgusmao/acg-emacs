@@ -117,13 +117,10 @@ Exhibits recursive or loop-like behavior when POS is < 0 or
   ;; TODO: modify <M-q> to operate only on tabs when tab-line is active
 
   :bind
-  (("<C-tab>" . tab-line-switch-to-next-tab)
-   ("<C-S-iso-lefttab>" . tab-line-switch-to-prev-tab) ;; for Linux
-   ("<C-S-tab>" . tab-line-switch-to-prev-tab) ;; for Windows
-   ("<C-next>" . tab-line-switch-to-next-tab)
-   ("<C-prior>" . tab-line-switch-to-prev-tab)
-   ;; Key combos "C-S-PgUp" and "C-S-PgDn" move the current tab to the left and to the right.
-   ("C-S-<prior>" . tabbar-move-current-tab-one-place-left)
-   ("C-S-<next>" . tabbar-move-current-tab-one-place-right))
+  (("M-3" . tab-line-switch-to-next-tab)
+   ("M-2" . tab-line-switch-to-prev-tab)
+   ;; Key combos "M-S-PgUp" and "M-S-PgDn" move the current tab to the left and to the right.
+   ("M-@" . tabbar-move-current-tab-one-place-left)
+   ("M-#" . tabbar-move-current-tab-one-place-right))
   :hook
   ((after-init . global-tab-line-mode)))

@@ -15,7 +15,7 @@
   :straight nil
   :bind
   (:map bibtex-mode-map
-        ("C-j" . nil)))
+        ("M-j" . nil)))
 
 (use-package ivy-bibtex
   :after ivy bibtex
@@ -36,8 +36,8 @@
         ("<S-up>" . nil)                ; Previously org-ref-sort-citation-link
         ("<S-right>" . nil) ; Previously (lambda nil (interactive) (org-ref-swap-citation-link 1)))
         ("<S-left>" . nil) ; Previously (lambda nil (interactive) (org-ref-swap-citation-link -1)))
-        ("<C-right>" . nil)
-        ("<C-left>" . nil)
+        ("<M-right>" . nil)
+        ("<M-left>" . nil)
         ("<C-M-right>" . org-ref-next-key)
         ("<C-M-left>" . org-ref-previous-key)))
 

@@ -78,7 +78,7 @@ then redisplays the buffer where the function was issued."
 
   (advice-add 'delete-frame :before #'acg/save-some-buffers)
 
-  (global-set-key (kbd "C-b") (acg/with-double-keypress switch-to-buffer vertico-next))
+  (global-set-key (kbd "M-b") (acg/with-double-keypress switch-to-buffer vertico-next))
 
   ;; Keybindings
   :bind
@@ -91,8 +91,8 @@ then redisplays the buffer where the function was issued."
 
    ("C-q" . delete-window)
 
-   ;; (acg/force-global-set-key (kbd "C-w") 'acg/kill-buffer)
-   ("C-w" . acg/kill-buffer)))
+   ;; (acg/force-global-set-key (kbd "M-w") 'acg/kill-buffer)
+   ("M-w" . acg/kill-buffer)))
 
 
 
@@ -140,10 +140,10 @@ new buffer."
     (find-file filename))
 
   :bind
-  (("C-o" . find-file)
-   ("C-S-T" . acg/reopen-killed-file)
-   ("C-s" . save-buffer)
-   ("C-S-s" . acg/save-buffer-as)))
+  (("M-o" . find-file)
+   ("M-T" . acg/reopen-killed-file)
+   ("M-s" . save-buffer)
+   ("M-S" . acg/save-buffer-as)))
 
 
 

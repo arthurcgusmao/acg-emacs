@@ -24,7 +24,7 @@
   (:map isearch-mode-map
         ("<escape>" . isearch-abort)
         ("C-r" . consult-isearch)
-        ("C-s" . nil)
+        ("M-s" . nil)
         ("<up>" . isearch-repeat-backward)
         ("<down>" . isearch-repeat-forward)))
 
@@ -45,7 +45,7 @@
 
   (ctrlf-mode +1)
   :bind
-  ("M-s f" . acg/smart-ctrlf-forward))
+  ("C-s f" . acg/smart-ctrlf-forward))
 
 
 
@@ -130,16 +130,16 @@ which the completion originates."
   (:map vertico-map
         ("<S-return>" . vertico-exit-input)
         ("RET" . acg/vertico-smart-exit)
-        ("M-RET" . acg/vertico-buffer-insert)
+        ("C-RET" . acg/vertico-buffer-insert)
         ("<backspace>" . acg/minibuffer-smart-backspace)
 
-        ;; ("<C-return>" . vert) ; @todo: see how to narrow selection in vertico -- dual of ivy-restrict-to-matches
+        ;; ("<M-return>" . vert) ; @todo: see how to narrow selection in vertico -- dual of ivy-restrict-to-matches
 
         ("C-x g" . acg/vertico-embark--magit)
         ("C-M-g" . acg/vertico-embark--magit)
         ("C-x d" . acg/vertico-embark--dired)
         ("C-M-d" . acg/vertico-embark--dired)
-        ("M-f" . acg/vertico-embark--consult-ripgrep)))
+        ("C-f" . acg/vertico-embark--consult-ripgrep)))
 
 
 ;; Minibuffer metadata enhancement
@@ -300,13 +300,13 @@ directory."
 
   :bind
   ;; ("C-M-i" . acg/corfu-orderless-completion-at-point)
-  (("C-f" . acg/consult-line)
-   ("C-S-F" . consult-multi-occur) ;; @todo: default to all buffers, do not ask
-   ("M-f" . acg/consult-ripgrep-project)
-   ;; @todo: set C-f to restart search when in consult-line & others
+  (("M-f" . acg/consult-line)
+   ("M-F" . consult-line-multi)
+   ("C-f" . acg/consult-ripgrep-project)
+   ;; @todo: set M-f to restart search when in consult-line & others
    ("C-M-S-i" . acg/consult-completion-at-point)
-   ("C-S-O" . consult-recent-file) ; @todo: disable preview of files
-   ("M-g g" . consult-goto-line)
+   ("M-O" . consult-recent-file) ; @todo: disable preview of files
+   ("M-g l" . consult-goto-line)
    (:map minibuffer-local-map
          ("C-r" . consult-history))
    (:map consult-isearch-history-map

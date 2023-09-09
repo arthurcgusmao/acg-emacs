@@ -12,7 +12,7 @@
   :commands (embark--quit-and-run) ; Used in consult configs
 
   :bind
-  (("C-S-a" . embark-act)
+  (("M-A" . embark-act)
    (:map minibuffer-local-map
          ("C-e" . embark-export))))
 

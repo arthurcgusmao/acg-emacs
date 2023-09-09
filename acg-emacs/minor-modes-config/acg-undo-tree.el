@@ -25,13 +25,13 @@ region nor moves the cursor position."
       (setq deactivate-mark nil)))
 
   ;; Keybindings
-  (acg/force-global-set-key "M-z" 'undo-tree-visualize)
+  (acg/force-global-set-key "C-z" 'undo-tree-visualize)
   :bind
   (:map undo-tree-map
-   ("C-/" . nil)
-   ("C-?" . nil)
-   ("C-z" . undo-tree-undo)
-   ("C-S-z" . undo-tree-redo)
+   ("M-/" . nil)
+   ("M-?" . nil)
+   ("M-z" . undo-tree-undo)
+   ("M-Z" . undo-tree-redo)
    :map undo-tree-visualizer-mode-map
    ("RET" . undo-tree-visualizer-quit)
    ([escape] . undo-tree-visualizer-abort)))

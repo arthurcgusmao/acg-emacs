@@ -51,8 +51,8 @@ does not indent according to
     (crux-rename-buffer-and-file))
 
   :bind
-  (("<C-return>" . acg/smart-open-line-below)
-   ("<C-S-return>" . acg/smart-open-line-above)
-   ;; ("<M-RET>" . indent-new-comment-line)
+  (("<M-return>" . acg/smart-open-line-below)
+   ("<M-S-return>" . acg/smart-open-line-above)
+   ;; ("<C-RET>" . indent-new-comment-line)
    ("<M-RET>" . acg/open-line)
-   ("C-j" . crux-top-join-line)))
+   ("M-j" . crux-top-join-line)))

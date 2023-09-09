@@ -3,7 +3,7 @@
   :bind (("C-x C-b" . ibuffer)
          :map ibuffer-name-map
          ("<mouse-1>" . ibuffer-visit-buffer)
-         ("<C-mouse-1>" . ibuffer-mouse-toggle-mark)))
+         ("<M-mouse-1>" . ibuffer-mouse-toggle-mark)))
 
 (use-package ibuffer-vc
   :after (ibuffer vc)

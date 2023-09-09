@@ -135,30 +135,30 @@ user to choose a remote."
    ("C-M-g" . magit-status)
    ("C-x G" . magit-dispatch)
    :map magit-status-mode-map
-   ("<C-tab>" . nil)
+   ("<M-tab>" . nil)
    ("C-c <tab>" . magit-section-cycle)
    :map magit-process-mode-map
-   ("<C-tab>" . nil)
+   ("<M-tab>" . nil)
    ("C-c <tab>" . magit-section-cycle)
    :map magit-log-mode-map
    ([escape] . magit-kill-this-buffer)
-   ("C-w" . magit-kill-this-buffer)
+   ("M-w" . magit-kill-this-buffer)
    ("q" . magit-kill-this-buffer)
-   ("<C-tab>" . nil)
+   ("<M-tab>" . nil)
    ("C-c <tab>" . magit-section-cycle)
    :map magit-mode-map
    ([escape] . keyboard-quit)
-   ("C-w" . magit-kill-this-buffer)
+   ("M-w" . magit-kill-this-buffer)
    ("q" . magit-kill-this-buffer)
-   ("<C-up>" . magit-section-backward-sibling)
-   ("<C-down>" . magit-section-forward-sibling)
+   ("<M-up>" . magit-section-backward-sibling)
+   ("<M-down>" . magit-section-forward-sibling)
    :map magit-popup-mode-map
    ([escape] . magit-popup-quit)
    :map magit-file-section-map
    ("RET" . acg/magit-diff-visit-file)
-   ("<C-return>" . acg/magit-diff-display-file)
+   ("<M-return>" . acg/magit-diff-display-file)
    ("<S-return>" . acg/magit-diff-display-file-and-next)
-   ("<C-S-return>" . acg/magit-diff-display-file-and-previous))
+   ("<M-S-return>" . acg/magit-diff-display-file-and-previous))
   :commands
   (acg/magit-open-remote-repo
    acg/magit-open-remote-dwim))
@@ -166,8 +166,8 @@ user to choose a remote."
 (use-package with-editor
   :bind
   (:map with-editor-mode-map
-        ("C-w" . with-editor-cancel)
-        ("C-s" . with-editor-finish)))
+        ("M-w" . with-editor-cancel)
+        ("M-s" . with-editor-finish)))
 
 
 ;; Provide commit message guidelines/feedback when committing;

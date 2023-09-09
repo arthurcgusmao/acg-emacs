@@ -6,5 +6,5 @@
 
 (advice-add 'acg/comment-line :after #'acg/with-mark-active)
 
-(global-set-key (kbd "C-/") 'acg/comment-line)
-(global-set-key (kbd "C-?") 'comment-dwim)
+(global-set-key (kbd "M-/") 'acg/comment-line)
+(global-set-key (kbd "M-?") 'comment-dwim)
