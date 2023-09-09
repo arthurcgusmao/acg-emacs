@@ -29,9 +29,6 @@
 ;; Misc
 (use-package csv-mode)
 (use-package scala-mode)
-(use-package csharp-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode)))
 (use-package json-mode
   :config
   (setq js-indent-level 2))
