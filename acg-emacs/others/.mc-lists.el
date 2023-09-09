@@ -16,6 +16,7 @@
         acg/kill-sexp
         acg/kill-whole-line-or-region-content
         acg/kill-whole-line-or-region-lines
+        acg/kill-whole-line-or-region-lines-and-move-up
         acg/left-subword
         acg/move-beginning-of-line
         acg/move-beginning-of-visual-line
@@ -23,6 +24,7 @@
         acg/org-beginning-of-visual-line-or-indentation
         acg/org-smart-open-line-below
         acg/right-subword
+        acg/smart-open-line-below
         acg/toggle-word-case
         acg/toggle-word-separator
         acg/windows-clipboard-paste-replace-selection
@@ -32,6 +34,7 @@
         clipboard-paste-replace-selection
         crux-kill-line-backwards
         crux-smart-open-line-above
+        crux-top-join-line
         cycle-spacing
         end-of-visual-line
         fill-paragraph
@@ -55,6 +58,7 @@
         python-indent-shift-left
         python-indent-shift-right
         sp-backward-sexp
+        sp-forward-barf-sexp
         sp-forward-sexp
         sp-forward-slurp-sexp
         sp-kill-hybrid-sexp
@@ -84,6 +88,7 @@
         mc/mark-next-lines
         mc/mark-previous-lines
         mouse-set-region
+        mouse-start-secondary
         recompile
         repeat
         tab-line-switch-to-next-tab

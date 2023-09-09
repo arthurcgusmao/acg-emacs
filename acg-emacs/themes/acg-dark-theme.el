@@ -17,10 +17,10 @@
  '(font-lock-constant-face ((t (:foreground "#7ec"))))
  '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "#88d"))))
  '(font-lock-function-name-face ((t (:foreground "#bb55ff" :weight bold))))
- '(font-lock-keyword-face ((t (:foreground "#50bfff" :weight bold))))
+ '(font-lock-keyword-face ((t (:foreground "#50bfff"))))
  '(font-lock-string-face ((t (:foreground "#d88"))))
  '(font-lock-type-face ((t (:foreground "PaleGreen" :weight bold))))
- '(font-lock-variable-name-face ((t (:foreground "#ddcc82"))))
+ '(font-lock-variable-name-face ((t (:foreground "#dc8"))))
  '(region ((t (:background "#66a"))))
 
  ;; helm
