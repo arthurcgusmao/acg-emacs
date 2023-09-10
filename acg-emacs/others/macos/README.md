@@ -3,6 +3,10 @@
 
 ## Emacs installation
 
+See [homebrew-emacs-plus](https://github.com/d12frosted/homebrew-emacs-plus).
+
+### Depracted
+
 Same as in for Linux (see [./../linux/README.md](./../linux/README.md)), with the difference that dependencies have to be installed with macports or homebrew. I use homebrew, so I installed the dependencies below (adapted from [here](https://github.com/jimeh/build-emacs-for-macos)):
 ```bash
 brew install autoconf automake coreutils curl expat gcc gmp gnu-sed gnutls jansson libffi libgccjit libiconv librsvg libtasn1 libunistring libxml2 little-cms2 mailutils make ncurses nettle pkg-config texinfo zlib
@@ -37,7 +41,7 @@ fi
 
 Next, install my custom script for launching or raising an Emacs frame. Since I use `~/.opt/bin` for "optional", user-installed binaries, I did:
 ```bash
-ln -s ~/.config/emacs/acg-emacs/others/macos/acg-emacs.sh ~/.opt/bin/acg-emacs
+ln -s ~/.config/emacs/acg-emacs/others/linux/acg-emacs.sh ~/.opt/bin/acg-emacs
 ```
 
 In MacOS, the commands executed by the applescript or the Karabiner will not have your regular PATH values. Thus, you have to manually add it when invoking commands that use one of `emacsclient`, `emacs`, `acg-emacs`, etc.:
