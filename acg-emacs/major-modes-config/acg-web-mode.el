@@ -1,6 +1,7 @@
 (use-package web-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (setq-default web-mode-enable-auto-pairing t
                 web-mode-enable-auto-opening t
                 web-mode-enable-auto-indentation t

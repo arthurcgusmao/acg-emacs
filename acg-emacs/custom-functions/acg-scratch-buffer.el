@@ -21,6 +21,11 @@ Version 2016-08-11"
     (put 'acg/scratch-buffer 'permanent-local t)
     (setq acg/scratch-buffer t)))
 
+(defun acg/scratch-buffer-open-backup-dir ()
+  "Open the directory containing persisted scratch buffers."
+  (interactive)
+  (find-file acg/scratch-backup-dir))
+
 (defun acg/scratch-buffer-unflag (&optional buffer)
   "Unset buffer as scratch buffer."
   (let ((buffer (or buffer (current-buffer))))
