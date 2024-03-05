@@ -228,7 +228,6 @@
 
   :bind
   ("C-s" . nil)
-  ("M-k" . execute-extended-command)
   ("M-<up>" . backward-paragraph)
   ("M-<down>" . forward-paragraph)
   ("M-l" . recenter)

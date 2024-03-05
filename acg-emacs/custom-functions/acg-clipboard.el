@@ -43,12 +43,13 @@ original mixes the clipboard content with the kill ring."
 copies the content of the current line (stripping starting and ending
 whitespace)"
   (interactive)
-  (if (use-region-p)
-      (clipboard-kill-ring-save (region-beginning) (region-end))
-    (save-excursion
-      (clipboard-kill-ring-save
-       (progn (back-to-indentation) (point))
-       (progn (end-of-line) (skip-chars-backward " \t") (point))))))
+  (save-mark-and-excursion
+    (let (deactivate-mark)
+      (if (use-region-p)
+          (clipboard-kill-ring-save (region-beginning) (region-end))
+        (clipboard-kill-ring-save
+         (progn (back-to-indentation) (point))
+         (progn (end-of-line) (skip-chars-backward " \t") (point)))))))
 
 ;; (advice-add 'acg/clipboard-kill-ring-save :after #'acg/with-mark-active)
 ;; (advice-remove 'acg/clipboard-kill-ring-save 'acg/with-mark-active)
@@ -69,7 +70,7 @@ whitespace)"
 
 ;;keybindings
 (global-set-key (kbd "M-c") 'acg/clipboard-kill-ring-save)
-(global-set-key (kbd "M-x") 'acg/clipboard-kill-region-or-line)
+;; (global-set-key (kbd "M-x") 'acg/clipboard-kill-region-or-line)
 (global-set-key (kbd "M-v") 'acg/clipboard-paste-replace-selection)
 (global-set-key (kbd "C-v") 'acg/clipboard-paste-replace-selection)
 (global-set-key (kbd "<S-insert>") 'acg/clipboard-paste-replace-selection) ;; compatibility with CopyQ (OS clipboard history software)

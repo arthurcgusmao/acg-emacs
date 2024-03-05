@@ -59,8 +59,7 @@
             (define-key org-mode-map (kbd "C-e") nil)
             (define-key org-mode-map (kbd "M-e") 'org-edit-special)
             (define-key org-mode-map (kbd "M-j") nil)
-            (define-key org-mode-map (kbd "M-k") 'execute-extended-command)
-            (define-key org-mode-map (kbd "M-K") 'org-insert-link)
+            (define-key org-mode-map (kbd "M-k") 'org-insert-link)
             (define-key org-mode-map (kbd "M-y") nil)
             (define-key org-mode-map (kbd "M-t") nil)
 
