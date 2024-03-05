@@ -107,14 +107,21 @@
   :config
   (setq tramp-persistency-file-name (concat acg/history-dir "tramp"))
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
-  ;;; Make TRAMP faster
+  ;;; Make TRAMP faster (see https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html#Frequently-Asked-Questions)
   ;; Make VC ignore remote files
   (setq vc-ignore-dir-regexp
         (format "%s\\|%s"
                 vc-ignore-dir-regexp
                 tramp-file-name-regexp))
   ;; Decrease verbosity of TRAMP logs
-  (setq tramp-verbose 1))
+  (setq tramp-verbose 1)
+  ;; Disable remote file locks. Assumes no other EMACS sessions are modifying the same file.
+  (setq remote-file-name-inhibit-locks t)
+  ;; Reuse SSH Control* options (ControlMaster, ControlPath, ControlPersist) from ~/.ssh/config,
+  ;; instead of TRAMP's default (which creates new connections). Useful for speeding up Magit over TRAMP.
+  ;; See https://stackoverflow.com/a/59785383/5103881
+  (setq tramp-ssh-controlmaster-options nil)
+  )
 
 
 ;; Record various types of history
