@@ -285,7 +285,7 @@ directory."
                 (push 'home unread-command-events)))
     ;; Call original command
     (consult--grep "rg"
-                   #'consult--ripgrep-builder
+                   #'consult--ripgrep-make-builder
                    (rg-project-root default-directory)
                    initial))
 
@@ -296,7 +296,6 @@ directory."
   ;; (advice-remove 'consult-line 'acg/with-marked-input)
 
   (advice-add 'acg/consult-ripgrep-project :around #'acg/with-thing-at-point)
-
 
   :bind
   ;; ("C-M-i" . acg/corfu-orderless-completion-at-point)

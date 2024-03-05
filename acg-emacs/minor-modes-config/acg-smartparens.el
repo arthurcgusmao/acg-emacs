@@ -81,6 +81,7 @@
      ("C-M-p")
      ("C-M-k")
      ("C-M-w")
+     ("M-?")
      ("M-<delete>")
      ("M-<backspace>")
      ("C-<right>")

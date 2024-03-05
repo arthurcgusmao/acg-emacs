@@ -1,0 +1,11 @@
+#+TITLE: Notes about modern minibuffer packages
+
+Inspired by [1].
+
+* Consult
+** =consult-grep=
+- Pattern: =#<<sent-to-grep>>#<<sent-to-emacs>>=
+- Passing arguments to grep: =#<<pattern>> -- -C 3=
+
+* References
+1. [[https://www.youtube.com/watch?v=d3aaxOqwHhI][Emacs: modern minibuffer packages (Vertico, Consult, etc.) - YouTube]]
