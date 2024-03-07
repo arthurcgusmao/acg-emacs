@@ -83,6 +83,7 @@ then redisplays the buffer where the function was issued."
   ;; Keybindings
   :bind
   (("M-1" . other-window)
+   ("M-`" . ns-next-frame)
 
    ("C-1" . delete-other-windows)
    ("C-!" . delete-window)

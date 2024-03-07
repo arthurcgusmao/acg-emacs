@@ -1,6 +1,17 @@
 ;; ibuffer is a better built-in buffer manager
 (use-package ibuffer
+  :config
+
+  (define-ibuffer-filter unsaved-file-buffers
+      "Toggle current view to buffers whose file is unsaved."
+    (:description "file is unsaved")
+    (ignore qualifier)
+    (and (buffer-local-value 'buffer-file-name buf)
+         (buffer-modified-p buf)))
+
   :bind (("C-x C-b" . ibuffer)
+         :map ibuffer-mode-map
+         ("/ u" . ibuffer-filter-by-unsaved-file-buffers)
          :map ibuffer-name-map
          ("<mouse-1>" . ibuffer-visit-buffer)
          ("<M-mouse-1>" . ibuffer-mouse-toggle-mark)))
