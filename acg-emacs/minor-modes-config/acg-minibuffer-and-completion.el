@@ -304,7 +304,7 @@ directory."
    ("C-f" . acg/consult-ripgrep-project)
    ;; @todo: set M-f to restart search when in consult-line & others
    ("C-M-S-i" . acg/consult-completion-at-point)
-   ;; ("M-O" . consult-recent-file) ; @todo: disable preview of files
+   ("C-M-o" . consult-recent-file) ; @todo: disable preview of files
    ("M-g l" . consult-goto-line)
    (:map minibuffer-local-map
          ("C-r" . consult-history))
