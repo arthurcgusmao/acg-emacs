@@ -14,12 +14,13 @@ Version 2016-08-11"
   (interactive)
   (let ((-buf (generate-new-buffer "untitled")))
     (switch-to-buffer -buf)
-    (funcall initial-major-mode)
-    (setq buffer-offer-save t)
-    (make-variable-buffer-local 'acg/scratch-buffer)
-    ;; Flag variable should not be deleted when major mode changes
-    (put 'acg/scratch-buffer 'permanent-local t)
-    (setq acg/scratch-buffer t)))
+    (with-current-buffer -buf
+      (funcall initial-major-mode)
+      (setq buffer-offer-save nil)
+      (make-variable-buffer-local 'acg/scratch-buffer)
+      ;; Flag variable should not be deleted when major mode changes
+      (put 'acg/scratch-buffer 'permanent-local t)
+      (setq acg/scratch-buffer t))))
 
 (defun acg/scratch-buffer-open-backup-dir ()
   "Open the directory containing persisted scratch buffers."
@@ -52,20 +53,23 @@ Version 2016-08-11"
 
 
 ;; Making backups of unsaved scratch buffers
-(defun acg/scratch-buffer-save-backup ()
-  "Write the contents of *scratch* to the file name
-  PERSISTENT-SCRATCH-FILENAME, making a backup copy in
-  PERSISTENT-SCRATCH-BACKUP-DIRECTORY."
+(defun acg/scratch-buffer-save-backup-for-all-buffers ()
   (let ((buffers (buffer-list)))
     (while buffers
       (with-current-buffer (get-buffer (car buffers))
-        (if (acg/scratch-buffer-modified-p)
-            (write-file (concat
-                         acg/scratch-backup-dir
-                         (format-time-string "%Y-%m-%d--%Hh%Mm%Ss--")
-                         (buffer-name)))
-          t))
+        (acg/scratch-buffer-maybe-save-backup-for-current-buffer))
       (setq buffers (cdr buffers)))))
+
+(defun acg/scratch-buffer-maybe-save-backup-for-current-buffer ()
+  "Write the contents of *scratch* to the file name
+  PERSISTENT-SCRATCH-FILENAME, making a backup copy in
+  PERSISTENT-SCRATCH-BACKUP-DIRECTORY."
+  (if (acg/scratch-buffer-modified-p)
+      (write-file (concat
+                   acg/scratch-backup-dir
+                   (format-time-string "%Y-%m-%d--%Hh%Mm%Ss--")
+                   (buffer-name)))
+    t))
 
 
 ;; Configuring and initializing
@@ -73,7 +77,8 @@ Version 2016-08-11"
 ;; Run query before killing if buffer is acg/scratch-buffer
 ;; (add-to-list 'kill-buffer-query-functions 'acg/scratch-buffer-kill-query-function)
 ;; Adds the hook to be run whenever emacs is killed
-(push #'acg/scratch-buffer-save-backup kill-emacs-hook)
+(push #'acg/scratch-buffer-save-backup-for-all-buffers kill-emacs-hook)
+(add-hook 'kill-buffer-hook #'acg/scratch-buffer-maybe-save-backup-for-current-buffer)
 
 ;; Keybindings
 (global-set-key (kbd "M-t") 'acg/scratch-buffer-create)
