@@ -2,7 +2,7 @@
 
 ;; Highlight region when pasting, undoing/redoing, killing/deleting
 (use-package goggles
-  :straight (:host github :repo "minad/goggles")
+  :hook ((prog-mode text-mode) . goggles-mode)
   :config
   ;; Face colors
   (set-face-background 'goggles-changed "yellow")
@@ -12,4 +12,4 @@
   (setq goggles-pulse-iterations 10)
   (setq goggles-pulse-delay 0.03)
   (setq goggles-pulse t) ;; keep highlighted or just pulse highlight
-  (goggles-mode 1))
+  )
