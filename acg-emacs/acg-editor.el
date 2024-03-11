@@ -235,6 +235,7 @@
 
   :bind
   ("C-s" . nil)
+  ("M-?" . comment-dwim)
   ("M-<up>" . backward-paragraph)
   ("M-<down>" . forward-paragraph)
   ("M-l" . recenter)
