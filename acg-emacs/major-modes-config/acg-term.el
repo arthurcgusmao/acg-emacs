@@ -85,6 +85,7 @@ clipboard."
    ("M-q" . nil)
    ("C-w" . nil)
    ("C-o" . nil)
+   ("M-1" . nil)
    ("C-S-o" . nil)
    ("<escape>" . nil)
    ("C-v" . acg/vterm-paste-from-clipboard)

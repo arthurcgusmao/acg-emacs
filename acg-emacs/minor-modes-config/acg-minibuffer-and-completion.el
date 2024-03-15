@@ -66,7 +66,7 @@
     (interactive)
     (if (and minibuffer-completing-file-name
              (= (char-before) ?/))
-        (acg/backward-kill-word)
+        (acg/backward-delete-to-char ?/)
       (call-interactively 'delete-backward-char)))
 
   (defun acg/vertico-smart-exit ()

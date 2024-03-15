@@ -57,6 +57,16 @@ if there are only white spaces in it."
   (previous-line)
   (back-to-indentation))
 
+(defun acg/backward-delete-to-char (char)
+  (interactive (list (read-char-from-minibuffer "Delete backward to char: "
+						nil 'read-char-history)))
+  (zap-up-to-char -1 char nil))
+
+(defun acg/forward-delete-to-char (char)
+  (interactive (list (read-char-from-minibuffer "Delete forward to char: "
+						nil 'read-char-history)))
+  (zap-up-to-char +1 char nil))
+
 (defun acg/backward-kill-sexp ()
   "Same as `backward-kill-sexp' but kills region first if
 active."
