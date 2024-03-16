@@ -22,4 +22,5 @@
 
    ("<M-down-mouse-1>" . mc/add-cursor-on-click)
    :map mc/keymap
+   ("M-v" . nil)
    ("<escape>" . mc/keyboard-quit)))

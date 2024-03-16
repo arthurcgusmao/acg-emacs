@@ -81,6 +81,7 @@
         acg/tabbar-backward
         counsel-M-x
         crux-switch-to-previous-buffer
+        describe-key
         helm-M-x
         helm-find-files
         kmacro-end-or-call-macro
