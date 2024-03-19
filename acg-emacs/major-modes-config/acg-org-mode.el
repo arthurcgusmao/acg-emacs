@@ -466,13 +466,18 @@ active."
 
 ;; Org SRC blocks
 
+;; Flowcharts
+(use-package ob-mermaid)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    (shell . t)
    (python . t)
    ;; Org babel Jupyter integration -- Jupyter must be last
-   (jupyter . t)))
+   (jupyter . t)
+   ;; Orb babel Mermaid integration
+   (mermaid . t)))
 
 (setq org-babel-default-header-args:jupyter-python
       '((:async . "yes")
