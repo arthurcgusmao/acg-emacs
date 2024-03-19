@@ -1,20 +1,19 @@
-(use-package org)
-(use-package crux)
+(use-package org
+  :config
+  ;; configurations
+  (setq org-startup-with-inline-images t)
+  (setq org-image-actual-width '(400))
+  (setq org-startup-indented nil)
+  (setq org-adapt-indentation nil)
+  (setq org-startup-truncated nil)
+  (setq org-startup-folded nil)
+  (setq org-list-allow-alphabetical t)
 
-;; configurations
-(setq org-startup-with-inline-images t)
-(setq org-image-actual-width '(400))
-(setq org-startup-indented nil)
-(setq org-adapt-indentation nil)
-(setq org-startup-truncated nil)
-(setq org-startup-folded nil)
-(setq org-list-allow-alphabetical t)
-
-;; Export both source code and its results by default
-(setq org-babel-default-header-args
-      (cons '(:exports . "both")
-            (assq-delete-all :exports org-babel-default-header-args)))
-
+  ;; Export both source code and its results by default
+  (setq org-babel-default-header-args
+        (cons '(:exports . "both")
+              (assq-delete-all :exports org-babel-default-header-args)))
+  )
 
 ;;; Fonts and Appearence
 
