@@ -78,7 +78,7 @@ active."
 (defun acg/backward-kill-word (&optional arg)
   "Same as `backward-kill-word' but kills region first if
 active."
-  (interactive "^p")
+  (interactive)
   (setq arg (or arg 1))
   (if (use-region-p)
       (kill-region (region-beginning) (region-end)))
