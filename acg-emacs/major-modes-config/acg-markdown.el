@@ -23,7 +23,7 @@
   :bind
   (:map markdown-mode-map
         ("M-k" . 'markdown-insert-link)
-        ("M-e" . 'markdown-edit-code-block))
+        ("C-e" . 'markdown-edit-code-block))
   :hook
   (markdown-mode . acg/markdown-setup))
 
@@ -47,6 +47,6 @@
   :bind
   (:map edit-indirect-mode-map
         ("C-c C-c" . nil)
-        ("M-e" . edit-indirect-commit)
+        ("C-e" . edit-indirect-commit)
         ("M-s" . acg/edit-indirect-save-commit)
         ("M-w" . acg/edit-indirect-abort-confirm)))

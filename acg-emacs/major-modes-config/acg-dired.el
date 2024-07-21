@@ -82,6 +82,7 @@ Restore the buffer with \\<dired-mode-map>`\\[revert-buffer]'."
    ("C-M-d" . dired-jump)
    :map dired-mode-map
    ("M-o" . nil)
+   ("C-o" . nil)
    ("q" . 'kill-current-buffer)
    ;; ("q" . 'bury-buffer)
    ("RET" . 'dired-find-alternate-file)
