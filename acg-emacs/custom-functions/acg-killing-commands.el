@@ -67,6 +67,13 @@ if there are only white spaces in it."
 						nil 'read-char-history)))
   (zap-up-to-char +1 char nil))
 
+(defun acg/kill-sexp ()
+  "Same as `kill-sexp' but kills region first if active."
+  (interactive)
+  (if (use-region-p)
+      (kill-region (region-beginning) (region-end)))
+  (kill-sexp))
+
 (defun acg/backward-kill-sexp ()
   "Same as `backward-kill-sexp' but kills region first if
 active."
@@ -74,6 +81,13 @@ active."
   (if (use-region-p)
       (kill-region (region-beginning) (region-end)))
   (backward-kill-sexp))
+
+(defun acg/kill-word (&optional arg)
+  "Same as `kill-word' but kills region first if active."
+  (interactive)
+   (if (use-region-p)
+      (kill-region (region-beginning) (region-end)))
+  (kill-word arg))
 
 (defun acg/backward-kill-word (&optional arg)
   "Same as `backward-kill-word' but kills region first if
@@ -83,14 +97,6 @@ active."
   (if (use-region-p)
       (kill-region (region-beginning) (region-end)))
   (backward-kill-word arg))
-
-(defun acg/kill-sexp ()
-  "Same as `kill-sexp' but kills region first if active."
-  (interactive)
-  (if (use-region-p)
-      (kill-region (region-beginning) (region-end)))
-  (kill-sexp))
-
 ;; helper function
 ;; (defun current-line-empty-p ()
 ;;   "Checks if line is empty (has only whitespace characters)"
@@ -98,18 +104,26 @@ active."
 ;;     (beginning-of-line)
 ;;     (looking-at "[[:space:]]*$")))
 
-;; bindings
-(acg/force-global-set-key "<M-backspace>" 'acg/backward-kill-word)
-(global-set-key (kbd "<s-backspace>") (acg/with-subword-mode #'acg/backward-kill-word))
-(acg/force-global-set-key "<C-backspace>" 'acg/backward-kill-sexp)
+;;; Bindings.
 
-(acg/force-global-set-key "<C-delete>" 'acg/kill-sexp)
+;; Regular word.
+(acg/force-global-set-key "<C-backspace>" 'acg/backward-kill-word)
+(acg/force-global-set-key "<C-delete>" 'acg/kill-word)
+
+;; Subword.
+(global-set-key (kbd "<s-backspace>") (acg/with-subword-mode #'acg/backward-kill-word))
 (acg/force-global-set-key "<s-delete>" (acg/with-subword-mode #'kill-word))
 (acg/force-global-set-key "s-<kp-delete>" (acg/with-subword-mode #'kill-word)) ; For MacOS
-(global-set-key (kbd "<C-S-delete>") 'acg/kill-whole-line-or-region-lines-and-move-up)
 
-(acg/force-global-set-key "<M-S-backspace>" 'acg/kill-line-or-region-backwards)
-(acg/force-global-set-key "<M-S-delete>" 'acg/kill-line-or-region)
+;; Sexp.
+(acg/force-global-set-key "<C-M-backspace>" 'acg/backward-kill-sexp)
+(acg/force-global-set-key "<C-M-delete>" 'acg/kill-sexp)
 
-(global-set-key (kbd "<S-delete>") 'acg/kill-whole-line-or-region-lines)
+;; Line.
+(acg/force-global-set-key "<M-backspace>" 'acg/kill-line-or-region-backwards)
+(acg/force-global-set-key "<M-delete>" 'acg/kill-line-or-region)
+
+;; Whole line.
 (acg/force-global-set-key "<S-backspace>" 'acg/kill-whole-line-or-region-content)
+(global-set-key (kbd "<S-delete>") 'acg/kill-whole-line-or-region-lines)
+(global-set-key (kbd "<C-S-delete>") 'acg/kill-whole-line-or-region-lines-and-move-up)
