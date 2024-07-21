@@ -246,8 +246,8 @@
   ("<M-S-SPC>" . cycle-spacing)
   ("M-J" . join-line)
   ("C-x n w" . acg/widen-recenter)
-  ("<end>" . move-end-of-line)
-  ("C-<right>" . move-end-of-line)
+  ("M-<" . nil)
+  ("M->" . nil)
   )
 
 
