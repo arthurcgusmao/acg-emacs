@@ -17,6 +17,7 @@
         acg/kill-whole-line-or-region-content
         acg/kill-whole-line-or-region-lines
         acg/kill-whole-line-or-region-lines-and-move-up
+        acg/kill-word
         acg/left-subword
         acg/move-beginning-of-line
         acg/move-beginning-of-visual-line

@@ -31,7 +31,12 @@
 
 ;; keybindings
 (global-set-key (kbd "<home>") 'acg/beginning-of-visual-line-or-indentation)
-(global-set-key (kbd "<C-left>") 'acg/beginning-of-visual-line-or-indentation)
-(global-set-key (kbd "<C-right>") 'move-end-of-line)
+(global-set-key (kbd "<M-left>") 'acg/beginning-of-visual-line-or-indentation)
+(global-set-key (kbd "<end>") 'move-end-of-line)
+(global-set-key (kbd "<M-right>") 'move-end-of-line)
+
+(global-set-key (kbd "<C-right>") 'right-word)
+(global-set-key (kbd "<C-left>") 'left-word)
+
 (global-set-key (kbd "<s-left>") 'acg/left-subword)
 (global-set-key (kbd "<s-right>") 'acg/right-subword)

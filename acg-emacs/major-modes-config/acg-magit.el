@@ -150,8 +150,12 @@ user to choose a remote."
    ([escape] . keyboard-quit)
    ("M-w" . magit-kill-this-buffer)
    ("q" . magit-kill-this-buffer)
-   ("<M-up>" . magit-section-backward-sibling)
-   ("<M-down>" . magit-section-forward-sibling)
+   ("<C-up>" . magit-section-backward-sibling)
+   ("<C-down>" . magit-section-forward-sibling)
+   ("<M-up>" . nil)
+   ("<M-down>" . nil)
+   ("<C-M-up>" . magit-section-up)
+   ("<C-M-down>" . magit-section-forward)
    :map magit-file-section-map
    ("RET" . acg/magit-diff-visit-file)
    ("<M-return>" . acg/magit-diff-display-file)
@@ -217,3 +221,15 @@ user to choose a remote."
 
 ;; Show commit message of current line (comparable to VSCode GitLens)
 (use-package vc-msg)
+
+
+;; Modifying other default keybindings.
+(use-package git-rebase
+  :straight nil
+  :bind
+  (:map git-rebase-mode-map
+        ("<s-up>" . git-rebase-move-line-up)
+        ("<s-down>" . git-rebase-move-line-down)
+        ("<M-up>" . nil)
+        ("<M-down>" . nil)
+        ))

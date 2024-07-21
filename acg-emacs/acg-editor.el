@@ -234,10 +234,12 @@
     (recenter))
 
   :bind
-  ("C-s" . nil)
+  ("M-e" . execute-extended-command)
   ("M-?" . comment-dwim)
-  ("M-<up>" . backward-paragraph)
-  ("M-<down>" . forward-paragraph)
+  ("C-<up>" . backward-paragraph)
+  ("C-<down>" . forward-paragraph)
+  ("M-<up>" . beginning-of-buffer)
+  ("M-<down>" . end-of-buffer)
   ("M-l" . recenter)
   ("M-n" . make-frame-command)
   ("M-r" . repeat)
