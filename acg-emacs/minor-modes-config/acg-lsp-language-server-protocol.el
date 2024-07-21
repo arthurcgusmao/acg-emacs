@@ -3,7 +3,12 @@
   (setq lsp-keymap-prefix "C-l")
   :hook ((python-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
+  :commands lsp
+  :bind
+  (:map lsp-mode-map
+        ("C-<down-mouse-1>" . nil)
+        ("M-<down-mouse-1>" . lsp-find-definition-mouse)
+        ))
 
 (use-package lsp-python-ms
   :ensure t

@@ -240,6 +240,8 @@
   ("C-<down>" . forward-paragraph)
   ("M-<up>" . beginning-of-buffer)
   ("M-<down>" . end-of-buffer)
+  ("M-<drag-mouse-1>" . nil) ; Secondary selection.
+  ("C-<drag-mouse-1>" . mouse-set-secondary) ; Secondary selection.
   ("C-l" . nil)
   ("M-l" . recenter-top-bottom)
   ("M-n" . make-frame-command)

@@ -58,6 +58,7 @@
         prelude-move-beginning-of-line
         python-indent-shift-left
         python-indent-shift-right
+        recenter-current-error
         sp-backward-sexp
         sp-forward-barf-sexp
         sp-forward-sexp
@@ -85,11 +86,13 @@
         describe-key
         helm-M-x
         helm-find-files
+        ignore
         kmacro-end-or-call-macro
         kmacro-start-macro-or-insert-counter
         mc/mark-next-lines
         mc/mark-previous-lines
         mouse-set-region
+        mouse-set-secondary
         mouse-start-secondary
         recompile
         repeat

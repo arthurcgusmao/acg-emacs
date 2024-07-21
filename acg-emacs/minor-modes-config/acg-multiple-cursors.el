@@ -20,7 +20,7 @@
    ("<C-S-up>" . mc/mark-previous-lines)
    ("<C-S-down>" . mc/mark-next-lines)
 
-   ("<M-down-mouse-1>" . mc/add-cursor-on-click)
+   ("<s-down-mouse-1>" . mc/add-cursor-on-click)
    :map mc/keymap
    ("M-v" . nil)
    ("<escape>" . mc/keyboard-quit)))
