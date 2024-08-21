@@ -286,7 +286,7 @@ directory."
     ;; Call original command
     (consult--grep "rg"
                    #'consult--ripgrep-make-builder
-                   (rg-project-root default-directory)
+                   (rg-project-root (projectiny--project-get-root))
                    initial))
 
   ;; Preselect input
