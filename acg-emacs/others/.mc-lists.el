@@ -100,5 +100,6 @@
         tab-line-switch-to-prev-tab
         undefined
         web-mode-mark-and-expand
+        wgrep-change-to-wgrep-mode
         wgrep-finish-edit
         ))
