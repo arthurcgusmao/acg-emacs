@@ -76,11 +76,8 @@ previous file before displaying file at point."
   (defun acg/project-get-root-relative-path (&optional path)
     "Returns PATH relative to a project root."
     (let* ((path (expand-file-name (or path default-directory)))
-           (root-path (expand-file-name
-                       (cdr (project--find-in-directory path))))
-           (root-length (length root-path))
-           (rel-path (substring path root-length)))
-      rel-path))
+           (root (projectiny--project-get-root path)))
+      (file-relative-name path root)))
 
   (defun acg/magit-open-remote-dwim (&optional dir)
     "Opens a remote repo URL in the exact DIR location. Prompts the
