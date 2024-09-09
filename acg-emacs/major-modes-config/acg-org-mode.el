@@ -13,6 +13,74 @@
   (setq org-babel-default-header-args
         (cons '(:exports . "both")
               (assq-delete-all :exports org-babel-default-header-args)))
+  :bind
+  (:map org-mode-map
+        ("<C-down>" . org-insert-link)
+        ("<C-tab>" . nil)
+        ("<S-iso-lefttab>" . org-cycle)
+        ("M-a" . nil)
+        ("M-e" . nil)
+        ("C-e" . org-edit-special)
+        ("M-j" . nil)
+        ("M-k" . org-insert-link)
+        ("M-y" . nil)
+        ("M-t" . nil)
+
+        ("<S-left>" . nil)
+        ("<S-right>" . nil)
+        ("<S-up>" . nil)
+        ("<S-down>" . nil)
+        ("<M-left>" . nil)
+        ("<M-right>" . nil)
+        ("<C-left>" . nil)
+        ("<C-right>" . nil)
+        ("<M-up>" . nil)
+        ("<M-down>" . nil)
+        ("<C-up>" . org-backward-paragraph)
+        ("<C-down>" . org-forward-paragraph)
+        ("<C-s-up>" . acg/org-metaup)
+        ("<C-s-down>" . acg/org-metadown)
+        ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<C-left>") 'org-cycle-backwards)
+        ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<C-right>") 'org-cycle)
+
+        ("<M-S-right>" . nil)
+        ("<M-S-left>" . nil)
+        ("<M-S-up>" . nil)
+        ("<M-S-down>" . nil)
+        ("<C-S-end>" . show-subtree)
+        ("<C-S-home>" . hide-subtree)
+        ("<C-end>" . org-cycle)
+        ("<home>" . acg/org-beginning-of-visual-line-or-indentation)
+        ("<C-home>" . org-cycle-backwards)
+        ("<C-M-end>" . org-global-cycle)
+        ("<C-M-home>" . acg/org-global-cycle-backwards)
+        ("M-<" . org-shiftmetaleft)
+        ("M->" . org-shiftmetaright)
+
+        ("RET" . acg/org-return)
+        ("<M-return>" . acg/org-smart-open-line-below)
+        ("<M-S-return>" . acg/org-smart-open-line-above)
+        ("<C-RET>" . acg/org-open-line)
+        ("<S-return>" . acg/org-newline-above)
+        ;; ("<M-RET>" . acg/org-meta-return-newline)
+        ("M-8" . org-insert-heading-after-current)
+        ("C-8" . org-insert-subheading-newline)
+
+        ("<C-S-left>" . nil)
+        ("<C-S-up>" . nil)
+        ("<C-S-down>" . nil)
+
+
+        ("<f5>" . (lambda () (interactive) (org-preview-latex-fragment 16)))
+        ("<f6>" . org-preview-latex-fragment)
+        ("<f9>" . org-latex-export-to-pdf)
+
+        ;; Org src map
+        :map org-src-mode-map
+        ("C-e" . org-edit-src-exit)
+        ("M-s" . acg/org-edit-src-save-exit)
+        ("M-w" . acg/org-edit-src-confirm-abort)
+        )
   )
 
 ;;; Fonts and Appearence
@@ -47,73 +115,6 @@
 ;; Always redisplay inline images after executing and SRC block
 (eval-after-load 'org
   (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images))
-
-
-;; setting up keybindings
-(add-hook 'org-mode-hook
-          (lambda ()
-            (define-key org-mode-map (kbd "<C-tab>") nil)
-            (define-key org-mode-map (kbd "<S-iso-lefttab>") 'org-cycle)
-            (define-key org-mode-map (kbd "M-a") nil)
-            (define-key org-mode-map (kbd "C-e") nil)
-            (define-key org-mode-map (kbd "M-e") 'org-edit-special)
-            (define-key org-mode-map (kbd "M-j") nil)
-            (define-key org-mode-map (kbd "M-k") 'org-insert-link)
-            (define-key org-mode-map (kbd "M-y") nil)
-            (define-key org-mode-map (kbd "M-t") nil)
-
-            (define-key org-mode-map (kbd "<S-left>") nil)
-            (define-key org-mode-map (kbd "<S-right>") nil)
-            (define-key org-mode-map (kbd "<S-up>") nil)
-            (define-key org-mode-map (kbd "<S-down>") nil)
-            (define-key org-mode-map (kbd "<M-left>") nil)
-            (define-key org-mode-map (kbd "<M-right>") nil)
-            (define-key org-mode-map (kbd "<M-up>") 'org-backward-paragraph)
-            (define-key org-mode-map (kbd "<M-down>") 'org-forward-paragraph)
-            (define-key org-mode-map (kbd "<C-left>") nil)
-            (define-key org-mode-map (kbd "<C-right>") nil)
-            (define-key org-mode-map (kbd "<C-up>") 'acg/org-metaup)
-            (define-key org-mode-map (kbd "<C-down>") 'acg/org-metadown)
-            ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<C-left>") 'org-cycle-backwards)
-            ;; (acg/local-set-minor-mode-key 'smartparens-mode-map (kbd "<C-right>") 'org-cycle)
-
-            (define-key org-mode-map (kbd "<M-S-right>") nil)
-            (define-key org-mode-map (kbd "<M-S-left>") nil)
-            (define-key org-mode-map (kbd "<M-S-up>") nil)
-            (define-key org-mode-map (kbd "<M-S-down>") nil)
-            (define-key org-mode-map (kbd "<C-S-end>") 'show-subtree)
-            (define-key org-mode-map (kbd "<C-S-home>") 'hide-subtree)
-            (define-key org-mode-map (kbd "<C-end>") 'org-cycle)
-            (define-key org-mode-map (kbd "<home>") 'acg/org-beginning-of-visual-line-or-indentation)
-            (define-key org-mode-map (kbd "<C-home>") 'org-cycle-backwards)
-            (define-key org-mode-map (kbd "<C-M-end>") 'org-global-cycle)
-            (define-key org-mode-map (kbd "<C-M-home>") 'acg/org-global-cycle-backwards)
-            (define-key org-mode-map (kbd "M-<") 'org-shiftmetaleft)
-            (define-key org-mode-map (kbd "M->") 'org-shiftmetaright)
-
-            (define-key org-mode-map (kbd "RET") 'acg/org-return)
-            (define-key org-mode-map (kbd "<M-return>") 'acg/org-smart-open-line-below)
-            (define-key org-mode-map (kbd "<M-S-return>") 'acg/org-smart-open-line-above)
-            (define-key org-mode-map (kbd "<C-RET>") 'acg/org-open-line)
-            (define-key org-mode-map (kbd "<S-return>") 'acg/org-newline-above)
-            ;; (define-key org-mode-map (kbd "<M-RET>") 'acg/org-meta-return-newline)
-            (define-key org-mode-map (kbd "M-8") 'org-insert-heading-after-current)
-            (define-key org-mode-map (kbd "C-8") 'org-insert-subheading-newline)
-
-            (define-key org-mode-map (kbd "<C-S-left>") nil)
-            (define-key org-mode-map (kbd "<C-S-up>") nil)
-            (define-key org-mode-map (kbd "<C-S-down>") nil)
-
-
-            (define-key org-mode-map (kbd "<f5>") (lambda () (interactive) (org-preview-latex-fragment 16)))
-            (define-key org-mode-map (kbd "<f6>") 'org-preview-latex-fragment)
-            (define-key org-mode-map (kbd "<f9>") 'org-latex-export-to-pdf)
-
-            ;; Org src map
-            (define-key org-src-mode-map (kbd "M-e") 'org-edit-src-exit)
-            (define-key org-src-mode-map (kbd "M-s") 'acg/org-edit-src-save-exit)
-            (define-key org-src-mode-map (kbd "M-w") 'acg/org-edit-src-confirm-abort)
-            ))
 
 
 ;; custom function
