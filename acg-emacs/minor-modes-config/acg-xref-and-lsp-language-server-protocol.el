@@ -1,3 +1,15 @@
+(use-package xref
+  :straight nil
+  :bind
+  ;; TODO: Remap xref-find-references & others to C-., C-/, etc.
+  (("M-." . nil)
+   ("M-. ." . xref-find-definitions)
+   ("M-. <left>" . xref-go-back)
+   ("M-. <right>" . xref-go-forward)
+   ("C-M-," . nil)
+   ("M-. r" . xref-find-references)
+   ("M-. a" . xref-find-apropos)))
+
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-l")
