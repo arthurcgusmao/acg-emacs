@@ -8,6 +8,8 @@
   (setq org-startup-truncated nil)
   (setq org-startup-folded nil)
   (setq org-list-allow-alphabetical t)
+  (setq org-export-backends '(ascii html icalendar latex md odt))
+  (setq org-export-use-babel nil)  ;; Do not evaluate src blocks when exporting.
 
   ;; Export both source code and its results by default
   (setq org-babel-default-header-args
@@ -490,3 +492,8 @@ active."
 
 ;; Do not alter indentation in Org source blocks
 (setq org-src-preserve-indentation t)
+
+
+
+;; Exporting to Markdown
+(use-package ox-gfm)
