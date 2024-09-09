@@ -1,5 +1,5 @@
 (use-package form-feed)
-(use-package undo-tree)
+(use-package undo-tree)  ; Just for imports.
 (add-hook 'prog-mode-hook 'form-feed-mode)
 (add-hook 'css-mode-hook 'form-feed-mode)
 
@@ -9,7 +9,7 @@
 ;; (acg/global-form-feed-mode 1)
 
 ;; keybindings
-               
+
 (defun insert-form-feed-below ()
   "Inserts form feed char below current line."
   (interactive)

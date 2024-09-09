@@ -29,6 +29,7 @@ region nor moves the cursor position."
   :bind
   (:map undo-tree-map
    ("M-/" . nil)
+   ("C-/" . nil)
    ("M-?" . nil)
    ("M-z" . undo-tree-undo)
    ("M-Z" . undo-tree-redo)
