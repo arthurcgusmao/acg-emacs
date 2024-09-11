@@ -63,7 +63,7 @@
   ;; TODO: Maybe try to make a feature like Cmd+Tab in which
   ;; when keeping Cmd pressed we keep going down the list of
   ;; buffers.
-  (("M-6" . crux-switch-to-previous-buffer)))
+  (("M-6" . crux-switch-to-previous-buffer))) ; M-q swapped with M-6 for macOS purposes.
 
 
 
