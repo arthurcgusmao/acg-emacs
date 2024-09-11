@@ -21,7 +21,9 @@
   :config
   (setq isearch-repeat-on-direction-change t)
   :bind
-  (:map isearch-mode-map
+  (("C-s" . nil)
+   ("C-s s" . isearch-forward)
+   :map isearch-mode-map
         ("<escape>" . isearch-abort)
         ("C-r" . consult-isearch)
         ("M-s" . nil)
@@ -29,6 +31,7 @@
         ("<down>" . isearch-repeat-forward)))
 
 (use-package ctrlf
+  :after isearch
   :config
   (defun acg/smart-ctrlf-forward (&optional initial-contents)
     (interactive)

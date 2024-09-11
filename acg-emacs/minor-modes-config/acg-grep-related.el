@@ -44,7 +44,8 @@ This function is meant to be mapped to a key in `rg-mode-map'."
     (let ((pattern (car rg-pattern-history)))
       (rg-save-search-as-name (concat "«" pattern "»"))))
 
-  :bind (("C-s g" . prot/grep-vc-or-dir)
+  :bind (("C-s" . nil)
+         ("C-s g" . prot/grep-vc-or-dir)
          :map rg-mode-map
          ("s" . prot/rg-save-search-as-name)
          ;; ("M-n" . next-line)
