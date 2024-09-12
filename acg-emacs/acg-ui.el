@@ -107,7 +107,7 @@
         (vertical-scroll-bars . nil)))  ; disable vertical bars
 
 ;; Allow splitting current window if size above one of these thresholds
-(setq split-width-threshold 160) ; How many columns to split side-by-side
+(setq split-width-threshold 200) ; How many columns to split side-by-side
 (setq split-height-threshold 100) ; How many lines to split above/below
 
 ;; Custom split window logic
