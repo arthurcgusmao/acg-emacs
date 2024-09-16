@@ -56,17 +56,18 @@ Version 2015-11-30"
 URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
 Version 2015-12-10"
   (interactive)
-  (cond
-   ((string-equal system-type "windows-nt")
-    ;; Custom AutoHotKey script file must be in path, see https://github.com/arthurcgusmao/acg-windows/blob/master/bin/cmder-in-dir.ahk
-    (shell-command (concat "cmder-in-dir.ahk " default-directory)))
-    ;; (w32-shell-execute "cmd" (replace-regexp-in-string "/" "\\" default-directory t t)))
-   ((string-equal system-type "darwin")
-    (shell-command (concat "open -a iTerm \"" default-directory "\"")))
-   ((string-equal system-type "gnu/linux")
-    (let ((process-connection-type nil))
-      (start-process "" nil "x-terminal-emulator"
-                     (concat "--working-directory=" default-directory) )))))
+  (let ((dir (expand-file-name default-directory)))
+    (cond
+     ((string-equal system-type "windows-nt")
+      ;; Custom AutoHotKey script file must be in path, see https://github.com/arthurcgusmao/acg-windows/blob/master/bin/cmder-in-dir.ahk
+      (shell-command (concat "cmder-in-dir.ahk " dir)))
+     ;; (w32-shell-execute "cmd" (replace-regexp-in-string "/" "\\" default-directory t t)))
+     ((string-equal system-type "darwin")
+      (shell-command (concat "open -a iTerm \"" dir "\"")))
+     ((string-equal system-type "gnu/linux")
+      (let ((process-connection-type nil))
+        (start-process "" nil "x-terminal-emulator"
+                       (concat "--working-directory=" dir) ))))))
 
 
 
