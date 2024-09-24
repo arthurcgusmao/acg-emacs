@@ -261,3 +261,10 @@
   :config
   ;; Never ask to save authentication credentials in a file
   (setq auth-source-save-behavior nil))
+
+
+(use-package grep
+  :straight nil
+  :bind
+  (:map grep-mode-map
+        ("C-o" . nil)))
