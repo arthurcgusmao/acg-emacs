@@ -12,7 +12,9 @@
 ;; DevOps: Docker, Kubernetes, etc.
 (use-package bazel)
 (use-package docker :bind ("C-c d" . docker))
-(use-package dockerfile-mode)
+(use-package dockerfile-mode
+  :config
+  (add-to-list 'auto-mode-alist '("Dockerfile_[^\\.]+\\'" . dockerfile-mode)))
 (use-package kubernetes
   :commands (kubernetes-overview)
   :bind
