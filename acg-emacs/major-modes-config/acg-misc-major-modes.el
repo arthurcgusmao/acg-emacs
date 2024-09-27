@@ -14,7 +14,7 @@
 (use-package docker :bind ("C-c d" . docker))
 (use-package dockerfile-mode
   :config
-  (add-to-list 'auto-mode-alist '("Dockerfile_[^\\.]+\\'" . dockerfile-mode)))
+  (add-to-list 'auto-mode-alist '("Dockerfile[_-][^\\.]+\\'" . dockerfile-mode)))
 (use-package kubernetes
   :commands (kubernetes-overview)
   :bind
