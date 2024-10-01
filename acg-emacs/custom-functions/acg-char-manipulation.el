@@ -45,7 +45,7 @@ symbol at point or the current text selection."
             tmp/end (+ end (- (length new-s) (length old-s))))))
 
   :bind
-  (("s-c" . acg/toggle-word-separator)))
+  (("s-C" . acg/toggle-word-separator)))
 
 
 (defun append-or-remove-char-to-eol (char-code char)
@@ -103,7 +103,7 @@ Version 2017-04-19"
       (downcase-region -p1 -p2)
       (put this-command 'state 0)))))
 
-(global-set-key (kbd "s-C") 'acg/toggle-word-case)
+(global-set-key (kbd "s-c") 'acg/toggle-word-case)
 
 
 
