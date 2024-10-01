@@ -17,8 +17,8 @@
 
    ("M-d" . mc/mark-next-like-this)
    ("M-D" . mc/mark-all-like-this)
-   ("<C-S-up>" . mc/mark-previous-lines)
-   ("<C-S-down>" . mc/mark-next-lines)
+   ("<S-s-up>" . mc/mark-previous-lines)
+   ("<S-s-down>" . mc/mark-next-lines)
 
    ("<s-down-mouse-1>" . mc/add-cursor-on-click)
    :map mc/keymap
