@@ -107,7 +107,16 @@ Restore the buffer with \\<dired-mode-map>`\\[revert-buffer]'."
 
 
 (use-package dired-sidebar
-  :commands (dired-sidebar-toggle-sidebar))
+  :commands (dired-sidebar-show-sidebar)
+  :config
+  (defun acg/dired-sidebar-show-and-jump ()
+    (interactive)
+    (dired-sidebar-show-sidebar)
+    (dired-sidebar-jump-to-sidebar))
+
+  :bind
+  (("C-d" . acg/dired-sidebar-show-and-jump)
+   ("C-S-d" . dired-sidebar-toggle-with-current-directory)))
 
 
 ;; Dired ranger implements a "clipboard" for copying files in Dired.
