@@ -109,13 +109,21 @@ Restore the buffer with \\<dired-mode-map>`\\[revert-buffer]'."
 (use-package dired-sidebar
   :commands (dired-sidebar-show-sidebar)
   :config
-  (defun acg/dired-sidebar-show-and-jump ()
+  (defun acg/dired-sidebar-show ()
+    "Wrapper around `dired-sidebar-toggle-sidebar' that always shows
+the sidebar with the current file, on the current projectiny
+project."
     (interactive)
-    (dired-sidebar-show-sidebar)
-    (dired-sidebar-jump-to-sidebar))
+    ;; Workaround: the logic of opening the sidebar with the current file
+    ;; highlighted is in `dired-sidebar-toggle-sidebar', so we need to call
+    ;; that function even when the sidebar is being shown.
+    (dired-sidebar-hide-sidebar)
+    ;; TODO: Use projectiny project root as default dir while still going to
+    ;; the current file in the sidebar buffer.
+    (dired-sidebar-toggle-sidebar))
 
   :bind
-  (("C-d" . acg/dired-sidebar-show-and-jump)
+  (("C-d" . acg/dired-sidebar-show)
    ("C-S-d" . dired-sidebar-toggle-with-current-directory)))
 
 
