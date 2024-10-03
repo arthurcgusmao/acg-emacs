@@ -23,6 +23,10 @@
   (add-to-list 'magit-process-password-prompt-regexps
                "^Bad passphrase, try again for [^ ]*: ?$")
 
+  ;; Do not create a new window for magit buffers.
+  (setq magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
+  (setq magit-bury-buffer-function 'magit-restore-window-configuration)
+
   ;; Custom functions for VISITING FILES
 
   (defun acg/magit-diff-visit-file (file)
