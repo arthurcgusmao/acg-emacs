@@ -19,6 +19,9 @@
   :commands (kubernetes-overview)
   :bind
   ("C-c k" . kubernetes-overview))
+(use-package make-mode
+  :config
+  (add-to-list 'auto-mode-alist '("Makefile[_-][^\\.]+\\'" . makefile-mode)))
 (use-package conf-mode
   :straight nil
   :mode (("\\.ini$" . conf-windows-mode)
