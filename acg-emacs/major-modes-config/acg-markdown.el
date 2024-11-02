@@ -20,12 +20,20 @@
     (setq-local reftex-cite-format "[@%l]")
     (markdown-toggle-url-hiding 1))
 
+  ;; Enable highlighting, e.g.: ==Highlighted phrase==
+  (defun acg/markdown-highlight-setup ()
+    "Custom highlighting for ==highlight== in markdown-mode."
+    (font-lock-add-keywords nil
+                            '(("==\\(.*?\\)=="
+                               (0 'hi-yellow t)))))
+
   :bind
   (:map markdown-mode-map
         ("M-k" . 'markdown-insert-link)
         ("C-e" . 'markdown-edit-code-block))
   :hook
-  (markdown-mode . acg/markdown-setup))
+  (markdown-mode . acg/markdown-setup)
+  (markdown-mode . acg/markdown-highlight-setup))
 
 ;; Dependency for editing Markdown source blocks w/ <C-c '>
 (use-package edit-indirect
