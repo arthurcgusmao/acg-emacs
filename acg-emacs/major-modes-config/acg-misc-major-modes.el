@@ -30,6 +30,9 @@
 (use-package yaml-mode)
 (use-package hcl-mode)
 (use-package terraform-mode)
+(use-package pkl-mode
+  :straight (:host github :protocol ssh
+                   :repo "sin-ack/pkl-mode"))
 
 ;; Misc
 (use-package csv-mode)
