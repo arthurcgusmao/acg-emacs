@@ -43,21 +43,40 @@ all tabs state."
     (add-hook 'unmodified-buffer-hook 'acg/update-tab-line-format-all-tabs))
 
 
+  (defun insert-into-list (list el n)
+  "Insert into list LIST an element EL at index N.
+
+If N is 0, EL is inserted before the first element.
+
+The resulting list is returned.  As the list contents is mutated
+in-place, the old list reference does not remain valid."
+  (let* ((padded-list (cons nil list))
+         (c (nthcdr n padded-list)))
+    (setcdr c (cons el (cdr c)))
+    (cdr padded-list)))
+
+  ;; TODO: Create functions to handle addition, deletion, and swapping of buffers into the list. THis is required because we'll have multiple variables keeping state.
+
   ;;; Order buffers by first opened
 
   ;; Dissociate tab-line from window buffers. What I want to have is tab-line
   ;; as a completely separate abstraction, where the tabs order is a separate
   ;; ordering.
   (defun acg/tab-line-tabs-func ()
-    "Wrapper around `tab-line-tabs-window-buffers' that preserves
-the original order of the buffers in the tab-line."
-    (let* ((order (window-parameter nil 'tab-line-order)) ; Use window-parameter to store order
-           (order (seq-filter #'buffer-live-p order))     ; Filter out dead buffers
-           (order (seq-filter #'acg/tab-line-filter order))) ; Filter desired buffers
-      ;; Add current buffer to list, if missing
-      (unless (member (current-buffer) order)
-        (setq order (append order (list (current-buffer)))))
-      (set-window-parameter nil 'tab-line-order order)))
+    "Wrapper around `tab-line-tabs-window-buffers' that filters
+and preserves the original order of the buffers in the tab-line."
+    (let* ((buffers (window-parameter nil 'tab-line-buffers)) ; Use window-parameter to store buffer order.
+           (buffers (seq-filter #'buffer-live-p buffers))     ; Filter out dead buffers.
+           (buffers (seq-filter #'acg/tab-line-filter buffers)) ; Filter desired buffers.
+           (last-pos (window-parameter nil 'tab-line-last-displayed-buffer-position)))
+
+      ;; Add current buffer to list, if missing.
+      (unless (member (current-buffer) buffers)
+        (setq buffers (append buffers (list (current-buffer)))))
+
+      (set-window-parameter nil 'tab-line-buffers buffers)
+      ;; (set-window-parameter nil 'tab-line-last-displayed-buffer-position (acg/tab-line-get-current-pos))
+      ))
 
   (setq tab-line-tabs-function 'acg/tab-line-tabs-func)
   ;; (setq tab-line-tabs-function 'tab-line-tabs-window-buffers)
@@ -114,13 +133,26 @@ Exhibits recursive or loop-like behavior when POS is < 0 or
       (with-selected-window (or window (selected-window))
         (acg/tab-line-walk -1))))
 
+  (defun acg/tab-line-move-current-tab-left ()
+    "Move the current tab one place to the left in the tab-line."
+    (interactive)
+    (let* ((tabs (tab-line-tabs-window-buffers))
+           (current-tab (current-buffer))
+           (current-pos (acg/tab-line-get-current-pos)))
+      (when (and current-index (> current-index 0))
+        (let* ((left-tabs (seq-take tabs (1- current-index)))
+               (right-tabs (seq-drop tabs current-index))
+               (new-tabs (append left-tabs (list current-tab (nth (1- current-index) tabs)) (cdr right-tabs))))
+          (set-window-parameter nil 'tab-line-tabs-window-buffers new-tabs)
+          (acg/update-tab-line-format-all-tabs)))))
+
   ;; TODO: modify <M-q> to operate only on tabs when tab-line is active
 
   :bind
   (("M-3" . tab-line-switch-to-next-tab)
    ("M-2" . tab-line-switch-to-prev-tab)
-   ;; Key combos "M-S-PgUp" and "M-S-PgDn" move the current tab to the left and to the right.
-   ("M-@" . tabbar-move-current-tab-one-place-left)
-   ("M-#" . tabbar-move-current-tab-one-place-right))
+   ;; ("M-@" . tabbar-move-current-tab-one-place-left)
+   ;; ("M-#" . tabbar-move-current-tab-one-place-right)
+   )
   :hook
   ((after-init . global-tab-line-mode)))
