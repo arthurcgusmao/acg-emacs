@@ -83,6 +83,9 @@ any, similar to what a Jupyter REPL would do."
     ;; Fix newline indentation (indent according to previous blank line)
     (setq acg/electric-indent-newline-as-previous-if-blank t))
 
+  (defun acg/python-shell-send-string (str &optional beg end)
+    (python-shell-send-string str))
+
   ;; The functions below are just sending the code to the shell
   ;; ("invisibly"), but not printing it. @TODO: create a new function
   ;; that prints the results of the last variable, so that it works
@@ -90,7 +93,17 @@ any, similar to what a Jupyter REPL would do."
   (define-key python-mode-map (kbd "C-c C-b") (acg/eval-with 'acg/python-shell-send-region 'mark-whole-buffer))
   (define-key python-mode-map (kbd "C-c C-p") (acg/eval-with 'acg/python-shell-send-region 'mark-page))
   (define-key python-mode-map (kbd "C-c C-c") (acg/eval-with 'acg/python-shell-send-region 'acg/mark-dwim))
-  (define-key python-mode-map (kbd "C-c C-l") (acg/eval-with 'python-shell-send-string 'acg/expand-region-to-whole-lines 'acg/unindent-add-last-var))
+  (define-key python-mode-map (kbd "C-c C-l") (acg/eval-with 'acg/python-shell-send-string 'acg/expand-region-to-whole-lines 'acg/unindent-add-last-var))
+
+  (defun acg/run-python-project-root ()
+    "Runs `run-python' at the project's root directory.
+Prompts for a directory if not in project."
+    (interactive)
+    (let ((default-directory
+           (or (project-root (project-current nil))
+               (read-directory-name "Not in project, choose dir: "
+                                    default-directory nil t))))
+      (call-interactively 'run-python)))
 
   :hook
   (python-mode . acg/after-python-hook)
@@ -102,5 +115,6 @@ any, similar to what a Jupyter REPL would do."
         ("M->" . python-indent-shift-right)
         ("<f7>" . python-shell-switch-to-shell)
         ("<f8>" . python-shell-send-buffer)
-        ("C-c C-y" . run-python)
+        ("C-c y y" . run-python)
+        ("C-c y p" . acg/run-python-project-root)
         ))
