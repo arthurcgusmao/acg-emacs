@@ -19,8 +19,8 @@ git clone git@github.com:arthurcgusmao/acg-emacs.git ~/.config/emacs/
 
 ### 2) Change hardcoded paths
 
-There are a few hardcoded filepaths in `acg-core.el` (top section), please
-change them to what works for you.
+There are a few hardcoded filepaths in `acg-emacs/acg-core.el` (top section),
+please change them to what works for you.
 
 ### 3) Make OS-specific configurations
 
@@ -29,3 +29,4 @@ See additional configurations for the Operating system you are using:
 - [Linux (Ubuntu)](./acg-emacs/others/linux/)
 - [Windows](./acg-emacs/others/windows/)
 - [WSL (Windows Subsystem for Linux)](./acg-emacs/others/wsl/)
+- [MacOS](./acg-emacs/others/macos/)
