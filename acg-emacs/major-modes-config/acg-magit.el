@@ -176,6 +176,7 @@ user to choose a remote."
 ;; Provide commit message guidelines/feedback when committing;
 ;; taken from https://protesilaos.com/dotemacs
 (use-package git-commit
+  :straight nil    ;; `git-commit` is bundled with Magit; `use-package` should not try to install it.
   :after magit
   :custom
   (git-commit-fill-column 72)
