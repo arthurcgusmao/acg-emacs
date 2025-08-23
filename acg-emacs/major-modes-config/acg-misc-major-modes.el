@@ -6,7 +6,7 @@
 
 ;; HTML & related
 (use-package less-css-mode)
-(use-package scss-mode)
+;; (use-package scss-mode)  ;; Erroring w/ flymake-allowed-file-name-masks.
 (use-package rainbow-mode) ; color color strings (e.g., "#00FF00")
 
 ;; DevOps: Docker, Kubernetes, etc.
