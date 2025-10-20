@@ -63,7 +63,7 @@ Version 2015-12-10"
       (shell-command (concat "cmder-in-dir.ahk " dir)))
      ;; (w32-shell-execute "cmd" (replace-regexp-in-string "/" "\\" default-directory t t)))
      ((string-equal system-type "darwin")
-      (shell-command (concat "open -a iTerm \"" dir "\"")))
+      (shell-command (concat "/opt/homebrew/bin/alacritty msg create-window --working-directory \"" dir "\"")))
      ((string-equal system-type "gnu/linux")
       (let ((process-connection-type nil))
         (start-process "" nil "x-terminal-emulator"
