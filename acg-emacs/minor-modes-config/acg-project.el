@@ -4,11 +4,18 @@
   :config
   (setq projectiny-known-projects-file
         (concat acg/history-dir "projectiny-known-projects"))
+
+  (defun acg/projectiny-open-magit-in ()
+    "Select a project and directly open it in Magit status."
+    (interactive)
+    (magit-status (projectiny--choose-project)))
+
   :bind
   (("C-o" . projectiny-find-file)
    ("C-S-O" . projectiny-find-file-all)
    ("C-p" . projectiny-find-file-in)
-   ("C-c p" . projectiny-find-file-in))
+   ("C-c p" . projectiny-find-file-in)
+   ("C-c g" . acg/projectiny-open-magit-in))
   :commands
   (projectiny-add-project
    projectiny-clean-known-projects))
