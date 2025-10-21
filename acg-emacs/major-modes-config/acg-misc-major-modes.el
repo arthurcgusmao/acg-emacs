@@ -37,9 +37,6 @@
 ;; Misc
 (use-package csv-mode)
 (use-package scala-mode)
-(use-package json-mode
-  :config
-  (setq js-indent-level 4))
 (use-package powershell)
 
 ;; Databases
