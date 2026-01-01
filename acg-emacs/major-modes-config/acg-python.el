@@ -118,3 +118,8 @@ Prompts for a directory if not in project."
         ("C-c y y" . run-python)
         ("C-c y p" . acg/run-python-project-root)
         ))
+
+
+(use-package pyvenv
+  :config
+  (pyvenv-mode 1))
