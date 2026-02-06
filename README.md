@@ -1,6 +1,6 @@
 # My Emacs configurations
 
-My Emacs configurations. Master branch supports Emacs 28; for older versions
+My Emacs configurations. Master branch supports Emacs 30; for older versions
 see tags. There are tags for the lattest commit run on a particular operating
 system too.
 
