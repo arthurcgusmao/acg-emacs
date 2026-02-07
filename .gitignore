@@ -5,6 +5,7 @@ session.*
 .lsp-session-*
 
 # Specific files/dirs
+/.agent-shell/
 /.cache/
 /anaconda-mode/
 /auto-save-list/
