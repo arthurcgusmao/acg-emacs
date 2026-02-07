@@ -216,7 +216,7 @@ thresholds are not met."
            (push 'acg/fontify-frame-mswindows after-make-frame-functions))) ;; Fontify any future frames
 
 
-(defun acg/set-flexible-frame-font (font &optional frame)
+(defun acg/set-frame-font-and-size (font &optional frame)
   "Set different font sizes depending on the display
 size/resolution, using FONT as the base font."
   (interactive)
@@ -239,13 +239,13 @@ size/resolution, using FONT as the base font."
    ;; which is when we want to apply these configurations
    ;; (because in those cases Emacs starts with a strange font).
    ((string= "localhost" (getenv "DISPLAY")) ;; Condition based on value of DISPLAY
-    (acg/set-flexible-frame-font "Hack" frame))
+    (acg/set-frame-font-and-size "Hack" frame))
    ;; MacOS
    ((string-equal system-type "darwin")
-    (acg/set-flexible-frame-font "Menlo" frame))
+    (acg/set-frame-font-and-size "Menlo" frame))
    ;; Linux
    (t
-    (acg/set-flexible-frame-font "Ubuntu Mono" frame)))
+    (acg/set-frame-font-and-size "Ubuntu Mono" frame)))
 
   ;; Emoji: 😄, 🤦, 🏴󠁧󠁢󠁳󠁣󠁴󠁿
   (set-fontset-font t 'symbol "Noto Color Emoji")
