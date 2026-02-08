@@ -54,12 +54,9 @@ toggle `org-variable-pitch-minor-mode' instead."
 
   ;; List of possible fonts for variable pitch:
   ;; - Gentium Plus
-  ;; - DejaVu Sans, Condensed
-  (cond ((string-equal system-type "darwin")
-         (set-face-attribute 'variable-pitch nil :family "Tahoma"))
-        (t
-         (set-face-attribute 'variable-pitch nil :family "DejaVu Sans"
-                             :width 'condensed)))
+  ;; - DejaVu Sans, Condensed (... :family "DejaVu Sans" :width 'condensed)
+  ;; - Aporetic Sans
+  (set-face-attribute 'variable-pitch nil :family "Aporetic Sans")
 
   :bind
   ("<f12>" . acg/variable-pitch-mode)

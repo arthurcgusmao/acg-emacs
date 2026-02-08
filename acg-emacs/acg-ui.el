@@ -231,22 +231,7 @@ size/resolution, using FONT as the base font."
 (defun acg/update-frame-font (&optional frame)
   "Set my custom font configs for the frame."
   (interactive)
-
-  (cond
-   ;; Use (getenv "DISPLAY") to conditionally apply font
-   ;; configuration. Usually the DISPLAY variable only contains
-   ;; "localhost" when Forwarding X11 through an SSH connection,
-   ;; which is when we want to apply these configurations
-   ;; (because in those cases Emacs starts with a strange font).
-   ((string= "localhost" (getenv "DISPLAY")) ;; Condition based on value of DISPLAY
-    (acg/set-frame-font-and-size "Hack" frame))
-   ;; MacOS
-   ((string-equal system-type "darwin")
-    (acg/set-frame-font-and-size "Menlo" frame))
-   ;; Linux
-   (t
-    (acg/set-frame-font-and-size "Ubuntu Mono" frame)))
-
+  (acg/set-frame-font-and-size "Aporetic Sans Mono" frame)
   ;; Emoji: 😄, 🤦, 🏴󠁧󠁢󠁳󠁣󠁴󠁿
   (set-fontset-font t 'symbol "Noto Color Emoji")
   (set-fontset-font t 'symbol "Apple Color Emoji" nil 'append)
