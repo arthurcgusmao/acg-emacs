@@ -259,7 +259,7 @@ size/resolution, using FONT as the base font."
 
 ;; Resize the whole frame, and not only a window
 ;; Adapted from https://stackoverflow.com/a/24714383/5103881
-(defun acg/zoom-frame (&optional amt frame)
+(defun acg/frame-text-scale-adjust (&optional amt frame)
   "Increaze FRAME font size by amount AMT. Defaults to selected
 frame if FRAME is nil, and to 1 if AMT is nil."
   (interactive "p")
@@ -271,15 +271,15 @@ frame if FRAME is nil, and to 1 if AMT is nil."
     (set-frame-font (font-spec :size new-size) t `(,frame))
     (message "Frame's font new size: %d" new-size)))
 
-(defun acg/zoom-frame-out (&optional amt frame)
-  "Call `acg/zoom-frame' with negative argument."
+(defun acg/frame-text-scale-adjust-out (&optional amt frame)
+  "Call `acg/frame-text-scale-adjust' with negative argument."
   (interactive "p")
-  (acg/zoom-frame (- (or amt 1)) frame))
+  (acg/frame-text-scale-adjust (- (or amt 1)) frame))
 
-(global-set-key (kbd "C-x C-=") 'acg/zoom-frame)
-(global-set-key (kbd "C-x C--") 'acg/zoom-frame-out)
-(global-set-key (kbd "<C-down-mouse-4>") 'acg/zoom-frame)
-(global-set-key (kbd "<C-down-mouse-5>") 'acg/zoom-frame-out)
+;; Default text scaling to the whole Emacs frame.
+;; Built-in `text-scale-adjust' still accessible via C-x C-+
+(global-set-key (kbd "C-x C-=") 'acg/frame-text-scale-adjust)
+(global-set-key (kbd "C-x C--") 'acg/frame-text-scale-adjust-out)
 
 
 
