@@ -7,5 +7,11 @@
   :bind
   (("C-c a a" . agent-shell)
    ("C-c a n" . agent-shell-new-shell)
-   :agent-shell-mode
-   ("C-e" . agent-shell-other-buffer)))
+
+   :map agent-shell-mode-map
+   ;; Enable enter as a newline and C-c C-c to submit.
+   ("RET" . newline)
+   ("M-<return>" . shell-maker-submit)
+   ;; Other configs.
+   ("C-e" . agent-shell-other-buffer)
+   ))
