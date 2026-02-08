@@ -1,3 +1,5 @@
+(setq package-enable-at-startup nil)  ;; Avoid interference from `package.el' when using `straight'.
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
