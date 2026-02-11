@@ -25,8 +25,8 @@ Version 2016-07-13"
 
 
 ;; keybindings
-(global-set-key (kbd "M-p") (acg/with-double-keypress fill-paragraph forward-sentence))
-(global-set-key (kbd "M-P") 'acg/unfill-paragraph)
+(global-set-key (kbd "C-p") (acg/with-double-keypress fill-paragraph forward-sentence))
+(global-set-key (kbd "C-S-p") 'acg/unfill-paragraph)
 (global-set-key (kbd "s-p") (crux-with-region-or-line fill-region))
 (global-set-key (kbd "s-S-P") (crux-with-region-or-line acg/unfill-region))
 

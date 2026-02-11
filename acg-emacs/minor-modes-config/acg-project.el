@@ -13,7 +13,6 @@
   :bind
   (("C-o" . projectiny-find-file)
    ("C-S-O" . projectiny-find-file-all)
-   ("C-p" . projectiny-find-file-in)
    ("C-c p" . projectiny-find-file-in)
    ("C-c g" . acg/projectiny-open-magit-in))
   :commands

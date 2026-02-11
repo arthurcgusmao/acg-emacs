@@ -243,6 +243,7 @@
   ("M-<drag-mouse-1>" . nil) ; Secondary selection.
   ("C-<drag-mouse-1>" . mouse-set-secondary) ; Secondary selection.
   ("C-l" . nil)
+  ("M-h" . nil)
   ("M-l" . recenter-top-bottom)
   ("M-n" . make-frame-command)
   ("M-r" . repeat)

@@ -71,7 +71,7 @@ any, similar to what a Jupyter REPL would do."
     (cond ((python-info-docstring-p) (acg/py-docformatter-fill-paragraph))
           (t (acg/autopep8-fill-paragraph))))
 
-  (define-key python-mode-map (kbd "M-p") 'acg/python-fill-paragraph)
+  (define-key python-mode-map (kbd "C-p") 'acg/python-fill-paragraph)
 
 
   ;; Other configurations to be run after python-mode is loaded in a buffer
